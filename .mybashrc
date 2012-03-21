@@ -1,0 +1,30 @@
+# chdir to ~/Code
+cd /home/cpatton/Code
+
+# aliases
+alias bye='exit'
+alias c='clear'
+alias l='ls -FGXb --color=always $*'
+alias ll='l -hl $*'
+alias la='l -a $*'
+alias lal='ll -a $*'
+alias md='mkdir'
+alias ...='cd .. $*'
+
+alias h='cd ~/Code $*'
+
+alias scm='h; svn commit $*; cd -'
+alias sdf='h; svn diff $*; cd -'
+alias srv='h; svn revert $*; cd -'
+alias sst='h; svn status $*; cd -'
+alias sup='h; svn up $*; cd -'
+
+alias gad='git add $*'
+alias gcm='git commit $*'
+alias gdf='git diff $*'
+alias gpl='git pull $*'
+alias gps='git push $*'
+alias grs='git reset $*'
+alias gst='git status $*'
+
+alias myip="last \"\$USER\" | grep 'still' | awk '{print \$3}' | sort -nu"
