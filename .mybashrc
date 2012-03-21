@@ -1,5 +1,5 @@
-# chdir to ~/Code
-cd /home/cpatton/Code
+# login actions
+cd ~/Code
 
 # aliases
 alias bye='exit'
