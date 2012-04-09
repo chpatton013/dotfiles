@@ -25,3 +25,5 @@ alias grs='git reset $*'
 alias gst='git status $*'
 
 alias myip="last \"\$USER\" | grep 'still' | awk '{print \$3}' | sort -nu"
+
+alias ssh="ssh -X"
