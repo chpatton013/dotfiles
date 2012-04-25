@@ -54,6 +54,8 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 nnoremap <silent> g# g#zz
+" clear search hilighting
+nnoremap <silent> <leader>h :nohls<CR>
 " strip trailing whitespace
 nnoremap <silent> <leader>W :call <SID>StripTrailingWhitespaces()<CR>
 
