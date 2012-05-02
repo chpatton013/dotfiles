@@ -1,13 +1,16 @@
 alias :q='exit'
-alias bye='exit'
 alias c='clear'
+
 alias l='ls -FGXb --color=always $*'
 alias ll='l -hl $*'
 alias la='l -a $*'
 alias lal='ll -a $*'
-alias md='mkdir'
-alias ...='cd .. $*'
 
+alias md='mkdir'
+
+alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
+
+alias ...='cd .. $*'
 alias h='cd ~/Code $*'
 
 alias scm='h; svn commit $*; cd -'
