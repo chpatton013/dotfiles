@@ -1,26 +1,28 @@
+xorg-xinit xorg-server xorg-server-utils xorg-apps xorg-twm xorg-xclock xterm dbus numlockx mesa
+ttf-dejavu gnome gnome-extra
+awesome
+redshift
+
 zsh
+sudo
 screen
 
-vim vim-scripts vim-gnome
+pdnsd
+mlocate
+
+vim
 
 most
 
 git gitg
-subversion
 
-pidgin evolution-data-server pidgin-encryption pidgin-librvp pidgin-otr pidgin-plugin-pack
+samba
 
-openjdk-7-jre ttf-dejavu-extra icedtea6-plugin
+pidgin evolution-data-server pidgin-encryption pidgin-otr
 
 chromium-browser
-nautilus-dropbox
 
 vlc
 
-gtk-redshift
-gnome-do
-awesome
-
-samba
 
 bcc bin86 gawk bridge-utils iproute libcurl3 libcurl4-openssl-dev bzip2 module-init-tools transfig tgif texinfo texlive-latex-base texlive-latex-recommended texlive-fonts-extra texlive-fonts-recommended pciutils-dev mercurial build-essential make gcc libc6-dev zlib1g-dev python python-dev python-twisted libncurses5-dev patch libvncserver-dev libsdl1.2-dev libjpeg-dev iasl libbz2-dev e2fslibs-dev git-core uuid-dev ocaml libx11-dev bison flex ocaml-findlib gcc-multilib xz-utils
