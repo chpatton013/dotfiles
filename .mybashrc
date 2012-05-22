@@ -1,5 +1,5 @@
 if [ -f ~/.alias ]; then
-   ~/.alias
+   . ~/.alias
 fi
 
 # login actions
