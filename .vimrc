@@ -19,7 +19,7 @@ highlight WhitespaceEOL ctermbg=Red guibg=Red
 
 if exists('+colorcolumn')
    set cc=80
-   hi ColorColumn ctermbg=lightgrey guibg=lightgey
+   hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 else
    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
