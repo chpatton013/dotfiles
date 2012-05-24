@@ -7,6 +7,7 @@ zsh
 sudo
 screen
 
+wireless-tools
 pdnsd
 openssh mosh
 mlocate
@@ -21,7 +22,7 @@ samba
 
 pidgin evolution-data-server pidgin-encryption pidgin-otr
 
-chromium-browser
+chromium-browser flashplugin
 
 vlc
 
