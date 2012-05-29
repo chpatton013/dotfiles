@@ -24,7 +24,7 @@ pidgin evolution-data-server pidgin-encryption pidgin-otr
 
 chromium-browser flashplugin
 
-jre7-openjdk
+jre7-openjdk icedtea-web-java7
 
 vlc
 
