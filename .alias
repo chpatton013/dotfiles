@@ -21,11 +21,13 @@ alias sup="h; svn up $*; cd -"
 
 alias gad="git add $*"
 alias gcm="git commit $*"
-alias gdf="git diff $*"
 alias gpl="git pull $*"
 alias gps="git push $*"
 alias grs="git reset $*"
+alias gco="git checkout $*"
 alias gst="git status $*"
+alias gdf="git diff $*"
+alias gsl="git stash list $*"
 
 alias myip="last \"\$USER\" | grep 'still' | awk '{print \$3}' | sort -nu"
 

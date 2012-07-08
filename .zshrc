@@ -1,12 +1,11 @@
 # Autoload screen if we aren't in it
 if [[ $STY = '' ]] then screen -xR; fi
 
+cd ~/Code
+
 #{{{ ZSH Modules
 
-#autoload -U compinit promptinit zcalc zsh-mime-setup
-#compinit
-#promptinit
-#zsh-mime-setup
+autoload -U compinit promptinit zcalc zsh-mime-setup
 
 #}}}
 
@@ -115,7 +114,6 @@ zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*' group-name ''
-#zstyle ':completion:*' completer _oldlist _expand _force_rehash _complete
 zstyle ':completion:*' completer _expand _force_rehash _complete _approximate _ignored
 
 # generate descriptions with magic.
@@ -219,9 +217,6 @@ HISTSIZE=10000
 # Don't overwrite, append!
 setopt APPEND_HISTORY
 
-# Write after each command
-# setopt INC_APPEND_HISTORY
-
 # Killer: share history between multiple shells
 setopt SHARE_HISTORY
 
@@ -304,16 +299,17 @@ else
     post_prompt="%{$fg_bold[$user_color]%}%#%{$reset_color%}"
 fi
 
-PS1="${host_prompt} ${jobs_total}${history_total} ${directory_prompt}${error_total}${post_prompt} "
+#Git integration
+if [[ -f ~/git-completion.sh ]] then
+   source ~/git-completion.sh;
+   export GIT_PS1_SHOWDIRTYSTATE=" "
+   export GIT_PS1_SHOWSTASHSTATE=" "
+   export GIT_PS1_SHOWUNTRACKEDFILES=" "
+   export GIT_PS1_SHOWUPSTREAM=" "
+fi
 
-
-#if [[ $TERM == screen]; then
-#   function precmd() {
-#   print -Pn "\033]0;S $TTY:t{%100<...<%~%<<}\007"
-#}
-#elsif [[ $TERM == linux ]]; then
-#   precmd () { print -Pn "\e]0;%m: %~\a" }
-#fi
+PS1="[ %n @ %M ] [ %~ :: $(__git_ps1 "%s")\$ ] [ %D :: %* ]
+[ %# ]> "
 
 #}}}
 
@@ -329,14 +325,5 @@ edit-command-output() {
  CURSOR=0
 }
 zle -N edit-command-output
-
-#}}}
-
-#{{{ Testing... Testing...
-#exec 2>>(while read line; do
-#print '\e[91m'${(q)line}'\e[0m' > /dev/tty; done &)
-
-watch=(notme)
-LOGCHECK=0
 
 #}}}
