@@ -1,8 +1,6 @@
 # Autoload screen if we aren't in it
 if [[ $STY = '' ]] then screen -xR; fi
 
-cd ~/Code
-
 #{{{ ZSH Modules
 
 autoload -U compinit promptinit zcalc zsh-mime-setup
@@ -300,8 +298,8 @@ else
 fi
 
 #Git integration
-if [[ -f ~/git-completion.sh ]] then
-   source ~/git-completion.sh;
+if [[ -f ~/.git-completion.sh ]] then
+   source ~/.git-completion.sh;
    export GIT_PS1_SHOWDIRTYSTATE=" "
    export GIT_PS1_SHOWSTASHSTATE=" "
    export GIT_PS1_SHOWUNTRACKEDFILES=" "
@@ -327,3 +325,5 @@ edit-command-output() {
 zle -N edit-command-output
 
 #}}}
+
+cd ~/Code
