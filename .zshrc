@@ -306,7 +306,7 @@ if [[ -f ~/.git-completion.sh ]] then
    export GIT_PS1_SHOWUPSTREAM=" "
 fi
 
-PS1="[ %n @ %M ] [ %~ :: $(__git_ps1 "%s")\$ ] [ %D :: %* ]
+PS1="[ %n@%M ] [ %~ $(__git_ps1 "%s")\$ ] [ %D %* ]
 [ %# ]> "
 
 #}}}
