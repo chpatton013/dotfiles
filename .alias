@@ -28,6 +28,7 @@ alias gco="git checkout $*"
 alias gst="git status $*"
 alias gdf="git diff $*"
 alias gsl="git stash list $*"
+alias gitsum="gst && gsl | cat && gdf | cat $*"
 
 alias myip="last \"\$USER\" | grep 'still' | awk '{print \$3}' | sort -nu"
 
