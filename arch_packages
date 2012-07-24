@@ -1,3 +1,5 @@
+base-devel
+
 xorg-xinit xorg-server xorg-server-utils xorg-apps xorg-twm xorg-xclock xterm dbus numlockx mesa
 ttf-dejavu gnome gnome-extra
 awesome
@@ -13,7 +15,6 @@ openssh mosh
 mlocate
 
 vim
-
 most
 
 git gitg
@@ -22,17 +23,21 @@ truecrypt
 
 samba
 
-deluge
+jre7-openjdk icedtea-web-java7
+python python-cairo pythin-gobject python-notify pygtk python2-mako
+
+deluge librsvg gettext
+
+boost-libs boost-build boost
 
 pidgin evolution-data-server pidgin-encryption pidgin-otr
 
 chromium-browser flashplugin
 
-jre7-openjdk icedtea-web-java7
-
+picard
+mplayer
 vlc
 
 libreoffice-en-US libreoffice-common libreoffice-base libreoffice-postgresql-connector libreoffice-calc libreoffice-draw libreoffice-extension-pdfimport libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-writer
 
-bcc bin86 gawk bridge-utils iproute libcurl3 libcurl4-openssl-dev bzip2 module-init-tools transfig tgif texinfo texlive-latex-base texlive-latex-recommended texlive-fonts-extra texlive-fonts-recommended pciutils-dev mercurial build-essential make gcc libc6-dev zlib1g-dev python python-dev python-twisted libncurses5-dev patch libvncserver-dev libsdl1.2-dev libjpeg-dev iasl libbz2-dev e2fslibs-dev git-core uuid-dev ocaml libx11-dev bison flex ocaml-findlib gcc-multilib xz-utils
 premake
