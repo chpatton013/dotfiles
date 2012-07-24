@@ -1,10 +1,11 @@
 alias :q="exit"
 alias c="clear"
 
-alias l="ls -FGb --color=always $*"
+alias l="ls -FGb $*"
 alias ll="l -hl $*"
 alias la="l -a $*"
 alias lal="ll -a $*"
+alias lla="lal $*"
 
 alias md="mkdir"
 
