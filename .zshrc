@@ -4,6 +4,7 @@ if [[ $STY = '' ]] then screen -xR; fi
 #{{{ ZSH Modules
 
 autoload -U compinit promptinit zcalc zsh-mime-setup
+autoload -U colors && colors
 
 #}}}
 
@@ -306,8 +307,8 @@ if [[ -f ~/.git-completion.sh ]] then
    export GIT_PS1_SHOWUPSTREAM=" "
 fi
 
-PS1="[ %n@%M ] [ %~ $(__git_ps1 "%s")\$ ] [ %D %* ]
-[ %# ]> "
+PS1="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%n@%M%{$reset_color%}%{$fg[blue]%} ] [ %{$reset_color%}%{$fg[red]%}%~ $(__git_ps1 "%s")\$%{$reset_color%}%{$fg[blue]%} ] [ %{$reset_color%}%{$fg[red]%}%D %*%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}
+%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%#%{$reset_color%}%{$fg[blue]%} ]> %{$reset_color%}"
 
 #}}}
 
