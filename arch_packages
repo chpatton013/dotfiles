@@ -23,6 +23,9 @@ truecrypt
 
 samba
 
+ntfs-3g
+ntfsprogs
+
 jre7-openjdk icedtea-web-java7
 python python-cairo pythin-gobject python-notify pygtk python2-mako
 
