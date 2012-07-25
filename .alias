@@ -34,5 +34,10 @@ alias gitsum="gst && gsl | cat && gdf | cat $*"
 alias myip="last \"\$USER\" | grep 'still' | awk '{print \$3}' | sort -nu"
 
 alias sshx="ssh -X $*"
-alias multi="ssh chpatton@multicore.csc.calpoly.edu"
-alias multix="ssh -X chpatton@multicore.csc.calpoly.edu"
+
+alias multi="ssh chpatton@multicore.csc.calpoly.edu $*"
+alias multix="ssh -X chpatton@multicore.csc.calpoly.edu $*"
+
+alias cmr="ssh cpatton@cominor.com $*"
+alias lb="live_ssh ifixit.com $*"
+alias slave="live_ssh slave.ifixit.com $*"

@@ -1,10 +1,20 @@
 # Autoload screen if we aren't in it
-if [[ $STY = '' ]] then screen -xR; fi
+if [[ $STY = '' ]]; then
+   if [[ -r ~/.no_mux_hosts ]]; then
+      if [[ "grep -c `hostname` ~/.no_mux_hosts" == 0 ]]; then
+         screen -xR
+      fi
+   else
+      screen -xR
+   fi
+fi
 
 #{{{ ZSH Modules
 
-autoload -U compinit promptinit zcalc zsh-mime-setup
+autoload -U promptinit zcalc zsh-mime-setup
 autoload -U colors && colors
+autoload -Uz compinit
+compinit
 
 #}}}
 
