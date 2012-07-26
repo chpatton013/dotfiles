@@ -6,6 +6,20 @@ git pull --rebase
 git submodule update
 git stash pop
 
+# Remove config file links in home folder
+rm -f ~/.alias
+rm -f ~/.git-completion.sh
+rm -f ~/.mybashrc
+rm -f ~/.no_mux_hosts
+rm -f ~/.zshrc
+rm -f ~/.vimrc
+rm -f ~/.vim
+
+# Remove plugin links for vim
+rm -f ~/dotfiles/vim/.vim/autoload/pathogen.vim
+rm -f ~/dotfiles/vim/.vim/bundle/vim-fugitive
+rm -f ~/dotfiles/vim/.vim/bundle/vim-colors-solarized
+
 # Link config files in home folder
 ln -sf ~/dotfiles/sh/.alias ~/.alias
 ln -sf ~/dotfiles/sh/.git-completion.sh ~/.git-completion.sh
