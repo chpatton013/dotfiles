@@ -1,0 +1,6 @@
+# Vim Swap Files
+*.swp
+*.swo
+
+# EMacs Swap Files
+*.*~
