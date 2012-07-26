@@ -1,0 +1,6 @@
+# Only symlinks should be in this directory. Because we do not want to add
+# links which our infection script may later change or render obsolete, we will
+# ignore the entire contents of this directory. This file is present only to
+# prevent git from ignoring this otherwise "empty" directory.
+vim-fugitive
+vim-colors-solarized
