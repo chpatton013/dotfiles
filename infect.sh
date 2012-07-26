@@ -3,6 +3,7 @@
 # Update repository
 git stash
 git pull --rebase
+git submodule init
 git submodule update
 git stash pop
 
