@@ -46,9 +46,6 @@ setopt NO_HUP
 
 setopt VI
 
-# only fools wouldn't do this ;-)
-export EDITOR="vim"
-
 
 setopt IGNORE_EOF
 
@@ -79,6 +76,8 @@ setopt RC_EXPAND_PARAM
 
 export LANG=en_US
 export PAGER=most
+export EDITOR=vim
+export PATH=$PATH:~/bin
 
 #}}}
 
