@@ -1,13 +1,7 @@
 # Autoload screen if we aren't in it
-if [[ $STY = '' ]]; then
-   if [[ -r ~/.no_mux_hosts ]]; then
-      if [[ "grep -c `hostname` ~/.no_mux_hosts" == 0 ]]; then
-         screen -xR
-      fi
-   else
-      screen -xR
-   fi
-fi
+#if [[ $STY = '' ]]; then
+#   screen -xR
+#fi
 
 #{{{ ZSH Modules
 
