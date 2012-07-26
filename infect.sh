@@ -20,6 +20,9 @@ rm -f ~/dotfiles/vim/.vim/autoload/pathogen.vim
 rm -f ~/dotfiles/vim/.vim/bundle/vim-fugitive
 rm -f ~/dotfiles/vim/.vim/bundle/vim-colors-solarized
 
+# Remove additional executable links
+rm -f ~/bin/premake
+
 # Link config files in home folder
 ln -sf ~/dotfiles/sh/.alias ~/.alias
 ln -sf ~/dotfiles/sh/.git-completion.sh ~/.git-completion.sh
@@ -33,3 +36,7 @@ ln -sf ~/dotfiles/vim/.vim ~/.vim
 ln -sf ~/dotfiles/vim/vim-pathogen/autoload/pathogen.vim ~/dotfiles/vim/.vim/autoload
 ln -sf ~/dotfiles/vim/vim-fugitive ~/dotfiles/vim/.vim/bundle
 ln -sf ~/dotfiles/themes/solarized/vim-colors-solarized ~/dotfiles/vim/.vim/bundle
+
+# Link additional executable files
+mkdir -p ~/bin
+ln -sf ~/dotfiles/premake4 ~/bin/premake
