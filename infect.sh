@@ -18,8 +18,9 @@ rm -f ~/.vim
 
 # Remove plugin links for vim
 rm -f ~/dotfiles/vim/.vim/autoload/pathogen.vim
-rm -f ~/dotfiles/vim/.vim/bundle/vim-fugitive
+rm -f ~/dotfiles/vim/.vim/bundle/syntastic
 rm -f ~/dotfiles/vim/.vim/bundle/vim-colors-solarized
+rm -f ~/dotfiles/vim/.vim/bundle/vim-fugitive
 
 # Remove additional executable links
 rm -f ~/bin/premake
@@ -35,8 +36,9 @@ ln -sf ~/dotfiles/vim/.vim ~/.vim
 
 # Link plugins for vim
 ln -sf ~/dotfiles/vim/vim-pathogen/autoload/pathogen.vim ~/dotfiles/vim/.vim/autoload
-ln -sf ~/dotfiles/vim/vim-fugitive ~/dotfiles/vim/.vim/bundle
+ln -sf ~/dotfiles/vim/syntastic ~/dotfiles/vim/.vim/bundle
 ln -sf ~/dotfiles/themes/solarized/vim-colors-solarized ~/dotfiles/vim/.vim/bundle
+ln -sf ~/dotfiles/vim/vim-fugitive ~/dotfiles/vim/.vim/bundle
 
 # Link additional executable files
 mkdir -p ~/bin
