@@ -1,12 +1,30 @@
+[submodule "neocomplcache"]
+	path = vim/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
 [submodule "solarized"]
 	path = themes/solarized
 	url = git://github.com/altercation/solarized.git
-[submodule "vim/syntastic"]
+[submodule "syntastic"]
 	path = vim/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule "vim-abolish"]
+	path = vim/vim-abolish
+	url = git://github.com/tpope/vim-abolish.git
+[submodule "vim-commentary"]
+	path = vim/vim-commentary
+	url = git://github.com/tpope/vim-commentary.git
+[submodule "vim-easymotion"]
+	path = vim/vim-easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
 [submodule "vim-fugitive"]
 	path = vim/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
 [submodule "vim-pathogen"]
 	path = vim/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+[submodule "vim-repeat"]
+	path = vim/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
+[submodule "vim-surround"]
+	path = vim/vim-surround
+	url = git://github.com/tpope/vim-surround.git

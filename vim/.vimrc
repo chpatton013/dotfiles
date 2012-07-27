@@ -33,13 +33,35 @@ au BufWinEnter * call RestoreCursor()
 
 " Pathogen - https://github.com/tpope/vim-pathogen
 call pathogen#infect()
+call pathogen#helptags()
+
 
 " Syntastic - https://github.com/scrooloose/syntastic/
-let g:syntastic_check_on_open=1
+"  Commands:
+"     :Errors              // pop up location list and display errors
+"     :SyntasticToggleMode // toggles between active and passive mode
+"     :SyntasticCheck      // forces a syntax check in passive mode
 
-" vim-powerline - https://github.com/Lokaltog/vim-powerline
-let g:Powerline_theme="solarized"
-let g:Powerline_symbols="compatible"
+" show Syntastic status in statusline
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" check for syntax errors on file open
+let g:syntastic_check_on_open=1
+" echo errors to the command window
+let g:syntastic_echo_current_error=1
+" mark lines with errors and warnings
+let g:syntastic_enable_signs=1
+" set sign symbols
+let g:syntastic_error_symbol='E>'
+let g:syntastic_warning_symbol='W>'
+let g:syntastic_style_error_symbol='S>'
+let g:syntastic_style_warning_symbol='s>'
+" open error balloons when moused over erroneous lines
+let g:syntastic_enable_balloons=1
+" customize statusline
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
