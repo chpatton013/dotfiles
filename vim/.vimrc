@@ -43,9 +43,9 @@ call pathogen#helptags()
 "     :SyntasticCheck      // forces a syntax check in passive mode
 
 " show Syntastic status in statusline
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 " check for syntax errors on file open
 let g:syntastic_check_on_open=1
@@ -81,7 +81,7 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 " Insert <Tab> or complete identifier if the cursor is after a keyword character
-function TabOrComplete()
+function! TabOrComplete()
     let col = col('.')-1
     if !col || getline('.')[col-1] !~ '\k'
         return "\<tab>"
@@ -99,6 +99,7 @@ function! RestoreCursor()
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration customization

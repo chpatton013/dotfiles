@@ -1,6 +1,8 @@
 alias :q="exit"
 alias c="clear"
 
+alias less="less -R"
+
 alias l="ls -FGb --color=always $*"
 alias ll="l -hl $*"
 alias la="l -a $*"

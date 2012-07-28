@@ -75,7 +75,7 @@ setopt RC_EXPAND_PARAM
 #{{{ Variables
 
 export LANG=en_US
-export PAGER=most
+export PAGER=less
 export EDITOR=vim
 export PATH=$PATH:~/bin
 
