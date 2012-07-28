@@ -12,11 +12,25 @@ augroup END
 
 " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars
 if exists('+colorcolumn')
-   au BufEnter * set colorcolumn=80
-   au BufEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+   au BufWinEnter * set colorcolumn=80
+   au BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 else
-   au BufEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
+
+" Highlight over-length characters and trailing whitespace
+au ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
+au ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
+
+augroup ExtraCharacters
+   autocmd!
+   autocmd BufWinEnter * let w:whitespace_match_number =
+   \ matchadd('ExtraWhitespace', '\s\+$')
+   autocmd BufWinEnter * call matchadd('OverLength',
+   \ '\(^\(\s\)\{-}\(*\|//\|/\*\)\{1}\(.\)*\(\%81v\)\)\@<=\(.\)\{1,}$')
+   autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
+   autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+augroup END
 
 " Resize splits on window resize
 au VimResized * exe "normal! \<c-w>="
@@ -32,9 +46,26 @@ au BufWinEnter * call RestoreCursor()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Pathogen - https://github.com/tpope/vim-pathogen
+
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
+
+
+" Easymotion - https://github.com/Lokaltog/vim-easymotion/
+
+" This is so much more convenient
+let g:EasyMotion_leader_key=',m'
+
+
+" Neocomplcache - https://github.com/Shougo/neocomplcache
+
+" Enable at startup.
+let g:neocomplcache_enable_at_startup=1
+" Only display 10 items in the list.
+let g:neocomplcache_max_list=10
+" Auto-select the first candidate.
+let g:neocomplcache_enable_auto_select=1
 
 
 " Syntastic - https://github.com/scrooloose/syntastic/
@@ -45,7 +76,7 @@ call pathogen#helptags()
 
 " show Syntastic status in statusline
 "set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
 
 " check for syntax errors on file open
@@ -62,7 +93,7 @@ let g:syntastic_style_warning_symbol='s>'
 " open error balloons when moused over erroneous lines
 let g:syntastic_enable_balloons=1
 " customize statusline
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_stl_format = '[%E{E: %fe #%e}%B{, }%W{W: %fw #%w}]'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -79,6 +110,18 @@ function! <SID>StripTrailingWhitespaces()
    %s/\s\+$//e
    let @/=_s
    call cursor(l, c)
+endfunction
+
+" Toggle match of trailing whitespace
+function! s:ToggleWhitespaceMatch(mode)
+   let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
+   if exists('w:whitespace_match_number')
+     call matchdelete(w:whitespace_match_number)
+     call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
+   else
+     " Something went wrong, try to be graceful.
+     let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
+   endif
 endfunction
 
 " Insert <Tab> or complete identifier if the cursor is after a keyword character
@@ -112,49 +155,56 @@ set guifont=Consolas:h9
 set encoding=utf-8
 set fileencoding=utf-8
 
-set nocompatible              " No compatibility with vi.
-filetype on                   " Recognize syntax by file extension.
-filetype indent on            " Check for indent file.
-filetype plugin on            " Allow plugins to be loaded by file type.
+set nocompatible                 " No compatibility with vi.
+filetype on                      " Recognize syntax by file extension.
+filetype indent on               " Check for indent file.
+filetype plugin on               " Allow plugins to be loaded by file type.
 
-behave xterm                  " Maintain keybindings across enviornments
+behave xterm                     " Maintain keybindings across enviornments
 
-set autowrite                 " Write before executing the 'make' command.
-set background=dark           " Background light, so foreground not bold.
-set backspace=2               " Allow <BS> to go past last insert.
-set expandtab                 " Expand tabs with spaces.
-set nofoldenable              " Disable folds; toggle with zi.
-set gdefault                  " Assume :s uses /g.
-set ignorecase                " Ignore case in regular expressions
-set incsearch                 " Immediately highlight search matches.
-set history=500               " Set number of lines for vim to remember
-set hlsearch                  " Highlight all search matches
-set laststatus=2              " show status line even where there is only one window
-set linespace=-1              " Bring lines closer together vertically
-set modeline                  " Check for a modeline.
-set noerrorbells              " No beeps on errors.
-set nohls                     " Don't highlight all regex matches.
-set nowrap                    " Don't soft wrap.
-set number                    " Display line numbers.
-set path=~/Code/**            " Set default path
-set ruler                     " Display row, column and % of document.
-set rulerformat=%l,%c%V%=%P   " Cleaner ruler format
-set scrolloff=6               " Keep min of 6 lines above/below cursor.
-set shiftwidth=3              " >> and << shift 3 spaces.
-set showcmd                   " Show partial commands in the status line.
-set showmatch                 " Show matching () {} etc..
-set showmode                  " Show current mode.
-set smartcase                 " Searches are case-sensitive if caps used.
-set smartindent               " Maintains most indentation and adds extra level when nesting
-set softtabstop=3             " See spaces as tabs.
-set splitright splitbelow     " Open splits below and to the right
-set tabstop=3                 " <Tab> move three characters.
-set textwidth=79              " Hard wrap at 79 characters.
-set title                     " Set the console title
-set viminfo='20,\"500,%       " Adjust viminfo contents
-set virtualedit=block         " Allow the cursor to go where there's no char.
-set wildmenu                  " Tab completion opens a Tab- and arrow-navigable menu
-set wildmode=longest,full     " Tab completion works like bash.
+set autowrite                    " Write before executing the 'make' command.
+set background=dark              " Background light, so foreground not bold.
+set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert
+set expandtab                    " Expand tabs with spaces.
+set nofoldenable                 " Disable folds; toggle with zi.
+set gdefault                     " Assume :s uses /g.
+set hidden                       " Use hidden buffers so unsaved buffers can go to the background
+set history=500                  " Set number of lines for vim to remember
+set hlsearch                     " Highlight all search matches
+set ignorecase                   " Ignore case in regular expressions
+set incsearch                    " Immediately highlight search matches.
+set laststatus=2                 " Show status line even where there is only one window
+set lazyredraw                   " Redraw faster
+set linespace=-1                 " Bring lines closer together vertically
+set modeline                     " Check for a modeline.
+set noerrorbells                 " No beeps on errors.
+set nohls                        " Don't highlight all regex matches.
+set nowrap                       " Don't soft wrap.
+set number                       " Display line numbers.
+set path=~/Code/**               " Set default path
+set ruler                        " Display row, column and % of document.
+set rulerformat=%l,%c%V%=%P      " Cleaner ruler format
+set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
+set shellslash                   " Use forward slashes regardless of OS
+set shiftwidth=3                 " >> and << shift 3 spaces.
+set showcmd                      " Show partial commands in the status line.
+set showmatch                    " Show matching () {} etc..
+set showmode                     " Show current mode.
+set sidescrolloff=10             " Keep min of 'n' columns right/left cursor.
+set smartcase                    " Searches are case-sensitive if caps used.
+set smarttab                     " Tabs and backspaces at the start of a line indent the line one level
+set smartindent                  " Maintains most indentation and adds extra level when nesting
+set softtabstop=3                " See spaces as tabs.
+set splitright splitbelow        " Open splits below and to the right
+set synmaxcol=160                " Only matches syntax on first 'n' columns of each line (faster)
+set tabstop=3                    " <Tab> move three characters
+set textwidth=79                 " Hard wrap at 79 characters
+set title                        " Set the console title
+set viminfo='20,\"500,%          " Adjust viminfo contents
+set virtualedit=all              " Allow the cursor to go where there's no text
+set wildmenu                     " Tab completion opens a Tab- and arrow-navigable menu
+set wildmode=longest,full        " Tab completion works like bash.
+set wrapscan                     " Searching wraps to start of file when end is reached
 
 " Formatting settings
 " t: Auto-wrap text using textwidth. (default)
@@ -166,8 +216,13 @@ set wildmode=longest,full     " Tab completion works like bash.
 " l: Don't auto-wrap if a line is already longer than textwidth.
 set formatoptions+=ronl
 
-" Enable mouse scrolling in all modes (same as 'a')
-"set mouse=nvic
+" Enable mouse scrolling in selected modes
+" a: All
+" c: Command
+" i: Insert
+" n: Normal
+" v: Visual
+set mouse=a
 " Set scrolling to be single-line
 "map <MouseDown> <C-Y>
 "map <S-MouseDown> <C-U>
@@ -178,10 +233,6 @@ set formatoptions+=ronl
 syntax enable
 set t_Co=16
 colorscheme solarized
-
-" Highlight trailing whitespace
-highlight WhitespaceEOL ctermbg=Red guibg=Red
-   match WhitespaceEOL /\s\+$/
 
 " Configuration variables
 let loaded_matchparen=0   " do automatic bracket highlighting.
@@ -250,14 +301,6 @@ set foldmethod=indent
 
 " Open file for class name under cursor
 nnoremap <C-i> yiw:find <C-R>".php<CR>
-
-" word wrapping
-map \b i[<Esc>ea]<Esc>
-map \B a]<Esc>bi[<Esc>
-map \c i{<Esc>ea}<Esc>
-map \C a}<Esc>bi{<Esc>
-map \p i(<Esc>ea)<Esc>
-map \P a)<Esc>bi(<Esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
