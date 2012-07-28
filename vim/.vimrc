@@ -32,7 +32,7 @@ au BufWinEnter * call RestoreCursor()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Pathogen - https://github.com/tpope/vim-pathogen
-runtime bundle/pathogen/autoload/pathogen.vim
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
