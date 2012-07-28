@@ -7,7 +7,7 @@
 [submodule "vim-abolish"]
 	path = vim/.vim/bundle/vim-abolish
 	url = git://github.com/tpope/vim-abolish.git
-[submodule "vim/.vim/bundle/vim-colors-solarized"]
+[submodule "vim-colors-solarized"]
 	path = vim/.vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "vim-commentary"]
