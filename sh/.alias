@@ -3,7 +3,7 @@ alias c="clear"
 
 alias less="less -R"
 
-alias l="ls -FGb --color=always $*"
+alias l="ls -FGb $*"
 alias ll="l -hl $*"
 alias la="l -a $*"
 alias lal="ll -a $*"

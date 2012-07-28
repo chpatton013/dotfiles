@@ -16,18 +16,6 @@ rm -f ~/.zshrc
 rm -f ~/.vimrc
 rm -f ~/.vim
 
-# Remove plugin links for vim
-rm -f ~/dotfiles/vim/.vim/autoload/pathogen.vim
-rm -f ~/dotfiles/vim/.vim/bundle/neocomplcache
-rm -f ~/dotfiles/vim/.vim/bundle/syntastic
-rm -f ~/dotfiles/vim/.vim/bundle/vim-abolish
-rm -f ~/dotfiles/vim/.vim/bundle/vim-colors-solarized
-rm -f ~/dotfiles/vim/.vim/bundle/vim-commentary
-rm -f ~/dotfiles/vim/.vim/bundle/vim-easymotion
-rm -f ~/dotfiles/vim/.vim/bundle/vim-fugitive
-rm -f ~/dotfiles/vim/.vim/bundle/vim-repeat
-rm -f ~/dotfiles/vim/.vim/bundle/vim-surround
-
 # Remove additional executable links
 rm -f ~/bin/premake
 
@@ -39,18 +27,6 @@ ln -sf ~/dotfiles/sh/.no_mux_hosts ~/.no_mux_hosts
 ln -sf ~/dotfiles/sh/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/vim/.vim ~/.vim
-
-# Link plugins for vim
-ln -sf ~/dotfiles/vim/vim-pathogen/autoload/pathogen.vim ~/dotfiles/vim/.vim/autoload
-ln -sf ~/dotfiles/vim/neocomplcache ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/vim/syntastic ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/themes/solarized/vim-abolish ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/themes/solarized/vim-colors-solarized ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/themes/solarized/vim-commentary ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/vim/vim-easymotion ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/vim/vim-fugitive ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/vim/vim-repeat ~/dotfiles/vim/.vim/bundle
-ln -sf ~/dotfiles/vim/vim-surround ~/dotfiles/vim/.vim/bundle
 
 # Link additional executable files
 mkdir -p ~/bin
