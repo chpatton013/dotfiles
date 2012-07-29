@@ -11,25 +11,27 @@ augroup VimConfig
 augroup END
 
 " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars
-if exists('+colorcolumn')
-   au BufWinEnter * set colorcolumn=80
-   au BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-else
-   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
+augroup ColorColumnConfig
+  au!
+   if exists('+colorcolumn')
+      au BufWinEnter * set colorcolumn=80
+      au BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+   else
+      au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+   endif
+augroup END
 
 " Highlight over-length characters and trailing whitespace
-au ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
-au ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-
 augroup ExtraCharacters
-   autocmd!
-   autocmd BufWinEnter * let w:whitespace_match_number =
+   au!
+   au ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
+   au ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
+   au BufWinEnter * let w:whitespace_match_number =
    \ matchadd('ExtraWhitespace', '\s\+$')
-   autocmd BufWinEnter * call matchadd('OverLength',
+   au BufWinEnter * call matchadd('OverLength',
    \ '\(^\(\s\)\{-}\(*\|//\|/\*\)\{1}\(.\)*\(\%81v\)\)\@<=\(.\)\{1,}$')
-   autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
-   autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+   au InsertEnter * call s:ToggleWhitespaceMatch('i')
+   au InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
 
 " Resize splits on window resize
@@ -37,6 +39,13 @@ au VimResized * exe "normal! \<c-w>="
 
 " Restore the cursor when we can.
 au BufWinEnter * call RestoreCursor()
+
+" Change the statusline color based on current mode
+augroup StatuslineColor
+   au!
+   au InsertEnter * call InsertStatuslineColor(v:insertmode)
+   au InsertLeave * hi statusline ctermfg=cyan ctermbg=black guifg=cyan guibg=black
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -74,11 +83,6 @@ let g:neocomplcache_enable_auto_select=1
 "     :SyntasticToggleMode // toggles between active and passive mode
 "     :SyntasticCheck      // forces a syntax check in passive mode
 
-" show Syntastic status in statusline
-"set statusline+=%#warningmsg#
-"set statusline=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
 " check for syntax errors on file open
 let g:syntastic_check_on_open=1
 " echo errors to the command window
@@ -92,7 +96,7 @@ let g:syntastic_style_error_symbol='S>'
 let g:syntastic_style_warning_symbol='s>'
 " open error balloons when moused over erroneous lines
 let g:syntastic_enable_balloons=1
-" customize statusline
+" customize Syntastic statusline
 let g:syntastic_stl_format = '[%E{E: %fe #%e}%B{, }%W{W: %fw #%w}]'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,22 +128,23 @@ function! s:ToggleWhitespaceMatch(mode)
    endif
 endfunction
 
-" Insert <Tab> or complete identifier if the cursor is after a keyword character
-function! TabOrComplete()
-    let col = col('.')-1
-    if !col || getline('.')[col-1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<C-N>"
-     endif
-endfunction
-
 " Restore the cursor when we can
 function! RestoreCursor()
     if line("'\"") <= line("$")
         normal! g`"
         normal! zz
     endif
+endfunction
+
+" Change the statusline color based on current mode
+function! InsertStatuslineColor(mode)
+   if a:mode == 'i'
+      hi statusline ctermfg=darkmagenta ctermbg=black guifg=darkmagenta guibg=black
+   elseif a:mode == 'r'
+      hi statusline ctermfg=darkgreen ctermbg=black guifg=darkgreen guibg=black
+   else
+      hi statusline ctermfg=darkred ctermbg=black guifg=darkred guibg=black
+   endif
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -155,12 +160,12 @@ set guifont=Consolas:h9
 set encoding=utf-8
 set fileencoding=utf-8
 
-set nocompatible                 " No compatibility with vi.
-filetype on                      " Recognize syntax by file extension.
-filetype indent on               " Check for indent file.
-filetype plugin on               " Allow plugins to be loaded by file type.
+set nocompatible     " No compatibility with vi.
+filetype on          " Recognize syntax by file extension.
+filetype indent on   " Check for indent file.
+filetype plugin on   " Allow plugins to be loaded by file type.
 
-behave xterm                     " Maintain keybindings across enviornments
+behave xterm   " Maintain keybindings across enviornments
 
 set autowrite                    " Write before executing the 'make' command.
 set background=dark              " Background light, so foreground not bold.
@@ -182,8 +187,6 @@ set nohls                        " Don't highlight all regex matches.
 set nowrap                       " Don't soft wrap.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
-set ruler                        " Display row, column and % of document.
-set rulerformat=%l,%c%V%=%P      " Cleaner ruler format
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
 set shellslash                   " Use forward slashes regardless of OS
 set shiftwidth=3                 " >> and << shift 3 spaces.
@@ -201,12 +204,24 @@ set tabstop=3                    " <Tab> move three characters
 set textwidth=79                 " Hard wrap at 79 characters
 set title                        " Set the console title
 set viminfo='20,\"500,%          " Adjust viminfo contents
-set virtualedit=all              " Allow the cursor to go where there's no text
+set virtualedit=block            " Allow the cursor to go where it should not
 set wildmenu                     " Tab completion opens a Tab- and arrow-navigable menu
 set wildmode=longest,full        " Tab completion works like bash.
 set wrapscan                     " Searching wraps to start of file when end is reached
 
-" Formatting settings
+
+" Define statusline
+set statusline=%f                                     " Relative file path
+set statusline+=%(\ [%M%R%H%W]%)                      " File flags (mod, RO, help, preview)
+set statusline+=%(\ %<%)                              " Start truncation
+set statusline+=%(\ %{fugitive#statusline()}%)        " Git branch name (if applicable)
+set statusline+=%=                                    " Begin right justification
+set statusline+=%#warningmsg#                         " Start warning highlighting
+set statusline+=%(\ %{SyntasticStatuslineFlag()}%)    " Show Syntastic errors and warnings
+set statusline+=%*                                    " End warning highlighting
+set statusline+=\ [line\ %l\/%L,\ col\ %c%V,\ %p%%]   " Line and column numbers and percentage through file
+
+" Text formatting settings
 " t: Auto-wrap text using textwidth. (default)
 " c: Auto-wrap comments; insert comment leader. (default)
 " q: Allow formatting of comments with "gq". (default)
@@ -312,9 +327,6 @@ nnoremap <C-i> yiw:find <C-R>".php<CR>
 " Set up dictionary completion.
 set dictionary+=~/.vim/dictionary/english-freq
 set complete+=k
-
-" Insert <Tab> or complete identifier if the cursor is after a keyword character
-inoremap <Tab> <C-R>=TabOrComplete()<CR>
 
 " Smash Esc
 inoremap jk <Esc>
