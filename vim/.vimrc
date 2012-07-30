@@ -12,7 +12,7 @@ augroup END
 
 " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars
 augroup ColorColumnConfig
-  au!
+   au!
    if exists('+colorcolumn')
       au BufWinEnter * set colorcolumn=80
       au BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
