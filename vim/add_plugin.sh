@@ -1,4 +1,5 @@
 #!/bin/sh
+# This script was derived from the work of Marc Zych (https://github.com/marczych)
 
 if [ "$#" != "1" ]
 then
