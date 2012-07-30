@@ -209,7 +209,6 @@ set wildmenu                     " Tab completion opens a Tab- and arrow-navigab
 set wildmode=longest,full        " Tab completion works like bash.
 set wrapscan                     " Searching wraps to start of file when end is reached
 
-
 " Define statusline
 set statusline=%f                                     " Relative file path
 set statusline+=%(\ [%M%R%H%W]%)                      " File flags (mod, RO, help, preview)
