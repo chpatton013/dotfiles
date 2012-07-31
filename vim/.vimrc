@@ -71,10 +71,17 @@ let g:EasyMotion_leader_key=',m'
 
 " Enable at startup.
 let g:neocomplcache_enable_at_startup=1
-" Only display 10 items in the list.
-let g:neocomplcache_max_list=10
-" Auto-select the first candidate.
-let g:neocomplcache_enable_auto_select=1
+" Only display 'n' items in the list.
+let g:neocomplcache_max_list=5
+" Do not auto-select the first candidate.
+let g:neocomplcache_enable_auto_select=0
+" Do not try to match until 'n' characters have been typed
+let g:neocomplcache_auto_completion_start_length=3
+" Do not try to match to anything less than 'n' characters
+let g:neocomplcache_min_keyword_length=6
+let g:neocomplcache_min_syntax_length=6
+" Only consider case if an uppercase character has been typed
+let g:neocomplcache_enable_smart_case=1
 
 
 " Syntastic - https://github.com/scrooloose/syntastic/
