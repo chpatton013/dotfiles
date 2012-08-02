@@ -74,7 +74,7 @@ let g:neocomplcache_enable_at_startup=1
 " Only display 'n' items in the list.
 let g:neocomplcache_max_list=5
 " Do not auto-select the first candidate.
-let g:neocomplcache_enable_auto_select=0
+let g:neocomplcache_enable_auto_select=1
 " Do not try to match until 'n' characters have been typed
 let g:neocomplcache_auto_completion_start_length=3
 " Do not try to match to anything less than 'n' characters
