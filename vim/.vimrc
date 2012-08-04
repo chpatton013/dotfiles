@@ -179,7 +179,6 @@ set background=dark              " Background light, so foreground not bold.
 set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert
 set expandtab                    " Expand tabs with spaces.
 set nofoldenable                 " Disable folds; toggle with zi.
-set gdefault                     " Assume :s uses /g.
 set hidden                       " Use hidden buffers so unsaved buffers can go to the background
 set history=500                  " Set number of lines for vim to remember
 set hlsearch                     " Highlight all search matches
@@ -190,7 +189,6 @@ set lazyredraw                   " Redraw faster
 set linespace=-1                 " Bring lines closer together vertically
 set modeline                     " Check for a modeline.
 set noerrorbells                 " No beeps on errors.
-set nohls                        " Don't highlight all regex matches.
 set nowrap                       " Don't soft wrap.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
@@ -208,7 +206,7 @@ set softtabstop=3                " See spaces as tabs.
 set splitright splitbelow        " Open splits below and to the right
 set synmaxcol=160                " Only matches syntax on first 'n' columns of each line (faster)
 set tabstop=3                    " <Tab> move three characters
-set textwidth=79                 " Hard wrap at 79 characters
+set textwidth=80                 " Hard wrap at 'n' characters
 set title                        " Set the console title
 set viminfo='20,\"500,%          " Adjust viminfo contents
 set virtualedit=block            " Allow the cursor to go where it should not
