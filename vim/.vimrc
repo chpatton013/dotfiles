@@ -5,46 +5,46 @@
 " Reread configuration of Vim if .vimrc is saved
 augroup VimConfig
   au!
-  au BufWritePost ~/.vimrc       so ~/.vimrc
-  au BufWritePost _vimrc         so ~/_vimrc
-  au BufWritePost vimrc          so ~/.vimrc
+  autocmd BufWritePost ~/.vimrc       so ~/.vimrc
+  autocmd BufWritePost _vimrc         so ~/_vimrc
+  autocmd BufWritePost vimrc          so ~/.vimrc
 augroup END
 
 " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars
 augroup ColorColumnConfig
    au!
    if exists('+colorcolumn')
-      au BufWinEnter * set colorcolumn=80
-      au BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+      autocmd BufWinEnter * set colorcolumn=80
+      autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
    else
-      au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+      autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
    endif
 augroup END
 
 " Highlight over-length characters and trailing whitespace
 augroup ExtraCharacters
    au!
-   au ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
-   au ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-   au BufWinEnter * let w:whitespace_match_number =
+   autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
+   autocmd ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
+   autocmd BufWinEnter * let w:whitespace_match_number =
    \ matchadd('ExtraWhitespace', '\s\+$')
-   au BufWinEnter * call matchadd('OverLength',
+   autocmd BufWinEnter * call matchadd('OverLength',
    \ '\(^\(\s\)\{-}\(*\|//\|/\*\)\{1}\(.\)*\(\%81v\)\)\@<=\(.\)\{1,}$')
-   au InsertEnter * call s:ToggleWhitespaceMatch('i')
-   au InsertLeave * call s:ToggleWhitespaceMatch('n')
+   autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
+   autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
 
 " Resize splits on window resize
-au VimResized * exe "normal! \<c-w>="
+autocmd VimResized * exe "normal! \<c-w>="
 
 " Restore the cursor when we can.
-au BufWinEnter * call RestoreCursor()
+autocmd BufWinEnter * call RestoreCursor()
 
 " Change the statusline color based on current mode
 augroup StatuslineColor
    au!
-   au InsertEnter * call InsertStatuslineColor(v:insertmode)
-   au InsertLeave * hi statusline ctermfg=cyan ctermbg=black guifg=cyan guibg=black
+   autocmd InsertEnter * call InsertStatuslineColor(v:insertmode)
+   autocmd InsertLeave * hi statusline ctermfg=cyan ctermbg=black guifg=cyan guibg=black
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -161,13 +161,6 @@ endfunction
 " Configuration customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" gui configuration (do not move from top of configurations)
-set guioptions=am
-set guifont=Consolas:h9
-set encoding=utf-8
-set fileencoding=utf-8
-
-set nocompatible     " No compatibility with vi.
 filetype on          " Recognize syntax by file extension.
 filetype indent on   " Check for indent file.
 filetype plugin on   " Allow plugins to be loaded by file type.
@@ -177,8 +170,9 @@ behave xterm   " Maintain keybindings across enviornments
 set autowrite                    " Write before executing the 'make' command.
 set background=dark              " Background light, so foreground not bold.
 set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert
+set encoding=utf-8               " Set encoding to utf-8
 set expandtab                    " Expand tabs with spaces.
-set nofoldenable                 " Disable folds; toggle with zi.
+set fileencoding=utf-8           " Set fileencoding to utf-8
 set hidden                       " Use hidden buffers so unsaved buffers can go to the background
 set history=500                  " Set number of lines for vim to remember
 set hlsearch                     " Highlight all search matches
@@ -188,7 +182,9 @@ set laststatus=2                 " Show status line even where there is only one
 set lazyredraw                   " Redraw faster
 set linespace=-1                 " Bring lines closer together vertically
 set modeline                     " Check for a modeline.
+set nocompatible                 " No compatibility with vi.
 set noerrorbells                 " No beeps on errors.
+set nofoldenable                 " Disable folds; toggle with zi.
 set nowrap                       " Don't soft wrap.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
@@ -248,13 +244,12 @@ set mouse=a
 "map <MouseUp> <C-E>
 "map <S-MouseUp> <C-D>
 
-" Highlighting
+" Color theme
 syntax enable
 set t_Co=16
 colorscheme solarized
 
 " Configuration variables
-let loaded_matchparen=0   " do automatic bracket highlighting.
 let mapleader=","         " Use , instead of \ for the map leader.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
