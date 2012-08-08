@@ -9,4 +9,4 @@ fi
 
 REPONAME=`echo "$1" | sed 's/^.*\///' | sed 's/\..*$//'`
 
-git submodule add $1 vim/.vim/bundle/$REPONAME
+git submodule add $1 vim/bundle/$REPONAME
