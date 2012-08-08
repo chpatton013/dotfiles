@@ -22,6 +22,7 @@ alias srv="h; svn revert $*; cd -"
 alias sst="h; svn status $*; cd -"
 alias sup="h; svn up $*; cd -"
 
+alias gg="git grep $*"
 alias gad="git add $*"
 alias gcm="git commit $*"
 alias gpl="git pull $*"
