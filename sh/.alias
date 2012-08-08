@@ -43,4 +43,5 @@ alias multix="ssh -X chpatton@multicore.csc.calpoly.edu $*"
 
 alias cmr="ssh cpatton@cominor.com $*"
 alias lb="live_ssh ifixit.com $*"
+alias db="live_ssh db.ifixit.com $*"
 alias slave="live_ssh slave.ifixit.com $*"
