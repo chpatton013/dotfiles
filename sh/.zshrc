@@ -1,314 +1,196 @@
-# Autoload screen if we aren't in it
+###############################################################################
+# Login actions
+###############################################################################
+
+# Autoload screen if we aren't in it.
 #if [[ $STY = '' ]]; then
 #   screen -xR
 #fi
 
-#{{{ ZSH Modules
+cd ~/Code
 
-autoload -U promptinit zcalc zsh-mime-setup
-autoload -U colors && colors
-autoload -Uz compinit
-compinit
-
-#}}}
-
-#{{{ Options
-
-# Now we can pipe to multiple outputs!
-setopt MULTIOS
-
-# Spell check commands!  (Sometimes annoying)
-setopt CORRECT
-
-# This makes cd=pushd
-setopt AUTO_PUSHD
-
-# If we have a glob this will expand it
-setopt GLOB_COMPLETE
-setopt PUSHD_MINUS
-
-# No more annoying pushd messages...
-setopt PUSHD_SILENT
-
-# blank pushd goes to home
-setopt PUSHD_TO_HOME
-
-# this will ignore multiple directories for the stack.  Useful?  I dunno.
-setopt PUSHD_IGNORE_DUPS
-
-# 10 second wait if you do something that will delete everything.  I wish I'd had this before...
-setopt RM_STAR_WAIT
-
-# use magic (this is default, but it can't hurt!)
-setopt ZLE
-
-setopt NO_HUP
-
-setopt VI
+###############################################################################
 
 
-setopt IGNORE_EOF
+###############################################################################
+# ZSH Modules
+###############################################################################
 
-# If I could disable Ctrl-s completely I would!
-setopt NO_FLOW_CONTROL
+autoload -U compinit complete complist computil    # Enable completion support.
+autoload -U promptinit                             # Prompt customization support.
+autoload -U colors                                 # Enable color support.
+autoload -U regex                                  # Enable regex support.
+colors && compinit && promptinit
 
-# beeps are annoying
-setopt NO_BEEP
+###############################################################################
 
-# Keep echo "station" > station from clobbering station
-setopt NO_CLOBBER
 
-# Case insensitive globbing
-setopt NO_CASE_GLOB
+###############################################################################
+# Key bindings
+###############################################################################
 
-# Be Reasonable!
-setopt NUMERIC_GLOB_SORT
+# Incremental search.
+bindkey -M vicmd "/" history-incremental-search-backward
+bindkey -M vicmd "?" history-incremental-search-forward
+# Search on text already typed in.
+bindkey -M vicmd "//" history-beginning-search-backward
+bindkey -M vicmd "??" history-beginning-search-forward
 
-# I don't know why I never set this before.
-setopt EXTENDED_GLOB
+# Rebind arrow keys.
+bindkey '\e[A' up-line-or-history
+bindkey '\eOA' up-line-or-history
+bindkey '\e[B' down-line-or-history
+bindkey '\eOB' down-line-or-history
+bindkey '\e[C' forward-char
+bindkey '\eOC' forward-char
+bindkey '\e[D' backward-char
+bindkey '\eOD' backward-char
+# Rebind home and end.
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
+# Rebind the insert and delete.
+bindkey '\e[2~' overwrite-mode
+bindkey '\e[3~' delete-char
 
-# text around arrays wraps each emelent, not the whole array
-setopt RC_EXPAND_PARAM
+# Vim smash escape.
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins 'kj' vi-cmd-mode
+# Vim undo and redo.
+bindkey -M vicmd 'u' undo
+bindkey -M vicmd '^r' redo
+# Vim clear text on line ("quit").
+bindkey -M vicmd "q" push-line
 
-#}}}
+# Space and completion in one.
+bindkey -M viins ' ' magic-space
 
-#{{{ Variables
+###############################################################################
 
+
+###############################################################################
+# Configuration options.
+###############################################################################
+
+setopt AUTO_CD          # Lone directory names become cd commands.
+setopt AUTO_PUSHD       # cd = pushd.
+setopt CORRECT          # This is why I use zsh.
+setopt IGNORE_EOF       # We don't want to have any accidents, now do we?
+setopt MULTIOS          # Allow piping to multiple outputs.
+setopt NO_BEEP          # No audio bells.
+setopt NO_FLOW_CONTROL  # It's annoying when the terminal stops producing output for no good reason.
+setopt NO_HUP           # Do not hang up on me.
+setopt PUSHD_MINUS      # Reverses 'cd +1' and 'cd -1'.
+setopt PUSHD_SILENT     # So annoying.
+setopt PUSHD_TO_HOME    # Blank pushd goes to home.
+setopt RC_EXPAND_PARAM  # foo${a b c}bar = fooabar foobbar foocbar instead of fooa b cbar.
+setopt RM_STAR_WAIT     # Prevents nuclear holocausts.
+setopt VI               # Vim commands on the command line (instead of emacs).
+
+###############################################################################
+
+
+###############################################################################
+# Variable exports
+###############################################################################
+
+export EDITOR=vim
 export LANG=en_US
 export PAGER=less
-export EDITOR=vim
 export PATH=$PATH:~/bin
 
-#}}}
+###############################################################################
 
-#{{{ External Files
 
-# Include stuff that should only be on this
-if [[ -r ~/.localinclude ]]; then
-   source ~/.localinclude
+###############################################################################
+# History settings
+###############################################################################
+
+HISTFILE=~/.history
+
+SAVEHIST=1000
+HISTSIZE=1000
+
+setopt APPEND_HISTORY         # Do not overwrite.
+setopt EXTENDED_HISTORY       # Save time and duration of execution.
+setopt HIST_IGNORE_DUPS       # Ignore immediate duplicates.
+setopt HIST_IGNORE_SPACE      # Do not save lines that start with a space.
+setopt HIST_NO_STORE          # Do not save commands with '!' (only the resulting auto-completed command).
+setopt HIST_REDUCE_BLANKS     # This     seems  like    a good    idea.
+setopt HIST_VERIFY            # Auto-completion with '!' verifies on next line.
+setopt SHARE_HISTORY          # Share history between shells.
+
+###############################################################################
+
+
+###############################################################################
+# Completion settings
+###############################################################################
+
+setopt COMPLETE_IN_WORD    # Try to complete from cursor.
+setopt GLOB_COMPLETE       # Expand globs.
+setopt EXTENDED_GLOB       # Moar globs!
+setopt NO_CASE_GLOB        # Case insensitive globbing.
+setopt NUMERIC_GLOB_SORT   # Glob sorting is primarily numeric.
+
+# Formatting output.
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*:corrections' format '%B%d (errors %e)%b'
+zstyle ':completion:*' verbose yes
+# Descriptions for options not described by completion functions.
+zstyle ':completion:*' auto-description 'specify: %d'
+# Menu instead of prompting for output. Auto-select first item.
+zstyle ':completion:*:default' menu 'select=0'
+# Use colors in completion menu.
+zstyle ':completion:*:default' list-colors "=(#b) #([0-9]#)*=36=31"
+# Display different types of matches separately.
+zstyle ':completion:*' group-name ''
+# Separate man page sections.
+zstyle ':completion:*:manuals' separate-sections true
+# Case insensitive completion.
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# Don't complete directory we are already in (../here).
+zstyle ':completion:*' ignore-parents parent pwd
+# More errors allowed for large words and fewer for small words.
+zstyle ':completion:*:approximate:*' max-errors 'reply=(  $((  ($#PREFIX+$#SUFFIX)/3  ))  )'
+# Perform expansions, match all completions and corrections, and omit ignored.
+zstyle ':completion:*' completer _expand _complete _approximate _ignored
+# Faster completion.
+zstyle ':completion::complete:*' use-cache 1
+
+###############################################################################
+
+
+###############################################################################
+# Git integration
+###############################################################################
+
+if [[ -f ~/.git-completion.sh ]] then
+   source ~/.git-completion.sh
+   export GIT_PS1_SHOWDIRTYSTATE="true"
+   export GIT_PS1_SHOWSTASHSTATE=" true"
+   export GIT_PS1_SHOWUNTRACKEDFILES=" true"
+   export GIT_PS1_SHOWUPSTREAM="true"
 fi
 
-# Include local directories
-if [[ -r ~/.localdirs ]]; then
-   source ~/.localdirs
-fi
+###############################################################################
 
-# Include alias
+
+###############################################################################
+# External files
+###############################################################################
+
 if [[ -f ~/.alias ]]; then
    . ~/.alias
 fi
 
-autoload run-help
-HELPDIR=~/zsh_help
+###############################################################################
 
-#}}}
 
-#{{{ Completion Stuff
-
-# Faster! (?)
-zstyle ':completion::complete:*' use-cache 1
-
-# case insensitive completion
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' completer _expand _force_rehash _complete _approximate _ignored
-
-# generate descriptions with magic.
-zstyle ':completion:*' auto-description 'specify: %d'
-
-# Don't prompt for a huge list, page it!
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-
-# Don't prompt for a huge list, menu it!
-zstyle ':completion:*:default' menu 'select=0'
-
-# Have the newer files last so I see them first
-zstyle ':completion:*' file-sort modification reverse
-
-# color code completion!!!!  Wohoo!
-zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"
-
-unsetopt LIST_AMBIGUOUS
-setopt  COMPLETE_IN_WORD
-
-# Separate man page sections.  Neat.
-zstyle ':completion:*:manuals' separate-sections true
-
-# complete with a menu for xwindow ids
-zstyle ':completion:*:windows' menu on=0
-zstyle ':completion:*:expand:*' tag-order all-expansions
-
-# more errors allowed for large words and fewer for small words
-zstyle ':completion:*:approximate:*' max-errors 'reply=(  $((  ($#PREFIX+$#SUFFIX)/3  ))  )'
-
-# Errors format
-zstyle ':completion:*:corrections' format '%B%d (errors %e)%b'
-
-# Don't complete stuff already on the line
-zstyle ':completion::*:(rm|vi):*' ignore-line true
-
-# Don't complete directory we are already in (../here)
-zstyle ':completion:*' ignore-parents parent pwd
-
-zstyle ':completion::approximate*:*' prefix-needed false
-
-#}}}
-
-#{{{ Key bindings
-
-# Who doesn't want home and end to work?
-bindkey '\e[1~' beginning-of-line
-bindkey '\e[4~' end-of-line
-
-# Incremental search is elite!
-bindkey -M vicmd "/" history-incremental-search-backward
-bindkey -M vicmd "?" history-incremental-search-forward
-
-# Search based on what you typed in already
-bindkey -M vicmd "//" history-beginning-search-backward
-bindkey -M vicmd "??" history-beginning-search-forward
-
-bindkey "\eOP" run-help
-
-# oh wow!  This is killer...  try it!
-bindkey -M vicmd "q" push-line
-
-# Ensure that arrow keys work as they should
-bindkey '\e[A' up-line-or-history
-bindkey '\e[B' down-line-or-history
-
-bindkey '\eOA' up-line-or-history
-bindkey '\eOB' down-line-or-history
-
-bindkey '\e[C' forward-char
-bindkey '\e[D' backward-char
-
-bindkey '\eOC' forward-char
-bindkey '\eOD' backward-char
-
-bindkey -M viins 'jj' vi-cmd-mode
-bindkey -M vicmd 'u' undo
-
-# Rebind the insert key.  I really can't stand what it currently does.
-bindkey '\e[2~' overwrite-mode
-
-# Rebind the delete key. Again, useless.
-bindkey '\e[3~' delete-char
-
-bindkey -M vicmd '!' edit-command-output
-
-# it's like, space AND completion.  Gnarlbot.
-bindkey -M viins ' ' magic-space
-
-#}}}
-
-#{{{ History Stuff
-
-# Where it gets saved
-HISTFILE=~/.history
-
-# Remember about a years worth of history (AWESOME)
-SAVEHIST=10000
-HISTSIZE=10000
-
-# Don't overwrite, append!
-setopt APPEND_HISTORY
-
-# Killer: share history between multiple shells
-setopt SHARE_HISTORY
-
-# If I type cd and then cd again, only save the last one
-setopt HIST_IGNORE_DUPS
-
-# Even if there are commands inbetween commands that are the same, still only save the last one
-setopt HIST_IGNORE_ALL_DUPS
-
-# Pretty    Obvious.  Right?
-setopt HIST_REDUCE_BLANKS
-
-# If a line starts with a space, don't save it.
-setopt HIST_IGNORE_SPACE
-setopt HIST_NO_STORE
-
-# When using a hist thing, make a newline show the change before executing it.
-setopt HIST_VERIFY
-
-# Save the time and how long a command ran
-setopt EXTENDED_HISTORY
-
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
-
-#}}}
-
-#{{{ Prompt!
-
-host_color=cyan
-history_color=yellow
-user_color=green
-root_color=red
-directory_color=magenta
-error_color=red
-jobs_color=green
-
-host_prompt="%{$fg_bold[$host_color]%}%m%{$reset_color%}"
-
-jobs_prompt1="%{$fg_bold[$jobs_color]%}(%{$reset_color%}"
-
-jobs_prompt2="%{$fg[$jobs_color]%}%j%{$reset_color%}"
-
-jobs_prompt3="%{$fg_bold[$jobs_color]%})%{$reset_color%}"
-
-jobs_total="%(1j.${jobs_prompt1}${jobs_prompt2}${jobs_prompt3} .)"
-
-history_prompt1="%{$fg_bold[$history_color]%}[%{$reset_color%}"
-
-history_prompt2="%{$fg[$history_color]%}%h%{$reset_color%}"
-
-history_prompt3="%{$fg_bold[$history_color]%}]%{$reset_color%}"
-
-history_total="${history_prompt1}${history_prompt2}${history_prompt3}"
-
-error_prompt1="%{$fg_bold[$error_color]%}<%{$reset_color%}"
-
-error_prompt2="%{$fg[$error_color]%}%?%{$reset_color%}"
-
-error_prompt3="%{$fg_bold[$error_color]%}>%{$reset_color%}"
-
-error_total="%(?..${error_prompt1}${error_prompt2}${error_prompt3} )"
-
-case "$TERM" in
-  (screen)
-    function precmd() { print -Pn "\033]0;S $TTY:t{%100<...<%~%<<}\007" }
-  ;;
-  (xterm)
-    directory_prompt=""
-  ;;
-  (*)
-    directory_prompt="%{$fg[$directory_color]%}%~%{$reset_color%} "
-  ;;
-esac
-
-if [[ $USER == root ]]; then
-    post_prompt="%{$fg_bold[$root_color]%}%#%{$reset_color%}"
-else
-    post_prompt="%{$fg_bold[$user_color]%}%#%{$reset_color%}"
-fi
-
-#Git integration
-if [[ -f ~/.git-completion.sh ]] then
-   source ~/.git-completion.sh;
-   export GIT_PS1_SHOWDIRTYSTATE=" "
-   export GIT_PS1_SHOWSTASHSTATE=" "
-   export GIT_PS1_SHOWUNTRACKEDFILES=" "
-   export GIT_PS1_SHOWUPSTREAM=" "
-fi
+###############################################################################
+# Prompt definition
+###############################################################################
 
 PS1="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%n@%M%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
 PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%~ $(__git_ps1 "%s")\$%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
@@ -317,21 +199,4 @@ PS1+="
 "
 PS1+="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%#%{$reset_color%}%{$fg[blue]%} ]> %{$reset_color%}"
 
-#}}}
-
-#{{{ Functions
-
-_force_rehash() {
-  (( CURRENT == 1 )) && rehash
-  return 1  # Because we didn't really complete anything
-}
-
-edit-command-output() {
- BUFFER=$(eval $BUFFER)
- CURSOR=0
-}
-zle -N edit-command-output
-
-#}}}
-
-cd ~/Code
+###############################################################################
