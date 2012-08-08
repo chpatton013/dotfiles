@@ -11,7 +11,6 @@ git stash pop
 rm -f ~/.alias
 rm -f ~/.git-completion.sh
 rm -f ~/.mybashrc
-rm -f ~/.no_mux_hosts
 rm -f ~/.zshrc
 rm -f ~/.vimrc
 rm -f ~/.vim
@@ -20,13 +19,12 @@ rm -f ~/.vim
 rm -f ~/bin/premake
 
 # Link config files in home folder
-ln -sf ~/dotfiles/sh/.alias ~/.alias
-ln -sf ~/dotfiles/sh/.git-completion.sh ~/.git-completion.sh
-ln -sf ~/dotfiles/sh/.mybashrc ~/.mybashrc
-ln -sf ~/dotfiles/sh/.no_mux_hosts ~/.no_mux_hosts
-ln -sf ~/dotfiles/sh/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
-ln -sf ~/dotfiles/vim/.vim ~/.vim
+ln -sf ~/dotfiles/sh/alias ~/.alias
+ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
+ln -sf ~/dotfiles/sh/mybashrc ~/.mybashrc
+ln -sf ~/dotfiles/sh/zshrc ~/.zshrc
+ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
+ln -sf ~/dotfiles/vim/ ~/.vim
 
 # Link additional executable files
 mkdir -p ~/bin
