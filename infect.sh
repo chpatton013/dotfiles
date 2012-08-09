@@ -24,7 +24,7 @@ ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
 ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
-ln -sf ~/dotfiles/vim/ ~/.vim
+ln -sf ~/dotfiles/vim ~/.vim
 
 # Link additional executable files
 mkdir -p ~/bin
