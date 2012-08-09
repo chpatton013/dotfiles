@@ -19,13 +19,13 @@ rm -f ~/.vim
 rm -f ~/bin/premake
 
 # Link config files in home folder
-ln -sf ~/dotfiles/sh/alias ~/.alias
+ln -sf ~/dotfiles/sh/alias.sh ~/.alias
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
-ln -sf ~/dotfiles/sh/mybashrc ~/.mybashrc
-ln -sf ~/dotfiles/sh/zshrc ~/.zshrc
+ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
+ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/vim/ ~/.vim
 
 # Link additional executable files
 mkdir -p ~/bin
-ln -sf ~/dotfiles/premake4 ~/bin/premake
+ln -sf ~/dotfiles/bin/premake4 ~/bin/premake
