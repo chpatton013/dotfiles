@@ -1,46 +1,41 @@
-alias :q="exit"
-alias c="clear"
-
+# Expand control characters.
 alias less="less -R"
+# Enable X-window when ssh'ing.
+alias sshx="ssh -X $*"
+# Pass enviornment variables onto sudo.
+alias sudo="sudo -E"
 
+# `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
 alias l="ls -FGb $*"
 alias ll="l -hl $*"
 alias la="l -a $*"
 alias lal="ll -a $*"
 alias lla="lal $*"
 
+# Command-line shortcuts.
+alias ...="cd .. $*"
+alias :q="exit"
+alias c="clear"
 alias md="mkdir"
 
-alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
-
-alias ...="cd .. $*"
-alias h="cd ~/Code $*"
-
-alias scm="h; svn commit $*; cd -"
-alias sdf="h; svn diff $*; cd -"
-alias srv="h; svn revert $*; cd -"
-alias sst="h; svn status $*; cd -"
-alias sup="h; svn up $*; cd -"
-
-alias gg="git grep $*"
+# Git shortcuts.
 alias gad="git add $*"
+alias gad="git add -p $*"
 alias gcm="git commit $*"
+alias gco="git checkout $*"
+alias gdf="git diff $*"
+alias gitsum="git status && git stash list && git diff | less $*"
+alias gg="git grep $*"
 alias gpl="git pull $*"
 alias gps="git push $*"
 alias grs="git reset $*"
-alias gco="git checkout $*"
-alias gst="git status $*"
-alias gdf="git diff $*"
 alias gsl="git stash list $*"
-alias gitsum="gst && gsl | cat && gdf | cat $*"
+alias gst="git status $*"
 
-alias myip="last \"\$USER\" | grep 'still' | awk '{print \$3}' | sort -nu"
-
-alias sshx="ssh -X $*"
-
+# School ssh addresses.
 alias multi="ssh chpatton@multicore.csc.calpoly.edu $*"
-alias multix="ssh -X chpatton@multicore.csc.calpoly.edu $*"
 
+# Work ssh addresses.
 alias cmr="ssh cpatton@cominor.com $*"
 alias lb="live_ssh ifixit.com $*"
 alias db="live_ssh db.ifixit.com $*"
