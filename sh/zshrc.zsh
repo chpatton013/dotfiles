@@ -90,18 +90,6 @@ setopt VI               # Vim commands on the command line (instead of emacs).
 
 
 ###############################################################################
-# Variable exports
-###############################################################################
-
-export EDITOR=vim
-export LANG=en_US
-export PAGER=less
-export PATH=$PATH:~/bin
-
-###############################################################################
-
-
-###############################################################################
 # History settings
 ###############################################################################
 
@@ -192,11 +180,57 @@ fi
 # Prompt definition
 ###############################################################################
 
-PS1="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%n@%M%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
+PS1=""
+PS1+="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%n@%M%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
 PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%~ $(__git_ps1 "%s")\$%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
 PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%D %*%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
 PS1+="
 "
 PS1+="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%#%{$reset_color%}%{$fg[blue]%} ]> %{$reset_color%}"
+
+###############################################################################
+
+
+###############################################################################
+# Path construction
+###############################################################################
+
+PATH=.
+# personal bin directories
+if [ -d ~/bin ]; then; PATH+=:~/bin
+fi
+if [ -d ~/sbin ]; then; PATH+=:~/sbin
+fi
+# homebrew bin directories
+if [ -d /usr/local/bin ]; then; PATH+=:/usr/local/bin
+fi
+if [ -d /usr/local/sbin ]; then; PATH+=:/usr/local/sbin
+fi
+# X11 bin directories
+if [ -d /usr/X11/bin ]; then; PATH+=:/usr/X11/bin
+fi
+# user bin directories
+if [ -d /usr/bin ]; then; PATH+=:/usr/bin
+fi
+if [ -d /usr/sbin ]; then; PATH+=:/usr/sbin
+fi
+# system bin directories
+if [ -d /bin ]; then; PATH+=:/bin
+fi
+if [ -d /sbin ]; then; PATH+=:/sbin
+fi
+
+###############################################################################
+
+
+###############################################################################
+# Variable exports
+###############################################################################
+
+export EDITOR=vim
+export LANG=en_US
+export PAGER=less
+export PATH=$PATH
+export PS1=$PS1
 
 ###############################################################################
