@@ -168,7 +168,7 @@ filetype plugin on   " Allow plugins to be loaded by file type.
 behave xterm   " Maintain keybindings across enviornments
 
 set autowrite                    " Write before executing the 'make' command.
-set background=dark              " Background light, so foreground not bold.
+set background=light             " Background light, so foreground not bold.
 set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert
 set encoding=utf-8               " Set encoding to utf-8
 set expandtab                    " Expand tabs with spaces.
