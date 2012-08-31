@@ -182,7 +182,7 @@ fi
 
 PS1=""
 PS1+="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%n@%M%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
-PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%~ $(__git_ps1 "%s")\$%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
+PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%~ $(__git_ps1 "%s")%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
 PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%D %*%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
 PS1+="
 "
