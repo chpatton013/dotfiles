@@ -110,8 +110,17 @@ let g:syntastic_stl_format = '[%E{E: %fe #%e}%B{, }%W{W: %fw #%w}]'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fucntions
+" Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Toggle background color
+" function! SwitchBackgroundColor()
+"    if background = 'dark'
+"       set background=light
+"    else
+"       set background=dark
+"    endif
+" endfunction
 
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
@@ -168,7 +177,7 @@ filetype plugin on   " Allow plugins to be loaded by file type.
 behave xterm   " Maintain keybindings across enviornments
 
 set autowrite                    " Write before executing the 'make' command.
-set background=light             " Background light, so foreground not bold.
+set background=dark              " Usually prefer dark backgrounds
 set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert
 set encoding=utf-8               " Set encoding to utf-8
 set expandtab                    " Expand tabs with spaces.
@@ -276,6 +285,9 @@ noremap <Leader>h :set hlsearch! hlsearch?<CR>
 
 " Open a scratch buffer.
 noremap <Leader>s :Scratch<CR>
+
+" Toggle background color
+"noremap <Leader>b :call SwitchBackgroundColor()<CR>
 
 " Improve movement on wrapped lines
 nnoremap j gj
