@@ -195,29 +195,54 @@ PS1+="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%#%{$reset_color%}%{$fg[blue]%}
 # Path construction
 ###############################################################################
 
+OLD_PATH=$PATH
 PATH=.
 # personal bin directories
 if [ -d ~/bin ]; then; PATH+=:~/bin
 fi
 if [ -d ~/sbin ]; then; PATH+=:~/sbin
 fi
+# usr bin directories
+if [ -d /usr/bin ]; then; PATH+=:/usr/bin
+fi
+if [ -d /usr/sbin ]; then; PATH+=:/usr/sbin
+fi
 # homebrew bin directories
 if [ -d /usr/local/bin ]; then; PATH+=:/usr/local/bin
 fi
 if [ -d /usr/local/sbin ]; then; PATH+=:/usr/local/sbin
 fi
+# mysql bin directories
+if [ -d /usr/local/mysql/bin ]; then; PATH+=:/usr/local/mysql/bin
+fi
+if [ -d /usr/local/mysql/sbin ]; then; PATH+=:/usr/local/mysql/sbin
+fi
 # X11 bin directories
 if [ -d /usr/X11/bin ]; then; PATH+=:/usr/X11/bin
 fi
-# user bin directories
-if [ -d /usr/bin ]; then; PATH+=:/usr/bin
+# kerberos bin directories
+if [ -d /usr/kerberos/bin ]; then; PATH+=:/usr/kerberos/bin
 fi
-if [ -d /usr/sbin ]; then; PATH+=:/usr/sbin
+if [ -d /usr/kerberos/sbin ]; then; PATH+=:/usr/kerberos/sbin
 fi
 # system bin directories
 if [ -d /bin ]; then; PATH+=:/bin
 fi
 if [ -d /sbin ]; then; PATH+=:/sbin
+fi
+PATH=$OLD_PATH:$PATH
+
+###############################################################################
+
+
+###############################################################################
+# LD Library Path construction
+###############################################################################
+
+LD_LIBRARY_PATH=.
+if [ -d /usr/lib ]; then; LD_LIBRARY_PATH+=:/usr/lib
+fi
+if [ -d /usr/local/lib ]; then; LD_LIBRARY_PATH+=:/usr/local/lib
 fi
 
 ###############################################################################
@@ -228,8 +253,26 @@ fi
 ###############################################################################
 
 export EDITOR=vim
-export LANG=en_US
 export PAGER=less
+
+# Language
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_COLLATE=C
+export LC_MONETARY="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_PAPER="en_US.UTF-8"
+export LC_NAME="en_US.UTF-8"
+export LC_ADDRESS="en_US.UTF-8"
+export LC_TELEPHONE="en_US.UTF-8"
+export LC_MEASUREMENT="en_US.UTF-8"
+export LC_IDENTIFICATION="en_US.UTF-8"
+export LC_ALL=
+export CHARSET=UTF-8
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 export PATH=$PATH
 export PS1=$PS1
 
