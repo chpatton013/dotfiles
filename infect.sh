@@ -13,7 +13,7 @@ rm -f ~/.git-completion.sh
 rm -f ~/.mybashrc
 rm -f ~/.zshrc
 rm -f ~/.vimrc
-rm -f ~/.vim
+rm -rf ~/.vim
 
 # Remove additional executable links
 rm -f ~/bin/premake
