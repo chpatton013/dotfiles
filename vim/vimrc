@@ -69,8 +69,8 @@ let g:EasyMotion_leader_key=',m'
 
 " Neocomplcache - https://github.com/Shougo/neocomplcache
 
-" Enable at startup.
-let g:neocomplcache_enable_at_startup=1
+" Disabled at startup.
+let g:neocomplcache_enable_at_startup=0
 " Only display 'n' items in the list.
 let g:neocomplcache_max_list=5
 " Do not auto-select the first candidate.
@@ -246,7 +246,7 @@ set formatoptions+=ronl
 " i: Insert
 " n: Normal
 " v: Visual
-set mouse=a
+set mouse=
 " Set scrolling to be single-line
 "map <MouseDown> <C-Y>
 "map <S-MouseDown> <C-U>
