@@ -25,7 +25,7 @@ alias gcm="git commit $*"
 alias gco="git checkout $*"
 alias gdf="git diff $*"
 alias gitsum="git status && git stash list && git diff | less $*"
-alias gg="git grep $*"
+alias gg="git grep -n $*"
 alias gpl="git pull $*"
 alias gps="git push $*"
 alias grs="git reset $*"
@@ -34,6 +34,10 @@ alias gst="git status $*"
 
 # School ssh addresses.
 alias multi="ssh chpatton@multicore.csc.calpoly.edu $*"
+alias unix1="ssh chpatton@unix1.csc.calpoly.edu $*"
+alias unix2="ssh chpatton@unix2.csc.calpoly.edu $*"
+alias unix3="ssh chpatton@unix3.csc.calpoly.edu $*"
+alias unix4="ssh chpatton@unix4.csc.calpoly.edu $*"
 
 # Work ssh addresses.
 alias cmr="ssh cpatton@cominor.com $*"
