@@ -493,8 +493,8 @@ function network()
       print('setting up network')
    end
 
-   local net_devices = os.capture('ifconfig | grep -E \'(eth|wlan)[0-9]+\' ' ..
-    '| awk \'{ print $1 }\' | sed \'s/://g\'')
+   local net_devices = os.capture('ifconfig | grep -E "(eth|wlan)[0-9]+" ' ..
+    '| awk -F \':\' \'{ print $1 }\'')
 
    if net_devices == nil or net_devices.len == 0 then
       print('no network devices detected. installation cannot continue.')
