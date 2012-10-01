@@ -554,7 +554,7 @@ function settings()
    if verbose == high then
       print('setting timezone...')
    end
-   os.execute('ln -sf /mnt/usr/share/zoneinfo/America/Los_Angelos ' ..
+   os.execute('ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles ' ..
     '/mnt/etc/localtime')
 
    if verbose == high then
