@@ -189,7 +189,7 @@ set ignorecase                   " Ignore case in regular expressions
 set incsearch                    " Immediately highlight search matches.
 set laststatus=2                 " Show status line even where there is only one window
 set lazyredraw                   " Redraw faster
-set linespace=-1                 " Bring lines closer together vertically
+set linespace=0                  " Adjust relative line height.
 set modeline                     " Check for a modeline.
 set nocompatible                 " No compatibility with vi.
 set noerrorbells                 " No beeps on errors.
