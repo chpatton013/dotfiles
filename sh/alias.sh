@@ -1,7 +1,7 @@
 # Expand control characters.
 alias less="less -R"
-# Enable X-window when ssh'ing.
-alias sshx="ssh -X $*"
+# Enabled X Forwarding and compression in X sessions.
+alias ssh="ssh -XYC"
 # Pass enviornment variables onto sudo.
 alias sudo="sudo -E"
 
