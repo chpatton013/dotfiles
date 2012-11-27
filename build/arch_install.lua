@@ -608,7 +608,7 @@ function ramdisk()
       until ramdisk_config == 'done'
    end
 
-   os.execute(mkinitcpio)
+   chroot(mkinitcpio)
 end
 
 function install()
