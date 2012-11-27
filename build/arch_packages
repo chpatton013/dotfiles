@@ -1,47 +1,41 @@
-base-devel
-
-xorg-xinit xorg-server xorg-server-utils xorg-apps xorg-twm xorg-xclock xterm dbus numlockx mesa
-ttf-dejavu gnome gnome-extra
-awesome
-redshift
+linux-headers linux-lts-headers
+ntp
+dbus
+openssh
+mlocate
+sudo
 
 zsh
-sudo
-screen
-
-wireless-tools
-pdnsd
-openssh mosh
-mlocate
-
 vim
-most
+screen
+tmux
+git
+premake
 
-git gitg
-
-truecrypt
-
+pmount
+zip unzip
 samba
-
-ntfs-3g
-ntfsprogs
-
-jre7-openjdk icedtea-web-java7
-python python-cairo pythin-gobject python-notify pygtk python2-mako
-
-deluge librsvg gettext
+truecrypt
+ntfs-3g ntfsprogs
 
 boost-libs boost-build boost
+jre7-openjdk icedtea-web-java7
+python python-cairo python-gobject python-notify pygtk python2-mako
+lua
 
-pidgin evolution-data-server pidgin-encryption pidgin-otr
+awesome
+terminator
+xorg-xinit xorg-apps xorg-twm xorg-xclock xterm numlockx mesa
+xorg-server xorg-server-{common,devel,utils,xdmx,xvfb}
 
-chromium-browser flashplugin
+redshift
+chromium flashplugin
+pidgin pidgin-encryption pidgin-otr evolution-data-server
+deluge librsvg gettext
+libreoffice-en-US
+libreoffice-{common,base,calc,draw,impress,math,writer,gnome,kde4,sdk,sdk-doc}
+libreoffice-extension-{ct2n,pdfimport,presenter-screen}
 
+ffmpeg libmp4v2
+mplayer vlc
 picard
-mplayer
-vlc
-libmp4v2
-
-libreoffice-en-US libreoffice-common libreoffice-base libreoffice-postgresql-connector libreoffice-calc libreoffice-draw libreoffice-extension-pdfimport libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-writer
-
-premake
