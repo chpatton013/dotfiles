@@ -28,3 +28,9 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
+[submodule "themes/solarized/gnome-terminal-colors-solarized"]
+	path = themes/solarized/gnome-terminal-colors-solarized
+	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
+[submodule "themes/solarized/konsole-colors-solarized"]
+	path = themes/solarized/konsole-colors-solarized
+	url = git://github.com/phiggins/konsole-colors-solarized.git
