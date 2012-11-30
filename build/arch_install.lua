@@ -15,7 +15,7 @@ function chroot(cmd)
    if cmd == nil then
       cmd = ''
    end
-   return os.execute('arch-chroot /mnt "%s"', cmd)
+   return os.execute(string.format('arch-chroot /mnt "%s; exit"', cmd))
 end
 
 -- global variables
@@ -608,7 +608,7 @@ function ramdisk()
       until ramdisk_config == 'done'
    end
 
-   os.execute(mkinitcpio)
+   chroot(mkinitcpio)
 end
 
 function install()

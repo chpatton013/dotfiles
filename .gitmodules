@@ -34,3 +34,7 @@
 [submodule "themes/solarized/konsole-colors-solarized"]
 	path = themes/solarized/konsole-colors-solarized
 	url = git://github.com/phiggins/konsole-colors-solarized.git
+[submodule "vim/bundle/vim-latex"]
+	path = vim/bundle/vim-latex
+	url = git://github.com/jcf/vim-latex.git
+>>>>>>> 781c5a4a5f18e3fa7ee84cea4d5278e8b90136b1
