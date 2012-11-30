@@ -9,22 +9,26 @@ git stash pop
 
 # Remove config file links in home folder
 rm -f ~/.alias
+rm -f ~/.commonrc
 rm -f ~/.git-completion.sh
 rm -f ~/.mybashrc
-rm -f ~/.zshrc
-rm -f ~/.vimrc
+rm -rf ~/.themes
 rm -rf ~/.vim
+rm -f ~/.vimrc
+rm -f ~/.zshrc
 
 # Remove additional executable links
 rm -f ~/bin/premake
 
 # Link config files in home folder
 ln -sf ~/dotfiles/sh/alias.sh ~/.alias
+ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
-ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
-ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
+ln -sf ~/dotfiles/sh/themes ~/.themes
 ln -sf ~/dotfiles/vim ~/.vim
+ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
+ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 
 # Link additional executable files
 mkdir -p ~/bin
