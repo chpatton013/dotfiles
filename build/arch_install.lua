@@ -1,7 +1,7 @@
 -- helper functions
 function split_str(str, delim)
    local tbl = {}
-   for line in string.gmatch(str, delim) do table.insert(t, line) end
+   for line in string.gmatch(str, delim) do table.insert(tbl, line) end
    return tbl
 end
 function clean_str(str)
