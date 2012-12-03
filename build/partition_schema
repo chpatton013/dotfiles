@@ -1,0 +1,4 @@
+/dev/sda primary 2 grub grub grub bios_grub
+/dev/sda primary 100 ext3 boot /boot boot
+/dev/sda logical 512 swap swap swap
+/dev/sda logical -1 ext3 main /
