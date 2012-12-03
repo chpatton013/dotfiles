@@ -10,6 +10,7 @@ git stash pop
 # Remove config file links in home folder
 rm -f ~/.alias
 rm -f ~/.commonrc
+rm -rf ~/.dircolors
 rm -f ~/.git-completion.sh
 rm -f ~/.mybashrc
 rm -rf ~/.themes
@@ -23,6 +24,7 @@ rm -f ~/bin/premake
 # Link config files in home folder
 ln -sf ~/dotfiles/sh/alias.sh ~/.alias
 ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
+ln -sf ~/dotfiles/sh/dircolors/solarized/dircolors.ansi-dark ~/.dircolors
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
 ln -sf ~/dotfiles/sh/themes ~/.themes

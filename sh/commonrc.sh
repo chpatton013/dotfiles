@@ -17,7 +17,7 @@ cd ~/Code
 ###############################################################################
 
 if [ -f ~/.alias ]; then
-   . ~/.alias
+   source ~/.alias
 fi
 
 if [ -f ~/.git-completion.sh ]; then
@@ -26,6 +26,10 @@ if [ -f ~/.git-completion.sh ]; then
    export GIT_PS1_SHOWSTASHSTATE=" true"
    export GIT_PS1_SHOWUNTRACKEDFILES=" true"
    export GIT_PS1_SHOWUPSTREAM="true"
+fi
+
+if [ -d ~/.dircolors ]; then
+   eval `dircolors ~/.dircolors`
 fi
 
 if [ `echo $DESKTOP_SESSION | grep "gnome"` ] &&
