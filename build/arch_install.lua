@@ -1,4 +1,9 @@
 -- helper functions
+function split_str(str, delim)
+   local t = {}
+   for line in string.gmatch(str, delim) do table.insert(t, line) end
+   return t
+end
 function clean_str(str)
    return str:gsub('((^%s)|(%s$))+', ''):gsub('[\n\r]+', '\n')
 end
@@ -14,7 +19,7 @@ function os.capture(cmd, raw)
 end
 function make_set(table)
    local set = {}
-   for item in table do set[item] = true end
+   for item in table do table.insert(set, item, true) end
    return set
 end
 function chroot(cmd)
@@ -41,8 +46,9 @@ function check_dryrun(description, func, success)
 end
 
 -- global variables
-disks = make_set(split(os.capture(
-   'fdisk -l | awk -F ":" "{ print $1 }" | awk "{ print $2 }"'), "\n"
+disks = make_set(split_str(
+   os.capture('fdisk -l | awk -F ":" "{ print $1 }" | awk "{ print $2 }"'),
+   "\n"
 ))
 schema = {}
 parted_cmd = 'parted -a optimize --script'
@@ -105,7 +111,7 @@ function cmd_line()
    end
 
    for ndx=1,# arg do
-      local cmd = split(arg[ndx], '=')
+      local cmd = split_str(arg[ndx], '=')
       local form
       if string.find(cmd[0], '--') ~= nil
       then form = 'full'
@@ -138,7 +144,7 @@ end
 
 function make_schema()
    function make_schema_item(str)
-      items = split(str, ' ')
+      local items = split_str(str, ' ')
       return {
          disk=items[1],
          part_type=items[2],
@@ -146,7 +152,7 @@ function make_schema()
          fs=items[4],
          name=items[5],
          mount=items[6],
-         flags=split(items[7], ',')
+         flags=split_str(items[7], ',')
       }
    end
 
@@ -154,7 +160,7 @@ function make_schema()
    local str = clean_str(io.read('*all'))
    io.input():close()
 
-   local items = split(str, '\n')
+   local items = split_str(str, '\n')
    for item in items do
       local schema_item = make_schema_item(item)
       if schema_item['size'] ~= 0 then
