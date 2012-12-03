@@ -1,8 +1,8 @@
 -- helper functions
 function split_str(str, delim)
-   local t = {}
+   local tbl = {}
    for line in string.gmatch(str, delim) do table.insert(t, line) end
-   return t
+   return tbl
 end
 function clean_str(str)
    return str:gsub('((^%s)|(%s$))+', ''):gsub('[\n\r]+', '\n')
@@ -17,9 +17,9 @@ function os.capture(cmd, raw)
    else return clean_str(s)
    end
 end
-function make_set(table)
+function make_set(tbl)
    local set = {}
-   for item in table do table.insert(set, item, true) end
+   for item in tbl do table.insert(set, item, true) end
    return set
 end
 function chroot(cmd)
