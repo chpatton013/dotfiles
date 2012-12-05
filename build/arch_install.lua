@@ -1,5 +1,7 @@
 -- helper functions
 function split_str(str, delim)
+   str = str or ''
+   delim = string.format('[^%s]+', (delim or '%s'))
    local tbl = {}
    for line in string.gmatch(str, delim) do table.insert(tbl, line) end
    return tbl
@@ -9,7 +11,7 @@ function clean_str(str)
 end
 function make_set(tbl)
    local set = {}
-   for _,row in pairs(tbl) do table.insert(set, row, true) end
+   for _,row in pairs(tbl) do set[row] = true end
    return set
 end
 function check_dryrun(description, func, success)
@@ -47,7 +49,11 @@ end
 
 -- global variables
 disks = make_set(split_str(
-   os.capture('fdisk -l | awk -F ":" "{ print $1 }" | awk "{ print $2 }"'),
+   os.capture(string.format(
+      '%s | %s | %s | %s',
+      'fdisk -l', 'grep -i \'disk\'',
+      'awk -F \':\' \'{ print $1 }\'', 'awk \'{ print $2 }\''
+   )),
    "\n"
 ))
 schema = {}
@@ -156,9 +162,9 @@ function make_schema()
       }
    end
 
-   io.input(partition_file)
-   local str = clean_str(io.read('*all'))
-   io.input():close()
+   local fstr = assert(io.open(partition_file, 'r'))
+   local str = clean_str(fstr:read('*all'))
+   fstr:close()
 
    local rows = split_str(str, '\n')
    for _,row in pairs(rows) do
