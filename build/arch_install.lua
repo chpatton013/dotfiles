@@ -57,8 +57,10 @@ disks = make_set(split_str(
    "\n"
 ))
 schema = {}
-parted_cmd = 'parted -a optimize --script'
-architecture = os.capture('lscpu | grep -i "architecture" | awk "{ print $2 }"')
+parted_cmd = 'parted --align optimal --script'
+architecture = os.capture(
+   'lscpu | grep -i \'architecture\' | awk \'{ print $2 }\''
+)
 usage = string.format(
    'usage: %s [ %s [ %s [ ... ] ] ]',
    arg[0], 'option=argument', 'option=argument'
@@ -119,23 +121,27 @@ function cmd_line()
    for ndx=1,# arg do
       local cmd = split_str(arg[ndx], '=')
       local form
-      if string.find(cmd[0], '--') ~= nil
+      if string.find(cmd[1], '--') ~= nil
       then form = 'full'
       else form = 'short'
       end
 
-      table.foreach(options, function(key, val)
-         if cmd[0] == val[form] then
+      for key,val in pairs(options) do
+         if cmd[1] == val[form] then
             if key == 'help' then
                print(usage)
                print_options()
                os.exit(0)
-            elseif key == 'dryryn' then dryrun = to_boolean(cmd[1])
-            elseif key == 'file' then partition_file = cmd[1]
-            elseif key == 'host' then hostname = cmd[1]
-            elseif key == 'time' then timezone = cmd[1]
-            elseif key == 'lang' then language = cmd[1]
-            elseif key == 'pass' then password = cmd[1]
+            elseif key == 'dryrun' then
+               if cmd[2] == nil
+               then dryrun = true
+               else dryrun = not not cmd[1]
+               end
+            elseif key == 'file' then partition_file = cmd[2]
+            elseif key == 'host' then hostname = cmd[2]
+            elseif key == 'time' then timezone = cmd[2]
+            elseif key == 'lang' then language = cmd[2]
+            elseif key == 'pass' then password = cmd[2]
             else
                print(string.format(
                   'unrecognized option "%s".\n%s\nexiting...',
@@ -144,7 +150,7 @@ function cmd_line()
                os.exit(1)
             end
          end
-      end)
+      end
    end
 end
 
@@ -180,7 +186,7 @@ function make_schema()
 
       if disk_count[row['disk']]
       then disk_count[row['disk']] = disk_count[row['disk']] + 1
-      else table.insert(disk_count, row['disk'], 1)
+      else disk_count[row['disk']] = 1
       end
 
       schema[ndx]['part_num'] = disk_count[row['disk']]
@@ -193,14 +199,14 @@ function create_partition_tables()
       if not disks[row['disk']] then
          print(string.format('disk %s not found. exiting...', row['disk']))
          os.exit(1)
-      elseif not initialized_tables[row['disk']] then
+      elseif not initialized_labels[row['disk']] then
          local label_cmd = string.format(
             '%s %s mklabel gpt',
             parted_cmd, row['disk']
          )
          local label_func = function() return os.execute(label_cmd) end
-         if check_dryrun(local_cmd, local_func, 0) == 0 then
-            initialized_tables[row['disk']] = true
+         if check_dryrun(label_cmd, label_func, 0) == 0 then
+            initialized_labels[row['disk']] = true
          else
             print(string.format(
                'could not make gpt label for disk %s. exiting...',
@@ -320,7 +326,7 @@ function install()
    -- base installation
    local base_cmd = 'pacstrap /mnt base base-devel grub-bios'
    local base_func = function() return os.execute(base_cmd) end
-   if check_dir(base_cmd, base_func, 0) ~= 0 then
+   if check_dryrun(base_cmd, base_func, 0) ~= 0 then
       print('could not install base system. exiting...')
       os.exit(1)
    end
