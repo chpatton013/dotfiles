@@ -9,7 +9,7 @@ function clean_str(str)
 end
 function make_set(tbl)
    local set = {}
-   for row in tbl do table.insert(set, row, true) end
+   for _,row in pairs(tbl) do table.insert(set, row, true) end
    return set
 end
 function check_dryrun(description, func, success)
@@ -102,7 +102,7 @@ password = 'feedface'
 function cmd_line()
    function print_options()
       print('options:')
-      for op in options do
+      for _,op in pairs(options) do
          print(string.format(
             '   %s | %-10s: %s',
             op['short'], op['full'], op['description']
@@ -161,7 +161,7 @@ function make_schema()
    io.input():close()
 
    local rows = split_str(str, '\n')
-   for row in rows do
+   for _,row in pairs(rows) do
       local schema_row = make_schema_row(row)
       if schema_row['size'] ~= 0 then
          table.insert(schema, schema_row)
@@ -183,7 +183,7 @@ end
 function create_partition_tables()
    local initialized_labels = {}
 
-   for row in schema do
+   for _,row in pairs(schema) do
       if not disks[row['disk']] then
          print(string.format('disk %s not found. exiting...', row['disk']))
          os.exit(1)
@@ -216,7 +216,7 @@ function create_partitions()
    local part_start = 0
    local part_stop
 
-   for row in schema do
+   for _,row in pairs(schema) do
       part_stop = part_start + row['size']
 
       -- make partition
@@ -240,7 +240,7 @@ function create_partitions()
       end
 
       -- set flags
-      for flag in row['flags'] do
+      for _,flag in pairs(row['flags']) do
          local flag_cmd = string.format('%s set %d %s on',
           parted_cmd, row['part_num'], flag)
          local flag_func = function() return os.execute(flag_cmd) end
@@ -274,7 +274,7 @@ function create_partitions()
 end
 function mount_filesystems()
    table.sort(schema, function(a, b) return a['mount'] < b['mount'] end)
-   for row in schema do
+   for _,row in pairs(schema) do
       if row['mount'] ~= 'swap' and row['mount'] ~= 'grub' then
          local dir = string.format('/mnt%s', row['mount'])
 
@@ -385,16 +385,20 @@ function install()
    end
 end
 function clean()
+   -- dismount filesystems
    table.sort(schema, function(a, b) return a['mount'] > b['mount'] end)
-   for row in schema do
-      local umount_cmd = string.format('umount %s', row['mount'])
-      local umount_func = function() return os.execute(umount_cmd) end
-      if check_dryrun(umount_cmd, umount_func, 0) ~= 0 then
-         print(string.format(
-            'could not dismount filesystem %s%d at "%s". exiting...',
-            row['disk'], row['part_num'], row['mount']
-         ))
-         os.exit(1)
+   for _,row in pairs(schema) do
+      if row['mount'] ~= 'swap' and row['mount'] ~= 'grub' then
+         local dir = string.format('/mnt%s', row['mount'])
+         local umount_cmd = string.format('umount %s', dir)
+         local umount_func = function() return os.execute(umount_cmd) end
+         if check_dryrun(umount_cmd, umount_func, 0) ~= 0 then
+            print(string.format(
+               'could not dismount filesystem %s%d at "%s". exiting...',
+               row['disk'], row['part_num'], row['mount']
+            ))
+            os.exit(1)
+         end
       end
    end
 end
