@@ -7,21 +7,23 @@ function split_str(str, delim)
    return tbl
 end
 function clean_str(str)
+   str = str or ''
    return str:gsub('((^%s)|(%s$))+', ''):gsub('[\n\r]+', '\n')
 end
 function make_set(tbl)
+   tbl = tbl or {}
    local set = {}
    for _,row in pairs(tbl) do set[row] = true end
    return set
 end
-function check_dryrun(description, func, success)
+function os.dryrun(cmd, success)
    if not quiet
-   then print(description)
+   then print(cmd)
    end
 
    if dryrun
    then return success
-   else func()
+   else return os.execute(cmd)
    end
 end
 function os.capture(cmd, raw)
@@ -35,16 +37,13 @@ function os.capture(cmd, raw)
    end
 end
 function os.chroot(cmd)
-   if cmd == nil
-   then cmd = ''
-   end
+   cmd = cmd or ''
 
    local chroot_cmd = string.format(
-      'arch-chroot /mnt %q',
+      'arch-chroot /mnt %s',
       cmd:gsub('"', '\\"')
    )
-   local chroot_func = function() return os.execute(chroot_cmd) end
-   return check_dryrun(chroot_cmd, chroot_func, 0)
+   return os.dryrun(chroot_cmd, 0)
 end
 
 -- global variables
@@ -57,10 +56,10 @@ disks = make_set(split_str(
    "\n"
 ))
 schema = {}
-parted_cmd = 'parted --align optimal --script'
-architecture = os.capture(
+parted_cmd = 'parted --align optimal --script --'
+architecture = clean_str(os.capture(
    'lscpu | grep -i \'architecture\' | awk \'{ print $2 }\''
-)
+)):gsub('\n', '')
 usage = string.format(
    'usage: %s [ %s [ %s [ ... ] ] ]',
    arg[0], 'option=argument', 'option=argument'
@@ -204,8 +203,7 @@ function create_partition_tables()
             '%s %s mklabel gpt',
             parted_cmd, row['disk']
          )
-         local label_func = function() return os.execute(label_cmd) end
-         if check_dryrun(label_cmd, label_func, 0) == 0 then
+         if os.dryrun(label_cmd, 0) == 0 then
             initialized_labels[row['disk']] = true
          else
             print(string.format(
@@ -220,43 +218,53 @@ end
 function create_partitions()
    function get_error_message(cmd_str, row)
       string.format(
-         'could not %s partition (%s %d %s %s) on disk %s',
-         row['part_type'], row['size'], row['fs'], row['name'], row['disk']
+         'could not %s partition (%s %s %s %s) on disk %s',
+         cmd_str, row['part_type'], row['size'],
+         row['fs'], row['name'], row['disk']
       )
    end
 
-   local part_start = 0
-   local part_stop
+   local disk_partitions = {}
 
    for _,row in pairs(schema) do
-      part_stop = part_start + row['size']
+      -- determine partitions boundaries
+      if disk_partitions[row['disk']] == nil
+      then disk_partitions[row['disk']] = 0
+      end
+
+      local part_start = disk_partitions[row['disk']]
+      local part_stop
+
+      if tonumber(row['size']) < 0
+      then part_stop = '-0'
+      else part_stop = part_start + row['size']
+      end
 
       -- make partition
-      local partition_cmd = string.format('%s mkpart %s %d %d',
-       parted_cmd, row['part_type'], part_start, part_stop)
-      local partition_func = function() return os.execute(partition_cmd) end
-      if check_dryrun(partition_cmd, partition_func, 0) ~= 0 then
+      local partition_cmd = string.format('%s %s mkpart %s %s %s',
+       parted_cmd, row['disk'], row['part_type'], part_start, part_stop)
+      if os.dryrun(partition_cmd, 0) ~= 0 then
          print(get_error_message('make', row))
          os.exit(1)
       end
 
-      part_start = part_stop + row['size']
+      disk_partitions[row['disk']] = part_stop
 
       -- name partition
-      local name_cmd = string.format('%s name %d %s',
-       parted_cmd, row['part_num'], row['name'])
-      local name_func = function() return os.execute(name_cmd) end
-      if check_dryrun(name_cmd, name_func, 0) ~= 0 then
+      local name_cmd = string.format('%s %s name %d %s',
+       parted_cmd, row['disk'], row['part_num'], row['name'])
+      if os.dryrun(name_cmd, 0) ~= 0 then
          print(get_error_message('name', row))
          os.exit(1)
       end
 
       -- set flags
       for _,flag in pairs(row['flags']) do
-         local flag_cmd = string.format('%s set %d %s on',
-          parted_cmd, row['part_num'], flag)
-         local flag_func = function() return os.execute(flag_cmd) end
-         if check_dryrun(flag_cmd, flag_func, 0) ~= 0 then
+         local flag_cmd = string.format(
+            '%s %s set %d %s on',
+            parted_cmd, row['disk'], row['part_num'], flag
+         )
+         if os.dryrun(flag_cmd, 0) ~= 0 then
             print(get_error_message(
                string.format('set flag "%s"', flag), row)
             )
@@ -277,8 +285,7 @@ function create_partitions()
             row['fs'], row['disk'], row['part_num']
          )
       end
-      local format_func = function() return os.execute(format_cmd) end
-      if format_cmd and check_dryrun(format_cmd, format_func, 0) ~= 0 then
+      if format_cmd and (os.dryrun(format_cmd, 0) ~= 0) then
          print(get_error_message('format', row))
          os.exit(1)
       end
@@ -291,8 +298,7 @@ function mount_filesystems()
          local dir = string.format('/mnt%s', row['mount'])
 
          local mkdir_cmd = string.format('mkdir -p %s', dir)
-         local mkdir_func = function() return os.execute(mkdir_cmd) end
-         if check_dryrun(mkdir_cmd, mkdir_func, 0) ~= 0 then
+         if os.dryrun(mkdir_cmd, 0) ~= 0 then
             print(string.format(
                'could not make directory "%s". exiting...',
                dir
@@ -304,8 +310,7 @@ function mount_filesystems()
             'mount %s%d %s',
             row['disk'], row['part_num'], dir
          )
-         local mount_func = function() return os.execute(mount_cmd) end
-         if check_dryrun(mount_cmd, mount_func, 0) ~= 0 then
+         if os.dryrun(mount_cmd, 0) ~= 0 then
             print(string.format(
                'could not mount %s%d at "%s". exiting...',
                row['disk'], row['part_num'], dir
@@ -325,24 +330,21 @@ end
 function install()
    -- base installation
    local base_cmd = 'pacstrap /mnt base base-devel grub-bios'
-   local base_func = function() return os.execute(base_cmd) end
-   if check_dryrun(base_cmd, base_func, 0) ~= 0 then
+   if os.dryrun(base_cmd, 0) ~= 0 then
       print('could not install base system. exiting...')
       os.exit(1)
    end
 
    -- generate fstab
    local fstab_cmd = 'genfstab -p /mnt >> /mnt/etc/fstab'
-   local fstab_func = function() return os.execute(fstab_cmd) end
-   if check_dryrun(fstab_cmd, fstab_func, 0) ~= 0 then
+   if os.dryrun(fstab_cmd, 0) ~= 0 then
       print('could not generate fstab. exiting...')
       os.exit(1)
    end
 
    -- set hostname
    local hostname_cmd = string.format('echo %s > /mnt/etc/hostname', hostname)
-   local hostname_func = function() return os.execute(hostname_cmd) end
-   if check_dryrun(hostname_cmd, hostname_func, 0) ~= 0 then
+   if os.dryrun(hostname_cmd, 0) ~= 0 then
       print('could not set hostname. exiting...')
       os.exit(1)
    end
@@ -352,46 +354,67 @@ function install()
       'ln -sf /mnt/usr/share/zoneinfo/%s /mnt/etc/localtime',
       timezone
    )
-   local timezone_func = function() return os.execute(timezone_cmd) end
-   if check_dryrun(timezone_cmd, timezone_func, 0) ~= 0 then
+   if os.dryrun(timezone_cmd, 0) ~= 0 then
       print('could not set timezone. exiting...')
       os.exit(1)
    end
 
    -- generate locale
-   local locale_cmd = string.format(
-      'sed -i \'s/^#%s/%s/g\' /etc/locale.gen; locale-gen',
-      language, language
-   )
-   if os.chroot(locale_cmd) ~= 0 then
+   local locale_cmd = {
+      string.format(
+         'sed -i \'s/^#%s/%s/g\' /mnt/etc/locale.gen',
+         language, language
+      ),
+      'locale-gen'
+   }
+   if (os.dryrun(locale_cmd[1]) ~= 0) and (os.chroot(locale_cmd[2]) ~= 0) then
       print('could not set locale. exiting...')
       os.exit(1)
    end
 
    -- create initial ramdisk
-   if os.chroot('mkinitcpio -p linux') ~= 0 then
+   local ramdisk_cmd = 'mkinitcpio -p linux'
+   if os.chroot(ramdisk_cmd) ~= 0 then
       print('could not create initial ramdisk. exiting...')
       os.exit(1)
    end
 
    -- install bootloader
-   local bootloader_cmd = string.format('%s; %s; %s; %s',
+   local boot_disk
+   for _,row in pairs(schema) do
+      if row['name'] == 'grub' then
+         boot_disk = row['disk']
+      end
+   end
+   if boot_disk == nil then
+      print('could not identify boot disk. exiting...')
+      os.exit(1)
+   end
+   local bootloader_cmd = {
       'modprobe dm-mod',
-      'grub-install /dev/sda',
+      string.format('grub-install %s', boot_disk),
+      'mkdir -p /mnt/boot/grub/locale',
       string.format('cp %s %s',
-         '/usr/share/locale/en@quot/LC_MESSAGES/grub.mo',
-         '/boot/grub/locale/en.mo; '
+         '/mnt/usr/share/locale/en@quot/LC_MESSAGES/grub.mo',
+         '/mnt/boot/grub/locale/en.mo'
       ),
       'grub-mkconfig -o /boot/grub/grub.cfg'
-   )
-   if os.chroot(bootloader_cmd) ~= 0 then
+   }
+   if (os.chroot(bootloader_cmd[1]) ~= 0) and
+      (os.chroot(bootloader_cmd[2]) ~= 0) and
+      (os.dryrun(bootloader_cmd[3]) ~= 0) and
+      (os.dryrun(bootloader_cmd[4]) ~= 0) and
+      (os.chroot(bootloader_cmd[5]) ~= 0) then
       print('could not install bootloader. exiting...')
       os.exit(1)
    end
 
    -- set root password
-   local passwd_cmd = string.format('echo \'root:%s\' | chpasswd', password)
-   if os.chroot(passwd_cmd) ~= 0 then
+   local passwd_cmd = string.format(
+      'echo root:%s | chpasswd --root /mnt',
+      password
+   )
+   if os.dryrun(passwd_cmd) ~= 0 then
       print('could not set root password. exiting...')
       os.exit(1)
    end
@@ -403,8 +426,7 @@ function clean()
       if row['mount'] ~= 'swap' and row['mount'] ~= 'grub' then
          local dir = string.format('/mnt%s', row['mount'])
          local umount_cmd = string.format('umount %s', dir)
-         local umount_func = function() return os.execute(umount_cmd) end
-         if check_dryrun(umount_cmd, umount_func, 0) ~= 0 then
+         if os.dryrun(umount_cmd, 0) ~= 0 then
             print(string.format(
                'could not dismount filesystem %s%d at "%s". exiting...',
                row['disk'], row['part_num'], row['mount']
