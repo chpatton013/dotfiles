@@ -16,10 +16,25 @@ function make_set(tbl)
    for _,row in pairs(tbl) do set[row] = true end
    return set
 end
-function os.dryrun(cmd, success)
-   if not quiet
-   then print(cmd)
+function io.log(str, force)
+   str = str or ''
+
+   if not quiet or force
+   then log_fstr:write(str .. '\n')
    end
+end
+function io.log_err(str)
+   str = str or ''
+
+   io.stderr:write(str .. '\n')
+
+   if log_fstr ~= io.stdout and log_fstr ~= io.stderr
+   then io.log(str, true)
+   end
+end
+function os.dryrun(cmd, success)
+   cmd = cmd or ''
+   io.log(cmd)
 
    if dryrun
    then return success
@@ -27,12 +42,20 @@ function os.dryrun(cmd, success)
    end
 end
 function os.capture(cmd, raw)
-   local f = assert(io.popen(cmd, 'r'))
-   local s = assert(f:read('*a'))
+   local f = io.popen(cmd, 'r')
+   if not f then
+      io.stderr:write(string.format(
+         'could not execute command \'%s\'. exiting...',
+         cmd
+      ))
+      os.exit(1)
+   end
+
+   local s = f:read('*a')
    f:close()
 
    if raw
-   then return s
+   then return s or ''
    else return clean_str(s)
    end
 end
@@ -77,6 +100,10 @@ options = {
       short='-q', full='--quiet',
       description='do not print status during installation.'
    },
+   log = {
+      short='-l', full='--log',
+      description='write status to log_file instead of printing.'
+   },
    file = {
       short='-f', full='--file',
       description='set the filename of the partition schema.'
@@ -100,6 +127,8 @@ options = {
 }
 dryrun = false
 quiet = false
+log_fstr = io.stdout
+log_file = nil
 partition_file = './partition_schema'
 hostname = string.format('arch-%s', architecture)
 timezone = 'America/Los_Angeles'
@@ -107,14 +136,15 @@ language = 'en_US.UTF-8'
 password = 'feedface'
 
 function cmd_line()
-   function print_options()
-      print('options:')
+   function get_options()
+      local opt_str = 'options:\n'
       for _,op in pairs(options) do
-         print(string.format(
-            '   %s | %-10s: %s',
+         opt_str = opt_str .. (string.format(
+            '   %s | %-10s: %s\n',
             op['short'], op['full'], op['description']
          ))
       end
+      return opt_str
    end
 
    for ndx=1,# arg do
@@ -128,27 +158,49 @@ function cmd_line()
       for key,val in pairs(options) do
          if cmd[1] == val[form] then
             if key == 'help' then
-               print(usage)
-               print_options()
+               io.stdout:write(usage .. '\n')
+               io.stdout:write(get_options())
                os.exit(0)
             elseif key == 'dryrun' then
                if cmd[2] == nil
                then dryrun = true
                else dryrun = not not cmd[1]
                end
+            elseif key == 'quiet' then
+               if cmd[2] == nil
+               then quiet = true
+               else quiet = not not cmd[1]
+               end
+            elseif key == 'log' then log_file = cmd[2]
             elseif key == 'file' then partition_file = cmd[2]
             elseif key == 'host' then hostname = cmd[2]
             elseif key == 'time' then timezone = cmd[2]
             elseif key == 'lang' then language = cmd[2]
             elseif key == 'pass' then password = cmd[2]
             else
-               print(string.format(
-                  'unrecognized option "%s".\n%s\nexiting...',
+               io.stderr:write(string.format(
+                  'unrecognized option "%s".\n%s\nexiting...\n',
                   key, usage
                ))
                os.exit(1)
             end
          end
+      end
+   end
+
+   if log_file then
+      io.stdout:write(string.format(
+         'logging installation status in file \'%s\'\n',
+         log_file
+      ))
+      log_fstr = io.open(log_file, 'w')
+
+      if not log_fstr then
+         io.stderr:write(string.format(
+            'could not open file %s for writing. exiting...\n',
+            log_file
+         ))
+         os.exit(1)
       end
    end
 end
@@ -196,7 +248,10 @@ function create_partition_tables()
 
    for _,row in pairs(schema) do
       if not disks[row['disk']] then
-         print(string.format('disk %s not found. exiting...', row['disk']))
+         io.log_err(string.format(
+            'disk %s not found. exiting...',
+            row['disk']
+         ))
          os.exit(1)
       elseif not initialized_labels[row['disk']] then
          local label_cmd = string.format(
@@ -206,7 +261,7 @@ function create_partition_tables()
          if os.dryrun(label_cmd, 0) == 0 then
             initialized_labels[row['disk']] = true
          else
-            print(string.format(
+            io.log_err(string.format(
                'could not make gpt label for disk %s. exiting...',
                row['disk']
             ))
@@ -244,7 +299,7 @@ function create_partitions()
       local partition_cmd = string.format('%s %s mkpart %s %s %s',
        parted_cmd, row['disk'], row['part_type'], part_start, part_stop)
       if os.dryrun(partition_cmd, 0) ~= 0 then
-         print(get_error_message('make', row))
+         io.log_err(get_error_message('make', row))
          os.exit(1)
       end
 
@@ -254,7 +309,7 @@ function create_partitions()
       local name_cmd = string.format('%s %s name %d %s',
        parted_cmd, row['disk'], row['part_num'], row['name'])
       if os.dryrun(name_cmd, 0) ~= 0 then
-         print(get_error_message('name', row))
+         io.log_err(get_error_message('name', row))
          os.exit(1)
       end
 
@@ -265,7 +320,7 @@ function create_partitions()
             parted_cmd, row['disk'], row['part_num'], flag
          )
          if os.dryrun(flag_cmd, 0) ~= 0 then
-            print(get_error_message(
+            io.log_err(get_error_message(
                string.format('set flag "%s"', flag), row)
             )
             os.exit(1)
@@ -286,7 +341,7 @@ function create_partitions()
          )
       end
       if format_cmd and (os.dryrun(format_cmd, 0) ~= 0) then
-         print(get_error_message('format', row))
+         io.log_err(get_error_message('format', row))
          os.exit(1)
       end
    end
@@ -299,7 +354,7 @@ function mount_filesystems()
 
          local mkdir_cmd = string.format('mkdir -p %s', dir)
          if os.dryrun(mkdir_cmd, 0) ~= 0 then
-            print(string.format(
+            io.log_err(string.format(
                'could not make directory "%s". exiting...',
                dir
             ))
@@ -311,7 +366,7 @@ function mount_filesystems()
             row['disk'], row['part_num'], dir
          )
          if os.dryrun(mount_cmd, 0) ~= 0 then
-            print(string.format(
+            io.log_err(string.format(
                'could not mount %s%d at "%s". exiting...',
                row['disk'], row['part_num'], dir
             ))
@@ -331,21 +386,21 @@ function install()
    -- base installation
    local base_cmd = 'pacstrap /mnt base base-devel grub-bios'
    if os.dryrun(base_cmd, 0) ~= 0 then
-      print('could not install base system. exiting...')
+      io.log_err('could not install base system. exiting...')
       os.exit(1)
    end
 
    -- generate fstab
    local fstab_cmd = 'genfstab -p /mnt >> /mnt/etc/fstab'
    if os.dryrun(fstab_cmd, 0) ~= 0 then
-      print('could not generate fstab. exiting...')
+      io.log_err('could not generate fstab. exiting...')
       os.exit(1)
    end
 
    -- set hostname
    local hostname_cmd = string.format('echo %s > /mnt/etc/hostname', hostname)
    if os.dryrun(hostname_cmd, 0) ~= 0 then
-      print('could not set hostname. exiting...')
+      io.log_err('could not set hostname. exiting...')
       os.exit(1)
    end
 
@@ -355,7 +410,7 @@ function install()
       timezone
    )
    if os.dryrun(timezone_cmd, 0) ~= 0 then
-      print('could not set timezone. exiting...')
+      io.log_err('could not set timezone. exiting...')
       os.exit(1)
    end
 
@@ -368,14 +423,14 @@ function install()
       'locale-gen'
    }
    if (os.dryrun(locale_cmd[1]) ~= 0) and (os.chroot(locale_cmd[2]) ~= 0) then
-      print('could not set locale. exiting...')
+      io.log_err('could not set locale. exiting...')
       os.exit(1)
    end
 
    -- create initial ramdisk
    local ramdisk_cmd = 'mkinitcpio -p linux'
    if os.chroot(ramdisk_cmd) ~= 0 then
-      print('could not create initial ramdisk. exiting...')
+      io.log_err('could not create initial ramdisk. exiting...')
       os.exit(1)
    end
 
@@ -387,7 +442,7 @@ function install()
       end
    end
    if boot_disk == nil then
-      print('could not identify boot disk. exiting...')
+      io.log_err('could not identify boot disk. exiting...')
       os.exit(1)
    end
    local bootloader_cmd = {
@@ -405,7 +460,7 @@ function install()
       (os.dryrun(bootloader_cmd[3]) ~= 0) and
       (os.dryrun(bootloader_cmd[4]) ~= 0) and
       (os.chroot(bootloader_cmd[5]) ~= 0) then
-      print('could not install bootloader. exiting...')
+      io.log_err('could not install bootloader. exiting...')
       os.exit(1)
    end
 
@@ -414,8 +469,8 @@ function install()
       'echo root:%s | chpasswd --root /mnt',
       password
    )
-   if os.dryrun(passwd_cmd) ~= 0 then
-      print('could not set root password. exiting...')
+   if os.dryrun(passwd_cmd, 0) ~= 0 then
+      io.log_err('could not set root password. exiting...')
       os.exit(1)
    end
 end
@@ -427,7 +482,7 @@ function clean()
          local dir = string.format('/mnt%s', row['mount'])
          local umount_cmd = string.format('umount %s', dir)
          if os.dryrun(umount_cmd, 0) ~= 0 then
-            print(string.format(
+            io.log_err(string.format(
                'could not dismount filesystem %s%d at "%s". exiting...',
                row['disk'], row['part_num'], row['mount']
             ))
@@ -441,4 +496,4 @@ cmd_line()
 partition()
 install()
 clean()
-print('installation completed without errors.')
+io.stdout:write('installation completed without errors.')
