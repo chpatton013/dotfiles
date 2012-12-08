@@ -40,13 +40,6 @@ autocmd VimResized * exe "normal! \<c-w>="
 " Restore the cursor when we can.
 autocmd BufWinEnter * call RestoreCursor()
 
-" Change the statusline color based on current mode
-augroup StatuslineColor
-   au!
-   autocmd InsertEnter * call InsertStatuslineColor(v:insertmode)
-   autocmd InsertLeave * hi statusline ctermfg=cyan ctermbg=black guifg=cyan guibg=black
-augroup END
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -61,7 +54,7 @@ call pathogen#infect()
 call pathogen#helptags()
 
 
-" Easymotion - https://github.com/Lokaltog/vim-easymotion/
+" Easymotion - https://github.com/Lokaltog/vim-easymotion
 
 " This is so much more convenient
 let g:EasyMotion_leader_key=',m'
@@ -84,7 +77,7 @@ let g:neocomplcache_min_syntax_length=6
 let g:neocomplcache_enable_smart_case=1
 
 
-" Syntastic - https://github.com/scrooloose/syntastic/
+" Syntastic - https://github.com/scrooloose/syntastic
 "  Commands:
 "     :Errors              // pop up location list and display errors
 "     :SyntasticToggleMode // toggles between active and passive mode
@@ -96,15 +89,8 @@ let g:syntastic_check_on_open=1
 let g:syntastic_echo_current_error=1
 " mark lines with errors and warnings
 let g:syntastic_enable_signs=1
-" set sign symbols
-let g:syntastic_error_symbol='E>'
-let g:syntastic_warning_symbol='W>'
-let g:syntastic_style_error_symbol='S>'
-let g:syntastic_style_warning_symbol='s>'
 " open error balloons when moused over erroneous lines
 let g:syntastic_enable_balloons=1
-" customize Syntastic statusline
-let g:syntastic_stl_format = '[%E{E: %fe #%e}%B{, }%W{W: %fw #%w}]'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -150,17 +136,6 @@ function! RestoreCursor()
         normal! g`"
         normal! zz
     endif
-endfunction
-
-" Change the statusline color based on current mode
-function! InsertStatuslineColor(mode)
-   if a:mode == 'i'
-      hi statusline ctermfg=darkmagenta ctermbg=black guifg=darkmagenta guibg=black
-   elseif a:mode == 'r'
-      hi statusline ctermfg=darkgreen ctermbg=black guifg=darkgreen guibg=black
-   else
-      hi statusline ctermfg=darkred ctermbg=black guifg=darkred guibg=black
-   endif
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -219,17 +194,6 @@ set wildmenu                     " Tab completion opens a Tab- and arrow-navigab
 set wildmode=longest,full        " Tab completion works like bash.
 set wrapscan                     " Searching wraps to start of file when end is reached
 
-" Define statusline
-set statusline=%f                                     " Relative file path
-set statusline+=%(\ [%M%R%H%W]%)                      " File flags (mod, RO, help, preview)
-set statusline+=%(\ %<%)                              " Start truncation
-set statusline+=%(\ %{fugitive#statusline()}%)        " Git branch name (if applicable)
-set statusline+=%=                                    " Begin right justification
-set statusline+=%#warningmsg#                         " Start warning highlighting
-set statusline+=%(\ %{SyntasticStatuslineFlag()}%)    " Show Syntastic errors and warnings
-set statusline+=%*                                    " End warning highlighting
-set statusline+=\ [line\ %l\/%L,\ col\ %c%V,\ %p%%]   " Line and column numbers and percentage through file
-
 " Text formatting settings
 " t: Auto-wrap text using textwidth. (default)
 " c: Auto-wrap comments; insert comment leader. (default)
@@ -273,9 +237,6 @@ map Y y$
 
 " Make Q reformat text.
 noremap Q gq
-
-" Toggle paste mode.
-noremap <Leader>p :set paste!<CR>
 
 " Open the file under the cursor in a new tab.
 noremap <Leader>ot <C-W>gf
