@@ -16,7 +16,21 @@ colors && compinit && promptinit
 ###############################################################################
 
 if [ -f ~/.commonrc ]; then
+   PS1_name=$'\e[0;32m%n\e[0m'
+   PS1_host=$'\e[0;32m%M\e[0m'
+   PS1_pwd=$'\e[0;32m%~\e[0m'
+   PS1_date=$'\e[0;32m%D\e[0m'
+   PS1_time=$'\e[0;32m%*\e[0m'
+   PS1_priv=$'\e[0;32m%#\e[0m'
+
    source ~/.commonrc
+
+   unset PS1_name
+   unset PS1_host
+   unset PS1_pwd
+   unset PS1_date
+   unset PS1_time
+   unset PS1_priv
 fi
 
 ###############################################################################
@@ -140,22 +154,3 @@ zstyle ':completion:*' completer _expand _complete _approximate _ignored
 zstyle ':completion::complete:*' use-cache 1
 
 ###############################################################################
-
-
-###############################################################################
-# Prompt Definition
-###############################################################################
-
-PS1=""
-PS1+="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%n@%M%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
-PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%~ $(__git_ps1 "%s")%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
-PS1+=" %{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%D %*%{$reset_color%}%{$fg[blue]%} ]%{$reset_color%}"
-PS1+="
-"
-PS1+="%{$fg[blue]%}[ %{$reset_color%}%{$fg[red]%}%#%{$reset_color%}%{$fg[blue]%} ]> %{$reset_color%}"
-# delete this line after prompt it genericized.
-export PS1=$PS1
-
-###############################################################################
-
-
