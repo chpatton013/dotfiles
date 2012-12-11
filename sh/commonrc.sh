@@ -117,27 +117,13 @@ fi
 # Prompt Definition
 ###############################################################################
 
-PS1_lbrace=$'\e[0;34m[\e[0m'
-PS1_rbrace=$'\e[0;34m]\e[0m'
-PS1_at=$'\e[0;34m@\e[0m'
-PS1_vbar=$'\e[0;34m|\e[0m'
-PS1_queue=$'\e[0;34m>\e[0m '
-# PS1_name set externally
-# PS1_host set externally
-# PS1_pwd set externally
-# PS1_date set externally
-# PS1_time set externally
-# PS1_priv set externally
+# Defined externally:
+# PS1_lbrace, PS1_rbrace, PS1_at, PS1_vbar, PS1_queue, PS1_name, PS1_host,
+# PS1_pwd, PS1_date, PS1_time, PS1_priv
 
 PS1="$PS1_lbrace $PS1_name $PS1_at $PS1_host $PS1_vbar $PS1_date $PS1_at $PS1_time $PS1_rbrace
 $PS1_lbrace $PS1_pwd $PS1_rbrace
-$PS1_lbrace $PS1_priv $PS1_queue"
-
-unset PS1_lbrace
-unset PS1_rbrace
-unset PS1_at
-unset PS1_vbar
-unset PS1_queue
+$PS1_lbrace $PS1_priv $PS1_queue "
 
 ###############################################################################
 

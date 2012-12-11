@@ -16,15 +16,25 @@ colors && compinit && promptinit
 ###############################################################################
 
 if [ -f ~/.commonrc ]; then
-   PS1_name=$'\e[0;32m%n\e[0m'
-   PS1_host=$'\e[0;32m%M\e[0m'
-   PS1_pwd=$'\e[0;32m%~\e[0m'
-   PS1_date=$'\e[0;32m%D\e[0m'
-   PS1_time=$'\e[0;32m%*\e[0m'
-   PS1_priv=$'\e[0;32m%#\e[0m'
+   PS1_lbrace="%{$fg[blue]%}[%{$reset_color%}"
+   PS1_rbrace="%{$fg[blue]%}]%{$reset_color%}"
+   PS1_at="%{$fg[blue]%}@%{$reset_color%}"
+   PS1_vbar="%{$fg[blue]%}|%{$reset_color%}"
+   PS1_queue="%{$fg[blue]%}>%{$reset_color%}"
+   PS1_name="%{$fg[green]%}%n%{$reset_color%}"
+   PS1_host="%{$fg[green]%}%M%{$reset_color%}"
+   PS1_pwd="%{$fg[green]%}%~%{$reset_color%}"
+   PS1_date="%{$fg[green]%}%D%{$reset_color%}"
+   PS1_time="%{$fg[green]%}%*%{$reset_color%}"
+   PS1_priv="%{$fg[green]%}%#%{$reset_color%}"
 
    source ~/.commonrc
 
+   unset PS1_lbrace
+   unset PS1_rbrace
+   unset PS1_at
+   unset PS1_vbar
+   unset PS1_queue
    unset PS1_name
    unset PS1_host
    unset PS1_pwd
