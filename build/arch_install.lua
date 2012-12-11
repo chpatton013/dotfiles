@@ -455,11 +455,13 @@ function install()
       ),
       'grub-mkconfig -o /boot/grub/grub.cfg'
    }
-   if (os.chroot(bootloader_cmd[1]) ~= 0) and
-      (os.chroot(bootloader_cmd[2]) ~= 0) and
-      (os.dryrun(bootloader_cmd[3]) ~= 0) and
-      (os.dryrun(bootloader_cmd[4]) ~= 0) and
-      (os.chroot(bootloader_cmd[5]) ~= 0) then
+   if not (
+      (os.chroot(bootloader_cmd[1]) == 0) and
+      (os.chroot(bootloader_cmd[2]) == 0) and
+      (os.dryrun(bootloader_cmd[3]) == 0) and
+      (os.dryrun(bootloader_cmd[4]) == 0) and
+      (os.chroot(bootloader_cmd[5]) == 0)
+   ) then
       io.log_err('could not install bootloader. exiting...')
       os.exit(1)
    end
