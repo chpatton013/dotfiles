@@ -14,6 +14,7 @@ rm -rf ~/.dircolors
 rm -f ~/.git-completion.sh
 rm -f ~/.mybashrc
 rm -rf ~/.themes
+rm -r ~/.tmux.conf
 rm -rf ~/.vim
 rm -f ~/.vimrc
 rm -f ~/.zshrc
@@ -28,6 +29,7 @@ ln -sf ~/dotfiles/sh/dircolors/solarized/dircolors.ansi-dark ~/.dircolors
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
 ln -sf ~/dotfiles/sh/themes ~/.themes
+ln -sf ~/dotfiles/sh/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
