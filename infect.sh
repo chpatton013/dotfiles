@@ -14,7 +14,7 @@ rm -rf ~/.dircolors
 rm -f ~/.git-completion.sh
 rm -f ~/.mybashrc
 rm -rf ~/.themes
-rm -r ~/.tmux.conf
+rm -f ~/.tmux.conf
 rm -rf ~/.vim
 rm -f ~/.vimrc
 rm -f ~/.zshrc
