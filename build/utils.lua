@@ -9,12 +9,34 @@ function clean_str(str)
    str = str or ''
    return str:gsub('((^%s)|(%s$))+', ''):gsub('[\n\r]+', '\n')
 end
+function make_list(fstr)
+   function remove_comments(str)
+      if str
+      then return string.gsub(str, '#[^$]*$', '')
+      else return ''
+      end
+   end
+
+   local str = clean_str(fstr:read('*all'))
+
+   fstr:close()
+
+   local list = {}
+   for _,line in pairs(split_str(str, '\n')) do
+      line = remove_comments(line)
+      if line and line ~= '' then
+         table.insert(list, line)
+      end
+   end
+   return list
+end
 function make_set(tbl)
    tbl = tbl or {}
    local set = {}
    for _,row in pairs(tbl) do set[row] = true end
    return set
 end
+
 function io.log(str, force)
    str = str or ''
 
@@ -31,6 +53,7 @@ function io.log_err(str)
    then io.log(str, true)
    end
 end
+
 function os.dryrun(cmd, success)
    cmd = cmd or ''
    io.log(cmd)
@@ -58,12 +81,12 @@ function os.capture(cmd, raw)
    else return clean_str(s)
    end
 end
-function os.chroot(cmd)
+function os.chroot(cmd, success)
    cmd = cmd or ''
 
    local chroot_cmd = string.format(
       'arch-chroot /mnt %s',
       cmd:gsub('"', '\\"')
    )
-   return os.dryrun(chroot_cmd, 0)
+   return os.dryrun(chroot_cmd, success)
 end

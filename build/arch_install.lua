@@ -1,19 +1,6 @@
 require 'utils'
 
 -- global variables
-disks = make_set(split_str(
-   os.capture(string.format(
-      '%s | %s | %s | %s',
-      'fdisk -l', 'grep -i \'disk\'',
-      'awk -F \':\' \'{ print $1 }\'', 'awk \'{ print $2 }\''
-   )),
-   "\n"
-))
-schema = {}
-parted_cmd = 'parted --align optimal --script --'
-architecture = clean_str(os.capture(
-   'lscpu | grep -i \'architecture\' | awk \'{ print $2 }\''
-)):gsub('\n', '')
 usage = string.format(
    'usage: %s [ %s [ %s [ ... ] ] ]',
    arg[0], 'option=argument', 'option=argument'
@@ -33,39 +20,35 @@ options = {
    },
    log = {
       short='-l', full='--log',
-      description='write status to log_file instead of printing.'
+      description='write status to log file instead of printing.'
    },
    file = {
       short='-f', full='--file',
       description='set the filename of the partition schema.'
-   },
-   host = {
-      short='-h', full='--hostname',
-      description='set the hostname of the machine.'
-   },
-   time = {
-      short='-t', full='--timezone',
-      description='set the timezone of the machine'
-   },
-   lang = {
-      short='-l', full='--language',
-      description='set the languages to be installed.'
    },
    pass = {
       short='-p', full='--password',
       description='set the password of the root user.'
    }
 }
+disks = make_set(split_str(
+   os.capture(string.format(
+      '%s | %s | %s | %s',
+      'fdisk -l', 'grep -i \'disk\'',
+      'awk -F \':\' \'{ print $1 }\'', 'awk \'{ print $2 }\''
+   )),
+   "\n"
+))
+schema = {}
+parted_cmd = 'parted --align optimal --script --'
 dryrun = false
 quiet = false
 log_fstr = io.stdout
 log_file = nil
-partition_file = './partition_schema'
-hostname = string.format('arch-%s', architecture)
-timezone = 'America/Los_Angeles'
-language = 'en_US.UTF-8'
+partition_file = './files/schema'
 password = 'feedface'
 
+-- function definitions
 function cmd_line()
    function get_options()
       local opt_str = 'options:\n'
@@ -104,9 +87,6 @@ function cmd_line()
                end
             elseif key == 'log' then log_file = cmd[2]
             elseif key == 'file' then partition_file = cmd[2]
-            elseif key == 'host' then hostname = cmd[2]
-            elseif key == 'time' then timezone = cmd[2]
-            elseif key == 'lang' then language = cmd[2]
             elseif key == 'pass' then password = cmd[2]
             else
                io.stderr:write(string.format(
@@ -120,15 +100,18 @@ function cmd_line()
    end
 
    if log_file then
-      io.stdout:write(string.format(
-         'logging installation status in file \'%s\'\n',
-         log_file
-      ))
+      if not quiet then
+         io.stdout:write(string.format(
+            'logging installation status in file \'%s\'\n',
+            log_file
+         ))
+      end
+
       log_fstr = io.open(log_file, 'w')
 
       if not log_fstr then
          io.stderr:write(string.format(
-            'could not open file %s for writing. exiting...\n',
+            'could not open file %q for writing. exiting...\n',
             log_file
          ))
          os.exit(1)
@@ -150,12 +133,20 @@ function make_schema()
       }
    end
 
-   local fstr = assert(io.open(partition_file, 'r'))
+   local fstr = io.open(partition_file, 'r')
+   if not fstr then
+      io.stderr:write(string.format(
+         'could not open file %q for reading. exiting...\n',
+         partition_file
+      ))
+      os.exit(1)
+   end
+
    local str = clean_str(fstr:read('*all'))
+
    fstr:close()
 
-   local rows = split_str(str, '\n')
-   for _,row in pairs(rows) do
+   for _,row in pairs(split_str(str, '\n')) do
       local schema_row = make_schema_row(row)
       if schema_row['size'] ~= 0 then
          table.insert(schema, schema_row)
@@ -306,13 +297,13 @@ function mount_filesystems()
       end
    end
 end
-
 function partition()
    make_schema()
    create_partition_tables()
    create_partitions()
    mount_filesystems()
 end
+
 function install()
    -- base installation
    local base_cmd = 'pacstrap /mnt base base-devel grub-bios'
@@ -328,39 +319,9 @@ function install()
       os.exit(1)
    end
 
-   -- set hostname
-   local hostname_cmd = string.format('echo %s > /mnt/etc/hostname', hostname)
-   if os.dryrun(hostname_cmd, 0) ~= 0 then
-      io.log_err('could not set hostname. exiting...')
-      os.exit(1)
-   end
-
-   -- set timezone
-   local timezone_cmd = string.format(
-      'ln -sf /mnt/usr/share/zoneinfo/%s /mnt/etc/localtime',
-      timezone
-   )
-   if os.dryrun(timezone_cmd, 0) ~= 0 then
-      io.log_err('could not set timezone. exiting...')
-      os.exit(1)
-   end
-
-   -- generate locale
-   local locale_cmd = {
-      string.format(
-         'sed -i \'s/^#%s/%s/g\' /mnt/etc/locale.gen',
-         language, language
-      ),
-      'locale-gen'
-   }
-   if (os.dryrun(locale_cmd[1]) ~= 0) and (os.chroot(locale_cmd[2]) ~= 0) then
-      io.log_err('could not set locale. exiting...')
-      os.exit(1)
-   end
-
    -- create initial ramdisk
    local ramdisk_cmd = 'mkinitcpio -p linux'
-   if os.chroot(ramdisk_cmd) ~= 0 then
+   if os.chroot(ramdisk_cmd, 0) ~= 0 then
       io.log_err('could not create initial ramdisk. exiting...')
       os.exit(1)
    end
@@ -387,11 +348,11 @@ function install()
       'grub-mkconfig -o /boot/grub/grub.cfg'
    }
    if not (
-      (os.chroot(bootloader_cmd[1]) == 0) and
-      (os.chroot(bootloader_cmd[2]) == 0) and
+      (os.chroot(bootloader_cmd[1], 0) == 0) and
+      (os.chroot(bootloader_cmd[2], 0) == 0) and
       (os.dryrun(bootloader_cmd[3], 0) == 0) and
       (os.dryrun(bootloader_cmd[4], 0) == 0) and
-      (os.chroot(bootloader_cmd[5]) == 0)
+      (os.chroot(bootloader_cmd[5], 0) == 0)
    ) then
       io.log_err('could not install bootloader. exiting...')
       os.exit(1)
@@ -407,6 +368,7 @@ function install()
       os.exit(1)
    end
 end
+
 function clean()
    -- dismount filesystems
    table.sort(schema, function(a, b) return a['mount'] > b['mount'] end)
@@ -425,8 +387,10 @@ function clean()
    end
 end
 
+-- installation commands
 cmd_line()
 partition()
 install()
 clean()
 io.stdout:write('installation completed without errors.')
+os.exit(0)

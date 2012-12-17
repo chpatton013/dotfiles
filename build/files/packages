@@ -1,41 +1,77 @@
+# Basic OS
 linux-headers linux-lts-headers
-ntp
 dbus
-openssh
 mlocate
 sudo
 
+# Power / Performance
+acpid
+lm_sensors
+preload
+readahead-list
+cpupower
+irqbalance
+
+# Command-Line
 zsh
 vim
 screen
 tmux
 git
 premake
-
-pmount
 zip unzip
-samba
+
+# External Media
+pmount
 truecrypt
 ntfs-3g ntfsprogs
 
+# Language Support
 boost-libs boost-build boost
 jre7-openjdk icedtea-web-java7
 python python-cairo python-gobject python-notify pygtk python2-mako
 lua
 
+# Graphics Drivers
+# Generic
+xf86-video-vesa
+# AMD/ATI
+#xf86-video-ati
+# Intel
+#xf86-video-intel
+#xf86-video-i740
+# Nvidia
+#xf86-video-nouveau
+#nouveau-dri
+#xf86-video-nv
+# SiS
+#xf86-video-sis
+#xf86-video-sisimedia
+#xf86-video-sisusb
+
+# Window / Desktop Enviornment
 awesome
-terminator
 xorg-xinit xorg-apps xorg-twm xorg-xclock xterm numlockx mesa
 xorg-server xorg-server-{common,devel,utils,xdmx,xvfb}
-
+ttf-dejavu
 redshift
+
+# Network
+networkmanager
+net-snmp
+ntp
+openssh
+deluge librsvg gettext
+samba
 chromium flashplugin
 pidgin pidgin-encryption pidgin-otr evolution-data-server
-deluge librsvg gettext
+
+# Office
 libreoffice-en-US
 libreoffice-{common,base,calc,draw,impress,math,writer,gnome,kde4,sdk,sdk-doc}
 libreoffice-extension-{ct2n,pdfimport,presenter-screen}
 
+# Media
 ffmpeg libmp4v2
 mplayer vlc
 picard
