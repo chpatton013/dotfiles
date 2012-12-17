@@ -1,0 +1,24 @@
+# Power / Performance
+acpid
+lm_sensors
+preload
+systemd-readahead-collect
+systemd-readahead-replay
+cpupower
+irqbalance
+
+# Network
+NetworkManager
+snmpd
+ntpd
+sshd
+deluged
+deluge-web
+smbd
+nmbd
+winbindd
+
+# Misc
+cronie
+slim
+mdadm
