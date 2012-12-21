@@ -2,8 +2,6 @@
 acpid
 lm_sensors
 preload
-systemd-readahead-collect
-systemd-readahead-replay
 cpupower
 irqbalance
 

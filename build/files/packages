@@ -8,7 +8,6 @@ sudo
 acpid
 lm_sensors
 preload
-readahead-list
 cpupower
 irqbalance
 

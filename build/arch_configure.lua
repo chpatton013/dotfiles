@@ -27,11 +27,11 @@ options = {
       description='specify the desired internet device.'
    },
    hostname = {
-      short='-hs', full='--hostname',
+      short='-s', full='--hostname',
       description='set the hostname of the machine.'
    },
    language = {
-      short='-ln', full='--language',
+      short='-n', full='--language',
       description='set the language for locale generation.'
    },
    keymap = {
@@ -43,11 +43,11 @@ options = {
       description='set the timezone of the machine.'
    },
    package = {
-      short='-pk', full='--package',
+      short='-p', full='--package',
       description='set the filename of the package list.'
    },
    daemons = {
-      short='-dm', full='--daemons',
+      short='-a', full='--daemons',
       description='set the filename of the daemon list.'
    },
    files = {
@@ -146,22 +146,28 @@ function cmd_line()
 end
 
 function configure()
-   -- connect to internet
-   local internet_cmd = string.format('dhcpcd %s', internet)
-   if os.dryrun(internet_cmd, 0) ~= 0 then
-      io.log_err('could not connect to the internet. exiting...')
-      os.exit(1)
+   -- verify connection to internet
+   local internet_cmd = string.format('ls /run/dhcpcd-%s.pid', internet)
+   local internet_result = os.capture(internet_cmd)
+   if (not internet_result) or (string.len(internet_result) == 0) then
+      -- connect to internet
+      local connect_cmd = string.format('dhcpcd %s', internet)
+      if os.dryrun(connect_cmd, 0) ~= 0 then
+         io.log_err('could not connect to the internet. exiting...')
+         os.exit(1)
+      end
    end
 
    -- set hostname
    local hostname_cmd = string.format('hostnamectl set-hostname %s', hostname)
-   if os.dryrun(hostname_cmd, 0) ~= 0 then
-      io.log_err('could not set hostname. exiting...')
-      os.exit(1)
-   end
+   os.dryrun(hostname_cmd, 0)
 
    -- generate locale
    local locale_cmd = {
+      string.format(
+         'grep -E "^#?%s" /etc/locale.gen',
+         language
+      ),
       string.format(
          'sed -i \'s/^#%s/%s/g\' /etc/locale.gen',
          language, language
@@ -169,43 +175,41 @@ function configure()
       'locale-gen',
       string.format('localectl set-locale LANG=%q', language)
    }
-   if (os.dryrun(locale_cmd[1], 0) ~= 0) and
-      (os.dryrun(locale_cmd[2], 0) ~= 0) and
-      (os.dryrun(locale_cmd[3], 0) ~= 0) then
+   local locale_result = os.capture(locale_cmd[1])
+   if ((not locale_result) or (string.len(locale_result) == 0)) then
       io.log_err('could not set locale. exiting...')
       os.exit(1)
    end
+   os.dryrun(locale_cmd[2], 0)
+   os.dryrun(locale_cmd[3], 0)
+   os.dryrun(locale_cmd[4], 0)
 
    -- set keymap
    local keymap_cmd = string.format('localectl set-keymap %s', keymap)
-   if os.dryrun(keymap_cmd, 0) ~= 0 then
-      io.log_err('could not set keymap. exiting...')
-      os.exit(1)
-   end
+   os.dryrun(keymap_cmd, 0)
 
    -- set timezone
-   local timezone_cmd = string.format('timedatectl set-timezone %s', timezone)
-   if os.dryrun(timezone_cmd, 0) ~= 0 then
+   local timezone_cmd = {
+      string.format('ls /usr/share/zoneinfo/%s', timezone),
+      string.format('timedatectl set-timezone %s', timezone)
+   }
+   local timezone_result = os.capture(timezone_cmd[1])
+   if (not timezone_result) or (string.len(timezone_result) == 0) then
       io.log_err('could not set timezone. exiting...')
       os.exit(1)
    end
+   os.dryrun(timezone_cmd[2], 0)
 
    -- create configuration files
-   local files_cmd = string.format('cp %s/* /', files_dir)
-   if os.dryrun(files_cmd, 0) ~= 0 then
-      io.log_err('could not create configuration files. exiting...')
-      os.exit(1)
-   end
+   local files_cmd = string.format('cp -R %s/* /', files_dir)
+   os.dryrun(files_cmd, 0)
 end
 
 function packages()
    -- update databases and existing packages
-   local pacman_cmd = 'pacman -Syu'
+   local pacman_cmd = 'pacman --noconfirm -Syu'
    if os.dryrun(pacman_cmd, 0) ~= 0 then
-      io.log_err(string.format(
-         'could not update packages %q. exiting...\n',
-         line
-      ))
+      io.log_err('could not update packages. exiting...\n')
       os.exit(1)
    end
 
@@ -220,7 +224,7 @@ function packages()
    end
    local package_list = make_list(package_fstr)
    for _,line in pairs(package_list) do
-      local package_cmd = string.format('pacman -S %s', line)
+      local package_cmd = string.format('pacman --noconfirm -S %s', line)
       if os.dryrun(package_cmd, 0) ~= 0 then
          io.log_err(string.format(
             'could not install packages %q. exiting...\n',
@@ -243,13 +247,7 @@ function daemons()
    local daemon_list = make_list(daemon_fstr)
    for _,line in pairs(daemon_list) do
       local daemon_cmd = string.format('systemctl enable %s', line)
-      if os.dryrun(daemon_cmd, 0) ~= 0 then
-         io.log_err(string.format(
-            'could not enable daemon %q. exiting...\n',
-            line
-         ))
-         os.exit(1)
-      end
+      os.dryrun(daemon_cmd, 0)
    end
 end
 
