@@ -208,10 +208,7 @@ end
 function packages()
    -- update databases and existing packages
    local pacman_cmd = 'pacman --noconfirm -Syu'
-   if os.dryrun(pacman_cmd, 0) ~= 0 then
-      io.log_err('could not update packages. exiting...\n')
-      os.exit(1)
-   end
+   os.dryrun(pacman_cmd, 0)
 
    -- install new packages
    local package_fstr = io.open(package_file, 'r')
@@ -225,13 +222,7 @@ function packages()
    local package_list = make_list(package_fstr)
    for _,line in pairs(package_list) do
       local package_cmd = string.format('pacman --noconfirm -S %s', line)
-      if os.dryrun(package_cmd, 0) ~= 0 then
-         io.log_err(string.format(
-            'could not install packages %q. exiting...\n',
-            line
-         ))
-         os.exit(1)
-      end
+      os.dryrun(package_cmd, 0)
    end
 end
 
