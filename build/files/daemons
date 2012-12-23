@@ -18,5 +18,5 @@ winbindd
 
 # Misc
 cronie
-slim
+lxdm
 mdadm

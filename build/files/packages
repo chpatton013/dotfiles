@@ -28,7 +28,7 @@ ntfs-3g ntfsprogs
 # Language Support
 boost-libs boost-build boost
 jre7-openjdk icedtea-web-java7
-python python-cairo python-gobject python-notify pygtk python2-mako
+python{,-{cairo,gobject,notify}} pygtk python2-mako
 lua
 
 # Graphics Drivers
@@ -49,10 +49,10 @@ xf86-video-vesa
 #xf86-video-sisusb
 
 # Window / Desktop Enviornment
+xorg-{xinit,apps,twm,xclock,server{,-{common,devel,utils,xdmx,xvfb}}}
+xterm numlockx mesa ttf-dejavu
+lxdm
 awesome
-xorg-xinit xorg-apps xorg-twm xorg-xclock xterm numlockx mesa
-xorg-server xorg-server-{common,devel,utils,xdmx,xvfb}
-ttf-dejavu
 redshift
 
 # Network
@@ -63,11 +63,10 @@ openssh
 deluge librsvg gettext
 samba
 chromium flashplugin
-pidgin pidgin-encryption pidgin-otr evolution-data-server
+pidgin{,-{encryption,otr}} evolution-data-server
 
 # Office
-libreoffice-en-US
-libreoffice-{common,base,calc,draw,impress,math,writer,gnome,kde4,sdk,sdk-doc}
+libreoffice-{en-US,common,base,calc,draw,impress,math,writer,gnome,kde4,sdk{,-doc}}
 libreoffice-extension-{ct2n,pdfimport,presenter-screen}
 
 # Media
