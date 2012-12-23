@@ -72,4 +72,4 @@ libreoffice-extension-{ct2n,pdfimport,presenter-screen}
 # Media
 ffmpeg libmp4v2
 mplayer vlc
-picard
+picard libdiscid chromaprint
