@@ -1,0 +1,5 @@
+.include /usr/lib/systemd/system/deluge-web.service
+
+[Unit]
+Requires=deluged
+After=deluged

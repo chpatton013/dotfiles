@@ -1,0 +1,5 @@
+.include /usr/lib/systemd/system/<service-name>.service
+
+[Unit]
+Requires=<new dependency>
+After=<new dependency>
