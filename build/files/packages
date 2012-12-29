@@ -1,5 +1,5 @@
 # Basic OS
-linux-headers linux-lts-headers
+linux-{,lts-}headers
 dbus
 mlocate
 sudo
@@ -21,14 +21,14 @@ premake
 zip unzip
 
 # External Media
-pmount
+udiskie
 truecrypt
 ntfs-3g ntfsprogs
 
 # Language Support
-boost-libs boost-build boost
+boost{,-{libs,build}}
 jre7-openjdk icedtea-web-java7
-python{,-{cairo,gobject,notify}} pygtk python2-mako
+python{,2{,-{mako,notify}},3,-{cairo,gobject{,2}}} pygtk
 lua
 
 # Graphics Drivers
@@ -53,6 +53,8 @@ xorg-{xinit,apps,twm,xclock,server{,-{common,devel,utils,xdmx,xvfb}}}
 xterm numlockx mesa ttf-dejavu
 lxdm
 awesome
+#gnome{,-extra}
+#kde
 redshift
 
 # Network

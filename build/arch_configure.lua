@@ -222,7 +222,7 @@ function packages()
    local package_list = make_list(package_fstr)
    for _,line in pairs(package_list) do
       local package_cmd = string.format(
-         'pacman --noconfirm --needed --recursive -S %s',
+         'pacman --noconfirm --needed -S %s',
          line
       )
       os.dryrun(package_cmd, 0)
