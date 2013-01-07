@@ -2,7 +2,7 @@
 " Autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Reread configuration of Vim if .vimrc is saved
+" Reread configuration of Vim if .vimrc is saved.
 augroup VimConfig
   au!
   autocmd BufWritePost ~/.vimrc       so ~/.vimrc
@@ -10,7 +10,7 @@ augroup VimConfig
   autocmd BufWritePost vimrc          so ~/.vimrc
 augroup END
 
-" Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars
+" Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
 augroup ColorColumnConfig
    au!
    if exists('+colorcolumn')
@@ -21,7 +21,7 @@ augroup ColorColumnConfig
    endif
 augroup END
 
-" Highlight over-length characters and trailing whitespace
+" Highlight over-length characters and trailing whitespace.
 augroup ExtraCharacters
    au!
    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
@@ -34,7 +34,7 @@ augroup ExtraCharacters
    autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
 
-" Resize splits on window resize
+" Resize splits on window resize.
 autocmd VimResized * exe "normal! \<c-w>="
 
 " Restore the cursor when we can.
@@ -56,7 +56,7 @@ call pathogen#helptags()
 
 " Easymotion - https://github.com/Lokaltog/vim-easymotion
 
-" This is so much more convenient
+" This is so much more convenient.
 let g:EasyMotion_leader_key=',m'
 
 
@@ -68,12 +68,12 @@ let g:neocomplcache_enable_at_startup=0
 let g:neocomplcache_max_list=5
 " Do not auto-select the first candidate.
 let g:neocomplcache_enable_auto_select=1
-" Do not try to match until 'n' characters have been typed
+" Do not try to match until 'n' characters have been typed.
 let g:neocomplcache_auto_completion_start_length=3
-" Do not try to match to anything less than 'n' characters
+" Do not try to match to anything less than 'n' characters.
 let g:neocomplcache_min_keyword_length=6
 let g:neocomplcache_min_syntax_length=6
-" Only consider case if an uppercase character has been typed
+" Only consider case if an uppercase character has been typed.
 let g:neocomplcache_enable_smart_case=1
 
 
@@ -83,13 +83,13 @@ let g:neocomplcache_enable_smart_case=1
 "     :SyntasticToggleMode // toggles between active and passive mode
 "     :SyntasticCheck      // forces a syntax check in passive mode
 
-" check for syntax errors on file open
+" check for syntax errors on file open.
 let g:syntastic_check_on_open=1
-" echo errors to the command window
+" echo errors to the command window.
 let g:syntastic_echo_current_error=1
-" mark lines with errors and warnings
+" mark lines with errors and warnings.
 let g:syntastic_enable_signs=1
-" open error balloons when moused over erroneous lines
+" open error balloons when moused over erroneous lines.
 let g:syntastic_enable_balloons=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -99,16 +99,7 @@ let g:syntastic_enable_balloons=1
 " Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Toggle background color
-" function! SwitchBackgroundColor()
-"    if background = 'dark'
-"       set background=light
-"    else
-"       set background=dark
-"    endif
-" endfunction
-
-" Strip trailing whitespace
+" Strip trailing whitespace.
 function! <SID>StripTrailingWhitespaces()
    let _s=@/
    let l = line(".")
@@ -118,7 +109,7 @@ function! <SID>StripTrailingWhitespaces()
    call cursor(l, c)
 endfunction
 
-" Toggle match of trailing whitespace
+" Toggle match of trailing whitespace.
 function! s:ToggleWhitespaceMatch(mode)
    let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
    if exists('w:whitespace_match_number')
@@ -130,7 +121,7 @@ function! s:ToggleWhitespaceMatch(mode)
    endif
 endfunction
 
-" Restore the cursor when we can
+" Restore the cursor when we can.
 function! RestoreCursor()
     if line("'\"") <= line("$")
         normal! g`"
@@ -149,22 +140,23 @@ filetype on          " Recognize syntax by file extension.
 filetype indent on   " Check for indent file.
 filetype plugin on   " Allow plugins to be loaded by file type.
 
-behave xterm   " Maintain keybindings across enviornments
+behave xterm   " Maintain keybindings across enviornments.
 
 set autowrite                    " Write before executing the 'make' command.
-set background=dark              " Usually prefer dark backgrounds
-set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert
-set encoding=utf-8               " Set encoding to utf-8
+set background=dark              " Usually prefer dark backgrounds.
+set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert.
+set cpoptions+=$                 " Show dollar sign at end of text to be changed.
+set encoding=utf-8               " Set encoding to utf-8.
 set expandtab                    " Expand tabs with spaces.
-set fileencoding=utf-8           " Set fileencoding to utf-8
-set foldmethod=indent            " Set fold method (manual,indent,expr,syntax,diff,marker)
-set hidden                       " Use hidden buffers so unsaved buffers can go to the background
-set history=500                  " Set number of lines for vim to remember
-set hlsearch                     " Highlight all search matches
-set ignorecase                   " Ignore case in regular expressions
+set fileencoding=utf-8           " Set fileencoding to utf-8.
+set foldmethod=indent            " Set fold method (manual,indent,expr,syntax,diff,marker).
+set hidden                       " Use hidden buffers so unsaved buffers can go to the background.
+set history=500                  " Set number of lines for vim to remember.
+set hlsearch                     " Highlight all search matches.
+set ignorecase                   " Ignore case in regular expressions.
 set incsearch                    " Immediately highlight search matches.
-set laststatus=2                 " Show status line even where there is only one window
-set lazyredraw                   " Redraw faster
+set laststatus=2                 " Show status line even where there is only one window.
+set lazyredraw                   " Redraw faster.
 set linespace=0                  " Adjust relative line height.
 set modeline                     " Check for a modeline.
 set nocompatible                 " No compatibility with vi.
@@ -174,28 +166,28 @@ set nowrap                       " Don't soft wrap.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
-set shellslash                   " Use forward slashes regardless of OS
+set shellslash                   " Use forward slashes regardless of OS.
 set shiftwidth=3                 " >> and << shift 3 spaces.
 set showcmd                      " Show partial commands in the status line.
 set showmatch                    " Show matching () {} etc..
 set showmode                     " Show current mode.
 set sidescrolloff=10             " Keep min of 'n' columns right/left cursor.
 set smartcase                    " Searches are case-sensitive if caps used.
-set smarttab                     " Tabs and backspaces at the start of a line indent the line one level
-set smartindent                  " Maintains most indentation and adds extra level when nesting
+set smarttab                     " Tabs and backspaces at the start of a line indent the line one level.
+set smartindent                  " Maintains most indentation and adds extra level when nesting.
 set softtabstop=3                " See spaces as tabs.
-set splitright splitbelow        " Open splits below and to the right
-set synmaxcol=160                " Only matches syntax on first 'n' columns of each line (faster)
-set tabstop=3                    " <Tab> move three characters
-set textwidth=80                 " Hard wrap at 'n' characters
-set title                        " Set the console title
-set viminfo='20,\"500,%          " Adjust viminfo contents
-set virtualedit=block            " Allow the cursor to go where it should not
-set wildmenu                     " Tab completion opens a Tab- and arrow-navigable menu
+set splitright splitbelow        " Open splits below and to the right.
+set synmaxcol=160                " Only matches syntax on first 'n' columns of each line (faster).
+set tabstop=3                    " <Tab> move three characters.
+set textwidth=80                 " Hard wrap at 'n' characters.
+set title                        " Set the console title.
+set viminfo='20,\"500,%          " Adjust viminfo contents.
+set virtualedit=block            " Allow the cursor to go where it should not.
+set wildmenu                     " Tab completion opens a Tab- and arrow-navigable menu.
 set wildmode=longest,full        " Tab completion works like bash.
-set wrapscan                     " Searching wraps to start of file when end is reached
+set wrapscan                     " Searching wraps to start of file when end is reached.
 
-" Text formatting settings
+" Text formatting settings.
 " t: Auto-wrap text using textwidth. (default)
 " c: Auto-wrap comments; insert comment leader. (default)
 " q: Allow formatting of comments with "gq". (default)
@@ -205,25 +197,20 @@ set wrapscan                     " Searching wraps to start of file when end is 
 " l: Don't auto-wrap if a line is already longer than textwidth.
 set formatoptions+=ronl
 
-" Enable mouse scrolling in selected modes
+" Enable mouse scrolling in selected modes.
 " a: All
 " c: Command
 " i: Insert
 " n: Normal
 " v: Visual
 set mouse=
-" Set scrolling to be single-line
-"map <MouseDown> <C-Y>
-"map <S-MouseDown> <C-U>
-"map <MouseUp> <C-E>
-"map <S-MouseUp> <C-D>
 
-" Color theme
+" Color theme.
 syntax enable
 set t_Co=16
 colorscheme solarized
 
-" Configuration variables
+" Configuration variables.
 let mapleader=","         " Use , instead of \ for the map leader.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,7 +220,7 @@ let mapleader=","         " Use , instead of \ for the map leader.
 " Command mode customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Make y behave like all other capitals
+" Make y behave like all other capitals.
 map Y y$
 
 " Make Q reformat text.
@@ -248,14 +235,11 @@ noremap <Leader>h :set hlsearch! hlsearch?<CR>
 " Open a scratch buffer.
 noremap <Leader>s :Scratch<CR>
 
-" Toggle background color
-"noremap <Leader>b :call SwitchBackgroundColor()<CR>
-
-" Improve movement on wrapped lines
+" Improve movement on wrapped lines.
 nnoremap j gj
 nnoremap k gk
 
-" Keep search pattern at the center of the screen
+" Keep search pattern at the center of the screen.
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
@@ -263,20 +247,20 @@ nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 nnoremap <silent> g# g#zz
 
-" Use C-hjkl in to change windows
+" Use C-hjkl in to change windows.
 nnoremap <C-h> <C-w><Left>
 nnoremap <C-j> <C-w><Down>
 nnoremap <C-k> <C-w><Up>
 nnoremap <C-l> <C-w><Right>
 
-" Strip trailing whitespace
+" Strip trailing whitespace.
 nnoremap <silent> <leader>W :call <SID>StripTrailingWhitespaces()<CR>
 
 " Open a conque terminal.
 nnoremap <silent> <leader>ch :ConqueTermSplit $SHELL<CR>
 nnoremap <silent> <leader>cv :ConqueTermVSplit $SHELL<CR>
 
-" Allow easy toggling of spaces / tabs mode
+" Allow easy toggling of spaces / tabs mode.
 nnoremap <C-t><C-t> :set invexpandtab<CR>
 
 " Create simple toggles for line numbers, paste mode, and word wrap.
@@ -284,13 +268,13 @@ nnoremap <C-N><C-N> :set invnumber<CR>
 nnoremap <C-p><C-p> :set invpaste<CR>
 nnoremap <C-w><C-w> :set invwrap<CR>
 
-" Folding stuff
+" Folding stuff.
 nnoremap <C-o> zo
 nnoremap <C-c> zc
 nnoremap <C-O> zO
 nnoremap <C-O><C-O> zR
 
-" Open file for class name under cursor
+" Open file for class name under cursor.
 nnoremap <C-i> yiw:find <C-R>".php<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -304,25 +288,24 @@ nnoremap <C-i> yiw:find <C-R>".php<CR>
 set dictionary+=~/.vim/dictionary/english-freq
 set complete+=k
 
-" Smash Esc
+" Smash Esc.
 inoremap jk <Esc>
 inoremap kj <Esc>
 
-" Use hjkl in insert mode
+" Use hjkl in insert mode.
 imap <C-h> <Left>
 imap <C-j> <Down>
 imap <C-k> <Up>
 imap <C-l> <Right>
 
-" Make C-s write the buffer and return to insert mode when applicable
+" Make C-s write the buffer and return to insert mode when applicable.
 inoremap <C-s> <C-O>:w<CR>
 nnoremap <C-s> :w<CR>
 
-" auto-insert second braces and parynthesis
+" Auto-insert second braces and parenthesis.
 inoremap {<CR> {<CR>}<Esc>O
 inoremap ({<CR> ({<CR>});<Esc>O
 inoremap <<<<CR> <<<EOT<CR>EOT;<Esc>O<C-TAB><C-TAB><C-TAB>
-set cpoptions+=$ "show dollar sign at end of text to be changed
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -331,7 +314,7 @@ set cpoptions+=$ "show dollar sign at end of text to be changed
 " Visual mode customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" reselect visual block after indent/outdent
+" Reselect visual block after indent/outdent.
 xnoremap < <gv
 xnoremap > >gvo
 
