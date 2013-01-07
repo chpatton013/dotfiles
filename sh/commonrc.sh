@@ -67,15 +67,15 @@ if [ -d ~/bin ]; then PATH+=:~/bin
 fi
 if [ -d ~/sbin ]; then PATH+=:~/sbin
 fi
-# usr bin directories
-if [ -d /usr/bin ]; then PATH+=:/usr/bin
-fi
-if [ -d /usr/sbin ]; then PATH+=:/usr/sbin
-fi
 # homebrew bin directories
 if [ -d /usr/local/bin ]; then PATH+=:/usr/local/bin
 fi
 if [ -d /usr/local/sbin ]; then PATH+=:/usr/local/sbin
+fi
+# usr bin directories
+if [ -d /usr/bin ]; then PATH+=:/usr/bin
+fi
+if [ -d /usr/sbin ]; then PATH+=:/usr/sbin
 fi
 # mysql bin directories
 if [ -d /usr/local/mysql/bin ]; then PATH+=:/usr/local/mysql/bin
@@ -95,7 +95,7 @@ if [ -d /bin ]; then PATH+=:/bin
 fi
 if [ -d /sbin ]; then PATH+=:/sbin
 fi
-PATH=$OLD_PATH:$PATH
+PATH=$PATH:$OLD_PATH
 
 ###############################################################################
 

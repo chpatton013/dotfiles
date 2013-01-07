@@ -157,6 +157,7 @@ set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start
 set encoding=utf-8               " Set encoding to utf-8
 set expandtab                    " Expand tabs with spaces.
 set fileencoding=utf-8           " Set fileencoding to utf-8
+set foldmethod=indent            " Set fold method (manual,indent,expr,syntax,diff,marker)
 set hidden                       " Use hidden buffers so unsaved buffers can go to the background
 set history=500                  " Set number of lines for vim to remember
 set hlsearch                     " Highlight all search matches
@@ -167,8 +168,8 @@ set lazyredraw                   " Redraw faster
 set linespace=0                  " Adjust relative line height.
 set modeline                     " Check for a modeline.
 set nocompatible                 " No compatibility with vi.
+set nofoldenable                 " Do not open file folded.
 set noerrorbells                 " No beeps on errors.
-set nofoldenable                 " Disable folds; toggle with zi.
 set nowrap                       " Don't soft wrap.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
@@ -271,6 +272,10 @@ nnoremap <C-l> <C-w><Right>
 " Strip trailing whitespace
 nnoremap <silent> <leader>W :call <SID>StripTrailingWhitespaces()<CR>
 
+" Open a conque terminal.
+nnoremap <silent> <leader>ch :ConqueTermSplit $SHELL<CR>
+nnoremap <silent> <leader>cv :ConqueTermVSplit $SHELL<CR>
+
 " Allow easy toggling of spaces / tabs mode
 nnoremap <C-t><C-t> :set invexpandtab<CR>
 
@@ -284,7 +289,6 @@ nnoremap <C-o> zo
 nnoremap <C-c> zc
 nnoremap <C-O> zO
 nnoremap <C-O><C-O> zR
-set foldmethod=indent
 
 " Open file for class name under cursor
 nnoremap <C-i> yiw:find <C-R>".php<CR>
