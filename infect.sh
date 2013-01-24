@@ -26,7 +26,7 @@ rm -f ~/bin/premake
 # Link config files in home folder
 ln -sf ~/dotfiles/sh/alias.sh ~/.alias
 ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
-ln -sf ~/dotfiles/sh/dircolors/solarized/dircolors.ansi-dark ~/.dircolors
+ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
 ln -sf ~/dotfiles/sh/themes ~/.themes
