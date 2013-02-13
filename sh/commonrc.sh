@@ -82,8 +82,13 @@ if [ -d /usr/local/mysql/bin ]; then PATH+=:/usr/local/mysql/bin
 fi
 if [ -d /usr/local/mysql/sbin ]; then PATH+=:/usr/local/mysql/sbin
 fi
-# X11 bin directories
+# X11 bin directory
 if [ -d /usr/X11/bin ]; then PATH+=:/usr/X11/bin
+fi
+# CUDA bin directories
+if [ -d /usr/local/cuda/bin ]; then PATH+=:/usr/local/cuda/bin
+fi
+if [ -d /usr/local/cuda-5.0/bin ]; then PATH+=:/usr/local/cuda-5.0/bin
 fi
 # kerberos bin directories
 if [ -d /usr/kerberos/bin ]; then PATH+=:/usr/kerberos/bin
@@ -105,9 +110,19 @@ PATH=$PATH:$OLD_PATH
 ###############################################################################
 
 LD_LIBRARY_PATH=.
+if [ -d /lib ]; then LD_LIBRARY_PATH+=:/lib
+fi
 if [ -d /usr/lib ]; then LD_LIBRARY_PATH+=:/usr/lib
 fi
 if [ -d /usr/local/lib ]; then LD_LIBRARY_PATH+=:/usr/local/lib
+fi
+if [ -d /usr/local/cuda/lib ]; then LD_LIBRARY_PATH+=:/usr/local/cuda/lib
+fi
+if [ -d /usr/local/cuda/lib64 ]; then LD_LIBRARY_PATH+=:/usr/local/cuda/lib64
+fi
+if [ -d /usr/local/cuda-5.0/lib ]; then LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib
+fi
+if [ -d /usr/local/cuda-5.0/lib64 ]; then LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib64
 fi
 
 ###############################################################################

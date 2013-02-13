@@ -17,6 +17,7 @@ alias ...="cd .. $*"
 alias :q="exit"
 alias c="clear"
 alias md="mkdir"
+alias m="make -j 4 $*"
 
 # Git shortcuts.
 alias gad="git add $*"
