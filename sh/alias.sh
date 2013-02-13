@@ -6,7 +6,7 @@ alias ssh="ssh -XYC"
 alias sudo="sudo -E"
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
-alias l="ls -FGb $*"
+alias l="ls -FGb --color $*"
 alias ll="l -hl $*"
 alias la="l -a $*"
 alias lal="ll -a $*"
