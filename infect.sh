@@ -43,3 +43,5 @@ ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 # Link additional executable files
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/premake4 ~/bin/premake
+
+mkdir -p ~/Code
