@@ -1,0 +1,23 @@
+[user]
+   name = Christopher Patton
+   email = chpatton013@gmail.com
+[github]
+   user = chpatton013
+[core]
+   excludesfile = ~/.gitignore
+[color]
+   ui = true
+[alias]
+   ap = add -p
+   cm = commit
+   co = checkout
+   df = diff
+   dc = diff --cached
+   gr = grep -n
+   pl = pull
+   ps = push
+   rs = reset
+   sl = stash list
+   st = status
+[push]
+   default = current

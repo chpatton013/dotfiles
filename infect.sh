@@ -12,6 +12,8 @@ rm -f ~/.alias
 rm -f ~/.commonrc
 rm -rf ~/.dircolors
 rm -f ~/.git-completion.sh
+rm -f ~/.gitconfig
+rm -f ~/.gitignore
 rm -f ~/.mybashrc
 rm -rf ~/.themes
 rm -f ~/.tmux.conf
@@ -28,6 +30,8 @@ ln -sf ~/dotfiles/sh/alias.sh ~/.alias
 ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
 ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
+ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/git/gitignore ~/.gitignore
 ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
 ln -sf ~/dotfiles/sh/themes ~/.themes
 ln -sf ~/dotfiles/sh/tmux.conf ~/.tmux.conf
