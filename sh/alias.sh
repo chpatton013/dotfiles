@@ -16,7 +16,7 @@ alias lla="lal $*"
 alias ...="cd .. $*"
 alias :q="exit"
 alias c="clear"
-alias g="grep $*"
+alias g="git $*"
 alias m="make -j 4 $*"
 alias md="mkdir"
 
