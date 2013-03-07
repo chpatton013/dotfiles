@@ -145,7 +145,6 @@ set modeline                     " Check for a modeline.
 set nocompatible                 " No compatibility with vi.
 set nofoldenable                 " Do not open file folded.
 set noerrorbells                 " No beeps on errors.
-set nowrap                       " Don't soft wrap.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
@@ -168,6 +167,7 @@ set viminfo='20,\"500,%          " Adjust viminfo contents.
 set virtualedit=block            " Allow the cursor to go where it should not.
 set wildmenu                     " Tab completion opens a Tab- and arrow-navigable menu.
 set wildmode=longest,full        " Tab completion works like bash.
+set wrap                         " Soft wrap lines.
 set wrapscan                     " Searching wraps to start of file when end is reached.
 
 " Text formatting settings.
@@ -178,7 +178,7 @@ set wrapscan                     " Searching wraps to start of file when end is 
 " o: Insert comment leader after hitting 'o' or 'O' in command mode.
 " n: Auto-format lists, wrapping to text *after* the list bullet char.
 " l: Don't auto-wrap if a line is already longer than textwidth.
-set formatoptions+=ronl
+set formatoptions+=tcronl
 
 " Enable mouse scrolling in selected modes.
 " a: All
