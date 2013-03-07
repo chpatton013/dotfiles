@@ -239,10 +239,6 @@ nnoremap <C-l> <C-w><Right>
 " Strip trailing whitespace.
 nnoremap <silent> <leader>W :call <SID>StripTrailingWhitespaces()<CR>
 
-" Open a conque terminal.
-nnoremap <silent> <leader>ch :ConqueTermSplit $SHELL<CR>
-nnoremap <silent> <leader>cv :ConqueTermVSplit $SHELL<CR>
-
 " Allow easy toggling of spaces / tabs mode.
 nnoremap <C-t><C-t> :set invexpandtab<CR>
 
