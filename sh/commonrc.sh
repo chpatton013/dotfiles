@@ -97,7 +97,7 @@ if [ -d /bin ]; then PATH+=:/bin
 fi
 if [ -d /sbin ]; then PATH+=:/sbin
 fi
-PATH=$PATH:$OLD_PATH
+PATH=$OLD_PATH:$PATH
 
 ###############################################################################
 
