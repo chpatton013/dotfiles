@@ -11,8 +11,8 @@
    ap = add -p
    cm = commit
    co = checkout
-   df = diff
-   dc = diff --cached
+   df = diff --patience
+   dc = diff --patience --cached
    gr = grep -n
    pl = pull
    ps = push
