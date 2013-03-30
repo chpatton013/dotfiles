@@ -1,5 +1,0 @@
-.include /usr/lib/systemd/system/deluged.service
-
-[Unit]
-Requires=network
-After=network
