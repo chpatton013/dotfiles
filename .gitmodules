@@ -31,9 +31,6 @@
 [submodule "themes/solarized/konsole-colors-solarized"]
 	path = themes/solarized/konsole-colors-solarized
 	url = git://github.com/phiggins/konsole-colors-solarized.git
-[submodule "vim/bundle/vim-latex"]
-	path = vim/bundle/vim-latex
-	url = git://github.com/jcf/vim-latex.git
 [submodule "dircolors/solarized"]
 	path = dircolors/solarized
 	url = git://github.com/seebi/dircolors-solarized.git
