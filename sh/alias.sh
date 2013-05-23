@@ -1,9 +1,13 @@
 # Expand control characters.
-alias less="less -R"
+alias less="less -R $*"
 # Enabled X Forwarding and compression in X sessions.
-alias ssh="ssh -XYC"
+alias ssh="ssh -XYC $*"
 # Pass enviornment variables onto sudo.
-alias sudo="sudo -E"
+alias sudo="sudo -E $*"
+# Make du human readable
+alias du="du -h $*"
+# Speed up dd
+alias dd="dd bs=8196 $*"
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
 alias l="ls -FGb --color $*"
