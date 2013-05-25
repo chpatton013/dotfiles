@@ -4,13 +4,21 @@ alias less="less -R $*"
 alias ssh="ssh -XYC $*"
 # Pass enviornment variables onto sudo.
 alias sudo="sudo -E $*"
-# Make du human readable
+# Make du human readable.
 alias du="du -h $*"
-# Speed up dd
+# Speed up dd.
 alias dd="dd bs=8196 $*"
 
+# Add color to several commands.
+alias ls='ls --color'
+alias dir='dir --color'
+alias vdir='vdir --color'
+alias grep='grep --color'
+alias fgrep='fgrep --color'
+alias egrep='egrep --color'
+
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
-alias l="ls -FGb --color $*"
+alias l="ls -FGb $*"
 alias ll="l -hl $*"
 alias la="l -a $*"
 alias lal="ll -a $*"
