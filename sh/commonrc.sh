@@ -2,6 +2,13 @@
 # Login Actions.
 ###############################################################################
 
+# If not running interactively, don't do anything.
+case $- in
+   *i*) ;;
+   *) return;;
+esac
+
+# Move to development directory.
 if [ -d ~/Code ]; then
    cd ~/Code
 fi
@@ -46,9 +53,9 @@ fi
 ###############################################################################
 
 HISTFILE=~/.history
-
 SAVEHIST=1000
 HISTSIZE=1000
+HISTFILESIZE=2000
 
 ###############################################################################
 
