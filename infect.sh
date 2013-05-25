@@ -15,7 +15,7 @@ rm -rf ~/.dircolors
 rm -f ~/.git-completion.sh
 rm -f ~/.gitconfig
 rm -f ~/.gitignore
-rm -f ~/.mybashrc
+rm -f ~/.bashrc
 rm -rf ~/.themes
 rm -f ~/.tmux.conf
 rm -rf ~/.vim
@@ -35,9 +35,9 @@ ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/git/gitignore ~/.gitignore
-ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
+ln -sf ~/dotfiles/sh/bashrc.bash ~/.bashrc
 ln -sf ~/dotfiles/sh/themes ~/.themes
-ln -sf ~/dotfiles/sh/tmux.conf ~/.tmux.conf
+ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
