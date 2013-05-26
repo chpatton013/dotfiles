@@ -36,6 +36,9 @@ if [ -d ~/.dircolors ]; then
    dircolors ~/.dircolors
 fi
 
+if [ -f ~/.config/X/Xresources.xrdb ]; then
+   xrdb -merge ~/.config/X/Xresources.xrdb
+fi
 if [ -f ~/.themes/solarized/xresources ]; then
    xrdb -merge ~/.themes/solarized/xresources
 fi
