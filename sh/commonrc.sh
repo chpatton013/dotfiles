@@ -157,6 +157,7 @@ $PS1_lbrace $PS1_priv $PS1_queue "
 export CLICOLOR=TRUE
 export EDITOR=vim
 export PAGER=less
+export TERM="xterm-256color"
 
 # Language
 export LANG="en_US.UTF-8"

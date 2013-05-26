@@ -29,6 +29,7 @@ alias c='clear'
 alias g='git'
 alias m='make -j 4'
 alias md='mkdir'
+alias vi='vim'
 
 # School ssh addresses.
 alias multi='ssh chpatton@multicore.csc.calpoly.edu'
