@@ -1,18 +1,16 @@
 ###############################################################################
-# Base configuration
+# Variables
 ###############################################################################
 
-# Set mod as super key.
+set $alt Mod1
+set $num Mod2
 set $mod Mod4
 
-# Font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-
 ###############################################################################
 
 
 ###############################################################################
-# Applications
+# Application mapping
 ###############################################################################
 
 bindsym $mod+d exec dmenu_run
@@ -23,7 +21,7 @@ bindsym $mod+t exec xterm
 
 
 ###############################################################################
-# Commands
+# Command mapping
 ###############################################################################
 
 # Kill focused window.
@@ -41,6 +39,10 @@ bindsym $mod+Shift+E exit
 ###############################################################################
 # Window management
 ###############################################################################
+
+# Window title font.
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Courier New 10
 
 # Change window focus.
 bindsym $mod+h focus left
@@ -126,11 +128,79 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+###############################################################################
+
+
+###############################################################################
+# Colors (class border background text)
+###############################################################################
+
+# Solarized colors.
+set $S_yellow        #b58900
+set $S_orange        #cb4b16
+set $S_red           #dc322f
+set $S_magenta       #d33682
+set $S_violet        #6c71c4
+set $S_blue          #268bd2
+set $S_cyan          #2aa198
+set $S_green         #859900
+set $S_base03        #002b36
+set $S_base02        #073642
+set $S_base01        #586e75
+set $S_base00        #657b83
+set $S_base0         #839496
+set $S_base1         #93a1a1
+set $S_base2         #eee8d5
+set $S_base3         #fdf6e3
+
+client.focused          $S_blue     $S_blue     $S_base2
+client.focused_inactive $S_base0    $S_base0    $S_base3
+client.unfocused        $S_base01   $S_base01   $S_base2
+client.urgent           $S_red      $S_red      $S_base3
+client.background       $S_base03
+
+###############################################################################
+
+
+###############################################################################
+# i3bar configuration
+###############################################################################
+
 bar {
-   status_command i3status
+   status_command i3status --config ~/.config/i3/i3status.conf
+
+   font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+   font pango:Courier New 10
+
+   workspace_buttons yes
+   tray_output primary
+
+   # Hide status bar unless pressing Alt.
+   mode hide
+   modifier $alt
+
+   # Solarized colors.
+   colors {
+      # class     color
+      background  #000000
+      statusline  $S_base3
+
+      # class              border      background  text
+      focused_workspace    $S_magenta  #000000     $S_base3
+      inactive_workspace   $S_blue     #000000     $S_base1
+      urgent_workspace     $S_base3    $S_red      $S_base1
+      active_workspace     $S_base1    #000000     $S_base1
+   }
 }
+
+###############################################################################
+
+
+###############################################################################
+# Startup applications
+###############################################################################
+
+exec --no-startup-id nm-applet
 
 ###############################################################################
 

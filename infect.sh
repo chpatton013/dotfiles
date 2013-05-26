@@ -15,14 +15,14 @@ rm -rf ~/.dircolors
 rm -f ~/.git-completion.sh
 rm -f ~/.gitconfig
 rm -f ~/.gitignore
-rm -rf ~/.i3
 rm -rf ~/.themes
 rm -f ~/.tmux.conf
 rm -rf ~/.vim
 rm -f ~/.vimrc
 rm -f ~/.xinitrc
 rm -f ~/.zshrc
-rm -f ~/.config/X
+rm -rf ~/.config/i3
+rm -rf ~/.config/X
 
 # Make sure required directories exist.
 mkdir -p ~/Code
@@ -36,11 +36,11 @@ ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/git/gitignore ~/.gitignore
-ln -sf ~/dotfiles/config/i3 ~/.i3
 ln -sf ~/dotfiles/themes ~/.themes
 ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
 ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
+ln -sf ~/dotfiles/config/i3 ~/.config/i3
 ln -sf ~/dotfiles/config/X ~/.config/X
