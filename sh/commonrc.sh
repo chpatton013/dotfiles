@@ -43,13 +43,6 @@ if [ -d ~/.dircolors ]; then
 fi
 
 if [ $DISPLAY ]; then
-   if [ -f ~/.config/X/Xresources.xrdb ]; then
-      xrdb -merge ~/.config/X/Xresources.xrdb
-   fi
-   if [ -f ~/.themes/solarized/xresources ]; then
-      xrdb -merge ~/.themes/solarized/xresources
-   fi
-
    if [ `echo $DESKTOP_SESSION | grep "gnome"` ] &&
     [ -d ~/.themes/solarized/gnome-terminal-colors-solarized ]; then
       ~/.themes/solarized/gnome-terminal-colors-solarized/set_dark.sh
