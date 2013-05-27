@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Expand control characters.
 alias less='less -R'
 # Enabled X Forwarding and compression in X sessions.

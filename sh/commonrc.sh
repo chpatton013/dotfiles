@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 ###############################################################################
 # Login Actions.
 ###############################################################################
@@ -21,11 +23,15 @@ fi
 ###############################################################################
 
 if [ -f ~/.alias ]; then
-   source ~/.alias
+   . ~/.alias
+fi
+
+if [ -f ~/.variables ]; then
+   . ~/.variables
 fi
 
 if [ -f ~/.git-completion.sh ]; then
-   source ~/.git-completion.sh
+   . ~/.git-completion.sh
    export GIT_PS1_SHOWDIRTYSTATE="true"
    export GIT_PS1_SHOWSTASHSTATE=" true"
    export GIT_PS1_SHOWUNTRACKEDFILES=" true"
@@ -113,6 +119,7 @@ fi
 if [ -d /sbin ]; then PATH+=:/sbin
 fi
 PATH=$OLD_PATH:$PATH
+export PATH=$PATH
 
 ###############################################################################
 
@@ -136,6 +143,7 @@ if [ -d /usr/local/cuda-5.0/lib ]; then LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/li
 fi
 if [ -d /usr/local/cuda-5.0/lib64 ]; then LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib64
 fi
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 ###############################################################################
 
@@ -148,7 +156,7 @@ fi
 # PS1_lbrace, PS1_rbrace, PS1_at, PS1_vbar, PS1_queue, PS1_name, PS1_host,
 # PS1_pwd, PS1_date, PS1_time, PS1_priv
 
-PS1="$PS1_lbrace $PS1_name $PS1_at $PS1_host $PS1_vbar $PS1_date $PS1_at $PS1_time $PS1_rbrace
+export PS1="$PS1_lbrace $PS1_name $PS1_at $PS1_host $PS1_vbar $PS1_date $PS1_at $PS1_time $PS1_rbrace
 $PS1_lbrace $PS1_pwd $PS1_rbrace
 $PS1_lbrace $PS1_priv $PS1_queue "
 
@@ -156,15 +164,9 @@ $PS1_lbrace $PS1_priv $PS1_queue "
 
 
 ###############################################################################
-# Variable Exports.
+# Language
 ###############################################################################
 
-export CLICOLOR=TRUE
-export EDITOR=vim
-export PAGER=less
-export TERM="xterm-256color"
-
-# Language
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
@@ -180,10 +182,6 @@ export LC_MEASUREMENT="en_US.UTF-8"
 export LC_IDENTIFICATION="en_US.UTF-8"
 export LC_ALL=
 export CHARSET=UTF-8
-
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-export PATH=$PATH
-export PS1=$PS1
 
 ###############################################################################
 

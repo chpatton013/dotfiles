@@ -17,6 +17,7 @@ rm -f ~/.gitconfig
 rm -f ~/.gitignore
 rm -rf ~/.themes
 rm -f ~/.tmux.conf
+rm -f ~/.variables
 rm -rf ~/.vim
 rm -f ~/.vimrc
 rm -f ~/.xinitrc
@@ -39,6 +40,7 @@ ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/git/gitignore ~/.gitignore
 ln -sf ~/dotfiles/themes ~/.themes
 ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
+ln -sf ~/dotfiles/sh/variables.sh ~/.sh/.variables
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/sh/xsession.sh ~/.xinitrc
