@@ -20,6 +20,7 @@ rm -f ~/.tmux.conf
 rm -rf ~/.vim
 rm -f ~/.vimrc
 rm -f ~/.xinitrc
+rm -f ~/.xsession
 rm -f ~/.zshrc
 rm -rf ~/.config/i3
 rm -rf ~/.config/X
@@ -40,7 +41,8 @@ ln -sf ~/dotfiles/themes ~/.themes
 ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
-ln -sf ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
+ln -sf ~/dotfiles/sh/xsession.sh ~/.xinitrc
+ln -sf ~/dotfiles/sh/xsession.sh ~/.xsession
 ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 ln -sf ~/dotfiles/config/i3 ~/.config/i3
 ln -sf ~/dotfiles/config/X ~/.config/X
