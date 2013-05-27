@@ -167,17 +167,13 @@ client.background       $S_base03
 ###############################################################################
 
 bar {
-   status_command i3status --config ~/.config/i3/i3status.conf
+   status_command i3status --config ~/.i3/i3status.conf
 
    font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
    font pango:Courier New 10
 
    workspace_buttons yes
    tray_output primary
-
-   # Hide status bar unless pressing Alt.
-   mode hide
-   modifier $alt
 
    # Solarized colors.
    colors {
@@ -186,8 +182,8 @@ bar {
       statusline  $S_base3
 
       # class              border      background  text
-      focused_workspace    $S_magenta  #000000     $S_base3
-      inactive_workspace   $S_blue     #000000     $S_base1
+      focused_workspace    $S_blue     #000000     $S_base3
+      inactive_workspace   $S_magenta  #000000     $S_base1
       urgent_workspace     $S_base3    $S_red      $S_base1
       active_workspace     $S_base1    #000000     $S_base1
    }
