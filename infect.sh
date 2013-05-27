@@ -43,7 +43,7 @@ ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/sh/variables.sh ~/.variables
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
-ln -sf ~/dotfiles/sh/xsession.sh ~/.xinitrc
+ln -sf ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
 ln -sf ~/dotfiles/sh/xsession.sh ~/.xsession
 ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 ln -sf ~/dotfiles/config/i3 ~/.i3
