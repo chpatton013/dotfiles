@@ -40,11 +40,11 @@ ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/git/gitignore ~/.gitignore
 ln -sf ~/dotfiles/themes ~/.themes
 ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
-ln -sf ~/dotfiles/sh/variables.sh ~/.sh/.variables
+ln -sf ~/dotfiles/sh/variables.sh ~/.variables
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/sh/xsession.sh ~/.xinitrc
 ln -sf ~/dotfiles/sh/xsession.sh ~/.xsession
 ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
-ln -sf ~/dotfiles/config/i3 ~/.config/i3
+ln -sf ~/dotfiles/config/i3 ~/.i3
 ln -sf ~/dotfiles/config/X ~/.config/X
