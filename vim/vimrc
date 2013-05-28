@@ -132,6 +132,7 @@ set cpoptions+=$                 " Show dollar sign at end of text to be changed
 set encoding=utf-8               " Set encoding to utf-8.
 set expandtab                    " Expand tabs with spaces.
 set fileencoding=utf-8           " Set fileencoding to utf-8.
+set foldcolumn=1                 " Add <n> columns to show fold levels and boundaries.
 set foldmethod=indent            " Set fold method (manual,indent,expr,syntax,diff,marker).
 set hidden                       " Use hidden buffers so unsaved buffers can go to the background.
 set history=500                  " Set number of lines for vim to remember.
