@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
 
+# Make du human readable.
+alias du='du -h'
 # Expand control characters.
 alias less='less -R'
 # Enabled X Forwarding and compression in X sessions.
 alias ssh='ssh -XYC'
+# Log X sessions.
+alias startx='startx &> ~/.xlog'
 # Pass enviornment variables onto sudo.
 alias sudo='sudo -E'
-# Make du human readable.
-alias du='du -h'
-# Speed up dd.
-alias dd='dd bs=8196'
 
 # Add color to several commands.
 alias ls='ls --color'
@@ -31,6 +31,7 @@ alias c='clear'
 alias g='git'
 alias m='make -j 4'
 alias md='mkdir'
+alias v='vim'
 alias vi='vim'
 
 # School ssh addresses.
