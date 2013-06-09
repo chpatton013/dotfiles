@@ -14,8 +14,11 @@ set $mod Mod4
 ###############################################################################
 
 bindsym $mod+d exec dmenu_run
-bindsym $mod+i exec chromium-browser
+bindsym $mod+i exec google-chrome
+bindsym $mod+m exec clementine
+bindsym $mod+n exec pidgin
 bindsym $mod+t exec xterm
+bindsym $mod+y exec pcmanfm
 
 ###############################################################################
 
@@ -132,6 +135,16 @@ bindsym $mod+r mode "resize"
 
 
 ###############################################################################
+# Application-specific behavior.
+###############################################################################
+
+for_window [class="Xfce4-notifyd"] floating enable; border none; focus mode_toggle
+for_window [class="^Google-chrome$"] border none
+
+###############################################################################
+
+
+###############################################################################
 # Colors (class border background text).
 ###############################################################################
 
@@ -197,6 +210,7 @@ bar {
 ###############################################################################
 
 exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
 
 ###############################################################################
 
