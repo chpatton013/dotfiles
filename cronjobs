@@ -1,0 +1,1 @@
+*/5 * * * *  DISPLAY=:0.0 feh --bg-fill "$(find ~/.wallpaper/|shuf -n1)"

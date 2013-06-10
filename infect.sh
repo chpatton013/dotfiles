@@ -12,7 +12,6 @@ rm -f ~/.alias
 rm -f ~/.bashrc
 rm -f ~/.commonrc
 rm -rf ~/.dircolors
-rm -f ~/.fehbg
 rm -f ~/.git-completion.sh
 rm -f ~/.gitconfig
 rm -f ~/.gitignore
@@ -20,6 +19,7 @@ rm -rf ~/.themes
 rm -f ~/.tmux.conf
 rm -f ~/.variables
 rm -rf ~/.vim
+rm -rf ~/.wallpaper
 rm -f ~/.vimrc
 rm -f ~/.xinitrc
 rm -f ~/.xsession
@@ -36,7 +36,6 @@ ln -sf ~/dotfiles/sh/alias.sh ~/.alias
 ln -sf ~/dotfiles/sh/bashrc.bash ~/.bashrc
 ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
 ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
-ln -sf ~/dotfiles/scripts/rand-bg.py ~/.fehbg
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/git/gitignore ~/.gitignore
@@ -50,3 +49,4 @@ ln -sf ~/dotfiles/sh/xsession.sh ~/.xsession
 ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 ln -sf ~/dotfiles/config/i3 ~/.i3
 ln -sf ~/dotfiles/config/X ~/.config/X
+ln -sf ~/Pictures/Wallpapers ~/.wallpaper

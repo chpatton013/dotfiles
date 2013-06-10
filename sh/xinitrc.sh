@@ -31,12 +31,8 @@ if which xscreensaver &> /dev/null; then
    xscreensaver -no-splash &
 fi
 
-if which xscetroot &> /dev/null; then
+if which xsetroot &> /dev/null; then
    xsetroot -cursor_name left_ptr &
-fi
-
-if [ -f ~/.fehbg ]; then
-   sh ~/.fehbg &
 fi
 
 case $1 in
