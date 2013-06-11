@@ -9,6 +9,7 @@ git stash pop
 
 # Remove config file links in home folder.
 rm -f ~/.alias
+rm -f ~/.background
 rm -f ~/.bashrc
 rm -f ~/.commonrc
 rm -rf ~/.dircolors
@@ -33,6 +34,7 @@ mkdir -p ~/.config
 
 # Link config files in home folder.
 ln -sf ~/dotfiles/sh/alias.sh ~/.alias
+ln -sf ~/dotfiles/sh/background.sh ~/.background
 ln -sf ~/dotfiles/sh/bashrc.bash ~/.bashrc
 ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
 ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
