@@ -35,6 +35,8 @@ bindsym $mod+Shift+C reload
 bindsym $mod+Shift+R restart
 # Exit i3.
 bindsym $mod+Shift+E exit
+# Lock screen.
+bindsym $mod+Shift+Z exec xscreensaver-command -lock
 
 ###############################################################################
 
