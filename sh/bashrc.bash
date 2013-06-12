@@ -7,17 +7,17 @@
 if [ -f ~/.commonrc ]; then
    # Color support
    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-      PS1_lbrace=$'\[\e[0;34m\][\[\e[0m\]'
-      PS1_rbrace=$'\[\e[0;34m\]]\[\e[0m\]'
-      PS1_at=$'\[\e[0;34m\]@\[\e[0m\]'
-      PS1_vbar=$'\[\e[0;34m\]|\[\e[0m\]'
-      PS1_queue=$'\[\e[0;34m\]>\[\e[0m\]'
-      PS1_name=$'\[\e[0;32m\]\u\[\e[0m\]'
-      PS1_host=$'\[\e[0;32m\]\H\[\e[0m\]'
-      PS1_pwd=$'\[\e[0;32m\]\w\[\e[0m\]'
-      PS1_date=$'\[\e[0;32m\]`date +"%m-%y-%d"`\[\e[0m\]'
-      PS1_time=$'\[\e[0;32m\]\D{}\[\e[0m\]'
-      PS1_priv=$'\[\e[0;32m\]\$\[\e[0m\]'
+      PS1_lbrace=$'\[\e[0;37m\][\[\e[0m\]'
+      PS1_rbrace=$'\[\e[0;37m\]]\[\e[0m\]'
+      PS1_at=$'\[\e[0;37m\]@\[\e[0m\]'
+      PS1_vbar=$'\[\e[0;37m\]|\[\e[0m\]'
+      PS1_queue=$'\[\e[0;37m\]>\[\e[0m\]'
+      PS1_name=$'\[\e[0;34m\]\u\[\e[0m\]'
+      PS1_host=$'\[\e[0;35m\]\H\[\e[0m\]'
+      PS1_pwd=$'\[\e[0;35m\]\w\[\e[0m\]'
+      PS1_date=$'\[\e[0;34m\]`date +"%m-%y-%d"`\[\e[0m\]'
+      PS1_time=$'\[\e[0;35m\]\D{}\[\e[0m\]'
+      PS1_priv=$'\[\e[0;34m\]\$\[\e[0m\]'
    else
       PS1_lbrace=$'['
       PS1_rbrace=$']'
