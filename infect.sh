@@ -26,7 +26,7 @@ rm -f ~/.xinitrc
 rm -rf ~/.xscreensaver
 rm -f ~/.xsession
 rm -f ~/.zshrc
-rm -rf ~/.config/i3
+rm -rf ~/.i3
 rm -rf ~/.config/X
 
 # Make sure required directories exist.
