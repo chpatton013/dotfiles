@@ -11,13 +11,14 @@
    ap = add -p
    cm = commit
    co = checkout
-   df = diff --patience
-   dc = diff --patience --cached
+   df = diff
+   dc = diff --cached
    gr = grep -n
    pl = pull
    ps = push
+   rb = rebase
    rs = reset
    sl = stash list
-   st = status
+   st = status -s -b
 [push]
    default = current
