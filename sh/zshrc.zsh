@@ -18,31 +18,24 @@ colors && compinit && promptinit
 ###############################################################################
 
 if [ -f ~/.commonrc ]; then
-   PS1_lbrace="%{$fg[white]%}[%{$reset_color%}"
-   PS1_rbrace="%{$fg[white]%}]%{$reset_color%}"
-   PS1_at="%{$fg[white]%}@%{$reset_color%}"
-   PS1_vbar="%{$fg[white]%}|%{$reset_color%}"
-   PS1_queue="%{$fg[white]%}>%{$reset_color%}"
-   PS1_name="%{$fg[blue]%}%n%{$reset_color%}"
-   PS1_host="%{$fg[magenta]%}%M%{$reset_color%}"
-   PS1_pwd="%{$fg[magenta]%}%~%{$reset_color%}"
-   PS1_date="%{$fg[blue]%}%D%{$reset_color%}"
-   PS1_time="%{$fg[magenta]%}%*%{$reset_color%}"
-   PS1_priv="%{$fg[blue]%}%#%{$reset_color%}"
+   fg_black="%{$fg[black]%}"
+   fg_red="%{$fg[red]%}"
+   fg_green="%{$fg[green]%}"
+   fg_yellow="%{$fg[yellow]%}"
+   fg_blue="%{$fg[blue]%}"
+   fg_magenta="%{$fg[magenta]%}"
+   fg_cyan="%{$fg[cyan]%}"
+   fg_white="%{$fg[white]%}"
+   reset_color="%{$reset_color%}"
+
+   SH_name="%n"
+   SH_host="%M"
+   SH_pwd="%~"
+   SH_date="%D"
+   SH_time="%*"
+   SH_priv="%#"
 
    source ~/.commonrc
-
-   unset PS1_lbrace
-   unset PS1_rbrace
-   unset PS1_at
-   unset PS1_vbar
-   unset PS1_queue
-   unset PS1_name
-   unset PS1_host
-   unset PS1_pwd
-   unset PS1_date
-   unset PS1_time
-   unset PS1_priv
 fi
 
 ###############################################################################

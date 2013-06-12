@@ -146,8 +146,20 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 ###############################################################################
 
 # Defined externally:
-# PS1_lbrace, PS1_rbrace, PS1_at, PS1_vbar, PS1_queue, PS1_name, PS1_host,
-# PS1_pwd, PS1_date, PS1_time, PS1_priv
+# fg_black, fg_red, fg_green, fg_yellow, fg_blue, fg_magenta, fg_cyan, fg_white,
+# reset_color, SH_name, SH_host, SH_pwd, SH_date, SH_time, SH_priv
+
+PS1_lbrace="${fg_white}[${reset_color}"
+PS1_rbrace="${fg_white}]${reset_color}"
+PS1_at="${fg_cyan}@${reset_color}"
+PS1_vbar="${fg_white}|${reset_color}"
+PS1_queue="${fg_white}>${reset_color}"
+PS1_name="${fg_blue}${SH_name}${reset_color}"
+PS1_host="${fg_green}${SH_host}${reset_color}"
+PS1_pwd="${fg_green}${SH_pwd}${reset_color}"
+PS1_date="${fg_blue}${SH_date}${reset_color}"
+PS1_time="${fg_green}${SH_time}${reset_color}"
+PS1_priv="${fg_blue}${SH_priv}${reset_color}"
 
 export PS1="$PS1_lbrace $PS1_name $PS1_at $PS1_host $PS1_vbar $PS1_date $PS1_at $PS1_time $PS1_rbrace
 $PS1_lbrace $PS1_pwd $PS1_rbrace

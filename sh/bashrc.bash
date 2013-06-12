@@ -5,46 +5,24 @@
 ###############################################################################
 
 if [ -f ~/.commonrc ]; then
-   # Color support
-   if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-      PS1_lbrace=$'\[\e[0;37m\][\[\e[0m\]'
-      PS1_rbrace=$'\[\e[0;37m\]]\[\e[0m\]'
-      PS1_at=$'\[\e[0;37m\]@\[\e[0m\]'
-      PS1_vbar=$'\[\e[0;37m\]|\[\e[0m\]'
-      PS1_queue=$'\[\e[0;37m\]>\[\e[0m\]'
-      PS1_name=$'\[\e[0;34m\]\u\[\e[0m\]'
-      PS1_host=$'\[\e[0;35m\]\H\[\e[0m\]'
-      PS1_pwd=$'\[\e[0;35m\]\w\[\e[0m\]'
-      PS1_date=$'\[\e[0;34m\]`date +"%m-%y-%d"`\[\e[0m\]'
-      PS1_time=$'\[\e[0;35m\]\D{}\[\e[0m\]'
-      PS1_priv=$'\[\e[0;34m\]\$\[\e[0m\]'
-   else
-      PS1_lbrace=$'['
-      PS1_rbrace=$']'
-      PS1_at=$'@'
-      PS1_vbar=$'|'
-      PS1_queue=$'>'
-      PS1_name=$'\u'
-      PS1_host=$'\H'
-      PS1_pwd=$'\w'
-      PS1_date=$'`date +"%m-%y-%d"`'
-      PS1_time=$'\D{}'
-      PS1_priv=$'\$'
-   fi
+   fg_black=$'\[\e[0;30m\]'
+   fg_red=$'\[\e[0;31m\]'
+   fg_green=$'\[\e[0;32m\]'
+   fg_yellow=$'\[\e[0;33m\]'
+   fg_blue=$'\[\e[0;34m\]'
+   fg_magenta=$'\[\e[0;35m\]'
+   fg_cyan=$'\[\e[0;36m\]'
+   fg_white=$'\[\e[0;37m\]'
+   reset_color=$'\[\e[0m\]'
+
+   SH_name=$'\u'
+   SH_host=$'\H'
+   SH_pwd=$'\w'
+   SH_date=$'`date +"%m-%y-%d"`'
+   SH_time=$'\D{}'
+   SH_priv=$'\$'
 
    source ~/.commonrc
-
-   unset PS1_lbrace
-   unset PS1_rbrace
-   unset PS1_at
-   unset PS1_vbar
-   unset PS1_queue
-   unset PS1_name
-   unset PS1_host
-   unset PS1_pwd
-   unset PS1_date
-   unset PS1_time
-   unset PS1_priv
 fi
 
 ###############################################################################
