@@ -25,7 +25,9 @@ fi
 if [ -f ~/.alias ]; then
    . ~/.alias
 fi
-
+if [ -f ~/.function ]; then
+   . ~/.function
+fi
 if [ -f ~/.variables ]; then
    . ~/.variables
 fi

@@ -13,6 +13,7 @@ rm -f ~/.background
 rm -f ~/.bashrc
 rm -f ~/.commonrc
 rm -rf ~/.dircolors
+rm -f ~/.function
 rm -f ~/.git-completion.sh
 rm -f ~/.gitconfig
 rm -f ~/.gitignore
@@ -39,6 +40,7 @@ ln -sf ~/dotfiles/sh/background.sh ~/.background
 ln -sf ~/dotfiles/sh/bashrc.bash ~/.bashrc
 ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
 ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
+ln -sf ~/dotfiles/sh/function.sh ~/.function
 ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/git/gitignore ~/.gitignore
