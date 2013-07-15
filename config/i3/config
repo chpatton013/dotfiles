@@ -71,7 +71,7 @@ bindsym $mod+Shift+Right move right
 
 # Split window.
 bindsym $mod+backslash split h
-bindsym $mod+- split v
+bindsym $mod+minus split v
 
 # Fullscreen window.
 bindsym $mod+f fullscreen

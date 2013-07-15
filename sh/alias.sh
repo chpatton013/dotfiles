@@ -31,6 +31,8 @@ alias c='clear'
 alias g='git'
 alias m='make -j 4'
 alias md='mkdir'
+alias tm='tmux_start_session'
+alias tl='tmux list-sessions'
 alias v='vim'
 alias vi='vim'
 
