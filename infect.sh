@@ -3,8 +3,7 @@
 # Update repository.
 git stash &&
 git pull --rebase &&
-git submodule init &&
-git submodule update &&
+git submodule update --init &&
 git stash pop
 
 # Remove config file links in home folder.
