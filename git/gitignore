@@ -17,3 +17,5 @@
 *.lai
 *.la
 *.a
+
+.remote
