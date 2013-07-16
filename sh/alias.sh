@@ -12,10 +12,12 @@ alias startx='startx &> ~/.xlog'
 alias sudo='sudo -E'
 
 # Add color to several commands.
-alias ls='ls --color'
-alias grep='grep --color'
-alias fgrep='fgrep --color'
-alias egrep='egrep --color'
+if [ `uname -s` != 'Darwin' ]; then
+   alias ls='ls --color'
+   alias grep='grep --color'
+   alias fgrep='fgrep --color'
+   alias egrep='egrep --color'
+fi
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
 alias l='ls -FGb'
