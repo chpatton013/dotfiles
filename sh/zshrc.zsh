@@ -8,7 +8,7 @@ autoload -U compinit complete complist computil    # Enable completion support.
 autoload -U promptinit                             # Prompt customization support.
 autoload -U colors                                 # Enable color support.
 autoload -U regex                                  # Enable regex support.
-colors && compinit && promptinit
+colors && compinit -u && promptinit
 
 ###############################################################################
 
