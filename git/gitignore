@@ -19,3 +19,5 @@
 *.a
 
 .remote
+
+gmon.out
