@@ -3,16 +3,16 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Reread configuration of Vim if .vimrc is saved.
-augroup VimConfig
-  au!
+augroup VimRC
+  autocmd!
   autocmd BufWritePost ~/.vimrc       so ~/.vimrc
   autocmd BufWritePost _vimrc         so ~/_vimrc
   autocmd BufWritePost vimrc          so ~/.vimrc
 augroup END
 
 " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
-augroup ColorColumnConfig
-   au!
+augroup ColorColumn
+   autocmd!
    if exists('+colorcolumn')
       autocmd BufWinEnter * set colorcolumn=80
       autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
@@ -23,7 +23,7 @@ augroup END
 
 " Highlight over-length characters and trailing whitespace.
 augroup ExtraCharacters
-   au!
+   autocmd!
    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
    autocmd ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
    autocmd BufWinEnter * let w:whitespace_match_number =
@@ -32,6 +32,13 @@ augroup ExtraCharacters
    \ '\(^\(\s\)\{-}\(*\|//\|/\*\)\{1}\(.\)*\(\%81v\)\)\@<=\(.\)\{1,}$')
    autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
    autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+augroup END
+
+" Treat files of certain types as other.
+augroup FileTypeAssociation
+   autocmd!
+   autocmd BufNewFile,BufRead *.make set filetype=make
+   autocmd BufNewFile,BufRead *.impl set filetype=cpp
 augroup END
 
 " Resize splits on window resize.
