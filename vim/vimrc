@@ -81,6 +81,10 @@ let g:syntastic_echo_current_error=1
 let g:syntastic_enable_signs=1
 " open error balloons when moused over erroneous lines.
 let g:syntastic_enable_balloons=1
+" use c++11 syntax.
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+" syntax-check c++ header files.
+let g:syntastic_cpp_check_header = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
