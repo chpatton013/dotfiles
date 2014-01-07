@@ -39,6 +39,8 @@ alias tm='tmux_start_session'
 alias tl='tmux list-sessions'
 alias v='vim'
 alias vi='vim'
+alias vo="vim -o"
+alias vO="vim -O"
 
 # School ssh addresses.
 alias multi='ssh chpatton@multicore.csc.calpoly.edu'

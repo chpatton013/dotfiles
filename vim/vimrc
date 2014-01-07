@@ -3,16 +3,16 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Reread configuration of Vim if .vimrc is saved.
-augroup VimConfig
-  au!
+augroup VimRC
+  autocmd!
   autocmd BufWritePost ~/.vimrc       so ~/.vimrc
   autocmd BufWritePost _vimrc         so ~/_vimrc
   autocmd BufWritePost vimrc          so ~/.vimrc
 augroup END
 
 " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
-augroup ColorColumnConfig
-   au!
+augroup ColorColumn
+   autocmd!
    if exists('+colorcolumn')
       autocmd BufWinEnter * set colorcolumn=80
       autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
@@ -23,7 +23,7 @@ augroup END
 
 " Highlight over-length characters and trailing whitespace.
 augroup ExtraCharacters
-   au!
+   autocmd!
    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
    autocmd ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
    autocmd BufWinEnter * let w:whitespace_match_number =
@@ -34,8 +34,11 @@ augroup ExtraCharacters
    autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
 
-augroup SyntaxHighlighting
+augroup FileTypeAssociation
+   autocmd!
    autocmd BufNewFile,BufRead *.ejs set filetype=html
+   autocmd BufNewFile,BufRead *.make set filetype=make
+   autocmd BufNewFile,BufRead *.impl set filetype=cpp
 augroup END
 
 " Resize splits on window resize.
@@ -78,6 +81,10 @@ let g:syntastic_echo_current_error=1
 let g:syntastic_enable_signs=1
 " open error balloons when moused over erroneous lines.
 let g:syntastic_enable_balloons=1
+" use c++11 syntax.
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+" syntax-check c++ header files.
+let g:syntastic_cpp_check_header = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -167,7 +174,6 @@ set splitright splitbelow        " Open splits below and to the right.
 set synmaxcol=160                " Only matches syntax on first 'n' columns of each line (faster).
 set tabstop=3                    " <Tab> move three characters.
 set textwidth=80                 " Hard wrap at 'n' characters.
-set title                        " Set the console title.
 set viminfo='20,\"500,%          " Adjust viminfo contents.
 set virtualedit=block            " Allow the cursor to go where it should not.
 set wildmenu                     " Tab completion opens a Tab- and arrow-navigable menu.

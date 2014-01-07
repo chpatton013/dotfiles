@@ -123,7 +123,7 @@ export PATH=$PATH
 # LD Library Path Construction.
 ###############################################################################
 
-LD_LIBRARY_PATH=.
+LD_LIBRARY_PATH=./lib
 if [ -d /lib ]; then LD_LIBRARY_PATH+=:/lib
 fi
 if [ -d /usr/lib ]; then LD_LIBRARY_PATH+=:/usr/lib
