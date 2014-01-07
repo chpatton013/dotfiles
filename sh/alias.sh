@@ -49,6 +49,7 @@ alias unix4='ssh chpatton@unix4.csc.calpoly.edu'
 
 # Work ssh addresses.
 alias cmr='ssh cpatton@cominor.com'
+alias troll='ssh ifixit@Picture-Frame-Mini.local'
 alias lb='live_ssh ifixit.com'
 alias db='live_ssh db.ifixit.com'
 alias slave='live_ssh slave.ifixit.com'
