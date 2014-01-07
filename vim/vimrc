@@ -34,6 +34,10 @@ augroup ExtraCharacters
    autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
 
+augroup SyntaxHighlighting
+   autocmd BufNewFile,BufRead *.ejs set filetype=html
+augroup END
+
 " Resize splits on window resize.
 autocmd VimResized * exe "normal! \<c-w>="
 
