@@ -176,8 +176,9 @@ set tabstop=3                    " <Tab> move three characters.
 set textwidth=80                 " Hard wrap at 'n' characters.
 set viminfo='20,\"500,%          " Adjust viminfo contents.
 set virtualedit=block            " Allow the cursor to go where it should not.
-set wildmenu                     " Tab completion opens a Tab- and arrow-navigable menu.
-set wildmode=longest,full        " Tab completion works like bash.
+set wildignorecase               " Tab completion is case-insensitive.
+set wildmenu                     " Tab completion navigable menu is enabled.
+set wildmode=list:longest,full   " Tab completion lists matches, then opens wildmenu on next <Tab>.
 set wrap                         " Soft wrap lines.
 set wrapscan                     " Searching wraps to start of file when end is reached.
 
@@ -223,9 +224,6 @@ noremap Q gq
 " Open the file under the cursor in a new tab.
 noremap <Leader>ot <C-W>gf
 
-" Toggle highlighting of the last search.
-noremap <Leader>h :set hlsearch! hlsearch?<CR>
-
 " Open a scratch buffer.
 noremap <Leader>s :Scratch<CR>
 
@@ -248,24 +246,19 @@ nnoremap <C-k> <C-w><Up>
 nnoremap <C-l> <C-w><Right>
 
 " Strip trailing whitespace.
-nnoremap <silent> <leader>W :call <SID>StripTrailingWhitespaces()<CR>
+nnoremap <leader><Space> :call <SID>StripTrailingWhitespaces()<CR>
 
-" Allow easy toggling of spaces / tabs mode.
-nnoremap <C-t><C-t> :set invexpandtab<CR>
-
-" Create simple toggles for line numbers, paste mode, and word wrap.
-nnoremap <C-N><C-N> :set invnumber<CR>
-nnoremap <C-p><C-p> :set invpaste<CR>
-nnoremap <C-w><C-w> :set invwrap<CR>
+" Toggles for search highlight, line numbers, paste mode, and word wrap.
+noremap <Leader>h :set invhlsearch<CR>
+noremap <Leader>n :set invnumber<CR>
+noremap <Leader>p :set invpaste<CR>
+noremap <Leader>w :set invwrap<CR>
 
 " Folding stuff.
 nnoremap <C-o> zo
 nnoremap <C-c> zc
 nnoremap <C-O> zO
 nnoremap <C-O><C-O> zR
-
-" Open file for class name under cursor.
-nnoremap <C-i> yiw:find <C-R>".php<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -287,10 +280,6 @@ imap <C-h> <Left>
 imap <C-j> <Down>
 imap <C-k> <Up>
 imap <C-l> <Right>
-
-" Make C-s write the buffer and return to insert mode when applicable.
-inoremap <C-s> <C-O>:w<CR>
-nnoremap <C-s> :w<CR>
 
 " Auto-insert second braces and parenthesis.
 inoremap {<CR> {<CR>}<Esc>O
