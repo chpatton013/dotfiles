@@ -34,9 +34,9 @@ augroup ExtraCharacters
    autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
 
-" Treat files of certain types as other.
 augroup FileTypeAssociation
    autocmd!
+   autocmd BufNewFile,BufRead *.ejs set filetype=html
    autocmd BufNewFile,BufRead *.make set filetype=make
    autocmd BufNewFile,BufRead *.impl set filetype=cpp
 augroup END
