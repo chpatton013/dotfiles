@@ -86,7 +86,7 @@ let g:syntastic_cpp_check_header=1
 " Use c++11 syntax and disable pre-compiled headers.
 let g:syntastic_cpp_compiler_options=' -std=c++11 -NoPCH'
 " Include these directories when building C++ files.
-let g:syntastic_cpp_include_dirs=['~/include']
+let g:syntastic_cpp_include_dirs=["$HOME/include"]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

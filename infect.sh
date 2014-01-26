@@ -31,6 +31,7 @@ rm -rf ~/.config/X
 
 # Make sure required directories exist.
 mkdir -p ~/Code
+mkdir -p ~/include
 mkdir -p ~/.config
 
 # Link config files in home folder.
