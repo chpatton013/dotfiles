@@ -73,18 +73,20 @@ let g:EasyMotion_leader_key=',m'
 "     :SyntasticToggleMode // toggles between active and passive mode
 "     :SyntasticCheck      // forces a syntax check in passive mode
 
-" check for syntax errors on file open.
+" Check for syntax errors on file open.
 let g:syntastic_check_on_open=1
-" echo errors to the command window.
+" Echo errors to the command window.
 let g:syntastic_echo_current_error=1
-" mark lines with errors and warnings.
+" Mark lines with errors and warnings.
 let g:syntastic_enable_signs=1
-" open error balloons when moused over erroneous lines.
+" Open error balloons when moused over erroneous lines.
 let g:syntastic_enable_balloons=1
-" use c++11 syntax.
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-" syntax-check c++ header files.
-let g:syntastic_cpp_check_header = 1
+" Syntax-check C++ header files.
+let g:syntastic_cpp_check_header=1
+" Use c++11 syntax and disable pre-compiled headers.
+let g:syntastic_cpp_compiler_options=' -std=c++11 -NoPCH'
+" Include these directories when building C++ files.
+let g:syntastic_cpp_include_dirs=['~/include']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
