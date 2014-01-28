@@ -88,6 +88,15 @@ let g:syntastic_cpp_compiler_options=' -std=c++11 -NoPCH'
 " Include these directories when building C++ files.
 let g:syntastic_cpp_include_dirs=["$HOME/include"]
 
+
+" GitGutter - https://github.com/airblade/vim-gitgutter
+
+" Add flags to git diff.
+let g:gitgutter_diff_args = '--patience'
+
+" Only redraw gutter on buffer save / open.
+let g:gitgutter_eager = 0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
