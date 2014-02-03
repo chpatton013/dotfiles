@@ -19,6 +19,6 @@
    rb = rebase
    rs = reset
    sl = stash list
-   st = status -s -b
+   st = status -s -b --ignore-submodules=dirty
 [push]
    default = current
