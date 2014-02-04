@@ -80,11 +80,11 @@ let g:syntastic_echo_current_error=1
 " Mark lines with errors and warnings.
 let g:syntastic_enable_signs=1
 " Open error balloons when moused over erroneous lines.
-let g:syntastic_enable_balloons=1
+let g:syntastic_enable_balloons=0
 " Syntax-check C++ header files.
 let g:syntastic_cpp_check_header=1
 " Use c++11 syntax and disable pre-compiled headers.
-let g:syntastic_cpp_compiler_options=' -std=c++11 -NoPCH'
+let g:syntastic_cpp_compiler_options=' -std=c++11'
 " Include these directories when building C++ files.
 let g:syntastic_cpp_include_dirs=["$HOME/include"]
 
