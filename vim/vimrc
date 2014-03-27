@@ -95,6 +95,10 @@ let g:gitgutter_diff_args = '--patience'
 " Only redraw gutter on buffer save / open.
 let g:gitgutter_eager = 0
 
+" PHPFolding
+""""""""""""""""""""
+let g:DisableAutoPHPFolding = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
