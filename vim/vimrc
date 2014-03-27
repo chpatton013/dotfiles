@@ -55,25 +55,24 @@ autocmd BufWinEnter * call RestoreCursor()
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Pathogen - https://github.com/tpope/vim-pathogen
-
+" Pathogen
+""""""""""""""""""""
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
-
-" Easymotion - https://github.com/Lokaltog/vim-easymotion
-
+" Easymotion
+""""""""""""""""""""
 " This is so much more convenient.
 let g:EasyMotion_leader_key=',m'
 
-
-" Syntastic - https://github.com/scrooloose/syntastic
+" Syntastic
+""""""""""""""""""""
 "  Commands:
 "     :Errors              // pop up location list and display errors
 "     :SyntasticToggleMode // toggles between active and passive mode
 "     :SyntasticCheck      // forces a syntax check in passive mode
-
+""""""""""""""""""""
 " Check for syntax errors on file open.
 let g:syntastic_check_on_open=1
 " Echo errors to the command window.
@@ -89,12 +88,10 @@ let g:syntastic_cpp_compiler_options=' -std=c++11'
 " Include these directories when building C++ files.
 let g:syntastic_cpp_include_dirs=["$HOME/include"]
 
-
-" GitGutter - https://github.com/airblade/vim-gitgutter
-
+" GitGutter
+""""""""""""""""""""
 " Add flags to git diff.
 let g:gitgutter_diff_args = '--patience'
-
 " Only redraw gutter on buffer save / open.
 let g:gitgutter_eager = 0
 
