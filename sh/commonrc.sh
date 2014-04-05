@@ -11,9 +11,7 @@ case $- in
 esac
 
 # Move to development directory.
-if [ -d ~/Code ]; then
-   cd ~/Code
-fi
+[ -d ~/Code ] && cd ~/Code
 
 ###############################################################################
 
@@ -22,15 +20,9 @@ fi
 # External Files.
 ###############################################################################
 
-if [ -f ~/.alias ]; then
-   . ~/.alias
-fi
-if [ -f ~/.function ]; then
-   . ~/.function
-fi
-if [ -f ~/.variables ]; then
-   . ~/.variables
-fi
+[ -f ~/.alias ] && . ~/.alias
+[ -f ~/.function ] && . ~/.function
+[ -f ~/.variables ] && . ~/.variables
 
 if [ -f ~/.git-completion.sh ]; then
    . ~/.git-completion.sh
@@ -44,7 +36,7 @@ if [ -d ~/.dircolors ]; then
    dircolors ~/.dircolors
 fi
 
-if [ $DISPLAY ]; then
+if [ "$DISPLAY" ]; then
    if [ `echo $DESKTOP_SESSION | grep "gnome"` ] &&
     [ -d ~/.themes/solarized/gnome-terminal-colors-solarized ]; then
       ~/.themes/solarized/gnome-terminal-colors-solarized/set_dark.sh
@@ -73,47 +65,29 @@ HISTFILESIZE=2000
 # Path Construction.
 ###############################################################################
 
-OLD_PATH=$PATH
-PATH=.
 # personal bin directories
-if [ -d ~/bin ]; then PATH+=:~/bin
-fi
-if [ -d ~/sbin ]; then PATH+=:~/sbin
-fi
+[ -d ~/bin ] && PATH+=:~/bin
+[ -d ~/sbin ] && PATH+=:~/sbin
 # homebrew bin directories
-if [ -d /usr/local/bin ]; then PATH+=:/usr/local/bin
-fi
-if [ -d /usr/local/sbin ]; then PATH+=:/usr/local/sbin
-fi
+[ -d /usr/local/bin ] && PATH+=:/usr/local/bin
+[ -d /usr/local/sbin ] && PATH+=:/usr/local/sbin
 # usr bin directories
-if [ -d /usr/bin ]; then PATH+=:/usr/bin
-fi
-if [ -d /usr/sbin ]; then PATH+=:/usr/sbin
-fi
+[ -d /usr/bin ] && PATH+=:/usr/bin
+[ -d /usr/sbin ] && PATH+=:/usr/sbin
 # mysql bin directories
-if [ -d /usr/local/mysql/bin ]; then PATH+=:/usr/local/mysql/bin
-fi
-if [ -d /usr/local/mysql/sbin ]; then PATH+=:/usr/local/mysql/sbin
-fi
+[ -d /usr/local/mysql/bin ] && PATH+=:/usr/local/mysql/bin
+[ -d /usr/local/mysql/sbin ] && PATH+=:/usr/local/mysql/sbin
 # X11 bin directory
-if [ -d /usr/X11/bin ]; then PATH+=:/usr/X11/bin
-fi
+[ -d /usr/X11/bin ] && PATH+=:/usr/X11/bin
 # CUDA bin directories
-if [ -d /usr/local/cuda/bin ]; then PATH+=:/usr/local/cuda/bin
-fi
-if [ -d /usr/local/cuda-5.0/bin ]; then PATH+=:/usr/local/cuda-5.0/bin
-fi
+[ -d /usr/local/cuda/bin ] && PATH+=:/usr/local/cuda/bin
+[ -d /usr/local/cuda-5.0/bin ] && PATH+=:/usr/local/cuda-5.0/bin
 # kerberos bin directories
-if [ -d /usr/kerberos/bin ]; then PATH+=:/usr/kerberos/bin
-fi
-if [ -d /usr/kerberos/sbin ]; then PATH+=:/usr/kerberos/sbin
-fi
+[ -d /usr/kerberos/bin ] && PATH+=:/usr/kerberos/bin
+[ -d /usr/kerberos/sbin ] && PATH+=:/usr/kerberos/sbin
 # system bin directories
-if [ -d /bin ]; then PATH+=:/bin
-fi
-if [ -d /sbin ]; then PATH+=:/sbin
-fi
-PATH=$OLD_PATH:$PATH
+[ -d /bin ] && PATH+=:/bin
+[ -d /sbin ] && PATH+=:/sbin
 export PATH=$PATH
 
 ###############################################################################
@@ -124,20 +98,13 @@ export PATH=$PATH
 ###############################################################################
 
 LD_LIBRARY_PATH=./lib
-if [ -d /lib ]; then LD_LIBRARY_PATH+=:/lib
-fi
-if [ -d /usr/lib ]; then LD_LIBRARY_PATH+=:/usr/lib
-fi
-if [ -d /usr/local/lib ]; then LD_LIBRARY_PATH+=:/usr/local/lib
-fi
-if [ -d /usr/local/cuda/lib ]; then LD_LIBRARY_PATH+=:/usr/local/cuda/lib
-fi
-if [ -d /usr/local/cuda/lib64 ]; then LD_LIBRARY_PATH+=:/usr/local/cuda/lib64
-fi
-if [ -d /usr/local/cuda-5.0/lib ]; then LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib
-fi
-if [ -d /usr/local/cuda-5.0/lib64 ]; then LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib64
-fi
+[ -d /lib ] && LD_LIBRARY_PATH+=:/lib
+[ -d /usr/lib ] && LD_LIBRARY_PATH+=:/usr/lib
+[ -d /usr/local/lib ] && LD_LIBRARY_PATH+=:/usr/local/lib
+[ -d /usr/local/cuda/lib ] && LD_LIBRARY_PATH+=:/usr/local/cuda/lib
+[ -d /usr/local/cuda/lib64 ] && LD_LIBRARY_PATH+=:/usr/local/cuda/lib64
+[ -d /usr/local/cuda-5.0/lib ] && LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib
+[ -d /usr/local/cuda-5.0/lib64 ] && LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 ###############################################################################
