@@ -53,10 +53,10 @@ fi
 # History Settings.
 ###############################################################################
 
-HISTFILE=~/.history
-SAVEHIST=1000
-HISTSIZE=1000
-HISTFILESIZE=2000
+export HISTFILE=~/.history
+export SAVEHIST=1000
+export HISTSIZE=1000
+export HISTFILESIZE=2000
 
 ###############################################################################
 
