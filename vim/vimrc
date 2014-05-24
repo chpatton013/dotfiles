@@ -238,12 +238,6 @@ map Y y$
 " Make Q reformat text.
 noremap Q gq
 
-" Open the file under the cursor in a new tab.
-noremap <Leader>ot <C-W>gf
-
-" Open a scratch buffer.
-noremap <Leader>s :Scratch<CR>
-
 " Improve movement on wrapped lines.
 nnoremap j gj
 nnoremap k gk
@@ -301,7 +295,6 @@ imap <C-l> <Right>
 " Auto-insert second braces and parenthesis.
 inoremap {<CR> {<CR>}<Esc>O
 inoremap ({<CR> ({<CR>});<Esc>O
-inoremap <<<<CR> <<<EOT<CR>EOT;<Esc>O<C-TAB><C-TAB><C-TAB>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
