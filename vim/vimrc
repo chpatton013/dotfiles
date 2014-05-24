@@ -43,10 +43,14 @@ augroup FileTypeAssociation
 augroup END
 
 " Resize splits on window resize.
-autocmd VimResized * exe "normal! \<c-w>="
+augroup AutoResizeSplits
+   autocmd VimResized * exe "normal! \<c-w>="
+augroup END
 
 " Restore the cursor when we can.
-autocmd BufWinEnter * call RestoreCursor()
+augroup AutoRestoreCursor
+   autocmd BufWinEnter * call RestoreCursor()
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
