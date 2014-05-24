@@ -295,6 +295,8 @@ imap <C-l> <Right>
 " Auto-insert second braces and parenthesis.
 inoremap {<CR> {<CR>}<Esc>O
 inoremap ({<CR> ({<CR>});<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+inoremap ([<CR> ([<CR>]);<Esc>O
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
