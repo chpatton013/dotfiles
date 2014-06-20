@@ -66,6 +66,8 @@ export HISTFILESIZE=2000
 ###############################################################################
 
 # personal bin directories
+OLD_PATH=$PATH
+PATH='.'
 [ -d ~/bin ] && PATH+=:~/bin
 [ -d ~/sbin ] && PATH+=:~/sbin
 # homebrew bin directories
@@ -88,7 +90,7 @@ export HISTFILESIZE=2000
 # system bin directories
 [ -d /bin ] && PATH+=:/bin
 [ -d /sbin ] && PATH+=:/sbin
-export PATH=$PATH
+export PATH="$PATH:$OLD_PATH"
 
 ###############################################################################
 
