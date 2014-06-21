@@ -1,38 +1,18 @@
 #!/bin/sh
 
 # Update repository.
-git stash &&
-git pull --rebase &&
-git submodule update --init &&
+git stash
+git pull --rebase && git submodule update --init;
 git stash pop
 
 # Remove config file links in home folder.
-rm -f ~/.alias
-rm -f ~/.background
-rm -f ~/.bashrc
-rm -f ~/.commonrc
-rm -rf ~/.dircolors
-rm -f ~/.function
-rm -f ~/.git-completion.sh
-rm -f ~/.gitconfig
-rm -f ~/.gitignore
-rm -rf ~/.themes
-rm -f ~/.tmux.conf
-rm -f ~/.variables
-rm -rf ~/.vim
-rm -rf ~/.wallpaper
-rm -f ~/.vimrc
-rm -f ~/.xinitrc
-rm -rf ~/.xscreensaver
-rm -f ~/.xsession
-rm -f ~/.zshrc
-rm -rf ~/.i3
-rm -rf ~/.config/X
+rm -rf ~/.alias ~/.background ~/.bashrc ~/.commonrc ~/.dircolors ~/.function \
+ ~/.git-completion.sh ~/.gitconfig ~/.gitignore ~/.themes ~/.tmux.conf \
+ ~/.variables ~/.vim ~/.wallpaper ~/.vimrc ~/.xinitrc ~/.xscreensaver \
+ ~/.xsession ~/.zshrc ~/.i3 ~/.config/X
 
 # Make sure required directories exist.
-mkdir -p ~/Code
-mkdir -p ~/include
-mkdir -p ~/.config
+mkdir -p ~/projects ~/include ~/.config
 
 # Link config files in home folder.
 ln -sf ~/dotfiles/sh/alias.sh ~/.alias

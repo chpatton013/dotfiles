@@ -11,7 +11,7 @@ case $- in
 esac
 
 # Move to development directory.
-[ -d ~/Code ] && cd ~/Code
+[ -d ~/projects ] && cd ~/projects
 
 ###############################################################################
 
