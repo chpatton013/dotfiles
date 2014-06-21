@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-# Make du human readable.
-alias du='du -h'
 # Expand control characters.
 alias less='less -R'
 # Enabled X Forwarding and compression in X sessions.
@@ -55,3 +53,8 @@ alias troll='ssh ifixit@Picture-Frame-Mini.local'
 alias lb='live_ssh ifixit.com'
 alias db='live_ssh db.ifixit.com'
 alias slave='live_ssh slave.ifixit.com'
+
+# Work command aliases.
+alias f='feature'
+alias h='hotfix'
+

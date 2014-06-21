@@ -36,16 +36,21 @@ augroup END
 
 augroup FileTypeAssociation
    autocmd!
+   autocmd BufNewFile,BufRead *.less set filetype=css
    autocmd BufNewFile,BufRead *.ejs set filetype=html
    autocmd BufNewFile,BufRead *.make set filetype=make
    autocmd BufNewFile,BufRead *.impl set filetype=cpp
 augroup END
 
 " Resize splits on window resize.
-autocmd VimResized * exe "normal! \<c-w>="
+augroup AutoResizeSplits
+   autocmd VimResized * exe "normal! \<c-w>="
+augroup END
 
 " Restore the cursor when we can.
-autocmd BufWinEnter * call RestoreCursor()
+augroup AutoRestoreCursor
+   autocmd BufWinEnter * call RestoreCursor()
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -54,25 +59,24 @@ autocmd BufWinEnter * call RestoreCursor()
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Pathogen - https://github.com/tpope/vim-pathogen
-
+" Pathogen
+""""""""""""""""""""
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
-
-" Easymotion - https://github.com/Lokaltog/vim-easymotion
-
+" Easymotion
+""""""""""""""""""""
 " This is so much more convenient.
 let g:EasyMotion_leader_key=',m'
 
-
-" Syntastic - https://github.com/scrooloose/syntastic
+" Syntastic
+""""""""""""""""""""
 "  Commands:
 "     :Errors              // pop up location list and display errors
 "     :SyntasticToggleMode // toggles between active and passive mode
 "     :SyntasticCheck      // forces a syntax check in passive mode
-
+""""""""""""""""""""
 " Check for syntax errors on file open.
 let g:syntastic_check_on_open=1
 " Echo errors to the command window.
@@ -87,6 +91,17 @@ let g:syntastic_cpp_check_header=1
 let g:syntastic_cpp_compiler_options=' -std=c++11'
 " Include these directories when building C++ files.
 let g:syntastic_cpp_include_dirs=["$HOME/include"]
+
+" GitGutter
+""""""""""""""""""""
+" Add flags to git diff.
+let g:gitgutter_diff_args = '--patience'
+" Only redraw gutter on buffer save / open.
+let g:gitgutter_eager = 0
+
+" PHPFolding
+""""""""""""""""""""
+let g:DisableAutoPHPFolding = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -178,7 +193,7 @@ set tabstop=3                    " <Tab> move three characters.
 set textwidth=80                 " Hard wrap at 'n' characters.
 set viminfo='20,\"500,%          " Adjust viminfo contents.
 set virtualedit=block            " Allow the cursor to go where it should not.
-set wildignorecase               " Tab completion is case-insensitive.
+silent! set wildignorecase       " Tab completion is case-insensitive.
 set wildmenu                     " Tab completion navigable menu is enabled.
 set wildmode=list:longest,full   " Tab completion lists matches, then opens wildmenu on next <Tab>.
 set wrap                         " Soft wrap lines.
@@ -222,12 +237,6 @@ map Y y$
 
 " Make Q reformat text.
 noremap Q gq
-
-" Open the file under the cursor in a new tab.
-noremap <Leader>ot <C-W>gf
-
-" Open a scratch buffer.
-noremap <Leader>s :Scratch<CR>
 
 " Improve movement on wrapped lines.
 nnoremap j gj
@@ -286,7 +295,8 @@ imap <C-l> <Right>
 " Auto-insert second braces and parenthesis.
 inoremap {<CR> {<CR>}<Esc>O
 inoremap ({<CR> ({<CR>});<Esc>O
-inoremap <<<<CR> <<<EOT<CR>EOT;<Esc>O<C-TAB><C-TAB><C-TAB>
+inoremap [<CR> [<CR>]<Esc>O
+inoremap ([<CR> ([<CR>]);<Esc>O
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
