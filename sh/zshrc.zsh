@@ -99,7 +99,6 @@ setopt PUSHD_MINUS      # Reverses 'cd +1' and 'cd -1'.
 setopt PUSHD_SILENT     # So annoying.
 setopt PUSHD_TO_HOME    # Blank pushd goes to home.
 setopt RC_EXPAND_PARAM  # foo${a b c}bar = fooabar foobbar foocbar instead of fooa b cbar.
-setopt RM_STAR_WAIT     # Prevents nuclear holocausts.
 setopt VI               # Vim commands on the command line (instead of emacs).
 
 ###############################################################################
