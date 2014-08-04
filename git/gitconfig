@@ -22,3 +22,5 @@
    st = status -s -b --ignore-submodules=dirty
 [push]
    default = current
+[diff]
+   algorithm = patience
