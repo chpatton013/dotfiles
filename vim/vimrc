@@ -5,9 +5,9 @@
 " Reread configuration of Vim if .vimrc is saved.
 augroup VimRC
   autocmd!
-  autocmd BufWritePost ~/.vimrc       so ~/.vimrc
-  autocmd BufWritePost _vimrc         so ~/_vimrc
-  autocmd BufWritePost vimrc          so ~/.vimrc
+  autocmd BufWritePost ~/.vimrc  so ~/.vimrc
+  autocmd BufWritePost _vimrc    so ~/_vimrc
+  autocmd BufWritePost vimrc     so ~/.vimrc
 augroup END
 
 " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
@@ -26,10 +26,8 @@ augroup ExtraCharacters
    autocmd!
    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
    autocmd ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-   autocmd BufWinEnter * let w:whitespace_match_number =
-   \ matchadd('ExtraWhitespace', '\s\+$')
-   autocmd BufWinEnter * call matchadd('OverLength',
-   \ '\(^\(\s\)\{-}\(*\|//\|/\*\)\{1}\(.\)*\(\%81v\)\)\@<=\(.\)\{1,}$')
+   autocmd BufWinEnter * let w:whitespace_match_number = matchadd('ExtraWhitespace', '\s\+$')
+   autocmd BufWinEnter * call matchadd('OverLength', '\(^\(\s\)\{-}\(*\|//\|/\*\)\{1}\(.\)*\(\%81v\)\)\@<=\(.\)\{1,}$')
    autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
    autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
@@ -44,11 +42,13 @@ augroup END
 
 " Resize splits on window resize.
 augroup AutoResizeSplits
+   autocmd!
    autocmd VimResized * exe "normal! \<c-w>="
 augroup END
 
 " Restore the cursor when we can.
 augroup AutoRestoreCursor
+   autocmd!
    autocmd BufWinEnter * call RestoreCursor()
 augroup END
 
