@@ -52,6 +52,14 @@ augroup AutoRestoreCursor
    autocmd BufWinEnter * call RestoreCursor()
 augroup END
 
+" Start NERDTree if vim is started without parameters
+augroup OpenCloseNERDTree
+   autocmd!
+   autocmd StdinReadPre * let s:std_in=1
+   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -270,6 +278,9 @@ nnoremap <C-o> zo
 nnoremap <C-c> zc
 nnoremap <C-O> zO
 nnoremap <C-O><C-O> zR
+
+" Bind NERDTree to ,t
+map <silent> <Leader>t :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
