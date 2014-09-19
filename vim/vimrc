@@ -37,6 +37,7 @@ augroup FileTypeAssociation
    autocmd BufNewFile,BufRead *.ejs set filetype=html
    autocmd BufNewFile,BufRead *.make set filetype=make
    autocmd BufNewFile,BufRead *.impl set filetype=cpp
+   autocmd BufNewFile,BufRead *.inl set filetype=cpp
 augroup END
 
 " Resize splits on window resize.
