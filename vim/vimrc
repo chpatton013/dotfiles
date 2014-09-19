@@ -10,16 +10,17 @@ augroup VimRC
   autocmd BufWritePost vimrc     so ~/.vimrc
 augroup END
 
-" Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
-augroup ColorColumn
-   autocmd!
-   if exists('+colorcolumn')
-      autocmd BufWinEnter * set colorcolumn=80
-      autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-   else
-      autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-   endif
-augroup END
+" Disabling colorcolumn for now.
+" " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
+" augroup ColorColumn
+"    autocmd!
+"    if exists('+colorcolumn')
+"       autocmd BufWinEnter * set colorcolumn=80
+"       autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+"    else
+"       autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+"    endif
+" augroup END
 
 " Highlight over-length characters and trailing whitespace.
 augroup ExtraCharacters
