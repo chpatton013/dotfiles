@@ -26,17 +26,13 @@ alias lla='lal'
 
 # Command-line shortcuts.
 alias ...='cd ..'
-alias :q='exit'
-alias c='clear'
 alias g='git'
-alias gpl='git_sync_pull'
-alias gps='git_sync_push'
 alias m='make -j 4'
-alias md='mkdir'
 alias tm='tmux_start_session'
 alias tl='tmux list-sessions'
+alias :q='exit'
+alias :e='vim'
 alias v='vim'
-alias vi='vim'
 alias vo="vim -o"
 alias vO="vim -O"
 
@@ -49,7 +45,6 @@ alias unix4='ssh chpatton@unix4.csc.calpoly.edu'
 
 # Work ssh addresses.
 alias cmr='ssh cpatton@cominor.com'
-alias troll='ssh ifixit@Picture-Frame-Mini.local'
 alias lb='live_ssh ifixit.com'
 alias db='live_ssh db.ifixit.com'
 alias slave='live_ssh slave.ifixit.com'
@@ -57,4 +52,3 @@ alias slave='live_ssh slave.ifixit.com'
 # Work command aliases.
 alias f='feature'
 alias h='hotfix'
-
