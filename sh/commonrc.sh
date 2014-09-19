@@ -46,6 +46,9 @@ if [ "$DISPLAY" ]; then
    fi
 fi
 
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_SDK_HOME=/usr/local/opt/android-sdk
+
 ###############################################################################
 
 
