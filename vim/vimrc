@@ -34,7 +34,6 @@ augroup END
 
 augroup FileTypeAssociation
    autocmd!
-   autocmd BufNewFile,BufRead *.less set filetype=css
    autocmd BufNewFile,BufRead *.ejs set filetype=html
    autocmd BufNewFile,BufRead *.make set filetype=make
    autocmd BufNewFile,BufRead *.impl set filetype=cpp
