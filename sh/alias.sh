@@ -18,7 +18,7 @@ if [ `uname -s` != 'Darwin' ]; then
 fi
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
-alias l='ls -FGb'
+alias l='ls -Fb'
 alias ll='l -hl'
 alias la='l -a'
 alias lal='ll -a'
