@@ -183,6 +183,7 @@ set modeline                     " Check for a modeline.
 set nocompatible                 " No compatibility with vi.
 set nofoldenable                 " Do not open file folded.
 set noerrorbells                 " No beeps on errors.
+set noswapfile                   " Don't use swap files.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
