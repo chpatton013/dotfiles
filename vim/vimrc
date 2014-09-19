@@ -10,16 +10,17 @@ augroup VimRC
   autocmd BufWritePost vimrc     so ~/.vimrc
 augroup END
 
-" Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
-augroup ColorColumn
-   autocmd!
-   if exists('+colorcolumn')
-      autocmd BufWinEnter * set colorcolumn=80
-      autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-   else
-      autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-   endif
-augroup END
+" Disabling colorcolumn for now.
+" " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
+" augroup ColorColumn
+"    autocmd!
+"    if exists('+colorcolumn')
+"       autocmd BufWinEnter * set colorcolumn=80
+"       autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+"    else
+"       autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+"    endif
+" augroup END
 
 " Highlight over-length characters and trailing whitespace.
 augroup ExtraCharacters
@@ -182,6 +183,7 @@ set modeline                     " Check for a modeline.
 set nocompatible                 " No compatibility with vi.
 set nofoldenable                 " Do not open file folded.
 set noerrorbells                 " No beeps on errors.
+set noswapfile                   " Don't use swap files.
 set number                       " Display line numbers.
 set path=~/Code/**               " Set default path
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.

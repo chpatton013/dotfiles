@@ -93,7 +93,7 @@ PATH='.'
 # system bin directories
 [ -d /bin ] && PATH+=:/bin
 [ -d /sbin ] && PATH+=:/sbin
-export PATH="$PATH:$OLD_PATH"
+export PATH="$OLD_PATH:$PATH"
 
 ###############################################################################
 
