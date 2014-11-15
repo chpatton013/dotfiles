@@ -10,18 +10,6 @@ augroup VimRC
   autocmd BufWritePost vimrc     so ~/.vimrc
 augroup END
 
-" Disabling colorcolumn for now.
-" " Set colorcolumn to 80 chars, or (if not supported) highlight lines > 80 chars.
-" augroup ColorColumn
-"    autocmd!
-"    if exists('+colorcolumn')
-"       autocmd BufWinEnter * set colorcolumn=80
-"       autocmd BufWinEnter * hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-"    else
-"       autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-"    endif
-" augroup END
-
 " Highlight over-length characters and trailing whitespace.
 augroup ExtraCharacters
    autocmd!
@@ -165,6 +153,7 @@ behave xterm   " Maintain keybindings across enviornments.
 set autowrite                    " Write before executing the 'make' command.
 set background=dark              " Usually prefer dark backgrounds.
 set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert.
+set colorcolumn=80               " Highlight the 80th column.
 set cursorline                   " Highlight current line.
 set cpoptions+=$                 " Show dollar sign at end of text to be changed.
 set encoding=utf-8               " Set encoding to utf-8.
