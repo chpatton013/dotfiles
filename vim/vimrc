@@ -158,7 +158,7 @@ set smarttab                     " Tabs and backspaces at the start of a line in
 set smartindent                  " Maintains most indentation and adds extra level when nesting.
 set softtabstop=3                " See spaces as tabs.
 set splitright splitbelow        " Open splits below and to the right.
-set synmaxcol=160                " Only matches syntax on first 'n' columns of each line (faster).
+set synmaxcol=2000               " Only matches syntax on first 'n' columns of each line.
 set tabstop=3                    " <Tab> move three characters.
 set ttyfast                      " Smoother redrawing.
 set textwidth=80                 " Hard wrap at 'n' characters.
