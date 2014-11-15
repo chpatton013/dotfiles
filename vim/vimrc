@@ -61,23 +61,23 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Pathogen
-""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
 " Easymotion
-""""""""""""""""""""
-" This is so much more convenient.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use my leader key as the prefix.
 let g:EasyMotion_leader_key=',m'
 
 " Syntastic
-""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Commands:
-"     :Errors              // pop up location list and display errors
-"     :SyntasticToggleMode // toggles between active and passive mode
-"     :SyntasticCheck      // forces a syntax check in passive mode
-""""""""""""""""""""
+"     Errors               pop up location list and display errors
+"     SyntasticToggleMode  toggles between active and passive mode
+"     SyntasticCheck       forces a syntax check in passive mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Check for syntax errors on file open.
 let g:syntastic_check_on_open=1
 " Echo errors to the command window.
@@ -105,18 +105,27 @@ let g:gitgutter_eager = 0
 " Configuration customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+behave xterm   " Maintain keybindings across enviornments.
+
+" Filetype detection
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype on          " Recognize syntax by file extension.
 filetype indent on   " Check for indent file.
 filetype plugin on   " Allow plugins to be loaded by file type.
 
-behave xterm   " Maintain keybindings across enviornments.
+" Variables
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader="," " Use , instead of \ for the map leader.
 
+" Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autowrite                    " Write before executing the 'make' command.
 set background=dark              " Usually prefer dark backgrounds.
 set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert.
 set colorcolumn=80               " Highlight the 80th column.
-set cursorline                   " Highlight current line.
 set cpoptions+=$                 " Show dollar sign at end of text to be changed.
+set cursorline                   " Highlight current line.
+set dictionary+=~/.vim/dictionary/english-freq
 set encoding=utf-8               " Set encoding to utf-8.
 set expandtab                    " Expand tabs with spaces.
 set fileencoding=utf-8           " Set fileencoding to utf-8.
@@ -136,7 +145,7 @@ set nofoldenable                 " Do not open file folded.
 set noerrorbells                 " No beeps on errors.
 set noswapfile                   " Don't use swap files.
 set number                       " Display line numbers.
-set path=~/Code/**               " Set default path
+set path=~/projects/**           " Set default path
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
 set shellslash                   " Use forward slashes regardless of OS.
 set shiftwidth=3                 " >> and << shift 3 spaces.
@@ -151,6 +160,7 @@ set softtabstop=3                " See spaces as tabs.
 set splitright splitbelow        " Open splits below and to the right.
 set synmaxcol=160                " Only matches syntax on first 'n' columns of each line (faster).
 set tabstop=3                    " <Tab> move three characters.
+set ttyfast                      " Smoother redrawing.
 set textwidth=80                 " Hard wrap at 'n' characters.
 set viminfo='20,\"500,%          " Adjust viminfo contents.
 set virtualedit=block            " Allow the cursor to go where it should not.
@@ -160,56 +170,65 @@ set wildmode=list:longest,full   " Tab completion lists matches, then opens wild
 set wrap                         " Soft wrap lines.
 set wrapscan                     " Searching wraps to start of file when end is reached.
 
-" Text formatting settings.
-" t: Auto-wrap text using textwidth. (default)
-" c: Auto-wrap comments; insert comment leader. (default)
-" q: Allow formatting of comments with "gq". (default)
-" r: Insert comment leader after hitting <Enter>.
-" o: Insert comment leader after hitting 'o' or 'O' in command mode.
-" n: Auto-format lists, wrapping to text *after* the list bullet char.
-" l: Don't auto-wrap if a line is already longer than textwidth.
-set formatoptions+=tcronl
+" Completion settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Options:
+"     .        scan the current buffer ('wrapscan' is ignored)
+"     w        scan buffers from other windows
+"     b        scan other loaded buffers that are in the buffer list
+"     u        scan the unloaded buffers that are in the buffer list
+"     U        scan the buffers that are not in the buffer list
+"     k        scan the files given with the 'dictionary' option
+"     kspell   use the currently active spell checking |spell|
+"     k{dict}  scan the file {dict}
+"     s        scan the files given with the 'thesaurus' option
+"     s{tsr}   scan the file {tsr}
+"     i        scan current and included files
+"     d        scan current and included files for defined name or macro |i_CTRL-X_CTRL-D|
+"     t        tag completion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set complete=.,w,b,u,t,i,k
 
-" Enable mouse scrolling in selected modes.
-" a: All
-" c: Command
-" i: Insert
-" n: Normal
-" v: Visual
+" Text formatting settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Options:
+"     t  Auto-wrap text using textwidth. (default)
+"     c  Auto-wrap comments; insert comment leader. (default)
+"     q  Allow formatting of comments with "gq". (default)
+"     r  Insert comment leader after hitting <Enter>.
+"     o  Insert comment leader after hitting 'o' or 'O' in command mode.
+"     n  Auto-format lists, wrapping to text *after* the list bullet char.
+"     l  Don't auto-wrap if a line is already longer than textwidth.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set formatoptions=tcronl
+
+" Enable mouse scrolling in selected modes
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Options:
+"     a  All
+"     c  Command
+"     i  Insert
+"     n  Normal
+"     v  Visual
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=
 
-" Color theme.
+" Color theme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set t_Co=16
 colorscheme solarized
 
-" Configuration variables.
-let mapleader=","         " Use , instead of \ for the map leader.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Command mode customization
+" Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Make y behave like all other capitals.
-map Y y$
+" Normal mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Make Q reformat text.
-noremap Q gq
-
-" Improve movement on wrapped lines.
-nnoremap j gj
-nnoremap k gk
-
-" Keep search pattern at the center of the screen.
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-nnoremap <silent> g* g*zz
-nnoremap <silent> g# g#zz
+" Make y behave like all other capitals (yank to end of line).
+nnoremap Y y$
 
 " Use C-hjkl in to change windows.
 nnoremap <C-h> <C-w><Left>
@@ -217,60 +236,28 @@ nnoremap <C-j> <C-w><Down>
 nnoremap <C-k> <C-w><Up>
 nnoremap <C-l> <C-w><Right>
 
-" Strip trailing whitespace.
-nnoremap <leader><Space> :call <SID>StripTrailingWhitespaces()<CR>
-
 " Toggles for search highlight, line numbers, paste mode, and word wrap.
-noremap <Leader>h :set invhlsearch<CR>
-noremap <Leader>n :set invnumber<CR>
-noremap <Leader>p :set invpaste<CR>
-noremap <Leader>w :set invwrap<CR>
+nnoremap <silent> <Leader>h :set invhlsearch<CR>
+nnoremap <silent> <Leader>n :set invnumber<CR>
+nnoremap <silent> <Leader>p :set invpaste<CR>
+nnoremap <silent> <Leader>w :set invwrap<CR>
 
-" Folding stuff.
-nnoremap <C-o> zo
-nnoremap <C-c> zc
-nnoremap <C-O> zO
-nnoremap <C-O><C-O> zR
+" Strip trailing whitespace.
+nnoremap <silent> <leader><Space> :call <SID>StripTrailingWhitespaces()<CR>
 
-" Bind NERDTree to ,t
-map <silent> <Leader>t :NERDTreeToggle<CR>
+" Toggle NERDTree.
+nnoremap <silent> <Leader>t :NERDTreeToggle<CR>
 
+" Insert mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Insert mode customization
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Set up dictionary completion.
-set dictionary+=~/.vim/dictionary/english-freq
-set complete+=k
 
 " Smash Esc.
-inoremap jk <Esc>
 inoremap kj <Esc>
 
-" Use hjkl in insert mode.
-imap <C-h> <Left>
-imap <C-j> <Down>
-imap <C-k> <Up>
-imap <C-l> <Right>
-
-" Auto-insert second braces and parenthesis.
-inoremap {<CR> {<CR>}<Esc>O
-inoremap ({<CR> ({<CR>});<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
-inoremap ([<CR> ([<CR>]);<Esc>O
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Visual mode customization
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Reselect visual block after indent/outdent.
-xnoremap < <gv
-xnoremap > >gvo
+" hjkl navigation in insert mode.
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
