@@ -5,20 +5,16 @@
 " Reread configuration of Vim if .vimrc is saved.
 augroup VimRC
   autocmd!
-  autocmd BufWritePost ~/.vimrc  so ~/.vimrc
-  autocmd BufWritePost _vimrc    so ~/_vimrc
-  autocmd BufWritePost vimrc     so ~/.vimrc
+  autocmd BufWritePost .vimrc so ~/.vimrc
+  autocmd BufWritePost _vimrc so ~/_vimrc
+  autocmd BufWritePost vimrc  so ~/.vimrc
 augroup END
 
-" Highlight over-length characters and trailing whitespace.
-augroup ExtraCharacters
+" Highlight trailing whitespace.
+augroup HighlightTrailingWhitespace
    autocmd!
-   autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Red guibg=Red
-   autocmd ColorScheme * highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-   autocmd BufWinEnter * let w:whitespace_match_number = matchadd('ExtraWhitespace', '\s\+$')
-   autocmd BufWinEnter * call matchadd('OverLength', '\(^\(\s\)\{-}\(*\|//\|/\*\)\{1}\(.\)*\(\%81v\)\)\@<=\(.\)\{1,}$')
-   autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
-   autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+   autocmd ColorScheme * highlight TrailingWhitespace ctermbg=Red guibg=Red
+   autocmd BufWinEnter * let w:whitespace_match_number = matchadd('TrailingWhitespace', '\s\+$')
 augroup END
 
 augroup FileTypeAssociation
@@ -35,21 +31,29 @@ augroup AutoResizeSplits
    autocmd VimResized * exe "normal! \<c-w>="
 augroup END
 
-" Restore the cursor when we can.
-augroup AutoRestoreCursor
-   autocmd!
-   autocmd BufWinEnter * call RestoreCursor()
-augroup END
-
-" Start NERDTree if vim is started without parameters
+" Start NERDTree if vim is started without parameters.
 augroup OpenCloseNERDTree
    autocmd!
+   " Auto-open NERDTree when no parameters are supplied.
+   autocmd VimEnter * if argc() == 0 | NERDTree | endif
+   " Auto-close NERDTree when no other buffers are left.
    autocmd StdinReadPre * let s:std_in=1
-   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! <SID>StripTrailingWhitespaces()
+   let _s=@/
+   let l = line(".")
+   let c = col(".")
+   %s/\s\+$//e
+   let @/=_s
+   call cursor(l, c)
+endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,50 +94,11 @@ let g:syntastic_cpp_compiler_options=' -std=c++11'
 let g:syntastic_cpp_include_dirs=["$HOME/include"]
 
 " GitGutter
-""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Add flags to git diff.
 let g:gitgutter_diff_args = '--patience'
 " Only redraw gutter on buffer save / open.
 let g:gitgutter_eager = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Strip trailing whitespace.
-function! <SID>StripTrailingWhitespaces()
-   let _s=@/
-   let l = line(".")
-   let c = col(".")
-   %s/\s\+$//e
-   let @/=_s
-   call cursor(l, c)
-endfunction
-
-" Toggle match of trailing whitespace.
-function! s:ToggleWhitespaceMatch(mode)
-   let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
-   if exists('w:whitespace_match_number')
-     call matchdelete(w:whitespace_match_number)
-     call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
-   else
-     " Something went wrong, try to be graceful.
-     let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
-   endif
-endfunction
-
-" Restore the cursor when we can.
-function! RestoreCursor()
-    if line("'\"") <= line("$")
-        normal! g`"
-        normal! zz
-    endif
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
