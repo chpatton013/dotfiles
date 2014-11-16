@@ -10,7 +10,7 @@ alias startx='startx &> ~/.xlog'
 alias sudo='sudo -E'
 
 # Add color to several commands.
-if [ `uname -s` != 'Darwin' ]; then
+if [ $(uname -s) != 'Darwin' ]; then
    alias ls='ls --color'
    alias grep='grep --color'
    alias fgrep='fgrep --color'
@@ -31,10 +31,10 @@ alias m='make -j 4'
 alias tm='tmux_start_session'
 alias tl='tmux list-sessions'
 alias :q='exit'
-alias :e='vim'
-alias v='vim'
-alias vo="vim -o"
-alias vO="vim -O"
+alias v='nvim'
+alias :e='v'
+alias vo="v -o"
+alias vO="v -O"
 
 # School ssh addresses.
 alias multi='ssh chpatton@multicore.csc.calpoly.edu'

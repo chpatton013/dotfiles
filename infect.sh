@@ -33,6 +33,8 @@ ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/sh/variables.sh ~/.variables
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
+ln -sf ~/dotfiles/nvim ~/.nvim
+ln -sf ~/dotfiles/vim/nvimrc ~/.nvimrc
 ln -sf ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
 ln -sf ~/dotfiles/config/X/xscreensaver ~/.xscreensaver
 ln -sf ~/dotfiles/sh/xsession.sh ~/.xsession

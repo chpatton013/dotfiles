@@ -1,29 +1,29 @@
-[submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
+[submodule "nvim/bundle/syntastic"]
+	path = nvim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/vim-abolish"]
-	path = vim/bundle/vim-abolish
+[submodule "nvim/bundle/vim-abolish"]
+	path = nvim/bundle/vim-abolish
 	url = git://github.com/tpope/vim-abolish.git
-[submodule "vim/bundle/vim-colors-solarized"]
-	path = vim/bundle/vim-colors-solarized
+[submodule "nvim/bundle/vim-colors-solarized"]
+	path = nvim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/bundle/vim-commentary"]
-	path = vim/bundle/vim-commentary
+[submodule "nvim/bundle/vim-commentary"]
+	path = nvim/bundle/vim-commentary
 	url = git://github.com/tpope/vim-commentary.git
-[submodule "vim/bundle/vim-easymotion"]
-	path = vim/bundle/vim-easymotion
+[submodule "nvim/bundle/vim-easymotion"]
+	path = nvim/bundle/vim-easymotion
 	url = git://github.com/Lokaltog/vim-easymotion.git
-[submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
+[submodule "nvim/bundle/vim-fugitive"]
+	path = nvim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
+[submodule "nvim/bundle/vim-pathogen"]
+	path = nvim/bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
-[submodule "vim/bundle/vim-repeat"]
-	path = vim/bundle/vim-repeat
+[submodule "nvim/bundle/vim-repeat"]
+	path = nvim/bundle/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
-[submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
+[submodule "nvim/bundle/vim-surround"]
+	path = nvim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
 [submodule "themes/solarized/gnome-terminal-colors-solarized"]
 	path = themes/solarized/gnome-terminal-colors-solarized
@@ -34,18 +34,18 @@
 [submodule "dircolors/solarized"]
 	path = dircolors/solarized
 	url = git://github.com/seebi/dircolors-solarized.git
-[submodule "vim/bundle/vim-powerline"]
-	path = vim/bundle/vim-powerline
+[submodule "nvim/bundle/vim-powerline"]
+	path = nvim/bundle/vim-powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
 [submodule "themes/solarized/tmux-colors-solarized"]
 	path = themes/solarized/tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized
-[submodule "vim/bundle/vim-gitgutter"]
-	path = vim/bundle/vim-gitgutter
+[submodule "nvim/bundle/vim-gitgutter"]
+	path = nvim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
+[submodule "nvim/bundle/nerdtree"]
+	path = nvim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vim/bundle/vim-airline"]
-	path = vim/bundle/vim-airline
+[submodule "nvim/bundle/vim-airline"]
+	path = nvim/bundle/vim-airline
 	url = git@github.com:bling/vim-airline.git
