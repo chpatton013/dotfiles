@@ -12,8 +12,8 @@ git stash pop
 # Remove config file links in home folder.
 rm -rf ~/.alias ~/.background ~/.bashrc ~/.commonrc ~/.dircolors ~/.function \
  ~/.git-completion.sh ~/.gitconfig ~/.gitignore ~/.themes ~/.tmux.conf \
- ~/.variables ~/.vim ~/.wallpaper ~/.vimrc ~/.xinitrc ~/.xscreensaver \
- ~/.xsession ~/.zshrc ~/.i3 ~/.config/X
+ ~/.variables ~/.vim ~/.nvim ~/.wallpaper ~/.vimrc ~/.nvimrc ~/.xinitrc \
+ ~/.xscreensaver ~/.xsession ~/.zshrc ~/.i3 ~/.config/X
 
 # Make sure required directories exist.
 mkdir -p ~/projects ~/include ~/.config
