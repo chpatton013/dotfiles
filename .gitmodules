@@ -49,3 +49,6 @@
 [submodule "nvim/bundle/vim-airline"]
 	path = nvim/bundle/vim-airline
 	url = git@github.com:bling/vim-airline.git
+[submodule "nvim/bundle/YouCompleteMe"]
+	path = nvim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git

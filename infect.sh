@@ -4,7 +4,7 @@
 git stash
 
 git pull --rebase &&
-git submodule update --init &&
+git submodule update --init --recursive &&
 git submodule foreach git pull origin master
 
 git stash pop
@@ -42,3 +42,8 @@ ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
 ln -sf ~/dotfiles/config/i3 ~/.i3
 ln -sf ~/dotfiles/config/X ~/.config/X
 ln -sf ~/Pictures/Wallpapers ~/.wallpaper
+
+# Build dependencies
+cd ./nvim/bundle/YouCompleteMe
+./install.sh --clang-completer
+cd -
