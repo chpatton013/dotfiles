@@ -100,6 +100,10 @@ let g:gitgutter_diff_args = '--patience'
 " Only redraw gutter on buffer save / open.
 let g:gitgutter_eager = 0
 
+" YouCompleteMe
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration customization

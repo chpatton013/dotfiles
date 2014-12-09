@@ -35,6 +35,7 @@ ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/nvim ~/.nvim
 ln -sf ~/dotfiles/nvim/nvimrc ~/.nvimrc
+ln -sf ~/dotfiles/nvim/bundle/ycmd/cpp/ycm/.ycm_extra_conf.py ~/.ycm_extra_conf.py
 ln -sf ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
 ln -sf ~/dotfiles/config/X/xscreensaver ~/.xscreensaver
 ln -sf ~/dotfiles/sh/xsession.sh ~/.xsession
