@@ -77,12 +77,15 @@ let g:syntastic_echo_current_error=1
 let g:syntastic_enable_signs=1
 " Open error balloons when moused over erroneous lines.
 let g:syntastic_enable_balloons=0
-" Syntax-check C++ header files.
+" Syntax-check C and C++ header files.
 let g:syntastic_cpp_check_header=1
+let g:syntastic_c_check_header=1
 " Use c++11 syntax and disable pre-compiled headers.
-let g:syntastic_cpp_compiler_options=' -std=c++11'
+let g:syntastic_cpp_compiler_options=' -std=c++11 -Wall -Wextra -Wno-unused-result'
+let g:syntastic_c_compiler_options=' -Wall -Wextra'
 " Include these directories when building C++ files.
-let g:syntastic_cpp_include_dirs=["$HOME/include"]
+let g:syntastic_cpp_include_dirs=['.', 'include', "$HOME/include"]
+let g:syntastic_c_include_dirs=['.', 'include', "$HOME/include"]
 
 " GitGutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,7 +144,7 @@ set nofoldenable                 " Do not open file folded.
 set noerrorbells                 " No beeps on errors.
 set noswapfile                   " Don't use swap files.
 set number                       " Display line numbers.
-set path=~/projects/**           " Set default path
+set path=.,./include,~/include/,/usr/include,/usr/local/include,./**/include,,
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
 set shellslash                   " Use forward slashes regardless of OS.
 set shiftwidth=3                 " >> and << shift 3 spaces.
