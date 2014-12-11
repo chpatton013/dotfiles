@@ -2,7 +2,18 @@
 
 set -e
 
-# Update repository.
+function link() {
+   local source_file="$1"
+   local link_file="$2"
+
+   rm -rf "$link_file"
+   ln -sf "$source_file" "$link_file"
+}
+
+################################################################################
+# Update repository
+################################################################################
+
 git stash
 
 git pull --rebase &&
@@ -11,43 +22,56 @@ git submodule foreach git pull origin master
 
 git stash pop
 
-# Remove config file links in home folder.
-rm -rf ~/.alias ~/.background ~/.bashrc ~/.commonrc ~/.dircolors ~/.function \
- ~/.git-completion.sh ~/.gitconfig ~/.gitignore ~/.themes ~/.tmux.conf \
- ~/.variables ~/.vim ~/.nvim ~/.wallpaper ~/.vimrc ~/.nvimrc ~/.xinitrc \
- ~/.xscreensaver ~/.xsession ~/.zshrc ~/.i3 ~/.config/X
+################################################################################
+# Create required directories
+################################################################################
 
-# Make sure required directories exist.
 mkdir -p ~/projects ~/include ~/.config
 
-# Link config files in home folder.
-ln -sf ~/dotfiles/ctags ~/.ctags
-ln -sf ~/dotfiles/sh/alias.sh ~/.alias
-ln -sf ~/dotfiles/sh/background.sh ~/.background
-ln -sf ~/dotfiles/sh/bashrc.bash ~/.bashrc
-ln -sf ~/dotfiles/sh/commonrc.sh ~/.commonrc
-ln -sf ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
-ln -sf ~/dotfiles/sh/function.sh ~/.function
-ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
-ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
-ln -sf ~/dotfiles/git/gitignore ~/.gitignore
-ln -sf ~/dotfiles/themes ~/.themes
-ln -sf ~/dotfiles/config/tmux.conf ~/.tmux.conf
-ln -sf ~/dotfiles/sh/variables.sh ~/.variables
-ln -sf ~/dotfiles/vim ~/.vim
-ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
-ln -sf ~/dotfiles/nvim ~/.nvim
-ln -sf ~/dotfiles/nvim/nvimrc ~/.nvimrc
-ln -sf ~/dotfiles/nvim/ycm_extra_conf.py ~/.ycm_extra_conf.py
-ln -sf ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
-ln -sf ~/dotfiles/config/X/xscreensaver ~/.xscreensaver
-ln -sf ~/dotfiles/sh/xsession.sh ~/.xsession
-ln -sf ~/dotfiles/sh/zshrc.zsh ~/.zshrc
-ln -sf ~/dotfiles/config/i3 ~/.i3
-ln -sf ~/dotfiles/config/X ~/.config/X
-ln -sf ~/Pictures/Wallpapers ~/.wallpaper
+################################################################################
+# Link config files in home folder
+################################################################################
 
+# Shell
+link ~/dotfiles/sh/alias.sh ~/.alias
+link ~/dotfiles/sh/function.sh ~/.function
+link ~/dotfiles/sh/variables.sh ~/.variables
+link ~/dotfiles/sh/commonrc.sh ~/.commonrc
+link ~/dotfiles/sh/bashrc.bash ~/.bashrc
+link ~/dotfiles/sh/zshrc.zsh ~/.zshrc
+link ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
+link ~/dotfiles/config/tmux.conf ~/.tmux.conf
+
+# Git
+link ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
+link ~/dotfiles/git/gitconfig ~/.gitconfig
+link ~/dotfiles/git/gitignore ~/.gitignore
+
+# Vim
+link ~/dotfiles/vim ~/.vim
+link ~/dotfiles/vim/vimrc ~/.vimrc
+link ~/dotfiles/nvim ~/.nvim
+link ~/dotfiles/nvim/nvimrc ~/.nvimrc
+link ~/dotfiles/nvim/ycm_extra_conf.py ~/.ycm_extra_conf.py
+
+# X
+link ~/dotfiles/sh/background.sh ~/.background
+link ~/Pictures/Wallpapers ~/.wallpaper
+link ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
+link ~/dotfiles/config/X/xscreensaver ~/.xscreensaver
+link ~/dotfiles/sh/xsession.sh ~/.xsession
+link ~/dotfiles/config/i3 ~/.i3
+link ~/dotfiles/config/X ~/.config/X
+
+# Other
+link ~/dotfiles/themes ~/.themes
+link ~/dotfiles/ctags ~/.ctags
+
+################################################################################
 # Build dependencies
-cd ./nvim/bundle/YouCompleteMe
-./install.sh --clang-completer --omnisharp-completer
-cd -
+################################################################################
+
+( # YouCompleteMe
+   cd ./nvim/bundle/YouCompleteMe
+   ./install.sh --clang-completer --omnisharp-completer
+)
