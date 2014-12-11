@@ -30,7 +30,6 @@ alias g='git'
 alias m='make -j 4'
 alias tm='tmux_start_session'
 alias tl='tmux list-sessions'
-alias vim='nvim'
 alias v='vim'
 alias vo="v -o"
 alias vO="v -O"
