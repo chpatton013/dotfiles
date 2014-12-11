@@ -1,20 +1,11 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Reread configuration of Vim if .vimrc is saved.
 augroup VimRC
   autocmd!
   autocmd BufWritePost .vimrc so ~/.vimrc
-  autocmd BufWritePost _vimrc so ~/_vimrc
-  autocmd BufWritePost vimrc  so ~/vimrc
-augroup END
-
-" Highlight trailing whitespace.
-augroup HighlightTrailingWhitespace
-   autocmd!
-   autocmd ColorScheme * highlight TrailingWhitespace ctermbg=Red guibg=Red
-   autocmd BufWinEnter * let w:whitespace_match_number = matchadd('TrailingWhitespace', '\s\+$')
 augroup END
 
 augroup FileTypeAssociation
@@ -38,46 +29,46 @@ augroup OpenCloseNERDTree
    autocmd VimEnter * if argc() == 0 | NERDTree | endif
    " Auto-close NERDTree when no other buffers are left.
    autocmd StdinReadPre * let s:std_in=1
-   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! <SID>StripTrailingWhitespaces()
    let _s=@/
-   let l = line(".")
-   let c = col(".")
+   let l=line(".")
+   let c=col(".")
    %s/\s\+$//e
    let @/=_s
    call cursor(l, c)
 endfunction
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Pathogen
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
 " Easymotion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use my leader key as the prefix.
 let g:EasyMotion_leader_key=',m'
 
 " Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Commands:
 "     Errors               pop up location list and display errors
 "     SyntasticToggleMode  toggles between active and passive mode
 "     SyntasticCheck       forces a syntax check in passive mode
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Check for syntax errors on file open.
 let g:syntastic_check_on_open=1
 " Echo errors to the command window.
@@ -94,35 +85,35 @@ let g:syntastic_cpp_compiler_options=' -std=c++11'
 let g:syntastic_cpp_include_dirs=["$HOME/include"]
 
 " GitGutter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Add flags to git diff.
-let g:gitgutter_diff_args = '--patience'
+let g:gitgutter_diff_args='--patience'
 " Only redraw gutter on buffer save / open.
-let g:gitgutter_eager = 0
+let g:gitgutter_eager=0
 
 " YouCompleteMe
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration customization
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 behave xterm   " Maintain keybindings across enviornments.
 
 " Filetype detection
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype on          " Recognize syntax by file extension.
 filetype indent on   " Check for indent file.
 filetype plugin on   " Allow plugins to be loaded by file type.
 
 " Variables
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader="," " Use , instead of \ for the map leader.
 
 " Settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autowrite                    " Write before executing the 'make' command.
 set background=dark              " Usually prefer dark backgrounds.
 set backspace=indent,eol,start   " Allow <BS> to go over indents, eol, and start of insert.
@@ -175,7 +166,7 @@ set wrap                         " Soft wrap lines.
 set wrapscan                     " Searching wraps to start of file when end is reached.
 
 " Completion settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Options:
 "     .        scan the current buffer ('wrapscan' is ignored)
 "     w        scan buffers from other windows
@@ -190,11 +181,11 @@ set wrapscan                     " Searching wraps to start of file when end is 
 "     i        scan current and included files
 "     d        scan current and included files for defined name or macro |i_CTRL-X_CTRL-D|
 "     t        tag completion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set complete=.,w,b,u,t,i,k
 
 " Text formatting settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Options:
 "     t  Auto-wrap text using textwidth. (default)
 "     c  Auto-wrap comments; insert comment leader. (default)
@@ -203,33 +194,33 @@ set complete=.,w,b,u,t,i,k
 "     o  Insert comment leader after hitting 'o' or 'O' in command mode.
 "     n  Auto-format lists, wrapping to text *after* the list bullet char.
 "     l  Don't auto-wrap if a line is already longer than textwidth.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set formatoptions=tcronl
 
 " Enable mouse scrolling in selected modes
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Options:
 "     a  All
 "     c  Command
 "     i  Insert
 "     n  Normal
 "     v  Visual
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=
 
 " Color theme
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set t_Co=16
 colorscheme solarized
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Normal mode
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Make y behave like all other capitals (yank to end of line).
 nnoremap Y y$
@@ -253,7 +244,7 @@ nnoremap <silent> <leader><Space> :call <SID>StripTrailingWhitespaces()<CR>
 nnoremap <silent> <Leader>t :NERDTreeToggle<CR>
 
 " Insert mode
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Smash Esc.
 inoremap kj <Esc>
