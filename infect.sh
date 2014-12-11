@@ -19,6 +19,7 @@ rm -rf ~/.alias ~/.background ~/.bashrc ~/.commonrc ~/.dircolors ~/.function \
 mkdir -p ~/projects ~/include ~/.config
 
 # Link config files in home folder.
+ln -sf ~/dotfiles/ctags ~/.ctags
 ln -sf ~/dotfiles/sh/alias.sh ~/.alias
 ln -sf ~/dotfiles/sh/background.sh ~/.background
 ln -sf ~/dotfiles/sh/bashrc.bash ~/.bashrc
