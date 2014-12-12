@@ -52,3 +52,6 @@
 [submodule "nvim/bundle/YouCompleteMe"]
 	path = nvim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "nvim/bundle/vim-lose"]
+	path = nvim/bundle/vim-lose
+	url = git@github.com:marczych/vim-lose.git
