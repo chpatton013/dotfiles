@@ -10,3 +10,8 @@ function tmux_start_session() {
       tmux new -s ${1}
    fi
 }
+
+function ifind() {
+   local pattern="$@"
+   find . -iname "*$pattern*"
+}
