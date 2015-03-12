@@ -2,12 +2,10 @@
 
 # Expand control characters.
 alias less='less -R'
-# Enabled X Forwarding and compression in X sessions.
+# Enable trusted and untrsuted X Forwarding and compression in X sessions.
 alias ssh='ssh -XYC'
 # Log X sessions.
 alias startx='startx &> ~/.xlog'
-# Pass enviornment variables onto sudo.
-alias sudo='sudo -E'
 
 # Add color to several commands.
 if [ $(uname -s) != 'Darwin' ]; then
@@ -28,7 +26,7 @@ alias lla='lal'
 alias ...='cd ..'
 alias g='git'
 alias m='make -j 4'
-alias tm='tmux_start_session'
+alias tn='tmux_start_session'
 alias tl='tmux list-sessions'
 alias v='vim'
 alias vo="v -o"
@@ -36,12 +34,13 @@ alias vO="v -O"
 alias :q='exit'
 alias :e='v'
 
-# Work ssh addresses.
-alias cmr='ssh cpatton@cominor.com'
-alias lb='live_ssh ifixit.com'
-alias db='live_ssh db.ifixit.com'
-alias slave='live_ssh slave.ifixit.com'
-
 # Work command aliases.
 alias f='feature'
 alias whitelist='sudo systemctl reload httpd && sudo systemctl reload varnish'
+
+alias cmr='ssh cpatton@cominor.com'
+alias lssh='live_ssh'
+alias devdb='lssh db.cominor.com'
+alias lb='lssh ifixit.com'
+alias db='lssh db.ifixit.com'
+alias slave='lssh slave.ifixit.com'
