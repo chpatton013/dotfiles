@@ -1,13 +1,18 @@
-function tmux_start_session() {
-   if [ -z ${1} ]; then
-      echo "usage: ${0} <session>" >&2
-      return 1
-   fi
+function random_string() {
+   local length="$1"
+   base64 /dev/urandom | tr -d '/+' | fold -w "$length" | head -n 1
+}
 
-   if tmux has-session -t ${1}; then
-      tmux attach -t ${1}
+function tmux_start_session() {
+   local name="$1"
+   if [ -z "$name" ]; then
+      tmux
    else
-      tmux new -s ${1}
+      if tmux has-session -t "$name"; then
+         tmux attach -t "$name"
+      else
+         tmux new -s "$name"
+      fi
    fi
 }
 
