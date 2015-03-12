@@ -44,5 +44,4 @@ alias slave='live_ssh slave.ifixit.com'
 
 # Work command aliases.
 alias f='feature'
-alias h='hotfix'
-alias whitelist='sudo service httpd reload && sudo service varnish reload'
+alias whitelist='sudo systemctl reload httpd && sudo systemctl reload varnish'
