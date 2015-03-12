@@ -10,9 +10,6 @@ case $- in
    *) return;;
 esac
 
-# Move to development directory.
-[ -d ~/projects ] && cd ~/projects
-
 ###############################################################################
 
 
