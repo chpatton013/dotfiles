@@ -174,7 +174,7 @@ endif
 if isdirectory('~/include')
    set path+=~/include
 endif
-if isdirectory('/use/include')
+if isdirectory('/usr/include')
    set path+=/usr/include
 endif
 if isdirectory('/usr/local/include')
