@@ -55,3 +55,6 @@
 [submodule "nvim/bundle/vim-lose"]
 	path = nvim/bundle/vim-lose
 	url = git@github.com:marczych/vim-lose.git
+[submodule "nvim/bundle/vim-glsl"]
+	path = nvim/bundle/vim-glsl
+	url = git@github.com:tikhomirov/vim-glsl.git
