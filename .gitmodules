@@ -58,6 +58,9 @@
 [submodule "nvim/bundle/vim-glsl"]
 	path = nvim/bundle/vim-glsl
 	url = git@github.com:tikhomirov/vim-glsl.git
+[submodule "nvim/bundle/vim-less"]
+	path = nvim/bundle/vim-less
+	url = git@github.com:groenewege/vim-less.git
 [submodule "nvim/bundle/vim-mustache-handlebars"]
 	path = nvim/bundle/vim-mustache-handlebars
 	url = git@github.com:mustache/vim-mustache-handlebars.git
