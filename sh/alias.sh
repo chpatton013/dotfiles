@@ -13,6 +13,8 @@ if [ $(uname -s) != 'Darwin' ]; then
    alias grep='grep --color'
    alias fgrep='fgrep --color'
    alias egrep='egrep --color'
+else
+   alias gdb='lldb'
 fi
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
@@ -25,6 +27,7 @@ alias lla='lal'
 # Command-line shortcuts.
 alias ...='cd ..'
 alias g='git'
+alias gg='g gr'
 alias m='make -j 4'
 alias tm='tmux_start_session'
 alias tl='tmux list-sessions'
