@@ -5,6 +5,7 @@ flags = [
    '-Wall',
    '-Wextra',
    '-Wno-unused-result',
+   '--pipe',
    '-std=c++11',
    '-x', 'c++',
    '-isystem', '/usr/include',
@@ -22,7 +23,7 @@ flags = [
 
 def IsHeaderFile(filename):
    extension = os.path.splitext(filename)[1]
-   return extension in ['.hpp', '.hxx', '.hh', '.h', '.inl']
+   return extension in ['.hpp', '.hxx', '.hh', '.h', '.inl', '.impl']
 
 def FlagsForFile(filename, **kwargs):
    return {
