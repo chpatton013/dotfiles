@@ -14,13 +14,7 @@ function link() {
 # Update repository
 ################################################################################
 
-git stash
-
-git pull --rebase &&
-git submodule update --init --recursive &&
-git submodule foreach git pull origin master
-
-git stash pop
+git submodule update --init --recursive
 
 ################################################################################
 # Create required directories
