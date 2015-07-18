@@ -236,6 +236,7 @@ nnoremap <C-k> <C-w><Up>
 nnoremap <C-l> <C-w><Right>
 
 " Toggles for search highlight, line numbers, paste mode, and word wrap.
+nnoremap <silent> <Leader>c :TagbarToggle<CR>
 nnoremap <silent> <Leader>h :set invhlsearch<CR>
 nnoremap <silent> <Leader>n :set invnumber<CR>
 nnoremap <silent> <Leader>p :set invpaste<CR>
