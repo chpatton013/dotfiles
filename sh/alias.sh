@@ -8,13 +8,13 @@ alias ssh='ssh -XYC'
 alias startx='startx &> ~/.xlog'
 
 # Add color to several commands.
-if [ $(uname -s) != 'Darwin' ]; then
+if [ $(uname -s) = 'Darwin' ]; then
+   alias gdb='lldb'
+else
    alias ls='ls --color'
    alias grep='grep --color'
    alias fgrep='fgrep --color'
    alias egrep='egrep --color'
-else
-   alias gdb='lldb'
 fi
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
