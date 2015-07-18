@@ -3,6 +3,16 @@ function random_string() {
    base64 /dev/urandom | tr -d '/+' | fold -w "$length" | head -n 1
 }
 
+# `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
+function ls() {
+   /bin/ls -Fb $@
+}
+
+function cd() {
+   builtin cd $@
+   ls
+}
+
 function tmux_start_session() {
    local name="$1"
    if [ -z "$name" ]; then

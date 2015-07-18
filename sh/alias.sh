@@ -17,10 +17,9 @@ else
    alias egrep='egrep --color'
 fi
 
-# `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
-alias l='ls -Fb'
-alias ll='l -hl'
-alias la='l -a'
+alias l='ls'
+alias ll='ls -hl'
+alias la='ls -a'
 alias lal='ll -a'
 alias lla='lal'
 
