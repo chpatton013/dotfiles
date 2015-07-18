@@ -144,7 +144,6 @@ set nofoldenable                 " Do not open file folded.
 set noerrorbells                 " No beeps on errors.
 set noswapfile                   " Don't use swap files.
 set number                       " Display line numbers.
-set path=.,./include,~/include/,/usr/include,/usr/local/include,./**/include,,
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
 set shellslash                   " Use forward slashes regardless of OS.
 set shiftwidth=3                 " >> and << shift 3 spaces.
@@ -168,6 +167,20 @@ set wildmenu                     " Tab completion navigable menu is enabled.
 set wildmode=list:longest,full   " Tab completion lists matches, then opens wildmenu on next <Tab>.
 set wrap                         " Soft wrap lines.
 set wrapscan                     " Searching wraps to start of file when end is reached.
+
+if isdirectory('./include')
+   set path+=./include
+endif
+if isdirectory('~/include')
+   set path+=~/include
+endif
+if isdirectory('/usr/include')
+   set path+=/usr/include
+endif
+if isdirectory('/usr/local/include')
+   set path+=/usr/local/include
+endif
+set path+=.,**
 
 " Completion settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
