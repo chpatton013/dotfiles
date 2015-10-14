@@ -67,3 +67,12 @@
 [submodule "nvim/bundle/tagbar"]
 	path = nvim/bundle/tagbar
 	url = git@github.com:majutsushi/tagbar.git
+[submodule "nvim/bundle/rust.vim"]
+	path = nvim/bundle/rust.vim
+	url = https://github.com/rust-lang/rust.vim.git
+[submodule "nvim/bundle/ejs-syntax"]
+	path = nvim/bundle/ejs-syntax
+	url = git@github.com:chpatton013/ejs-syntax.git
+[submodule "nvim/bundle/mako.vim"]
+	path = nvim/bundle/mako.vim
+	url = git@github.com:vim-scripts/mako.vim.git
