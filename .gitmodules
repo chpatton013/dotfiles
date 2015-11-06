@@ -1,45 +1,42 @@
-[submodule "nvim/bundle/syntastic"]
-	path = nvim/bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
-[submodule "nvim/bundle/vim-abolish"]
-	path = nvim/bundle/vim-abolish
-	url = git://github.com/tpope/vim-abolish.git
-[submodule "nvim/bundle/vim-colors-solarized"]
-	path = nvim/bundle/vim-colors-solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "nvim/bundle/vim-commentary"]
-	path = nvim/bundle/vim-commentary
-	url = git://github.com/tpope/vim-commentary.git
-[submodule "nvim/bundle/vim-easymotion"]
-	path = nvim/bundle/vim-easymotion
-	url = git://github.com/Lokaltog/vim-easymotion.git
-[submodule "nvim/bundle/vim-fugitive"]
-	path = nvim/bundle/vim-fugitive
-	url = git://github.com/tpope/vim-fugitive.git
-[submodule "nvim/bundle/vim-pathogen"]
-	path = nvim/bundle/vim-pathogen
-	url = git://github.com/tpope/vim-pathogen.git
-[submodule "nvim/bundle/vim-repeat"]
-	path = nvim/bundle/vim-repeat
-	url = git://github.com/tpope/vim-repeat.git
-[submodule "nvim/bundle/vim-surround"]
-	path = nvim/bundle/vim-surround
-	url = git://github.com/tpope/vim-surround.git
 [submodule "themes/solarized/gnome-terminal-colors-solarized"]
 	path = themes/solarized/gnome-terminal-colors-solarized
 	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
 [submodule "themes/solarized/konsole-colors-solarized"]
 	path = themes/solarized/konsole-colors-solarized
 	url = git://github.com/phiggins/konsole-colors-solarized.git
-[submodule "dircolors/solarized"]
-	path = dircolors/solarized
-	url = git://github.com/seebi/dircolors-solarized.git
-[submodule "nvim/bundle/vim-powerline"]
-	path = nvim/bundle/vim-powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
 [submodule "themes/solarized/tmux-colors-solarized"]
 	path = themes/solarized/tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized
+[submodule "dircolors/solarized"]
+	path = dircolors/solarized
+	url = git://github.com/seebi/dircolors-solarized.git
+[submodule "nvim/bundle/syntastic"]
+	path = nvim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
+[submodule "nvim/bundle/vim-colors-solarized"]
+	path = nvim/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "nvim/bundle/vim-pathogen"]
+	path = nvim/bundle/vim-pathogen
+	url = git://github.com/tpope/vim-pathogen.git
+[submodule "nvim/bundle/vim-abolish"]
+	path = nvim/bundle/vim-abolish
+	url = git://github.com/tpope/vim-abolish.git
+[submodule "nvim/bundle/vim-commentary"]
+	path = nvim/bundle/vim-commentary
+	url = git://github.com/tpope/vim-commentary.git
+[submodule "nvim/bundle/vim-fugitive"]
+	path = nvim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "nvim/bundle/vim-repeat"]
+	path = nvim/bundle/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
+[submodule "nvim/bundle/vim-surround"]
+	path = nvim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule "nvim/bundle/vim-easymotion"]
+	path = nvim/bundle/vim-easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
 [submodule "nvim/bundle/vim-gitgutter"]
 	path = nvim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
@@ -49,6 +46,9 @@
 [submodule "nvim/bundle/vim-airline"]
 	path = nvim/bundle/vim-airline
 	url = git@github.com:bling/vim-airline.git
+[submodule "nvim/bundle/tagbar"]
+	path = nvim/bundle/tagbar
+	url = git@github.com:majutsushi/tagbar.git
 [submodule "nvim/bundle/YouCompleteMe"]
 	path = nvim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
@@ -64,9 +64,6 @@
 [submodule "nvim/bundle/vim-mustache-handlebars"]
 	path = nvim/bundle/vim-mustache-handlebars
 	url = git@github.com:mustache/vim-mustache-handlebars.git
-[submodule "nvim/bundle/tagbar"]
-	path = nvim/bundle/tagbar
-	url = git@github.com:majutsushi/tagbar.git
 [submodule "nvim/bundle/rust.vim"]
 	path = nvim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
@@ -76,3 +73,18 @@
 [submodule "nvim/bundle/mako.vim"]
 	path = nvim/bundle/mako.vim
 	url = git@github.com:vim-scripts/mako.vim.git
+[submodule "nvim/bundle/vim-troll-stopper"]
+	path = nvim/bundle/vim-troll-stopper
+	url = git@github.com:vim-utils/vim-troll-stopper.git
+[submodule "nvim/bundle/vim-man"]
+	path = nvim/bundle/vim-man
+	url = git@github.com:vim-utils/vim-man.git
+[submodule "nvim/bundle/vim-all"]
+	path = nvim/bundle/vim-all
+	url = git@github.com:vim-utils/vim-all.git
+[submodule "nvim/bundle/vim-line"]
+	path = nvim/bundle/vim-line
+	url = git@github.com:vim-utils/vim-line.git
+[submodule "nvim/bundle/vim-space"]
+	path = nvim/bundle/vim-space
+	url = git@github.com:vim-utils/vim-space.git
