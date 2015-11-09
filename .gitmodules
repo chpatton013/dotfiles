@@ -73,6 +73,9 @@
 [submodule "nvim/bundle/mako.vim"]
 	path = nvim/bundle/mako.vim
 	url = git@github.com:vim-scripts/mako.vim.git
+[submodule "nvim/bundle/dockerfile.vim"]
+	path = nvim/bundle/dockerfile.vim
+	url = git@github.com:honza/dockerfile.vim.git
 [submodule "nvim/bundle/vim-troll-stopper"]
 	path = nvim/bundle/vim-troll-stopper
 	url = git@github.com:vim-utils/vim-troll-stopper.git
