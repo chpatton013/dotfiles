@@ -9,8 +9,7 @@ function ls() {
 }
 
 function cd() {
-   builtin cd $@
-   ls
+   builtin cd $@ && ls
 }
 
 function tmux_start_session() {
