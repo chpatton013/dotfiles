@@ -29,3 +29,7 @@ function ifind() {
    local pattern="$@"
    find . -iname "*$pattern*"
 }
+
+function vpn() {
+   sudo openvpn ~/.vpn/client.ovpn
+}
