@@ -60,6 +60,7 @@ link ~/dotfiles/config/X ~/.config/X
 # Other
 link ~/dotfiles/themes ~/.themes
 link ~/dotfiles/ctags ~/.ctags
+link ~/dotfiles/clang-format.conf ~/.clang-format
 
 ################################################################################
 # Build dependencies
