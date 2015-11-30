@@ -47,7 +47,6 @@ def getLocalIncludeFlags():
     return getIncludePaths('-I', [
         '.',
         './include',
-        '~/include',
     ])
 
 def getIncludePaths(prefix, paths):

@@ -85,8 +85,8 @@ let g:syntastic_c_check_header=1
 let g:syntastic_cpp_compiler_options=' -std=c++11 -Wall -Wextra -Wno-unused-result'
 let g:syntastic_c_compiler_options=' -Wall -Wextra'
 " Include these directories when building C++ files.
-let g:syntastic_cpp_include_dirs=['.', 'include', "$HOME/include"]
-let g:syntastic_c_include_dirs=['.', 'include', "$HOME/include"]
+let g:syntastic_cpp_include_dirs=['.', 'include']
+let g:syntastic_c_include_dirs=['.', 'include']
 
 " GitGutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,9 +171,6 @@ set wrapscan                     " Searching wraps to start of file when end is 
 
 if isdirectory('./include')
    set path+=./include
-endif
-if isdirectory('~/include')
-   set path+=~/include
 endif
 if isdirectory('/usr/include')
    set path+=/usr/include

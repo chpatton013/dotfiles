@@ -20,7 +20,7 @@ git submodule update --init --recursive
 # Create required directories
 ################################################################################
 
-mkdir -p ~/projects ~/include ~/.config
+mkdir -p ~/projects ~/.config
 
 ################################################################################
 # Link config files in home folder
