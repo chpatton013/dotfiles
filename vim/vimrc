@@ -248,11 +248,18 @@ colorscheme solarized
 " Make y behave like all other capitals (yank to end of line).
 nnoremap Y y$
 
-" Use C-hjkl in to change windows.
+" Use C-hjkl to change windows.
 nnoremap <C-h> <C-w><Left>
 nnoremap <C-j> <C-w><Down>
 nnoremap <C-k> <C-w><Up>
 nnoremap <C-l> <C-w><Right>
+
+" Use C-t to change tabs.
+nnoremap <C-t>e :tabnew<CR>
+nnoremap <C-t>% :tabnew<Space>%<CR>
+nnoremap <C-t>n :tabnext<CR>
+nnoremap <C-t>p :tabprevious<CR>
+nnoremap <C-t>d :tabclose<CR>
 
 " Toggles for search highlight, line numbers, paste mode, and word wrap.
 nnoremap <silent> <Leader>c :TagbarToggle<CR>
