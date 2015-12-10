@@ -12,6 +12,10 @@ function cd() {
    builtin cd $@ && ls
 }
 
+function fuck() {
+   sudo $(fc -ln -1)
+}
+
 function tmux_start_session() {
    local name="$1"
    if [ -z "$name" ]; then
