@@ -1,3 +1,4 @@
+export vim_tab_width=2
 export ZOOX_WORKSPACE=~/zoox_ros_ws
 export ROS_WORKSPACE="$ZOOX_WORKSPACE"
 export VLR_ROOT=~/projects/vlr
