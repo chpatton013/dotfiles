@@ -116,6 +116,11 @@ filetype plugin on   " Allow plugins to be loaded by file type.
 " Variables
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader="," " Use , instead of \ for the map leader.
+if $vim_tab_width
+   let tab_width=$vim_tab_width
+else
+   let tab_width=3
+endif
 
 " Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -147,7 +152,7 @@ set noswapfile                   " Don't use swap files.
 set number                       " Display line numbers.
 set scrolloff=5                  " Keep min of 'n' lines above/below cursor.
 set shellslash                   " Use forward slashes regardless of OS.
-set shiftwidth=3                 " >> and << shift 3 spaces.
+let &shiftwidth=tab_width        " >> and << shift N spaces.
 set showcmd                      " Show partial commands in the status line.
 set showmatch                    " Show matching () {} etc..
 set showmode                     " Show current mode.
@@ -155,10 +160,10 @@ set sidescrolloff=10             " Keep min of 'n' columns right/left cursor.
 set smartcase                    " Searches are case-sensitive if caps used.
 set smarttab                     " Tabs and backspaces at the start of a line indent the line one level.
 set smartindent                  " Maintains most indentation and adds extra level when nesting.
-set softtabstop=3                " See spaces as tabs.
+let &softtabstop=tab_width       " See spaces as tabs.
 set splitright splitbelow        " Open splits below and to the right.
 set synmaxcol=2000               " Only matches syntax on first 'n' columns of each line.
-set tabstop=3                    " <Tab> move three characters.
+let &tabstop=tab_width           " <Tab> move N characters.
 set ttyfast                      " Smoother redrawing.
 set textwidth=80                 " Hard wrap at 'n' characters.
 set viminfo='20,\"500,%          " Adjust viminfo contents.
@@ -240,11 +245,18 @@ colorscheme solarized
 " Make y behave like all other capitals (yank to end of line).
 nnoremap Y y$
 
-" Use C-hjkl in to change windows.
+" Use C-hjkl to change windows.
 nnoremap <C-h> <C-w><Left>
 nnoremap <C-j> <C-w><Down>
 nnoremap <C-k> <C-w><Up>
 nnoremap <C-l> <C-w><Right>
+
+" Use C-t to change tabs.
+nnoremap <C-t>e :tabnew<CR>
+nnoremap <C-t>% :tabnew<Space>%<CR>
+nnoremap <C-t>n :tabnext<CR>
+nnoremap <C-t>p :tabprevious<CR>
+nnoremap <C-t>d :tabclose<CR>
 
 " Toggles for search highlight, line numbers, paste mode, and word wrap.
 nnoremap <silent> <Leader>c :TagbarToggle<CR>
