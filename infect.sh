@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+script_dir="$( (builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) )"
+home="$HOME"
+
 function link() {
    local source_file="$1"
    local link_file="$2"
@@ -10,7 +13,11 @@ function link() {
    ln --symbolic --force "$source_file" "$link_file"
 }
 
-home="$HOME"
+################################################################################
+# Configure account
+################################################################################
+
+sudo chsh --shell "$(which zsh)" "$(id --user --name)"
 
 ################################################################################
 # Update repository
@@ -19,62 +26,55 @@ home="$HOME"
 git submodule update --init --recursive
 
 ################################################################################
-# Configure account
-################################################################################
-
-sudo chsh --shell "$(which zsh)" "$(id --user --name)"
-
-################################################################################
 # Create required directories
 ################################################################################
 
-mkdir --parents $home/projects $home/.config
+mkdir --parents "$home/projects" "$home/.config"
 
 ################################################################################
 # Link config files in home folder
 ################################################################################
 
 # Shell
-link $home/dotfiles/sh/alias.sh $home/.alias
-link $home/dotfiles/sh/function.sh $home/.function
-link $home/dotfiles/sh/variables.sh $home/.variables
-link $home/dotfiles/sh/commonrc.sh $home/.commonrc
-link $home/dotfiles/sh/bashrc.bash $home/.bashrc
-link $home/dotfiles/sh/zshrc.zsh $home/.zshrc
-link $home/dotfiles/dircolors/solarized/dircolors.256dark $home/.dircolors
-link $home/dotfiles/config/tmux.conf $home/.tmux.conf
+link "$script_dir/sh/alias.sh" "$home/.alias"
+link "$script_dir/sh/function.sh" "$home/.function"
+link "$script_dir/sh/variables.sh" "$home/.variables"
+link "$script_dir/sh/commonrc.sh" "$home/.commonrc"
+link "$script_dir/sh/bashrc.bash" "$home/.bashrc"
+link "$script_dir/sh/zshrc.zsh" "$home/.zshrc"
+link "$script_dir/dircolors/solarized/dircolors.256dark" "$home/.dircolors"
+link "$script_dir/config/tmux.conf" "$home/.tmux.conf"
 
 # Git
-link $home/dotfiles/sh/git-completion.sh $home/.git-completion.sh
-link $home/dotfiles/git/gitconfig $home/.gitconfig
-link $home/dotfiles/git/gitignore $home/.gitignore
+link "$script_dir/sh/git-completion.sh" "$home/.git-completion.sh"
+link "$script_dir/git/gitconfig" "$home/.gitconfig"
+link "$script_dir/git/gitignore" "$home/.gitignore"
 
 # Vim
-link $home/dotfiles/vim $home/.vim
-link $home/dotfiles/vim/vimrc $home/.vimrc
-link $home/dotfiles/nvim $home/.nvim
-link $home/dotfiles/nvim/nvimrc $home/.nvimrc
-link $home/dotfiles/nvim/ycm_extra_conf.py $home/.ycm_extra_conf.py
+link "$script_dir/vim" "$home/.vim"
+link "$script_dir/vim/vimrc" "$home/.vimrc"
+link "$script_dir/nvim" "$home/.nvim"
+link "$script_dir/nvim/nvimrc" "$home/.nvimrc"
+link "$script_dir/nvim/ycm_extra_conf.py" "$home/.ycm_extra_conf.py"
 
 # X
-link $home/dotfiles/sh/background.sh $home/.background
-link $home/Pictures/Wallpapers $home/.wallpaper
-link $home/dotfiles/sh/xinitrc.sh $home/.xinitrc
-link $home/dotfiles/config/X/xscreensaver $home/.xscreensaver
-link $home/dotfiles/sh/xsession.sh $home/.xsession
-link $home/dotfiles/config/i3 $home/.i3
-link $home/dotfiles/config/X $home/.config/X
+link "$script_dir/sh/background.sh" "$home/.background"
+link "$script_dir/sh/xinitrc.sh" "$home/.xinitrc"
+link "$script_dir/config/X/xscreensaver" "$home/.xscreensaver"
+link "$script_dir/sh/xsession.sh" "$home/.xsession"
+link "$script_dir/config/i3" "$home/.i3"
+link "$script_dir/config/X" "$home/.config/X"
 
 # Other
-link $home/dotfiles/themes $home/.themes
-link $home/dotfiles/ctags $home/.ctags
-link $home/dotfiles/clang-format.conf $home/.clang-format
+link "$script_dir/themes" "$home/.themes"
+link "$script_dir/ctags" "$home/.ctags"
+link "$script_dir/clang-format.conf" "$home/.clang-format"
 
 ################################################################################
 # Build dependencies
 ################################################################################
 
 ( # YouCompleteMe
-   builtin cd ./nvim/bundle/YouCompleteMe
+   builtin cd "$script_dir/nvim/bundle/YouCompleteMe"
    ./install.sh --clang-completer --omnisharp-completer
 )
