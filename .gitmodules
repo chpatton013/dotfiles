@@ -10,84 +10,84 @@
 [submodule "dircolors/solarized"]
 	path = dircolors/solarized
 	url = git://github.com/seebi/dircolors-solarized.git
-[submodule "nvim/bundle/syntastic"]
-	path = nvim/bundle/syntastic
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
-[submodule "nvim/bundle/vim-colors-solarized"]
-	path = nvim/bundle/vim-colors-solarized
+[submodule "vim/bundle/vim-colors-solarized"]
+	path = vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "nvim/bundle/vim-pathogen"]
-	path = nvim/bundle/vim-pathogen
+[submodule "vim/bundle/vim-pathogen"]
+	path = vim/bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
-[submodule "nvim/bundle/vim-abolish"]
-	path = nvim/bundle/vim-abolish
+[submodule "vim/bundle/vim-abolish"]
+	path = vim/bundle/vim-abolish
 	url = git://github.com/tpope/vim-abolish.git
-[submodule "nvim/bundle/vim-commentary"]
-	path = nvim/bundle/vim-commentary
+[submodule "vim/bundle/vim-commentary"]
+	path = vim/bundle/vim-commentary
 	url = git://github.com/tpope/vim-commentary.git
-[submodule "nvim/bundle/vim-fugitive"]
-	path = nvim/bundle/vim-fugitive
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "nvim/bundle/vim-repeat"]
-	path = nvim/bundle/vim-repeat
+[submodule "vim/bundle/vim-repeat"]
+	path = vim/bundle/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
-[submodule "nvim/bundle/vim-surround"]
-	path = nvim/bundle/vim-surround
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "nvim/bundle/vim-easymotion"]
-	path = nvim/bundle/vim-easymotion
+[submodule "vim/bundle/vim-easymotion"]
+	path = vim/bundle/vim-easymotion
 	url = git://github.com/Lokaltog/vim-easymotion.git
-[submodule "nvim/bundle/vim-gitgutter"]
-	path = nvim/bundle/vim-gitgutter
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "nvim/bundle/nerdtree"]
-	path = nvim/bundle/nerdtree
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "nvim/bundle/vim-airline"]
-	path = nvim/bundle/vim-airline
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
 	url = git@github.com:bling/vim-airline.git
-[submodule "nvim/bundle/tagbar"]
-	path = nvim/bundle/tagbar
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
 	url = git@github.com:majutsushi/tagbar.git
-[submodule "nvim/bundle/YouCompleteMe"]
-	path = nvim/bundle/YouCompleteMe
+[submodule "vim/bundle/YouCompleteMe"]
+	path = vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule "nvim/bundle/vim-lose"]
-	path = nvim/bundle/vim-lose
+[submodule "vim/bundle/vim-lose"]
+	path = vim/bundle/vim-lose
 	url = git@github.com:marczych/vim-lose.git
-[submodule "nvim/bundle/vim-glsl"]
-	path = nvim/bundle/vim-glsl
+[submodule "vim/bundle/vim-glsl"]
+	path = vim/bundle/vim-glsl
 	url = git@github.com:tikhomirov/vim-glsl.git
-[submodule "nvim/bundle/vim-less"]
-	path = nvim/bundle/vim-less
+[submodule "vim/bundle/vim-less"]
+	path = vim/bundle/vim-less
 	url = git@github.com:groenewege/vim-less.git
-[submodule "nvim/bundle/vim-mustache-handlebars"]
-	path = nvim/bundle/vim-mustache-handlebars
+[submodule "vim/bundle/vim-mustache-handlebars"]
+	path = vim/bundle/vim-mustache-handlebars
 	url = git@github.com:mustache/vim-mustache-handlebars.git
-[submodule "nvim/bundle/rust.vim"]
-	path = nvim/bundle/rust.vim
+[submodule "vim/bundle/rust.vim"]
+	path = vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
-[submodule "nvim/bundle/ejs-syntax"]
-	path = nvim/bundle/ejs-syntax
+[submodule "vim/bundle/ejs-syntax"]
+	path = vim/bundle/ejs-syntax
 	url = git@github.com:chpatton013/ejs-syntax.git
-[submodule "nvim/bundle/mako.vim"]
-	path = nvim/bundle/mako.vim
+[submodule "vim/bundle/mako.vim"]
+	path = vim/bundle/mako.vim
 	url = git@github.com:vim-scripts/mako.vim.git
-[submodule "nvim/bundle/dockerfile.vim"]
-	path = nvim/bundle/dockerfile.vim
+[submodule "vim/bundle/dockerfile.vim"]
+	path = vim/bundle/dockerfile.vim
 	url = git@github.com:honza/dockerfile.vim.git
-[submodule "nvim/bundle/vim-troll-stopper"]
-	path = nvim/bundle/vim-troll-stopper
+[submodule "vim/bundle/vim-troll-stopper"]
+	path = vim/bundle/vim-troll-stopper
 	url = git@github.com:vim-utils/vim-troll-stopper.git
-[submodule "nvim/bundle/vim-man"]
-	path = nvim/bundle/vim-man
+[submodule "vim/bundle/vim-man"]
+	path = vim/bundle/vim-man
 	url = git@github.com:vim-utils/vim-man.git
-[submodule "nvim/bundle/vim-all"]
-	path = nvim/bundle/vim-all
+[submodule "vim/bundle/vim-all"]
+	path = vim/bundle/vim-all
 	url = git@github.com:vim-utils/vim-all.git
-[submodule "nvim/bundle/vim-line"]
-	path = nvim/bundle/vim-line
+[submodule "vim/bundle/vim-line"]
+	path = vim/bundle/vim-line
 	url = git@github.com:vim-utils/vim-line.git
-[submodule "nvim/bundle/vim-space"]
-	path = nvim/bundle/vim-space
+[submodule "vim/bundle/vim-space"]
+	path = vim/bundle/vim-space
 	url = git@github.com:vim-utils/vim-space.git

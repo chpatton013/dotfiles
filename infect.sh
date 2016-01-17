@@ -52,10 +52,10 @@ link "$script_dir/git/gitignore" "$home/.gitignore"
 
 # Vim
 link "$script_dir/vim" "$home/.vim"
+link "$script_dir/config/nvim" "$home/.config/nvim"
 link "$script_dir/vim/vimrc" "$home/.vimrc"
-link "$script_dir/nvim" "$home/.nvim"
-link "$script_dir/nvim/nvimrc" "$home/.nvimrc"
-link "$script_dir/nvim/ycm_extra_conf.py" "$home/.ycm_extra_conf.py"
+link "$script_dir/vim/vimrc" "$home/.config/nvim/init.vim"
+link "$script_dir/vim/ycm_extra_conf.py" "$home/.ycm_extra_conf.py"
 
 # X
 link "$script_dir/sh/background.sh" "$home/.background"
@@ -75,6 +75,6 @@ link "$script_dir/clang-format.conf" "$home/.clang-format"
 ################################################################################
 
 ( # YouCompleteMe
-   builtin cd "$script_dir/nvim/bundle/YouCompleteMe"
+   builtin cd "$script_dir/vim/bundle/YouCompleteMe"
    ./install.sh --clang-completer --omnisharp-completer
 )

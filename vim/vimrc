@@ -2,12 +2,6 @@
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Reread configuration of Vim if .vimrc is saved.
-augroup VimRC
-  autocmd!
-  autocmd BufWritePost .vimrc so ~/.vimrc
-augroup END
-
 augroup FileTypeAssociation
    autocmd!
    autocmd BufNewFile,BufRead *.ejs set filetype=html
@@ -54,8 +48,8 @@ endfunction
 
 " Pathogen
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
+source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect('~/.vim/bundle/{}')
 call pathogen#helptags()
 
 " Easymotion
