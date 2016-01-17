@@ -1,14 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 function link() {
    local source_file="$1"
    local link_file="$2"
 
-   rm -rf "$link_file"
-   ln -sf "$source_file" "$link_file"
+   rm --recursive --force "$link_file"
+   ln --symbolic --force "$source_file" "$link_file"
 }
+
+home="$HOME"
 
 ################################################################################
 # Update repository
@@ -17,56 +19,62 @@ function link() {
 git submodule update --init --recursive
 
 ################################################################################
+# Configure account
+################################################################################
+
+sudo chsh --shell "$(which zsh)" "$(id --user --name)"
+
+################################################################################
 # Create required directories
 ################################################################################
 
-mkdir -p ~/projects ~/.config
+mkdir --parents $home/projects $home/.config
 
 ################################################################################
 # Link config files in home folder
 ################################################################################
 
 # Shell
-link ~/dotfiles/sh/alias.sh ~/.alias
-link ~/dotfiles/sh/function.sh ~/.function
-link ~/dotfiles/sh/variables.sh ~/.variables
-link ~/dotfiles/sh/commonrc.sh ~/.commonrc
-link ~/dotfiles/sh/bashrc.bash ~/.bashrc
-link ~/dotfiles/sh/zshrc.zsh ~/.zshrc
-link ~/dotfiles/dircolors/solarized/dircolors.256dark ~/.dircolors
-link ~/dotfiles/config/tmux.conf ~/.tmux.conf
+link $home/dotfiles/sh/alias.sh $home/.alias
+link $home/dotfiles/sh/function.sh $home/.function
+link $home/dotfiles/sh/variables.sh $home/.variables
+link $home/dotfiles/sh/commonrc.sh $home/.commonrc
+link $home/dotfiles/sh/bashrc.bash $home/.bashrc
+link $home/dotfiles/sh/zshrc.zsh $home/.zshrc
+link $home/dotfiles/dircolors/solarized/dircolors.256dark $home/.dircolors
+link $home/dotfiles/config/tmux.conf $home/.tmux.conf
 
 # Git
-link ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
-link ~/dotfiles/git/gitconfig ~/.gitconfig
-link ~/dotfiles/git/gitignore ~/.gitignore
+link $home/dotfiles/sh/git-completion.sh $home/.git-completion.sh
+link $home/dotfiles/git/gitconfig $home/.gitconfig
+link $home/dotfiles/git/gitignore $home/.gitignore
 
 # Vim
-link ~/dotfiles/vim ~/.vim
-link ~/dotfiles/vim/vimrc ~/.vimrc
-link ~/dotfiles/nvim ~/.nvim
-link ~/dotfiles/nvim/nvimrc ~/.nvimrc
-link ~/dotfiles/nvim/ycm_extra_conf.py ~/.ycm_extra_conf.py
+link $home/dotfiles/vim $home/.vim
+link $home/dotfiles/vim/vimrc $home/.vimrc
+link $home/dotfiles/nvim $home/.nvim
+link $home/dotfiles/nvim/nvimrc $home/.nvimrc
+link $home/dotfiles/nvim/ycm_extra_conf.py $home/.ycm_extra_conf.py
 
 # X
-link ~/dotfiles/sh/background.sh ~/.background
-link ~/Pictures/Wallpapers ~/.wallpaper
-link ~/dotfiles/sh/xinitrc.sh ~/.xinitrc
-link ~/dotfiles/config/X/xscreensaver ~/.xscreensaver
-link ~/dotfiles/sh/xsession.sh ~/.xsession
-link ~/dotfiles/config/i3 ~/.i3
-link ~/dotfiles/config/X ~/.config/X
+link $home/dotfiles/sh/background.sh $home/.background
+link $home/Pictures/Wallpapers $home/.wallpaper
+link $home/dotfiles/sh/xinitrc.sh $home/.xinitrc
+link $home/dotfiles/config/X/xscreensaver $home/.xscreensaver
+link $home/dotfiles/sh/xsession.sh $home/.xsession
+link $home/dotfiles/config/i3 $home/.i3
+link $home/dotfiles/config/X $home/.config/X
 
 # Other
-link ~/dotfiles/themes ~/.themes
-link ~/dotfiles/ctags ~/.ctags
-link ~/dotfiles/clang-format.conf ~/.clang-format
+link $home/dotfiles/themes $home/.themes
+link $home/dotfiles/ctags $home/.ctags
+link $home/dotfiles/clang-format.conf $home/.clang-format
 
 ################################################################################
 # Build dependencies
 ################################################################################
 
 ( # YouCompleteMe
-   cd ./nvim/bundle/YouCompleteMe
+   builtin cd ./nvim/bundle/YouCompleteMe
    ./install.sh --clang-completer --omnisharp-completer
 )
