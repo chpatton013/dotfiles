@@ -23,7 +23,9 @@ sudo chsh --shell "$(which zsh)" "$(id --user --name)"
 # Update repository
 ################################################################################
 
-git submodule update --init --recursive
+git submodule init
+git submodule foreach git pull origin master
+git submodule update --recursive
 
 ################################################################################
 # Create required directories
@@ -76,5 +78,8 @@ link "$script_dir/clang-format.conf" "$home/.clang-format"
 
 ( # YouCompleteMe
    builtin cd "$script_dir/vim/bundle/YouCompleteMe"
-   ./install.sh --clang-completer --omnisharp-completer
+   ./install.py \
+      --clang-completer \
+      --racer-completer \
+      --tern-completer
 )
