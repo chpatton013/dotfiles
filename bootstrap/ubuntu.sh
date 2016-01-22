@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+ubuntu_version="$(lsb_release --short --codename)"
+
+tmux_ppa="ppa:pi-rho/dev"
+
 neovim_ppa="ppa:neovim-ppa/unstable"
 
 google_signing_key="https://dl-ssl.google.com/linux/linux_signing_key.pub"
@@ -9,14 +13,17 @@ chrome_source_entry="deb http://dl.google.com/linux/chrome/deb/ stable main"
 
 docker_keyserver="hkp://p80.pool.sks-keyservers.net:80"
 docker_key="58118E89F3A912897C070ADBF76221572C52609D"
-docker_source_entry="deb https://apt.dockerproject.org/repo ubuntu-wily main"
+docker_source_entry="deb https://apt.dockerproject.org/repo ubuntu-$ubuntu_version main"
 
 virtualbox_signing_key="https://www.virtualbox.org/download/oracle_vbox.asc"
-virtualbox_source_entry="deb http://download.virtualbox.org/virtualbox/debian wily contrib"
+virtualbox_source_entry="deb http://download.virtualbox.org/virtualbox/debian $ubuntu_version contrib"
 
 rust_install_url="https://static.rust-lang.org/rustup.sh"
 
 sudo apt-get install software-properties-common
+
+# Tmux PPA
+sudo add-apt-repository --yes "$tmux_ppa"
 
 # Neovim PPA
 sudo add-apt-repository --yes "$neovim_ppa"
@@ -59,7 +66,7 @@ sudo apt-get install --assume-yes \
    python-pip \
    python3-dev \
    python3-pip \
-   tmux \
+   tmux=2.0-1~ppa1~t \
    tree \
    vagrant \
    vim \
