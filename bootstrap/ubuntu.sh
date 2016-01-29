@@ -16,7 +16,7 @@ virtualbox_source_entry="deb http://download.virtualbox.org/virtualbox/debian wi
 
 rust_install_url="https://static.rust-lang.org/rustup.sh"
 
-sudo apt-get install software-properties-common
+sudo apt-get install --assume-yes software-properties-common
 
 # Neovim PPA
 sudo add-apt-repository --yes "$neovim_ppa"
