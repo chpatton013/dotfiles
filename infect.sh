@@ -23,9 +23,8 @@ sudo chsh --shell "$(which zsh)" "$(id --user --name)"
 # Update repository
 ################################################################################
 
-git submodule init
+git submodule update --init --recursive
 git submodule foreach git pull origin master
-git submodule update --recursive
 
 ################################################################################
 # Create required directories

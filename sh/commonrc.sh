@@ -161,3 +161,4 @@ export CHARSET=UTF-8
 ###############################################################################
 
 [ -f ~/.bootstrap.sh ] && source ~/.bootstrap.sh
+[ -d ~/.bootstrap ] && source ~/.bootstrap/*
