@@ -3,6 +3,7 @@
 set -euo pipefail
 
 ubuntu_version="$(lsb_release --short --codename)"
+kernel_version="$(uname --kernel-release)"
 
 tmux_ppa="ppa:pi-rho/dev"
 
@@ -56,7 +57,7 @@ sudo apt-get install --assume-yes \
    git \
    google-chrome-stable \
    gnome-tweak-tool \
-   linux-image-extra-$(uname -r) \
+   "linux-image-extra-$kernel_version" \
    make \
    neovim \
    nodejs \
