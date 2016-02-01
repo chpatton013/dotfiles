@@ -7,6 +7,15 @@
 [submodule "themes/solarized/tmux-colors-solarized"]
 	path = themes/solarized/tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized
+[submodule "tmux/plugins/tmux-continuum"]
+	path = tmux/plugins/tmux-continuum
+	url = https://github.com/tmux-plugins/tmux-continuum.git
+[submodule "tmux/plugins/tmux-resurrect"]
+	path = tmux/plugins/tmux-resurrect
+	url = git@github.com:tmux-plugins/tmux-resurrect.git
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
 [submodule "dircolors/solarized"]
 	path = dircolors/solarized
 	url = git://github.com/seebi/dircolors-solarized.git
