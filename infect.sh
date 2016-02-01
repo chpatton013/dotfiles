@@ -30,7 +30,7 @@ git submodule foreach git pull origin master
 # Create required directories
 ################################################################################
 
-mkdir --parents "$home/projects" "$home/.config"
+mkdir --parents "$home/projects" "$home/.config" "$home/.tmux"
 
 ################################################################################
 # Link config files in home folder
@@ -44,7 +44,10 @@ link "$script_dir/sh/commonrc.sh" "$home/.commonrc"
 link "$script_dir/sh/bashrc.bash" "$home/.bashrc"
 link "$script_dir/sh/zshrc.zsh" "$home/.zshrc"
 link "$script_dir/dircolors/solarized/dircolors.256dark" "$home/.dircolors"
-link "$script_dir/config/tmux.conf" "$home/.tmux.conf"
+
+# Tmux
+link "$script_dir/tmux/tmux.conf" "$home/.tmux.conf"
+link "$script_dir/tmux/plugins" "$home/.tmux/plugins"
 
 # Git
 link "$script_dir/sh/git-completion.sh" "$home/.git-completion.sh"
