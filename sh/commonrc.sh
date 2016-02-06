@@ -160,5 +160,11 @@ export CHARSET=UTF-8
 
 ###############################################################################
 
-[ -f ~/.bootstrap.sh ] && source ~/.bootstrap.sh
-[ -d ~/.bootstrap ] && source ~/.bootstrap/*
+if [ -f ~/.bootstrap.sh ]; then
+   source ~/.bootstrap.sh
+fi
+if [ -d ~/.bootstrap ]; then
+   for b in ~/.bootstrap/*; do
+      source "$b"
+   done
+fi
