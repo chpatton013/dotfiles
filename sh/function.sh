@@ -4,9 +4,15 @@ function random_string() {
 }
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
-function ls() {
-   /bin/ls -Fb $@
-}
+if [ "$(uname -s)" = "Darwin" ]; then
+   function ls() {
+      /bin/ls -Fb $@
+   }
+else
+   function ls() {
+      /bin/ls --classify --escape $@
+   }
+fi
 
 function cd() {
    builtin cd $@ && ls
