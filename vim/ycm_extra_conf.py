@@ -28,18 +28,21 @@ def getSystemIncludeFlags():
 def getRosIncludeFlags():
     paths = []
 
+    # Project workspace
     ros_workspace = os.path.expandvars('$ROS_WORKSPACE') + '/devel/include'
     if os.path.isdir(ros_workspace):
         paths += [ros_workspace]
 
+    # Project packages
     paths += [rospack.get_path(path) + '/include' for path in rospack.list()]
 
+    # System workspace
     if os.path.isdir('/opt/ros'):
         paths += [
-                path + '/include'
-                for path in reversed(os.listdir('/opt/ros'))
-                    if os.path.isdir(path) and os.path.isdir(path + '/include')
-                ]
+            os.path.join(path + 'include')
+            for path in reversed(os.listdir('/opt/ros'))
+            if os.path.isdir(path) and os.path.isdir(path + '/include')
+        ]
 
     return getIncludePaths('-isystem', paths)
 
@@ -58,10 +61,7 @@ def getBazelIncludePaths(filename):
         return getIncludePaths('-I', [workspace])
 
 def getLocalIncludeFlags():
-    return getIncludePaths('-I', [
-        '.',
-        './include',
-    ])
+    return getIncludePaths('-I', ['.', './include'])
 
 def getIncludePaths(prefix, paths):
     paths = filter(lambda path: os.path.exists(path), set(paths))
