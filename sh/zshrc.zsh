@@ -90,7 +90,6 @@ bindkey -M viins ' ' magic-space
 setopt AUTO_CD          # Lone directory names become cd commands.
 setopt AUTO_PUSHD       # cd = pushd.
 setopt CORRECT          # This is why I use zsh.
-setopt IGNORE_EOF       # We don't want to have any accidents, now do we?
 setopt MULTIOS          # Allow piping to multiple outputs.
 setopt NO_BEEP          # No audio bells.
 setopt NO_FLOW_CONTROL  # It's annoying when the terminal stops producing output for no good reason.
