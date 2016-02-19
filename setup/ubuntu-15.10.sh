@@ -75,9 +75,10 @@ sudo apt-get install --assume-yes \
    zsh
 
 # Rust install
-wget --quiet --output-document=/tmp/rustup.sh "$rust_install_url"
-sudo sh /tmp/rustup.sh --yes
-rm /tmp/rustup.sh
+rust_install_file="$(mktemp)"
+wget --quiet --output-document="$rust_install_file" "$rust_install_url"
+sudo sh "$rust_install_file" --yes
+rm "$rust_install_file"
 
 # Docker service and user account
 sudo service docker start
