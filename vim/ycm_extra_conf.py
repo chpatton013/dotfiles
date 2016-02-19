@@ -43,6 +43,20 @@ def getRosIncludeFlags():
 
     return getIncludePaths('-isystem', paths)
 
+def getBazelWorkspace(filename):
+    while len(filename) > 0:
+        filename = os.path.dirname(filename)
+        if os.path.exists(os.path.join(filename, 'WORKSPACE')):
+            return filename
+    return None
+
+def getBazelIncludePaths(filename):
+    workspace = getBazelWorkspace(filename)
+    if workspace is None:
+        return []
+    else:
+        return getIncludePaths('-I', [workspace])
+
 def getLocalIncludeFlags():
     return getIncludePaths('-I', [
         '.',
@@ -60,6 +74,11 @@ def IsHeaderFile(filename):
 
 def FlagsForFile(filename, **kwargs):
     return {
-        'flags': getDefaultFlags() + getSystemIncludeFlags() + getRosIncludeFlags() + getLocalIncludeFlags(),
+        'flags': \
+                getDefaultFlags() + \
+                getSystemIncludeFlags() + \
+                getRosIncludeFlags() + \
+                getBazelIncludePaths(filename) + \
+                getLocalIncludeFlags(),
         'do_cache': True
     }
