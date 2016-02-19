@@ -43,3 +43,9 @@ function ifind() {
 function vpn() {
    sudo openvpn ~/.vpn/client.ovpn
 }
+
+if [ "$(uname -s)" = "Darwin" ]; then
+   function docker_setup() {
+      eval "$(docker-machine env default)"
+   }
+fi
