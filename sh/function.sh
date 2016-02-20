@@ -36,8 +36,7 @@ function tmux_start_session() {
 }
 
 function ifind() {
-   local pattern="$@"
-   find . -iname "*$pattern*"
+   find . -iname "*$@*"
 }
 
 function vpn() {
