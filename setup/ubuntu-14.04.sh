@@ -25,6 +25,7 @@ sudo apt-get install --assume-yes \
    gcc \
    git \
    gnome-tweak-tool \
+   htop \
    make \
    neovim \
    nodejs \

@@ -57,6 +57,7 @@ sudo apt-get install --assume-yes \
    git \
    google-chrome-stable \
    gnome-tweak-tool \
+   htop \
    "linux-image-extra-$kernel_version" \
    make \
    neovim \
