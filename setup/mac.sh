@@ -23,7 +23,6 @@ function main() {
    install_homebrew
    install_packages
    install_rust
-   configure_docker
    # configure_ntfs
 }
 
@@ -86,10 +85,6 @@ function install_rust() {
    curl --fail --silent --show-error --location "${install_url}" > "${install_file}"
    sudo sh "${install_file}" --yes
    rm "${install_file}"
-}
-
-function configure_docker() {
-   docker-machine create --driver virtualbox default
 }
 
 # This only works in recovery mode.
