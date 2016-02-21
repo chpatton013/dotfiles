@@ -124,16 +124,17 @@ PS1_lbrace="${fg_white}[${reset_color}"
 PS1_rbrace="${fg_white}]${reset_color}"
 PS1_vbar="${fg_white}|${reset_color}"
 PS1_at="${fg_white}@${reset_color}"
+PS1_langle="${fg_white}<${reset_color}"
 PS1_rangle="${fg_white}>${reset_color}"
 PS1_name="${fg_blue}${SH_name}${reset_color}"
-PS1_host="${fg_magenta}${SH_host}${reset_color}"
-PS1_time="${fg_magenta}${SH_time}${reset_color}"
+PS1_host="${fg_green}${SH_host}${reset_color}"
+PS1_time="${fg_green}${SH_time}${reset_color}"
 PS1_date="${fg_blue}${SH_date}${reset_color}"
-PS1_pwd="${fg_magenta}${SH_pwd}${reset_color}"
-PS1_priv="${fg_white}${SH_priv}${reset_color}"
+PS1_pwd="${fg_blue}${SH_pwd}${reset_color}"
+PS1_priv="${fg_green}${SH_priv}${reset_color}"
 
-export PS1="$PS1_lbrace $PS1_name $PS1_at $PS1_host $PS1_vbar $PS1_date $PS1_at $PS1_time $PS1_rbrace
-$PS1_lbrace $PS1_pwd $PS1_priv "
+export PS1="$PS1_name$PS1_at$PS1_host$PS1_vbar$PS1_date$PS1_at$PS1_time$PS1_vbar$PS1_pwd
+$PS1_priv$PS1_rangle "
 
 ###############################################################################
 
