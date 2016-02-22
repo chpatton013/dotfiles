@@ -65,32 +65,23 @@ export HISTFILESIZE=2000
 # Path Construction.
 ###############################################################################
 
-# personal bin directories
-OLD_PATH=$PATH
-PATH='.'
-[ -d ~/bin ] && PATH+=:~/bin
-[ -d ~/sbin ] && PATH+=:~/sbin
-# homebrew bin directories
-[ -d /usr/local/bin ] && PATH+=:/usr/local/bin
-[ -d /usr/local/sbin ] && PATH+=:/usr/local/sbin
-# usr bin directories
-[ -d /usr/bin ] && PATH+=:/usr/bin
-[ -d /usr/sbin ] && PATH+=:/usr/sbin
-# mysql bin directories
-[ -d /usr/local/mysql/bin ] && PATH+=:/usr/local/mysql/bin
-[ -d /usr/local/mysql/sbin ] && PATH+=:/usr/local/mysql/sbin
-# X11 bin directory
-[ -d /usr/X11/bin ] && PATH+=:/usr/X11/bin
-# CUDA bin directories
-[ -d /usr/local/cuda/bin ] && PATH+=:/usr/local/cuda/bin
-[ -d /usr/local/cuda-5.0/bin ] && PATH+=:/usr/local/cuda-5.0/bin
-# kerberos bin directories
-[ -d /usr/kerberos/bin ] && PATH+=:/usr/kerberos/bin
-[ -d /usr/kerberos/sbin ] && PATH+=:/usr/kerberos/sbin
-# system bin directories
-[ -d /bin ] && PATH+=:/bin
-[ -d /sbin ] && PATH+=:/sbin
-export PATH="$OLD_PATH:$PATH"
+paths=( \
+   /usr/local \
+   /usr \
+   /usr/local/mysql \
+   /usr/X11 \
+   /usr/local/cuda \
+   /usr/local/cuda-5.0 \
+   /usr/kerberos
+   / \
+)
+for p in ${paths[@]}; do
+   bin="$p/bin"
+   sbin="$p/sbin"
+   [ -d "$bin" ] && PATH+=:"$bin"
+   [ -d "$sbin" ] && PATH+=:"$sbin"
+done
+export PATH="$PATH"
 
 ###############################################################################
 
@@ -99,15 +90,20 @@ export PATH="$OLD_PATH:$PATH"
 # LD Library Path Construction.
 ###############################################################################
 
-LD_LIBRARY_PATH=./lib
-[ -d /lib ] && LD_LIBRARY_PATH+=:/lib
-[ -d /usr/lib ] && LD_LIBRARY_PATH+=:/usr/lib
-[ -d /usr/local/lib ] && LD_LIBRARY_PATH+=:/usr/local/lib
-[ -d /usr/local/cuda/lib ] && LD_LIBRARY_PATH+=:/usr/local/cuda/lib
-[ -d /usr/local/cuda/lib64 ] && LD_LIBRARY_PATH+=:/usr/local/cuda/lib64
-[ -d /usr/local/cuda-5.0/lib ] && LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib
-[ -d /usr/local/cuda-5.0/lib64 ] && LD_LIBRARY_PATH+=:/usr/local/cuda-5.0/lib64
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+library_paths=( \
+   / \
+   /usr \
+   /usr/local \
+   /usr/local/cuda \
+   /usr/local/cuda-5.0 \
+)
+for l in ${library_paths[@]}; do
+   lib="$l/lib"
+   lib64="$l/lib64"
+   [ -d "$lib" ] && LD_LIBRARY_PATH+=:"$lib"
+   [ -d "$lib64" ] && LD_LIBRARY_PATH+=:"$lib64"
+done
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
 
 ###############################################################################
 
