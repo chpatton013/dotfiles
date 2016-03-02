@@ -77,6 +77,9 @@ function install_packages() {
       vim \
       wget \
       zsh
+
+   sudo pip2 install neovim
+   sudo pip3 install neovim
 }
 
 function install_rust() {
