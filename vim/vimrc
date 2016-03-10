@@ -5,10 +5,11 @@
 augroup FileTypeAssociation
    autocmd!
    autocmd BufNewFile,BufRead *.ejs set filetype=html
-   autocmd BufNewFile,BufRead *.make set filetype=make
-   autocmd BufNewFile,BufRead *.mak set filetype=mako
    autocmd BufNewFile,BufRead *.impl set filetype=cpp
    autocmd BufNewFile,BufRead *.inl set filetype=cpp
+   autocmd BufNewFile,BufRead *.mak set filetype=mako
+   autocmd BufNewFile,BufRead *.launch set filetype=xml
+   autocmd BufNewFile,BufRead *.make set filetype=make
 augroup END
 
 " Resize splits on window resize.
