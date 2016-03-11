@@ -51,6 +51,7 @@ function install_packages() {
    brew upgrade
 
    brew cask install \
+      Caskroom/cask/xquartz \
       shiftit \
       vagrant \
       vagrant-manager \
@@ -76,6 +77,9 @@ function install_packages() {
       vim \
       wget \
       zsh
+
+   sudo pip2 install neovim
+   sudo pip3 install neovim
 }
 
 function install_rust() {

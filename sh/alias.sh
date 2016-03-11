@@ -19,13 +19,13 @@ fi
 
 alias l="ls"
 if [ "$(uname -s)" = "Darwin" ]; then
-   alias ll="ls --human-readable -l"
-   alias la="ls --all"
-   alias lal="ll --all"
-else
    alias ll="ls -hl"
    alias la="ls -a"
    alias lal="ll -a"
+else
+   alias ll="ls --human-readable -l"
+   alias la="ls --all"
+   alias lal="ll --all"
 fi
 alias lla="lal"
 
