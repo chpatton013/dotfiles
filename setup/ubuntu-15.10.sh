@@ -6,11 +6,10 @@ ubuntu_version="$(lsb_release --short --codename)"
 kernel_version="$(uname --kernel-release)"
 
 tmux_ppa="ppa:pi-rho/dev"
-
 neovim_ppa="ppa:neovim-ppa/unstable"
 
 google_signing_key="https://dl-ssl.google.com/linux/linux_signing_key.pub"
-chrome_source_entry="deb http://dl.google.com/linux/chrome/deb/ stable main"
+chrome_source_entry="deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
 
 docker_keyserver="hkp://p80.pool.sks-keyservers.net:80"
 docker_key="58118E89F3A912897C070ADBF76221572C52609D"
@@ -21,6 +20,7 @@ virtualbox_source_entry="deb http://download.virtualbox.org/virtualbox/debian $u
 
 rust_install_url="https://static.rust-lang.org/rustup.sh"
 
+sudo apt-get update
 sudo apt-get install --assume-yes software-properties-common
 
 # Tmux PPA
@@ -43,7 +43,6 @@ sudo apt-add-repository --yes "$virtualbox_source_entry"
 
 # Package installation
 sudo apt-get update
-sudo apt-get upgrade --assume-yes
 sudo apt-get install --assume-yes \
    chromium-browser \
    clang-3.6 \
@@ -59,6 +58,7 @@ sudo apt-get install --assume-yes \
    gnome-tweak-tool \
    htop \
    "linux-image-extra-$kernel_version" \
+   lm-sensors \
    make \
    neovim \
    nodejs \
@@ -84,5 +84,5 @@ sudo sh "$rust_install_file" --yes
 rm "$rust_install_file"
 
 # Docker service and user account
-sudo service docker start
+sudo service docker restart
 sudo usermod --append --groups docker "$(id --user --name)"
