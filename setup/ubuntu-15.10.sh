@@ -64,6 +64,8 @@ sudo apt-get install --assume-yes \
    nodejs \
    nodejs-legacy \
    npm \
+   openssh-client \
+   openssh-server \
    python-dev \
    python-pip \
    python3-dev \
