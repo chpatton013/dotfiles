@@ -1,3 +1,3 @@
-export LIBGL_ALWAYS_SOFTWARE=1
+export vim_tab_width=2
 zoox_driving_repository="$HOME/driving"
 source "$zoox_driving_repository/scripts/shell/zooxrc.sh"
