@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 ###############################################################################
 # Login Actions.
 ###############################################################################
@@ -34,10 +32,10 @@ if [ -d ~/.dircolors ]; then
 fi
 
 if [ "$DISPLAY" ]; then
-   if [ `echo $DESKTOP_SESSION | grep "gnome"` ] &&
+   if [ "$(echo $DESKTOP_SESSION | grep "gnome")" ] &&
     [ -d ~/.themes/solarized/gnome-terminal-colors-solarized ]; then
       ~/.themes/solarized/gnome-terminal-colors-solarized/set_dark.sh
-   elif [ `echo $DESKTOP_SESSION | grep -E "konsole|kde"` ] &&
+   elif [ "$(echo $DESKTOP_SESSION | grep -E "konsole|kde")" ] &&
     [ -d ~/.themes/solarized/konsole-colors-solarized ]; then
       ~/.themes/solarized/konsole-colors-solarized/set_dark.sh
    fi

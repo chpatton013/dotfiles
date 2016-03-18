@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 # Expand control characters.
 alias less="less --RAW-CONTROL-CHARS"
 # Enable trusted and untrsuted X Forwarding and compression in X sessions.
