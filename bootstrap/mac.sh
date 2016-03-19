@@ -18,3 +18,8 @@ function docker_setup() {
 
    eval "$(docker-machine env default)"
 }
+
+if which brew &>/dev/null; then
+   PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+   MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
+fi

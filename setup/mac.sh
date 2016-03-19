@@ -43,6 +43,7 @@ function install_homebrew() {
 function install_packages() {
    brew cask
 
+   brew tap homebrew/dupes
    brew tap homebrew/fuse
    brew tap homebrew/versions
    brew tap neovim/neovim
@@ -57,6 +58,7 @@ function install_packages() {
       vagrant-manager \
       virtualbox
 
+   # Missing or out-dated utilities.
    brew install \
       clang-format \
       cmake \
@@ -64,19 +66,46 @@ function install_packages() {
       docker-compose \
       docker-machine \
       docker-machine-parallels \
+      file-formula \
       gcc5 \
       git \
+      gpatch \
+      gpg \
       htop \
+      less \
       neovim \
+      nmap \
       node \
       ntfs-3g \
+      openssh \
       python \
       python3 \
+      rsync \
       tmux \
       tree \
+      unzip \
       vim \
       wget \
       zsh
+
+   # GNU utilities.
+	brew install binutils
+	brew install coreutils
+	brew install diffutils
+	brew install ed --default-names
+	brew install findutils --with-default-names
+	brew install gawk
+	brew install gnu-indent --with-default-names
+	brew install gnu-sed --with-default-names
+	brew install gnu-tar --with-default-names
+	brew install gnu-which --with-default-names
+	brew install gnutls
+	brew install grep --with-default-names
+	brew install gzip
+	brew install screen
+	brew install watch
+	brew install wdiff --with-gettext
+	brew install wget
 
    sudo pip2 install neovim
    sudo pip3 install neovim
