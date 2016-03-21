@@ -42,3 +42,19 @@ function ifind() {
 function vpn() {
    sudo openvpn ~/.vpn/client.ovpn
 }
+
+function docker_push() {
+   image_name="$1"
+   tag="$2"
+
+   user_name="chpatton013"
+   user_email="chpatton013@gmail.com"
+   identifier="$user_name/$image_name"
+
+   docker login --username="$user_name" --email="$user_email"
+
+   image_id="$(docker images --quiet "$image_name")"
+
+   docker tag "$image_id" "$identifier:$tag"
+   docker push "$identifier"
+}
