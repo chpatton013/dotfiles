@@ -29,19 +29,22 @@ def getRosIncludeFlags():
     paths = []
 
     # Project workspace
-    ros_workspace = os.path.expandvars('$ROS_WORKSPACE') + '/devel/include'
-    if os.path.isdir(ros_workspace):
-        paths += [ros_workspace]
+    ros_workspace = os.environ.get('ROS_WORKSPACE')
+    if ros_workspace:
+        paths += [os.path.join(ros_workspace, 'devel', 'include')]
 
     # Project packages
-    paths += [rospack.get_path(path) + '/include' for path in rospack.list()]
+    paths += [
+        os.path.join(rospack.get_path(path), 'include')
+        for path in rospack.list()
+    ]
 
     # System workspace
-    if os.path.isdir('/opt/ros'):
+    ros_system_workspace = '/opt/ros'
+    if os.path.isdir(ros_system_workspace):
         paths += [
-            os.path.join(path + 'include')
-            for path in reversed(os.listdir('/opt/ros'))
-            if os.path.isdir(path) and os.path.isdir(path + '/include')
+            os.path.join(path, 'include')
+            for path in reversed(os.listdir(ros_system_workspace))
         ]
 
     return getIncludePaths('-isystem', paths)
@@ -59,6 +62,13 @@ def getBazelIncludePaths(filename):
         return []
     else:
         return getIncludePaths('-I', [workspace])
+
+def getQtIncludeFlags():
+    paths = [
+        '/usr/include/qt4',
+        '/usr/include/qt4/QtCore',
+    ]
+    return getIncludePaths('-isystem', paths)
 
 def getLocalIncludeFlags():
     return getIncludePaths('-I', ['.', './include'])
@@ -79,6 +89,7 @@ def FlagsForFile(filename, **kwargs):
                 getSystemIncludeFlags() + \
                 getRosIncludeFlags() + \
                 getBazelIncludePaths(filename) + \
+                getQtIncludeFlags() + \
                 getLocalIncludeFlags(),
         'do_cache': True
     }
