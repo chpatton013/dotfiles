@@ -72,10 +72,11 @@ paths=( \
    /usr/local/cuda-5.0 \
    /usr/kerberos
    / \
+   "$HOME" \
 )
 for p in ${paths[@]}; do
-   bin="$p/bin"
-   sbin="$p/sbin"
+   bin="${p%/}/bin"
+   sbin="${p%/}/sbin"
    [ -d "$bin" ] && PATH+=:"$bin"
    [ -d "$sbin" ] && PATH+=:"$sbin"
 done
