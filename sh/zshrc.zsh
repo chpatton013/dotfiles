@@ -110,7 +110,6 @@ setopt EXTENDED_HISTORY       # Save time and duration of execution.
 setopt HIST_IGNORE_DUPS       # Ignore immediate duplicates.
 setopt HIST_IGNORE_SPACE      # Do not save lines that start with a space.
 setopt HIST_NO_STORE          # Do not save commands with '!' (only the resulting auto-completed command).
-setopt HIST_REDUCE_BLANKS     # This     seems  like    a good    idea.
 setopt HIST_VERIFY            # Auto-completion with '!' verifies on next line.
 setopt SHARE_HISTORY          # Share history between shells.
 
