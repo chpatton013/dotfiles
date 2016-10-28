@@ -1,3 +1,6 @@
+# Useless OS-specific files
+.DS_Store
+
 # Vim Swap Files
 *.sw?
 
@@ -18,6 +21,9 @@
 *.lai
 *.la
 *.a
+
+# Compiled Python
+*.pyc
 
 .remote
 
