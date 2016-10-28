@@ -106,3 +106,6 @@
 [submodule "vim/bundle/vim-troll-stopper"]
 	path = vim/bundle/vim-troll-stopper
 	url = git@github.com:vim-utils/vim-troll-stopper.git
+[submodule "vim/bundle/editorconfig-vim"]
+	path = vim/bundle/editorconfig-vim
+	url = git@github.com:editorconfig/editorconfig-vim.git
