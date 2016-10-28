@@ -63,6 +63,7 @@ link "$root_dir/config/X" "$home/.config/X"
 link "$root_dir/themes" "$home/.themes"
 link "$root_dir/ctags" "$home/.ctags"
 link "$root_dir/clang-format.conf" "$home/.clang-format"
+link "$root_dir/editorconfig" "$home/.editorconfig"
 
 ################################################################################
 # Build dependencies
