@@ -53,6 +53,7 @@ function install_packages() {
 
    brew cask install \
       Caskroom/cask/xquartz \
+      java \
       shiftit \
       vagrant \
       vagrant-manager \
@@ -60,6 +61,7 @@ function install_packages() {
 
    # Missing or out-dated utilities.
    brew install \
+      bazel \
       clang-format \
       cmake \
       docker \
