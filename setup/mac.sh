@@ -69,6 +69,7 @@ function install_packages() {
       docker-machine \
       docker-machine-parallels \
       file-formula \
+      fswatch \
       gcc5 \
       git \
       gpatch \
