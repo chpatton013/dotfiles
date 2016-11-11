@@ -72,7 +72,7 @@ paths=( \
    /usr/local/cuda-5.0 \
    /usr/kerberos
    / \
-   "$HOME" \
+   "$HOME/dotfiles" \
 )
 for p in ${paths[@]}; do
    bin="${p%/}/bin"
