@@ -164,3 +164,7 @@ if [ -d ~/.bootstrap ]; then
       source "$b"
    done
 fi
+
+# Setup ssh agent automatically. This will require a key decryption prompt in
+# the first shell opened each boot.
+sk
