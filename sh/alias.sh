@@ -1,7 +1,7 @@
 # Expand control characters.
 alias less="less --RAW-CONTROL-CHARS"
 # Enable trusted and untrsuted X Forwarding and compression in X sessions.
-alias ssh="ssh -XYC"
+alias ssh="ssh -o ForwardX11=yes -o ForwardX11Trusted=yes -o ForwardAgent=true"
 # Log X sessions.
 alias startx="startx &> ~/.xlog"
 
