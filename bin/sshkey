@@ -27,7 +27,8 @@ function _get_non_canon_agent_pids() {
     echo "$all_agent_pids"
   elif [ ! -z "$all_agent_pids" ] &&
        [ "$all_agent_pids" != "$canon_agent_pid" ]; then
-    echo "$all_agent_pids" | grep --invert-match "$canon_agent_pid"
+    # -v == --invert-match on Linux
+    echo "$all_agent_pids" | grep -v "$canon_agent_pid"
   fi
 }
 
@@ -39,7 +40,8 @@ function _is_canon_agent_running() {
     return 1
   fi
 
-  ps --pid "$canon_agent_pid" >/dev/null
+  # -p == --pid on Linux
+  ps -p "$canon_agent_pid" >/dev/null
   return "$?"
 }
 
@@ -48,7 +50,7 @@ function kill_non_canon_agents() {
   non_canon_agent_pids="$(_get_non_canon_agent_pids)"
   readonly non_canon_agent_pids
   if [ ! -z "$non_canon_agent_pids" ]; then
-    kill "$non_canon_agent_pids"
+    echo "$non_canon_agent_pids" | xargs kill
   fi
 }
 
@@ -63,7 +65,8 @@ function seed_agent() {
 }
 
 function main() {
-  mkdir --parents "$env_dir"
+  # -p == --parents on Linux
+  mkdir -p "$env_dir"
   touch "$env_file"
 
   kill_non_canon_agents
