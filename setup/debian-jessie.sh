@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 debian_version="$(lsb_release --short --codename)"
@@ -13,9 +12,9 @@ rust_install_url="https://static.rust-lang.org/rustup.sh"
 
 sudo apt-get update
 sudo apt-get install --assume-yes \
-   apt-transport-https \
-   ca-certificates \
-   software-properties-common
+  apt-transport-https \
+  ca-certificates \
+  software-properties-common
 
 # Docker repository
 sudo apt-key adv --keyserver "$docker_keyserver" --recv-keys "$docker_key"
@@ -24,32 +23,32 @@ sudo apt-add-repository --yes "$docker_source_entry"
 # Package installation
 sudo apt-get update
 sudo apt-get install --assume-yes \
-   clang-3.5 \
-   clang-format-3.5 \
-   cmake \
-   docker-engine \
-   g++ \
-   gcc \
-   git \
-   htop \
-   "linux-headers-$kernel_version" \
-   "linux-image-$kernel_version" \
-   lm-sensors \
-   make \
-   nodejs \
-   nodejs-legacy \
-   npm \
-   openssh-client \
-   openssh-server \
-   python-dev \
-   python-pip \
-   python3-dev \
-   python3-pip \
-   tmux \
-   tree \
-   vagrant \
-   vim \
-   zsh
+  clang-3.5 \
+  clang-format-3.5 \
+  cmake \
+  docker-engine \
+  g++ \
+  gcc \
+  git \
+  htop \
+  "linux-headers-$kernel_version" \
+  "linux-image-$kernel_version" \
+  lm-sensors \
+  make \
+  nodejs \
+  nodejs-legacy \
+  npm \
+  openssh-client \
+  openssh-server \
+  python-dev \
+  python-pip \
+  python3-dev \
+  python3-pip \
+  tmux \
+  tree \
+  vagrant \
+  vim \
+  zsh
 
 # Rust install
 rust_install_file="$(mktemp)"
