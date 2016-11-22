@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-env_dir="/var/tmp/sshkey"; readonly env_dir
-env_file="$env_dir/env.source"; readonly env_file
+# Use this tool to help manage ssh-agent processes.
+#
+# sshkey will create a single "canon" agent and kill all other agent processes.
+# It will then print the appropriate shell commands to configure your
+# environment for the canon agent. Repeated invocation of sshkey will leave the
+# canon agent running so you can save yourself from hundreds of errant agents
+# running all the time.
+#
+# Usage:
+#   eval $(/path/to/sshkey)
+
+env_dir="/var/tmp/sshkey"
+env_file="$env_dir/env.source"
+readonly env_dir env_file
 
 function _get_canon_agent_pid() {
   (
