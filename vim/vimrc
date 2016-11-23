@@ -76,8 +76,8 @@ let g:syntastic_enable_balloons=0
 " Syntax-check C and C++ header files.
 let g:syntastic_cpp_check_header=1
 let g:syntastic_c_check_header=1
-" Use c++11 syntax and disable pre-compiled headers.
-let g:syntastic_cpp_compiler_options=' -std=c++11 -Wall -Wextra -Wno-unused-result'
+" Use C++14 syntax and look for sane warnings.
+let g:syntastic_cpp_compiler_options=' -std=c++14 -Wall -Wextra -Wno-unused-result -Weffc++'
 let g:syntastic_c_compiler_options=' -Wall -Wextra'
 " Include these directories when building C++ files.
 let g:syntastic_cpp_include_dirs=['.', 'include']

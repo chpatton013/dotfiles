@@ -10,7 +10,7 @@ def getDefaultFlags():
         '-Wno-unused-result',
         '-Weffc++',
         '--pipe',
-        '-std=c++11',
+        '-std=c++14',
         '-x', 'c++',
     ]
 
