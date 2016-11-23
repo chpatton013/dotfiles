@@ -97,7 +97,12 @@ let g:ycm_collect_identifiers_from_tags_files=1
 
 " EditorConfig
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let g:EditorConfig_exclude_patterns=['fugitive://.*']
+
+" ClangFormat
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:clang_format#detect_style_file=1
+let g:clang_format#auto_format=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration customization
@@ -274,6 +279,16 @@ nnoremap <silent> <leader><Space> :call <SID>StripTrailingWhitespaces()<CR>
 
 " Toggle NERDTree.
 nnoremap <silent> <Leader>t :NERDTreeToggle<CR>
+
+" Run clang-format on open file.
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>f :ClangFormat<CR>
+nmap <Leader>F :ClangFormatAutoToggle<CR>
+
+" Visual mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Run clang-format on visual selection.
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>f :ClangFormat<CR>
 
 " Insert mode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
