@@ -18,6 +18,7 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   pl = pull
   ps = push
+  pf = push --force-with-lease
   rb = rebase
   rs = reset
   sl = stash list
