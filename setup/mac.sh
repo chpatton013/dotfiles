@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -xeuo pipefail
 
 # Installed via getmacapps.com:
 #   alfred
@@ -26,7 +26,7 @@ function install_homebrew() {
 
   curl --fail --silent --show-error --location "${install_url}" > "${install_file}"
   # Replace stdin with /dev/null so this install script does not wait for user.
-  sudo ruby -- "${install_file}" </dev/null
+  ruby -- "${install_file}" </dev/null
   rm "${install_file}"
 
   sudo mkdir -p /opt/homebrew-cask/Caskroom
