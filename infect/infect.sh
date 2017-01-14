@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -xeuo pipefail
 
 script_dir="$( (builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) )"
@@ -18,8 +17,8 @@ make_directory "$HOME/projects" "$HOME/.config" "$HOME/.tmux"
 # Update repository
 ################################################################################
 
+git submodule deinit --force .
 git submodule update --init --recursive
-git submodule foreach git pull origin master
 
 ################################################################################
 # Link config files in home folder
