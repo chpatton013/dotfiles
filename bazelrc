@@ -1,0 +1,68 @@
+################################################################################
+# Defaults
+
+# Group tasks into fewer processes so the OS scheduler can handle them better.
+startup --batch_cpu_scheduling
+
+# Always generate explanations.
+build --explain /tmp/explain.txt --verbose_explanations
+
+# Always show output from failing tests.
+test --test_output=errors
+
+# Remove external content quickly when cleaning.
+clean --expunge_async
+
+# Build sandboxed to help find hidden errors.
+build --config=sandboxed
+test --config=sandboxed
+
+# Omit unnecessary runfiles trees to speed up builds.
+build --config=norunfiles
+test --config=norunfiles
+
+################################################################################
+# Configs
+
+# Ensure builds and tests happen in a reproducible environment.
+build:sandboxed --spawn_strategy=sandboxed --genrule_strategy=sandboxed
+test:sandboxed --spawn_strategy=sandboxed --genrule_strategy=sandboxed
+
+# Turn off slow build and test isolation.
+build:standalone --spawn_strategy=standalone --genrule_strategy=standalone
+test:standalone --spawn_strategy=standalone --genrule_strategy=standalone
+
+# Build runfiles forests for all binary targets.
+build:runfiles --build_runfile_links
+test:runfiles --build_runfile_links
+
+# Only build runfiles forests for explicitly requested binary targets.
+build:norunfiles --nobuild_runfile_links
+test:norunfiles --nobuild_runfile_links
+
+# Instrument code with the Address Sanitizer.
+build:asan --strip=never
+build:asan --copt -fsanitize=address
+build:asan --copt -fsanitize=leak
+build:asan --copt -fno-omit-frame-pointer
+build:asan --copt -DADDRESS_SANITIZER
+build:asan --linkopt -fsanitize=address
+build:asan --linkopt -fsanitize=leak
+build:asan --linkopt -lpthread
+build:asan --linkopt -lrt
+build:asan --linkopt -ldl
+test:asan --test_timeout 120,600,1800,7200
+
+# Instrument code with the Thread Sanitizer.
+build:tsan --strip=never
+build:tsan --copt -fsanitize=thread
+build:tsan --copt -fno-omit-frame-pointer
+build:tsan --copt -DTHREAD_SANITIZER
+build:tsan --copt -DDYNAMIC_ANNOTATIONS_ENABLED=1
+build:tsan --copt -DDYNAMIC_ANNOTATIONS_EXTERNAL_IMPL=1
+build:tsan --copt -O1
+build:tsan --linkopt -fsanitize=thread
+build:tsan --linkopt -lpthread
+build:tsan --linkopt -lrt
+build:tsan --linkopt -ldl
+build:tsan --linkopt -ltsan

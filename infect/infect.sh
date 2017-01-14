@@ -62,6 +62,7 @@ link "$root_dir/themes" "$HOME/.themes"
 link "$root_dir/ctags" "$HOME/.ctags"
 link "$root_dir/clang-format.conf" "$HOME/.clang-format"
 link "$root_dir/editorconfig" "$HOME/.editorconfig"
+link "$root_dir/bazelrc" "$HOME/.bazelrc"
 
 ################################################################################
 # Build dependencies
