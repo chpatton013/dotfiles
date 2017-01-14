@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Manually installed:
-#   teamviewer
-#   osxfuse
-#
 # Installed via getmacapps.com:
 #   alfred
 #   caffeine
@@ -42,7 +38,6 @@ function install_packages() {
   brew cask
 
   brew tap homebrew/dupes
-  brew tap homebrew/fuse
   brew tap homebrew/versions
   brew tap neovim/neovim
 
@@ -77,7 +72,6 @@ function install_packages() {
     neovim \
     nmap \
     node \
-    ntfs-3g \
     openssh \
     python \
     python3 \
