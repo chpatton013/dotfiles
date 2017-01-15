@@ -78,6 +78,9 @@ sudo apt-get install --assume-yes \
   virtualbox-5.0 \
   zsh
 
+# Install etckeeper separately so we can specify "git mode".
+sudo apt-get install --assume-yes etckeeper git-core
+
 # Neovim python support
 sudo pip2 install --upgrade neovim
 sudo pip3 install --upgrade neovim
