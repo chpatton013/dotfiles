@@ -1,21 +1,21 @@
 function random_string() {
-   local length="$1"
+   local length; length="$1"; readonly length
    base64 /dev/urandom | tr -d '/+' | fold -w "$length" | head -n 1
 }
 
 # `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
 if [ "$(uname -s)" = "Darwin" ]; then
    function ls() {
-      /bin/ls -Fb $@
+      /bin/ls -Fb "$@"
    }
 else
    function ls() {
-      /bin/ls --classify --escape $@
+      /bin/ls --classify --escape "$@"
    }
 fi
 
 function cd() {
-   builtin cd $@ && ls
+   builtin cd "$@" && ls
 }
 
 function fuck() {
@@ -23,7 +23,7 @@ function fuck() {
 }
 
 function tmux_start_session() {
-   local name="$1"
+   local name; name="$1"; readonly name
    if [ -z "$name" ]; then
       tmux
    else
@@ -44,17 +44,64 @@ function vpn() {
 }
 
 function docker_push() {
-   local image_name="$1"
-   local tag="${2:-latest}"
+   local image_name; image_name="$1"; readonly image_name
+   local tag; tag="${2:-latest}"; readonly tag
 
-   local user_name="chpatton013"
-   local user_email="chpatton013@gmail.com"
-   local identifier="$user_name/$image_name"
+   local user_name; user_name="chpatton013"; readonly user_name
+   local user_email; user_email="chpatton013@gmail.com"; readonly user_email
+   local identifier; identifier="$user_name/$image_name"; readonly identifier
 
    docker login --username="$user_name" --email="$user_email"
 
-   local image_id="$(docker images --quiet "$image_name")"
+   local image_id; image_id="$(docker images --quiet "$image_name")"
+   readonly image_id
 
    docker tag "$image_id" "$identifier:$tag"
    docker push "$identifier"
 }
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  function inotifyrun() {
+    echo "Watching $(pwd): $@"
+
+    "$@"
+    echo
+
+    while fswatch --recursive \
+                  --event Updated \
+                  --event Created \
+                  --event Removed \
+                  --event MovedFrom \
+                  --event MovedTo \
+                  --timestamp \
+                  --extended \
+                  --exclude ".*/\.git/.*|(.*\.sw.?$)" \
+                  .; do
+      "$@"
+      echo
+    done
+  }
+else
+  function inotifyrun() {
+    echo "Watching $(pwd): $@"
+
+    "$@"
+    echo
+
+    while inotifywait --quiet \
+                      --recursive \
+                      --event close_write \
+                      --event create \
+                      --event delete \
+                      --event moved_to \
+                      --event moved_from \
+                      --event unmount \
+                      --timefmt "%H:%M:%S" \
+                      --format "%T: %e: %w%f" \
+                      --exclude ".*/\.git/.*|(.*\.sw.?$)" \
+                      .; do
+      "$@"
+      echo
+    done
+  }
+fi

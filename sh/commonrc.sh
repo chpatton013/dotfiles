@@ -72,7 +72,7 @@ paths=( \
    /usr/local/cuda-5.0 \
    /usr/kerberos
    / \
-   "$HOME" \
+   "$HOME/dotfiles" \
 )
 for p in ${paths[@]}; do
    bin="${p%/}/bin"
@@ -164,3 +164,7 @@ if [ -d ~/.bootstrap ]; then
       source "$b"
    done
 fi
+
+# Setup ssh agent automatically. This will require a key decryption prompt in
+# the first shell opened each boot.
+sk

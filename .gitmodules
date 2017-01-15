@@ -106,3 +106,12 @@
 [submodule "vim/bundle/vim-troll-stopper"]
 	path = vim/bundle/vim-troll-stopper
 	url = git@github.com:vim-utils/vim-troll-stopper.git
+[submodule "vim/bundle/editorconfig-vim"]
+	path = vim/bundle/editorconfig-vim
+	url = git@github.com:editorconfig/editorconfig-vim.git
+[submodule "vim/bundle/vim-clang-format"]
+	path = vim/bundle/vim-clang-format
+	url = git@github.com:rhysd/vim-clang-format.git
+[submodule "vim/bundle/vim-cpp-enhanced-highlight"]
+	path = vim/bundle/vim-cpp-enhanced-highlight
+	url = git@github.com:octol/vim-cpp-enhanced-highlight.git

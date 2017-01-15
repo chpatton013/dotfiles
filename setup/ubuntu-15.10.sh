@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 ubuntu_version="$(lsb_release --short --codename)"
@@ -44,38 +43,39 @@ sudo apt-add-repository --yes "$virtualbox_source_entry"
 # Package installation
 sudo apt-get update
 sudo apt-get install --assume-yes \
-   chromium-browser \
-   clang-3.6 \
-   clang-3.7 \
-   clang-format-3.6 \
-   clang-format-3.7 \
-   cmake \
-   docker-engine \
-   g++ \
-   gcc \
-   git \
-   google-chrome-stable \
-   gnome-tweak-tool \
-   htop \
-   "linux-image-extra-$kernel_version" \
-   lm-sensors \
-   make \
-   neovim \
-   nodejs \
-   nodejs-legacy \
-   npm \
-   openssh-client \
-   openssh-server \
-   python-dev \
-   python-pip \
-   python3-dev \
-   python3-pip \
-   tmux=2.0-1~ppa1~t \
-   tree \
-   vagrant \
-   vim \
-   virtualbox-5.0 \
-   zsh
+  chromium-browser \
+  clang-3.6 \
+  clang-3.7 \
+  clang-format-3.6 \
+  clang-format-3.7 \
+  cmake \
+  docker-engine \
+  g++ \
+  gcc \
+  git \
+  google-chrome-stable \
+  gnome-tweak-tool \
+  htop \
+  inotify-tools \
+  "linux-image-extra-$kernel_version" \
+  lm-sensors \
+  make \
+  neovim \
+  nodejs \
+  nodejs-legacy \
+  npm \
+  openssh-client \
+  openssh-server \
+  python-dev \
+  python-pip \
+  python3-dev \
+  python3-pip \
+  tmux=2.0-1~ppa1~t \
+  tree \
+  vagrant \
+  vim \
+  virtualbox-5.0 \
+  zsh
 
 # Rust install
 rust_install_file="$(mktemp)"
