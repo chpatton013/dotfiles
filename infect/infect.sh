@@ -49,13 +49,6 @@ link "$root_dir/vim/vimrc" "$HOME/.vimrc"
 link "$root_dir/vim/vimrc" "$HOME/.config/nvim/init.vim"
 link "$root_dir/vim/ycm_extra_conf.py" "$HOME/.ycm_extra_conf.py"
 
-# X
-link "$root_dir/sh/xinitrc.sh" "$HOME/.xinitrc"
-link "$root_dir/config/X/xscreensaver" "$HOME/.xscreensaver"
-link "$root_dir/sh/xsession.sh" "$HOME/.xsession"
-link "$root_dir/config/i3" "$HOME/.i3"
-link "$root_dir/config/X" "$HOME/.config/X"
-
 # Other
 link "$root_dir/themes" "$HOME/.themes"
 link "$root_dir/ctags" "$HOME/.ctags"
