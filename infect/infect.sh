@@ -41,7 +41,7 @@ link "$root_dir/tmux/tmux.conf" "$HOME/.tmux.conf"
 link "$root_dir/tmux/plugins" "$HOME/.tmux/plugins"
 
 # Git
-link "$root_dir/sh/git-completion.sh" "$HOME/.git-completion.sh"
+link "$root_dir/git/git-completion.sh" "$HOME/.git-completion.sh"
 link "$root_dir/git/gitconfig" "$HOME/.gitconfig"
 link "$root_dir/git/gitignore" "$HOME/.gitignore"
 
