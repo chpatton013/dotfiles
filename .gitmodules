@@ -1,17 +1,17 @@
 [submodule "dircolors/solarized"]
-	path = dircolors/solarized
+	path = colors/dircolors/solarized
 	url = git://github.com/seebi/dircolors-solarized.git
 [submodule "themes/solarized/iterm2-colors-solarized"]
-	path = themes/solarized/iterm2-colors-solarized
+	path = colors/themes/solarized/iterm2-colors-solarized
 	url = git@github.com:chpatton013/iterm2-colors-solarized.git
 [submodule "themes/solarized/gnome-terminal-colors-solarized"]
-	path = themes/solarized/gnome-terminal-colors-solarized
+	path = colors/themes/solarized/gnome-terminal-colors-solarized
 	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
 [submodule "themes/solarized/konsole-colors-solarized"]
-	path = themes/solarized/konsole-colors-solarized
+	path = colors/themes/solarized/konsole-colors-solarized
 	url = git://github.com/phiggins/konsole-colors-solarized.git
 [submodule "themes/solarized/tmux-colors-solarized"]
-	path = themes/solarized/tmux-colors-solarized
+	path = colors/themes/solarized/tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized
 [submodule "tmux/plugins/tmux-continuum"]
 	path = tmux/plugins/tmux-continuum

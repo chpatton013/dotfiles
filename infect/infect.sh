@@ -24,6 +24,10 @@ git submodule update --init --recursive
 # Link config files in home folder
 ################################################################################
 
+# Colors
+link "$root_dir/colors/dircolors/solarized/dircolors.256dark" "$HOME/.dircolors"
+link "$root_dir/colors/themes" "$HOME/.themes"
+
 # Shell
 link "$root_dir/sh/alias.sh" "$HOME/.alias"
 link "$root_dir/sh/function.sh" "$HOME/.function"
@@ -31,7 +35,6 @@ link "$root_dir/sh/variables.sh" "$HOME/.variables"
 link "$root_dir/sh/commonrc.sh" "$HOME/.commonrc"
 link "$root_dir/sh/bashrc.bash" "$HOME/.bashrc"
 link "$root_dir/sh/zshrc.zsh" "$HOME/.zshrc"
-link "$root_dir/dircolors/solarized/dircolors.256dark" "$HOME/.dircolors"
 
 # Tmux
 link "$root_dir/tmux/tmux.conf" "$HOME/.tmux.conf"
@@ -49,12 +52,11 @@ link "$root_dir/vim/vimrc" "$HOME/.vimrc"
 link "$root_dir/vim/vimrc" "$HOME/.config/nvim/init.vim"
 link "$root_dir/vim/ycm_extra_conf.py" "$HOME/.ycm_extra_conf.py"
 
-# Other
-link "$root_dir/themes" "$HOME/.themes"
-link "$root_dir/ctags" "$HOME/.ctags"
-link "$root_dir/clang-format.conf" "$HOME/.clang-format"
-link "$root_dir/editorconfig" "$HOME/.editorconfig"
-link "$root_dir/bazelrc" "$HOME/.bazelrc"
+# Tools
+link "$root_dir/tools/ctags" "$HOME/.ctags"
+link "$root_dir/tools/clang-format.conf" "$HOME/.clang-format"
+link "$root_dir/tools/editorconfig" "$HOME/.editorconfig"
+link "$root_dir/tools/bazelrc" "$HOME/.bazelrc"
 
 ################################################################################
 # Build dependencies
