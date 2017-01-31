@@ -44,6 +44,7 @@ sudo apt-get install --assume-yes \
   python-pip \
   python3-dev \
   python3-pip \
+  stow \
   tmux \
   tree \
   vagrant \

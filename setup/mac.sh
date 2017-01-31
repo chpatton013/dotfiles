@@ -76,6 +76,7 @@ function install_packages() {
     python \
     python3 \
     rsync \
+    stow \
     tmux \
     tree \
     unzip \

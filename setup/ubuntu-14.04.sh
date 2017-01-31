@@ -61,6 +61,7 @@ sudo apt-get install --assume-yes \
   python-pip \
   python3-dev \
   python3-pip \
+  stow \
   tmux=2.0-1~ppa1~t \
   tree \
   vagrant \
