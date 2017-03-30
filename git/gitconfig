@@ -12,14 +12,19 @@
   cm = commit
   co = checkout
   cp = cherry-pick
-  df = diff
-  dc = diff --cached
+  df = diff --patience --find-renames --find-copies-harder
+  dc = diff --patience --find-renames --find-copies-harder --cached
+  fx = commit --amend --no-edit
   gr = grep --line-number
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   pl = pull
   ps = push
   pf = push --force-with-lease
+  pu = push --set-upstream
   rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbi = rebase --interactive
   rs = reset
   sl = stash list
   st = status --short --branch --ignore-submodules=dirty
@@ -27,8 +32,6 @@
   default = current
 [pull]
   rebase = true
-[diff]
-  algorithm = patience
 [merge]
   tool = vimdiff
 [mergetool]
