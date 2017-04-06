@@ -18,6 +18,7 @@ esac
 [ -f ~/.alias ] && . ~/.alias
 [ -f ~/.function ] && . ~/.function
 [ -f ~/.variables ] && . ~/.variables
+[ -f ~/.cargo/env ] && . ~/.cargo/env
 
 if [ -f ~/.git-completion.sh ]; then
    . ~/.git-completion.sh
