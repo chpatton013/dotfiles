@@ -24,6 +24,8 @@ git submodule update --init --recursive
 # Link config files in home folder
 ################################################################################
 
+(cd stow && find -mindepth 1 -maxdepth 1) | \
+    xargs -I {} rm --recursive --force "$HOME/{}"
 stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 
 ################################################################################
