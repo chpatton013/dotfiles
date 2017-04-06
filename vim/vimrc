@@ -136,7 +136,7 @@ endif
 if $vim_tab_width
    let tab_width=$vim_tab_width
 else
-   let tab_width=3
+   let tab_width=2
 endif
 
 " Settings
