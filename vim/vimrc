@@ -128,9 +128,9 @@ filetype plugin on   " Allow plugins to be loaded by file type.
 let mapleader="," " Use , instead of \ for the map leader.
 
 if $vim_background
-   let &background=$vim_background
+   let background=$vim_background
 else
-   let &background="dark"
+   let background="light"
 endif
 
 if $vim_tab_width

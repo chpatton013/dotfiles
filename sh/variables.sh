@@ -1,8 +1,8 @@
 export tmux_dark_theme="$HOME/.themes/solarized/tmux-colors-solarized/tmuxcolors-dark.conf"
 export tmux_light_theme="$HOME/.themes/solarized/tmux-colors-solarized/tmuxcolors-light.conf"
-export tmux_default_theme="$tmux_dark_theme"
+export tmux_default_theme="$tmux_light_theme"
 
-export vim_background="dark"
+export vim_background="light"
 export vim_tab_width=2
 
 export BROWSER='chromium-browser'
