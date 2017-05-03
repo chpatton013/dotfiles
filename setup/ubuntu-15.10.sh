@@ -78,6 +78,10 @@ sudo apt-get install --assume-yes \
   virtualbox-5.0 \
   zsh
 
+# Neovim python support
+sudo pip2 install --upgrade neovim
+sudo pip3 install --upgrade neovim
+
 # Rust install
 rust_install_file="$(mktemp)"
 wget --quiet --output-document="$rust_install_file" "$rust_install_url"
