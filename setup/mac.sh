@@ -103,8 +103,8 @@ function install_packages() {
   brew install wdiff --with-gettext
   brew install wget
 
-  sudo pip2 install neovim
-  sudo pip3 install neovim
+  sudo pip2 install --upgrade neovim
+  sudo pip3 install --upgrade neovim
 }
 
 function install_rust() {
