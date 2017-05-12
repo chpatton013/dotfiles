@@ -32,6 +32,9 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 # Build dependencies
 ################################################################################
 
+# Vundle plugins
+vim +PluginInstall +qall
+
 ( # YouCompleteMe
    builtin cd "$root_dir/vim/bundle/YouCompleteMe"
    ./install.py \
