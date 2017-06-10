@@ -4,6 +4,8 @@ set -euo pipefail
 debian_version="$(lsb_release --short --codename)"
 kernel_version="$(uname --kernel-release)"
 
+debian_source_entry="deb http://ftp.us.debian.org/debian jessie main non-free"
+
 docker_keyserver="hkp://p80.pool.sks-keyservers.net:80"
 docker_key="58118E89F3A912897C070ADBF76221572C52609D"
 docker_source_entry="deb https://apt.dockerproject.org/repo debian-$debian_version main"
@@ -15,6 +17,9 @@ sudo apt-get install --assume-yes \
   apt-transport-https \
   ca-certificates \
   software-properties-common
+
+# Debian non-free repository
+sudo apt-add-repository --yes "$debian_source_entry"
 
 # Docker repository
 sudo apt-key adv --keyserver "$docker_keyserver" --recv-keys "$docker_key"
