@@ -24,7 +24,7 @@ git submodule update --init --recursive
 # Link config files in home folder
 ################################################################################
 
-(cd stow && find -mindepth 1 -maxdepth 1) | \
+(builtin cd stow && find -mindepth 1 -maxdepth 1) | \
     xargs -I {} rm --recursive --force "$HOME/{}"
 stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 
@@ -36,9 +36,8 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 vim +PluginInstall +qall
 
 ( # YouCompleteMe
-   builtin cd "$root_dir/vim/bundle/YouCompleteMe"
-   ./install.py \
-      --clang-completer \
-      --racer-completer \
-      --tern-completer
+  builtin cd "$root_dir/vim/bundle/YouCompleteMe"
+  git submodule deinit --force .
+  git submodule update --init --recursive
+  ./install.py --clang-completer --racer-completer --tern-completer
 )
