@@ -43,6 +43,8 @@ sudo apt-add-repository --yes "$virtualbox_source_entry"
 # Package installation
 sudo apt-get update
 sudo apt-get install --assume-yes \
+  avahi-autoipd \
+  avahi-daemon \
   chromium-browser \
   clang-3.6 \
   clang-3.7 \

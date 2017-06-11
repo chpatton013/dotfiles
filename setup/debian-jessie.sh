@@ -28,6 +28,8 @@ sudo apt-add-repository --yes "$docker_source_entry"
 # Package installation
 sudo apt-get update
 sudo apt-get install --assume-yes \
+  avahi-autoipd \
+  avahi-daemon \
   clang-3.5 \
   clang-format-3.5 \
   cmake \

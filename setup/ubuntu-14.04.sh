@@ -36,6 +36,8 @@ sudo apt-add-repository --yes "$docker_source_entry"
 # Package installation
 sudo apt-get update
 sudo apt-get install --assume-yes \
+  avahi-autoipd \
+  avahi-daemon \
   chromium-browser \
   clang-3.6 \
   clang-format-3.6 \
