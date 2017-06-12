@@ -28,6 +28,8 @@
   rs = reset
   sl = stash list
   st = status --short --branch --ignore-submodules=dirty
+[fetch]
+  prune = true
 [push]
   default = current
 [pull]
