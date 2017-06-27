@@ -19,6 +19,7 @@ Plugin 'Valloric/YouCompleteMe' " Autocompletion and code fixes
 Plugin 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plugin 'airblade/vim-gitgutter' " Show git diff in the gutter
 Plugin 'altercation/vim-colors-solarized' " Solarized color theme for vim
+Plugin 'crucerucalin/qml.vim' " QML syntax highlighting
 Plugin 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plugin 'marczych/vim-lose' " Better file find tool
 Plugin 'octol/vim-cpp-enhanced-highlight' " Better C++ syntax highlighting
