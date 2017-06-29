@@ -4,6 +4,7 @@ set -euo pipefail
 ubuntu_version="$(lsb_release --short --codename)"
 kernel_version="$(uname --kernel-release)"
 
+git_ppa="ppa:git-core/ppa"
 tmux_ppa="ppa:pi-rho/dev"
 neovim_ppa="ppa:neovim-ppa/unstable"
 
@@ -21,6 +22,9 @@ rust_install_url="https://static.rust-lang.org/rustup.sh"
 
 sudo apt-get update
 sudo apt-get install --assume-yes software-properties-common
+
+# Git PPA
+sudo add-apt-repository --yes "$git_ppa"
 
 # Tmux PPA
 sudo add-apt-repository --yes "$tmux_ppa"
