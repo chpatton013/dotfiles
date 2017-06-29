@@ -168,7 +168,7 @@ set laststatus=2                " Show status line even where there is only one 
 set lazyredraw                  " Redraw faster.
 set linespace=0                 " Adjust relative line height.
 set list                        " Enable listchars for undesireable whitespace and non-visible wrapped text.
-set listchars=tab:>-,trail:.,extends:>,precedes:<
+set listchars=tab:➤-,trail:·,extends:»,precedes:«
 set modeline                    " Check files for a modeline to apply config settings.
 set nocompatible                " No compatibility with vi.
 set noerrorbells                " No beeps on errors.
