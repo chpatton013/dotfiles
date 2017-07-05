@@ -33,6 +33,7 @@ Plugin 'tpope/vim-commentary' " Easy (un)commenting of code blocks
 Plugin 'tpope/vim-fugitive' " Integrated git commands
 Plugin 'tpope/vim-obsession' " Intelligent and automatic session management
 Plugin 'tpope/vim-repeat' " Better command classification for `.`
+Plugin 'tpope/vim-rhubarb' " GitHub integration for fugitive.
 Plugin 'tpope/vim-surround' " Easily manipulate surrounding symbols
 Plugin 'vim-airline/vim-airline' " Better status line
 Plugin 'vim-airline/vim-airline-themes' " Color theme support for airline
