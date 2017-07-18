@@ -26,7 +26,7 @@ function tmux_start_session() {
   local name; name="$1"; readonly name
   if [ -z "$name" ]; then
     tmux
-  elif tmux has-session -t "$name"; then
+  elif tmux has-session -t "$name" 2>/dev/null; then
     tmux attach -t "$name"
   else
     tmux new -s "$name"
