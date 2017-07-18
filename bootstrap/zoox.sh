@@ -1,4 +1,18 @@
+export WORKTREE_WORKTREE_ROOT=~/driving
+#export WORKTREE_PRIMARY_PROJECT=master
+export WORKTREE_BRANCH_NAME_PREFIX=user/chris/
+#export WORKTREE_BRANCH_NAME_SUFFIX=
+#export WORKTREE_BASE_BRANCH=master
+#export WORKTREE_REMOTE=origin
+WORKTREE_ENVIRONMENT_ENTRYPOINT="builtin cd \"\$project_directory\""
+WORKTREE_ENVIRONMENT_ENTRYPOINT+=" && tmux has-session -t \"\$project_name\" 2>/dev/null"
+WORKTREE_ENVIRONMENT_ENTRYPOINT+=" && tmux attach -t \"\$project_name\""
+WORKTREE_ENVIRONMENT_ENTRYPOINT+=" || tmux new -s \"\$project_name\""
+export WORKTREE_ENVIRONMENT_ENTRYPOINT
+source ~/.worktree
+alias wt=worktree
+alias wt_create=worktree_create
+alias wt_resume=worktree_resume
+
 export VLR_ROOT="$HOME"
-export vim_tab_width=2
-zoox_driving_repository="$HOME/driving/master"
-source "$zoox_driving_repository/scripts/shell/zooxrc.sh"
+source "$(worktree_active_project_worktree)/scripts/shell/zooxrc.sh"

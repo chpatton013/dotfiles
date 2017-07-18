@@ -32,6 +32,10 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 # Build dependencies
 ################################################################################
 
+# Worktree download
+wget --output-document="$HOME/.worktree" \
+     https://raw.githubusercontent.com/chpatton013/worktree/master/worktree.sh
+
 # Vundle plugins
 vim +PluginInstall +qall
 
