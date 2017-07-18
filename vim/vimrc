@@ -15,6 +15,7 @@ Plugin 'VundleVim/Vundle.vim' " Manage Vundle with Vundle
 
 " Add your list of plugins here.
 Plugin 'Lokaltog/vim-easymotion' " Easily navigate to symbols by prefix
+Plugin 'PeterRincker/vim-argumentative' " Rearrange function arguments.
 Plugin 'Valloric/YouCompleteMe' " Autocompletion and code fixes
 Plugin 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plugin 'airblade/vim-gitgutter' " Show git diff in the gutter
