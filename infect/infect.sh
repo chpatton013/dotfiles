@@ -36,6 +36,11 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 wget --output-document="$HOME/.worktree" \
      https://raw.githubusercontent.com/chpatton013/worktree/master/worktree.sh
 
+( # Airline patched fonts
+  builtin cd vim/fonts
+  ./install.sh
+)
+
 # Vundle plugins
 vim +PluginInstall +qall
 
