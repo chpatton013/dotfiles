@@ -53,7 +53,7 @@ function _is_canon_agent_running() {
   fi
 
   # -p == --pid on Linux
-  ps -p "$canon_agent_pid" >/dev/null
+  ps -p "$canon_agent_pid" | grep -q ssh-agent
   return "$?"
 }
 
