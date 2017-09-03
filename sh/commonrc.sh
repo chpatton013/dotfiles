@@ -81,6 +81,7 @@ for p in ${paths[@]}; do
    [ -d "$bin" ] && PATH+=:"$bin"
    [ -d "$sbin" ] && PATH+=:"$sbin"
 done
+PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$PATH"
 
 ###############################################################################

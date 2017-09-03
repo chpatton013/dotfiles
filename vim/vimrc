@@ -108,6 +108,7 @@ augroup FileTypeAssociation
    autocmd BufNewFile,BufRead *.launch set filetype=xml
    autocmd BufNewFile,BufRead *.make set filetype=make
    autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.*,*.bzl set filetype=python
+   autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 augroup END
 
 " Resize splits on window resize.
