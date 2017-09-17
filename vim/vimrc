@@ -92,6 +92,7 @@ let g:syntastic_enable_signs=1 " Mark lines with errors and warnings.
 let g:syntastic_enable_balloons=0 " Do not open error balloons over erroneous lines.
 let g:syntastic_cpp_check_header=1 " YCM will provide context for C++ files.
 let g:syntastic_c_check_header=1 " Same for C files.
+let g:syntastic_python_checkers=['pep8']
 
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
