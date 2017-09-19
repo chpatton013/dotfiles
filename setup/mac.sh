@@ -16,73 +16,47 @@ set -xeuo pipefail
 
 function main() {
   install_homebrew
-  install_packages
+  install_core
+  install_cpp
+  install_java
+  install_python
+  install_js
+  install_ruby
   install_rust
+  install_docker
+  install_vagrant
+  install_dev_tools
+  install_user_tools
+}
+
+function _ruby_version() {
+  "$@" --version | sed 's/^ruby \([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/g'
 }
 
 function install_homebrew() {
   local install_url="https://raw.githubusercontent.com/Homebrew/install/master/install"
-  local install_file="$(mktemp)"
 
-  curl --fail --silent --show-error --location "${install_url}" > "${install_file}"
   # Replace stdin with /dev/null so this install script does not wait for user.
-  ruby -- "${install_file}" </dev/null
-  rm "${install_file}"
+  /usr/bin/ruby -e "$(curl --fail --silent --show-error --location "$install_url")" </dev/null
 
   sudo mkdir -p /opt/homebrew-cask/Caskroom
   sudo chmod -R 755 /opt/homebrew-cask
   sudo chown -R "$(id -un):admin" /opt/homebrew-cask
-}
 
-function install_packages() {
-  brew cask
-
+  # Open all taps before updating.
   brew tap homebrew/dupes
   brew tap homebrew/versions
   brew tap neovim/neovim
+  brew tap jeffreywildman/homebrew-virt-manager
 
   brew update
   brew upgrade
+}
 
-  brew cask install \
-    Caskroom/cask/xquartz \
-    java \
-    shiftit \
-    vagrant \
-    vagrant-manager \
-    virtualbox
+function install_core() {
+  brew cask install Caskroom/cask/xquartz
 
-  # Missing or out-dated utilities.
-  brew install \
-    bazel \
-    clang-format \
-    cmake \
-    docker \
-    docker-compose \
-    docker-machine \
-    docker-machine-parallels \
-    file-formula \
-    fswatch \
-    gcc5 \
-    git \
-    gpatch \
-    gpg \
-    htop \
-    less \
-    neovim \
-    nmap \
-    node \
-    openssh \
-    python \
-    python3 \
-    rsync \
-    stow \
-    tmux \
-    tree \
-    unzip \
-    vim \
-    wget \
-    zsh
+  brew install file-formula fswatch nmap openssh rsync tree unzip wget
 
   # GNU utilities.
   brew install binutils
@@ -102,18 +76,67 @@ function install_packages() {
   brew install watch
   brew install wdiff --with-gettext
   brew install wget
+}
+
+function install_cpp() {
+  brew install bazel clang-format cmake gcc gcc5
+}
+
+function install_java() {
+  brew cask install java
+}
+
+function install_python() {
+  local packages_dir="$HOME/Library/Python/2.7/lib/python/site-packages"
+  local brew_path_file="$packages_dir/homebrew.pth"
+  local patch="import site; site.addsitedir(\"/usr/local/lib/python2.7/site-packages\")"
+
+  brew install python python3 pyenv
+
+  mkdir -p "$packages_dir"
+  if [ ! -f "$brew_path_file" ] || ! grep -q "$patch" "$brew_path_file"; then
+    echo "$patch" >> "$brew_path_file"
+  fi
+}
+
+function install_js() {
+  brew install node
+}
+
+function install_ruby() {
+  brew install rbenv ruby ruby-build
+  rbenv install "$(_ruby_version ruby)"
+}
+
+function install_rust() {
+  local install_url="https://static.rust-lang.org/rustup.sh"
+  curl --fail --silent --show-error --location "$install_url" | sh
+}
+
+function install_docker() {
+  brew install docker docker-compose docker-machine docker-machine-parallels
+}
+
+function install_vagrant() {
+  brew cask install vagrant vagrant-manager virtualbox
+  brew install libiconv libvirt virt-manager virt-viewer
+
+  rbenv install "$(_ruby_version /opt/vagrant/embedded/bin/ruby)"
+  vagrant plugin install vagrant-libvirt
+}
+
+function install_dev_tools() {
+  brew install \
+    file-formula fswatch git gpatch gpg htop less neovim nmap stow tmux vim zsh
+
+  sudo pip2 install vim-vint
 
   sudo pip2 install --upgrade neovim
   sudo pip3 install --upgrade neovim
 }
 
-function install_rust() {
-  local install_url="https://static.rust-lang.org/rustup.sh"
-  local install_file="$(mktemp)"
-
-  curl --fail --silent --show-error --location "${install_url}" > "${install_file}"
-  sudo sh "${install_file}" --yes
-  rm "${install_file}"
+function install_user_tools() {
+  brew cask install shiftit
 }
 
 main
