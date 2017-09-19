@@ -2,13 +2,9 @@
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Vundle
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Set the runtime path to include Vundle and initialize.
-set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim' " Manage Vundle with Vundle
@@ -46,7 +42,14 @@ Plugin 'vim-utils/vim-troll-stopper' " Convert elusive unicode characters to ASC
 
 " All of your Plugins must be added before the following line.
 call vundle#end()
-filetype plugin indent on
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Variables
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Global
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:mapleader=',' " Use , instead of \ for the map leader.
 
 " Airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -58,7 +61,10 @@ let g:airline_powerline_fonts = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:clang_format#command='clang-format-3.6'
 let g:clang_format#detect_style_file=1
-autocmd FileType c,cpp,objc let g:clang_format#auto_format=0
+augroup AutoFormat
+  autocmd!
+  autocmd FileType c,cpp,objc let g:clang_format#auto_format=0
+augroup END
 
 " CppEnhancedHighlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -93,6 +99,7 @@ let g:syntastic_enable_balloons=0 " Do not open error balloons over erroneous li
 let g:syntastic_cpp_check_header=1 " YCM will provide context for C++ files.
 let g:syntastic_c_check_header=1 " Same for C files.
 let g:syntastic_python_checkers=['pep8']
+let g:syntastic_vim_checkers = ['vint']
 
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,8 +107,29 @@ let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_collect_identifiers_from_tags_files=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Autocommands
+" Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Basics
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Always use Linux keybindings (even on Windows).
+behave xterm
+" Enable syntax highlighting.
+if !exists("g:syntax_on")
+  syntax enable
+endif
+" Load filetype files for default file types, custom file types, and file
+" indentation rules.
+filetype plugin indent on
+
+" File Encoding
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Treat all files like UTF-8.
+set encoding=utf-8
+set fileencoding=utf-8
+scriptencoding utf-8
 
 augroup FileTypeAssociation
    autocmd!
@@ -112,55 +140,24 @@ augroup FileTypeAssociation
    autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 augroup END
 
+" Events
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Resize splits on window resize.
 augroup AutoResizeSplits
    autocmd!
    autocmd VimResized * exe "normal! \<c-w>="
 augroup END
 
-" Start NERDTree if vim is started without parameters.
-augroup OpenCloseNERDTree
-   autocmd!
-   " Auto-open NERDTree when vim is started with no arguments.
-   autocmd VimEnter * if argc() == 0 | NERDTree | endif
-   " Auto-close NERDTree when no other buffers are left.
-   autocmd StdinReadPre * let s:std_in=1
-   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-augroup END
-
+" Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Configuration customization
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Variables
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader="," " Use , instead of \ for the map leader.
-
-if $vim_background
-   let background=$vim_background
-else
-   let background="light"
-endif
-
-if $vim_tab_width
-   let tab_width=$vim_tab_width
-else
-   let tab_width=2
-endif
-
-" Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-behave xterm                    " Always use Linux keybindings (even on Windows).
-syntax enable                   " Enable syntax highlighting.
 set autowrite                   " Write before executing the 'make' command.
 set backspace=indent,eol,start  " Allow <BS> to go over indents, eol, and start of insert.
 set colorcolumn=80              " Highlight the 80th column.
 set cpoptions+=$                " Show dollar sign at end of text to be changed.
 set cursorline                  " Highlight current line.
 set dictionary+=~/.vim/dictionary/english-freq
-set encoding=utf-8              " Set encoding to utf-8.
 set expandtab                   " Expand tabs into spaces.
-set fileencoding=utf-8          " Set fileencoding to utf-8.
 set foldcolumn=1                " Add N columns to show fold levels and boundaries.
 set foldmethod=indent           " Set fold method (manual,indent,expr,syntax,diff,marker).
 set hidden                      " Use hidden buffers so unsaved buffers can go to the background.
@@ -174,7 +171,6 @@ set linespace=0                 " Adjust relative line height.
 set list                        " Enable listchars for undesireable whitespace and non-visible wrapped text.
 set listchars=tab:➤-,trail:·,extends:»,precedes:«
 set modeline                    " Check files for a modeline to apply config settings.
-set nocompatible                " No compatibility with vi.
 set noerrorbells                " No beeps on errors.
 set nofoldenable                " Do not open file folded.
 set noswapfile                  " Don't use swap files.
@@ -223,7 +219,10 @@ set wrapscan                    " Searching wraps to start of file when end is r
 "     t        tag completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set complete=.,w,b,u,t,i
-autocmd FileType markdown,gitcommit,text setlocal complete+=k spell
+augroup ProseCompletion
+  autocmd!
+  autocmd FileType markdown,gitcommit,text setlocal complete+=k spell
+augroup END
 
 " Text formatting settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -258,7 +257,7 @@ silent! colorscheme solarized " Must be silent so Vundle does not fail when inst
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Normal mode
+" Basics
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Make y behave like all other capitals (yank to end of line).
@@ -267,6 +266,12 @@ nnoremap Y y$
 " No one ever intends to enter ex-mode. Make it harder by rebinding to QQ.
 nnoremap Q <nop>
 nnoremap QQ Q
+
+" Smash to exit insert mode because <ESC> is too far away from home row.
+inoremap kj <Esc>
+
+" Navigation
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use C-hjkl to change windows.
 nnoremap <C-h> <C-w><Left>
@@ -281,39 +286,37 @@ nnoremap <C-t>n :tabnext<CR>
 nnoremap <C-t>p :tabprevious<CR>
 nnoremap <C-t>d :tabclose<CR>
 
+" C-hjkl navigation in insert mode.
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
+" Booleans
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Toggles for search highlight, line numbers, paste mode, and word wrap.
 nnoremap <Leader>h :set invhlsearch<CR>
 nnoremap <Leader>n :set invnumber<CR>
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>w :set invwrap<CR>
 
+" Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Toggle NERDTree.
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
 " Run clang-format on open file.
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>f :ClangFormat<CR>
-nmap <Leader>F :ClangFormatAutoToggle<CR>
+augroup ManualFormat
+  autocmd!
+  autocmd FileType c,cpp,objc nnoremap <buffer><Leader>f :ClangFormat<CR>
+  autocmd FileType c,cpp,objc vnoremap <buffer><Leader>f :ClangFormat<CR>
+  autocmd FileType c,cpp,objc nnoremap <Leader>F :ClangFormatAutoToggle<CR>
+augroup END
 
 " Run grepper on motion.
-nmap gs <plug>(GrepperOperator)
-
-" Visual mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Run clang-format on visual selection.
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>f :ClangFormat<CR>
+nnoremap gs <plug>(GrepperOperator)
 
 " Run grepper on visual selection.
-xmap gs <plug>(GrepperOperator)
-
-" Insert mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Smash to exit insert mode because <ESC> is too far away from home row.
-inoremap kj <Esc>
-
-" C-hjkl navigation in insert mode.
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+xnoremap gs <plug>(GrepperOperator)
