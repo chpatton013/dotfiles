@@ -71,11 +71,15 @@ sudo apt-get install --assume-yes \
   tmux=2.0-1~ppa1~t \
   tree \
   vagrant \
+  vagrant-libvirt \
   vim \
   zsh
 
 # Install etckeeper separately so we can specify "git mode".
 sudo apt-get install --assume-yes etckeeper git-core
+
+# Vim linter.
+sudo pip2 install vim-vint
 
 # Neovim python support
 sudo pip2 install --upgrade neovim
