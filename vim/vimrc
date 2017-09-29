@@ -112,7 +112,7 @@ nnoremap <Leader>f :call AutoFormatToggle()<CR>
 " CommandT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <C-p> :CommandT
+nnoremap <C-p> :CommandT<CR>
 
 " EditorConfig
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
