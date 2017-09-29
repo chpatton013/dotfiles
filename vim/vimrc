@@ -2,46 +2,54 @@
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Set the runtime path to include Vundle and initialize.
-filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" TODO: both install commands block on 'Press ENTER or type command to continue'
 
-Plugin 'VundleVim/Vundle.vim' " Manage Vundle with Vundle
+function! BuildYouCompleteMe(info)
+  if a:info.force || a:info.status !=? 'unchanged'
+    !./install.py --clang-completer --racer-completer --tern-completer
+  end
+endfunction
+
+function! BuildCommandT(info)
+  if a:info.force || a:info.status !=? 'unchanged'
+    !builtin cd ruby/command-t/ext/command-t && ruby extconf.rb && make
+  end
+endfunction
+
+" Set the runtime path to include Vundle and initialize.
+" set runtimepath+=~/.vim/bundle/Vundle.vim
+call plug#begin()
 
 " Add your list of plugins here.
-Plugin 'Lokaltog/vim-easymotion' " Easily navigate to symbols by prefix
-Plugin 'PeterRincker/vim-argumentative' " Rearrange function arguments.
-Plugin 'Valloric/YouCompleteMe' " Autocompletion and code fixes
-Plugin 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
-Plugin 'airblade/vim-gitgutter' " Show git diff in the gutter
-Plugin 'altercation/vim-colors-solarized' " Solarized color theme for vim
-Plugin 'crucerucalin/qml.vim' " QML syntax highlighting
-Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy finder
-Plugin 'editorconfig/editorconfig-vim' " Editorconfig integration
-Plugin 'mhinz/vim-grepper' " Sync grep within vim
-Plugin 'octol/vim-cpp-enhanced-highlight' " Better C++ syntax highlighting
-Plugin 'powerline/fonts' " Pre-patched and adjusted fonts for status line
-Plugin 'qpkorr/vim-bufkill' " Close buffers without closing windows or splits.
-Plugin 'rhysd/vim-clang-format' " Auto-format C++ files
-Plugin 'scrooloose/nerdtree' " File navigation
-Plugin 'tpope/vim-abolish' " Assorted word-munging utilities
-Plugin 'tpope/vim-commentary' " Easy (un)commenting of code blocks
-Plugin 'tpope/vim-fugitive' " Integrated git commands
-Plugin 'tpope/vim-obsession' " Intelligent and automatic session management
-Plugin 'tpope/vim-repeat' " Better command classification for `.`
-Plugin 'tpope/vim-rhubarb' " GitHub integration for fugitive.
-Plugin 'tpope/vim-surround' " Easily manipulate surrounding symbols
-Plugin 'vim-airline/vim-airline' " Better status line
-Plugin 'vim-airline/vim-airline-themes' " Color theme support for airline
-Plugin 'vim-syntastic/syntastic' " Syntax checking for several common languages
-Plugin 'vim-utils/vim-all' " Full-buffer text objects
-Plugin 'vim-utils/vim-man' " Open man pages in vim
-Plugin 'vim-utils/vim-space' " Text objects with <Space> as the delimiter
-Plugin 'vim-utils/vim-troll-stopper' " Convert elusive unicode characters to ASCII
+Plug 'PeterRincker/vim-argumentative' " Rearrange function arguments
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYouCompleteMe') } " Autocompletion and code fixes
+Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
+Plug 'airblade/vim-gitgutter' " Show git diff in the gutter
+Plug 'altercation/vim-colors-solarized' " Solarized color theme for vim
+Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
+Plug 'google/vim-codefmt' " Syntax-aware code formatting
+Plug 'google/vim-glaive' " Configuration utility for maktaba
+Plug 'google/vim-maktaba' " Plugin framework
+Plug 'mhinz/vim-grepper' " Sync grep within vim
+Plug 'powerline/fonts' " Pre-patched and adjusted fonts for status line
+Plug 'scrooloose/nerdtree' " File navigation
+Plug 'tpope/vim-abolish' " Assorted word-munging utilities
+Plug 'tpope/vim-commentary' " Easy (un)commenting of code blocks
+Plug 'tpope/vim-fugitive' " Integrated git commands
+Plug 'tpope/vim-obsession' " Intelligent and automatic session management
+Plug 'tpope/vim-repeat' " Better command classification for `.`
+Plug 'tpope/vim-rhubarb' " GitHub integration for fugitive
+Plug 'tpope/vim-surround' " Easily manipulate surrounding symbols
+Plug 'vim-airline/vim-airline' " Better status line
+Plug 'vim-airline/vim-airline-themes' " Color theme support for airline
+Plug 'vim-syntastic/syntastic' " Syntax checking for several common languages
+Plug 'vim-utils/vim-man' " Open man pages in vim
+Plug 'vim-utils/vim-troll-stopper' " Convert elusive unicode characters to ASCII
+Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " Fuzzy file finder
 
 " All of your Plugins must be added before the following line.
-call vundle#end()
+call plug#end()
+call glaive#Install()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Variables
@@ -56,15 +64,6 @@ let g:mapleader=',' " Use , instead of \ for the map leader.
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
-
-" ClangFormat
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:clang_format#command='clang-format-3.6'
-let g:clang_format#detect_style_file=1
-augroup AutoFormat
-  autocmd!
-  autocmd FileType c,cpp,objc let g:clang_format#auto_format=0
-augroup END
 
 " CppEnhancedHighlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -106,6 +105,41 @@ let g:syntastic_vim_checkers = ['vint']
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_collect_identifiers_from_tags_files=1
 
+" CodeFmt
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+augroup AutoFormatSettings
+  autocmd!
+  autocmd FileType bzl let b:codefmt_formatter='buildifier'
+  autocmd FileType c,cpp,java,javascript,typescript,proto let b:codefmt_formatter='clang-format'
+  autocmd FileType css,html,json,xml let b:codefmt_formatter='js-beautify'
+  autocmd FileType python let b:codefmt_formatter='yapf'
+augroup END
+
+function! AutoFormatToggle()
+  if !exists('b:toggle_auto_format')
+    let b:toggle_auto_format=0
+  endif
+
+  if b:toggle_auto_format
+    :echo 'Disabling auto-formatting'
+    :NoAutoFormatBuffer
+    let b:toggle_auto_format=0
+  else
+    :echo 'Enabling auto-formatting'
+    :AutoFormatBuffer
+    let b:toggle_auto_format=1
+  endif
+endfunction
+
+" TrollStopper
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+augroup AutoTrollStopper
+  autocmd!
+  autocmd BufWritePre silent! :TrollStop<CR>
+augroup END
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -116,7 +150,7 @@ let g:ycm_collect_identifiers_from_tags_files=1
 " Always use Linux keybindings (even on Windows).
 behave xterm
 " Enable syntax highlighting.
-if !exists("g:syntax_on")
+if !exists('g:syntax_on')
   syntax enable
 endif
 " Load filetype files for default file types, custom file types, and file
@@ -132,12 +166,13 @@ set fileencoding=utf-8
 scriptencoding utf-8
 
 augroup FileTypeAssociation
-   autocmd!
-   autocmd BufNewFile,BufRead *.impl,*.inl set filetype=cpp
-   autocmd BufNewFile,BufRead *.launch set filetype=xml
-   autocmd BufNewFile,BufRead *.make set filetype=make
-   autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.*,*.bzl set filetype=python
-   autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+  autocmd!
+  autocmd BufNewFile,BufRead *.impl,*.inl set filetype=cpp
+  autocmd BufNewFile,BufRead *.launch set filetype=xml
+  autocmd BufNewFile,BufRead *.make set filetype=make
+  autocmd BufNewFile,BufRead *.bzl set filetype=python
+  autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.* set filetype=bzl
+  autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 augroup END
 
 " Events
@@ -145,8 +180,8 @@ augroup END
 
 " Resize splits on window resize.
 augroup AutoResizeSplits
-   autocmd!
-   autocmd VimResized * exe "normal! \<c-w>="
+  autocmd!
+  autocmd VimResized * exe "normal! \<c-w>="
 augroup END
 
 " Options
@@ -171,6 +206,7 @@ set linespace=0                 " Adjust relative line height.
 set list                        " Enable listchars for undesireable whitespace and non-visible wrapped text.
 set listchars=tab:➤-,trail:·,extends:»,precedes:«
 set modeline                    " Check files for a modeline to apply config settings.
+set nobomb                      " Remove Byte Order Mark from files.
 set noerrorbells                " No beeps on errors.
 set nofoldenable                " Do not open file folded.
 set noswapfile                  " Don't use swap files.
@@ -307,16 +343,10 @@ nnoremap <Leader>w :set invwrap<CR>
 " Toggle NERDTree.
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
-" Run clang-format on open file.
-augroup ManualFormat
-  autocmd!
-  autocmd FileType c,cpp,objc nnoremap <buffer><Leader>f :ClangFormat<CR>
-  autocmd FileType c,cpp,objc vnoremap <buffer><Leader>f :ClangFormat<CR>
-  autocmd FileType c,cpp,objc nnoremap <Leader>F :ClangFormatAutoToggle<CR>
-augroup END
+" Manual formatting.
+Glaive codefmt plugin[mappings]
+nnoremap <Leader>f :call AutoFormatToggle()<CR>
 
-" Run grepper on motion.
+" Run grepper on motion and selection.
 nnoremap gs <plug>(GrepperOperator)
-
-" Run grepper on visual selection.
 xnoremap gs <plug>(GrepperOperator)

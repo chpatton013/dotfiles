@@ -1,4 +1,2 @@
 /vim/.netrwhist
-!/vim/bundle
-/vim/bundle/*
-!/vim/bundle/Vundle.vim
+/vim/plugged/

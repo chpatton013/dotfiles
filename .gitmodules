@@ -22,9 +22,9 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = git@github.com:tmux-plugins/tpm.git
-[submodule "vim/bundle/Vundle.vim"]
-	path = vim/bundle/Vundle.vim
-	url = git@github.com:VundleVim/Vundle.vim.git
 [submodule "vim/fonts"]
 	path = vim/fonts
 	url = git@github.com:powerline/fonts.git
+[submodule "vim/vim-plug"]
+	path = vim/vim-plug
+	url = git@github.com:junegunn/vim-plug.git

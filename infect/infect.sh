@@ -41,12 +41,5 @@ wget --output-document="$HOME/.worktree" \
   ./install.sh
 )
 
-# Vundle plugins
-vim +PluginInstall +qall
-
-( # YouCompleteMe
-  builtin cd "$root_dir/vim/bundle/YouCompleteMe"
-  git submodule deinit --force .
-  git submodule update --init --recursive
-  ./install.py --clang-completer --racer-completer --tern-completer
-)
+# Vim plugins
+vim +PlugInstall +qall
