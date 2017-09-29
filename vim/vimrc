@@ -73,46 +73,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 
-" CppEnhancedHighlight
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:cpp_class_scope_highlight=1
-let g:cpp_experimental_simple_template_highlight=1
-let g:cpp_concepts_highlight=1
-
-" Easymotion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_leader_key=',m' " Use my leader key as the prefix.
-
-" EditorConfig
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EditorConfig_exclude_patterns=['fugitive://.*']
-
-" GitGutter
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_diff_args='--patience' " Add flags to git diff.
-let g:gitgutter_eager=0 " Only redraw gutter on buffer save / open.
-
-" Syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Commands:
-"     Errors               pop up location list and display errors
-"     SyntasticToggleMode  toggles between active and passive mode
-"     SyntasticCheck       forces a syntax check in passive mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_check_on_open=1 " Check for syntax errors on file open.
-let g:syntastic_echo_current_error=1 " Echo errors to the command window.
-let g:syntastic_enable_signs=1 " Mark lines with errors and warnings.
-let g:syntastic_enable_balloons=0 " Do not open error balloons over erroneous lines.
-let g:syntastic_cpp_check_header=1 " YCM will provide context for C++ files.
-let g:syntastic_c_check_header=1 " Same for C files.
-let g:syntastic_python_checkers=['pep8']
-let g:syntastic_vim_checkers = ['vint']
-
-" YouCompleteMe
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-let g:ycm_collect_identifiers_from_tags_files=1
-
 " CodeFmt
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -140,19 +100,65 @@ function! AutoFormatToggle()
   endif
 endfunction
 
+" EditorConfig
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:EditorConfig_exclude_patterns=['fugitive://.*']
+
+" GitGutter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:gitgutter_diff_args='--patience' " Add flags to git diff.
+let g:gitgutter_eager=0 " Only redraw gutter on buffer save / open.
+
+" Grepper
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Run grepper on motion and selection.
+nnoremap gs <Plug>(GrepperOperator)
+xnoremap gs <Plug>(GrepperOperator)
+
+" NERDTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Toggle NERDTree buffer.
+nnoremap <Leader>t :NERDTreeToggle<CR>
+
+" Syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Commands:
+"   Errors               pop up location list and display errors
+"   SyntasticToggleMode  toggles between active and passive mode
+"   SyntasticCheck       forces a syntax check in passive mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:syntastic_check_on_open=1 " Check for syntax errors on file open.
+let g:syntastic_echo_current_error=1 " Echo errors to the command window.
+let g:syntastic_enable_signs=1 " Mark lines with errors and warnings.
+let g:syntastic_enable_balloons=0 " Do not open error balloons over erroneous lines.
+let g:syntastic_cpp_check_header=1 " YCM will provide context for C++ files.
+let g:syntastic_c_check_header=1 " Same for C files.
+let g:syntastic_python_checkers=['pep8']
+let g:syntastic_vim_checkers = ['vint']
+
 " TrollStopper
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 augroup AutoTrollStopper
   autocmd!
-  autocmd BufWritePre silent! :TrollStop<CR>
+  autocmd BufWritePre * silent! :TrollStop<CR>
 augroup END
+
+" YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Basics
+" Behavior
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Always use Linux keybindings (even on Windows).
@@ -229,6 +235,12 @@ set wildmenu                    " Tab completion navigable menu is enabled.
 set wildmode=list:longest,full  " Tab completion lists matches, then opens wildmenu on next <Tab>.
 set wrap                        " Soft wrap lines.
 set wrapscan                    " Searching wraps to start of file when end is reached.
+
+" Toggles for invertible settings.
+nnoremap <Leader>h :set invhlsearch<CR>
+nnoremap <Leader>n :set invnumber<CR>
+nnoremap <Leader>p :set invpaste<CR>
+nnoremap <Leader>w :set invwrap<CR>
 
 " Completion settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -320,26 +332,3 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-
-" Booleans
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Toggles for search highlight, line numbers, paste mode, and word wrap.
-nnoremap <Leader>h :set invhlsearch<CR>
-nnoremap <Leader>n :set invnumber<CR>
-nnoremap <Leader>p :set invpaste<CR>
-nnoremap <Leader>w :set invwrap<CR>
-
-" Plugins
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Toggle NERDTree.
-nnoremap <Leader>t :NERDTreeToggle<CR>
-
-" Manual formatting.
-Glaive codefmt plugin[mappings]
-nnoremap <Leader>f :call AutoFormatToggle()<CR>
-
-" Run grepper on motion and selection.
-nnoremap gs <plug>(GrepperOperator)
-xnoremap gs <plug>(GrepperOperator)
