@@ -50,13 +50,22 @@ Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " Fuzzy file finde
 call plug#end()
 call glaive#Install()
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Variables
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Behavior of several plugins depends on filetype being set. Setting it early
+" helps get consistent behavior from them.
+augroup FileTypeAssociation
+  autocmd!
+  autocmd BufNewFile,BufRead *.impl,*.inl set filetype=cpp
+  autocmd BufNewFile,BufRead *.launch set filetype=xml
+  autocmd BufNewFile,BufRead *.make set filetype=make
+  autocmd BufNewFile,BufRead *.bzl set filetype=python
+  autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.*,*.BUILD set filetype=bzl
+  autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+augroup END
 
-" Global
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:mapleader=',' " Use , instead of \ for the map leader.
+" Use , instead of \ for the map leader.
+" Several mappings calculate the value of <Leader> when they are defined.
+" Setting it early prevents them from using the default value.
+let g:mapleader=','
 
 " Airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -156,35 +165,20 @@ endif
 " indentation rules.
 filetype plugin indent on
 
-" File Encoding
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Treat all files like UTF-8.
 set encoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf-8
 
-augroup FileTypeAssociation
-  autocmd!
-  autocmd BufNewFile,BufRead *.impl,*.inl set filetype=cpp
-  autocmd BufNewFile,BufRead *.launch set filetype=xml
-  autocmd BufNewFile,BufRead *.make set filetype=make
-  autocmd BufNewFile,BufRead *.bzl set filetype=python
-  autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.* set filetype=bzl
-  autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
-augroup END
-
-" Events
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Resize splits on window resize.
 augroup AutoResizeSplits
   autocmd!
-  autocmd VimResized * exe "normal! \<c-w>="
+  autocmd VimResized * wincmd =
 augroup END
 
 " Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set autowrite                   " Write before executing the 'make' command.
 set backspace=indent,eol,start  " Allow <BS> to go over indents, eol, and start of insert.
 set colorcolumn=80              " Highlight the 80th column.
