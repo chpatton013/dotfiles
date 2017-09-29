@@ -29,7 +29,7 @@ Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'google/vim-codefmt' " Syntax-aware code formatting
 Plug 'google/vim-glaive' " Configuration utility for maktaba
 Plug 'google/vim-maktaba' " Plugin framework
-Plug 'mhinz/vim-grepper' " Sync grep within vim
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
 Plug 'powerline/fonts' " Pre-patched and adjusted fonts for status line
 Plug 'scrooloose/nerdtree' " File navigation
 Plug 'tpope/vim-abolish' " Assorted word-munging utilities
@@ -128,9 +128,17 @@ let g:gitgutter_eager=0 " Only redraw gutter on buffer save / open.
 " Grepper
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:grepper = { 'tools': ['rg', 'git'], 'next_tool': '<C-g>' }
+
 " Run grepper on motion and selection.
-nnoremap gs <Plug>(GrepperOperator)
-xnoremap gs <Plug>(GrepperOperator)
+nmap gs <Plug>(GrepperOperator)
+xmap gs <Plug>(GrepperOperator)
+
+" Open the grepper prompt.
+nnoremap <Leader>G :Grepper<CR>
+
+" Search for the word under the cursor.
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
