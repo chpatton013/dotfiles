@@ -157,7 +157,7 @@ function install_dev_tools() {
 }
 
 function install_user_tools() {
-  brew cask install shiftit
+  brew cask install shiftit karabiner-elements
 }
 
 main
