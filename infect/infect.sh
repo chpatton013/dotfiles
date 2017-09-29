@@ -41,5 +41,10 @@ wget --output-document="$HOME/.worktree" \
   ./install.sh
 )
 
+# VimPlug download
+make_directory ./vim/autoload
+wget --output-document=./vim/autoload/plug.vim \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 # Vim plugins
 vim +PlugInstall +qall

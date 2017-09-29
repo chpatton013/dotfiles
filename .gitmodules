@@ -25,6 +25,3 @@
 [submodule "vim/fonts"]
 	path = vim/fonts
 	url = git@github.com:powerline/fonts.git
-[submodule "vim/vim-plug"]
-	path = vim/vim-plug
-	url = git@github.com:junegunn/vim-plug.git
