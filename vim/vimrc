@@ -2,22 +2,21 @@
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" TODO: both install commands block on 'Press ENTER or type command to continue'
-
 function! BuildYouCompleteMe(info)
   if a:info.force || a:info.status !=? 'unchanged'
-    !./install.py --clang-completer --racer-completer --tern-completer
+    silent !./install.py --clang-completer --racer-completer --tern-completer
+    redraw!
   end
 endfunction
 
 function! BuildCommandT(info)
   if a:info.force || a:info.status !=? 'unchanged'
-    !builtin cd ruby/command-t/ext/command-t && ruby extconf.rb && make
+    silent !builtin cd ruby/command-t/ext/command-t && ruby extconf.rb && make
+    redraw!
   end
 endfunction
 
-" Set the runtime path to include Vundle and initialize.
-" set runtimepath+=~/.vim/bundle/Vundle.vim
+" Initialize Plug.
 call plug#begin()
 
 " Add your list of plugins here.
