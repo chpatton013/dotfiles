@@ -255,21 +255,22 @@ nnoremap <Leader>w :set invwrap<CR>
 
 " Completion settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Options:
-"     .        scan the current buffer ('wrapscan' is ignored)
-"     w        scan buffers from other windows
-"     b        scan other loaded buffers that are in the buffer list
-"     u        scan the unloaded buffers that are in the buffer list
-"     U        scan the buffers that are not in the buffer list
-"     k        scan the files given with the 'dictionary' option
-"     kspell   use the currently active spell checking |spell|
-"     k{dict}  scan the file {dict}
-"     s        scan the files given with the 'thesaurus' option
-"     s{tsr}   scan the file {tsr}
-"     i        scan current and included files
-"     d        scan current and included files for defined name or macro |i_CTRL-X_CTRL-D|
-"     t        tag completion
+" Options:
+"   .        scan the current buffer ('wrapscan' is ignored)
+"   w        scan buffers from other windows
+"   b        scan other loaded buffers that are in the buffer list
+"   u        scan the unloaded buffers that are in the buffer list
+"   U        scan the buffers that are not in the buffer list
+"   k        scan the files given with the 'dictionary' option
+"   kspell   use the currently active spell checking |spell|
+"   k{dict}  scan the file {dict}
+"   s        scan the files given with the 'thesaurus' option
+"   s{tsr}   scan the file {tsr}
+"   i        scan current and included files
+"   d        scan current and included files for defined name or macro |i_CTRL-X_CTRL-D|
+"   t        tag completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set complete=.,w,b,u,t,i
 augroup ProseCompletion
   autocmd!
@@ -278,32 +279,35 @@ augroup END
 
 " Text formatting settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Options:
-"     t  Auto-wrap text using textwidth. (default)
-"     c  Auto-wrap comments; insert comment leader. (default)
-"     q  Allow formatting of comments with "gq". (default)
-"     r  Insert comment leader after hitting <Enter>.
-"     o  Insert comment leader after hitting 'o' or 'O' in command mode.
-"     n  Auto-format lists, wrapping to text after the list bullet char.
-"     l  Don't auto-wrap if a line is already longer than textwidth.
+" Options:
+"   t  Auto-wrap text using textwidth. (default)
+"   c  Auto-wrap comments; insert comment leader. (default)
+"   q  Allow formatting of comments with "gq". (default)
+"   r  Insert comment leader after hitting <Enter>.
+"   o  Insert comment leader after hitting 'o' or 'O' in command mode.
+"   n  Auto-format lists, wrapping to text after the list bullet char.
+"   l  Don't auto-wrap if a line is already longer than textwidth.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set formatoptions=tcqronl
 
 " Enable mouse scrolling in selected modes
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Options:
-"     a  All
-"     c  Command
-"     i  Insert
-"     n  Normal
-"     v  Visual
+" Options:
+"   a  All
+"   c  Command
+"   i  Insert
+"   n  Normal
+"   v  Visual
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set mouse=
 
 " Color theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set t_Co=256                  " Use as many colors as your terminal supports.
-silent! colorscheme solarized " Must be silent so Vundle does not fail when installing for the first time.
+silent! colorscheme solarized " Must be silent so Plug does not fail when installing for the first time.
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
@@ -319,7 +323,7 @@ nnoremap Y y$
 nnoremap Q <nop>
 nnoremap QQ Q
 
-" Smash to exit insert mode because <ESC> is too far away from home row.
+" Smash to exit insert mode because <Esc> is too far away from home row.
 inoremap kj <Esc>
 
 " Navigation
