@@ -4,18 +4,11 @@
 # Group tasks into fewer processes so the OS scheduler can handle them better.
 startup --batch_cpu_scheduling
 
-# Always generate explanations.
-build --explain /tmp/explain.txt --verbose_explanations
-
 # Always show output from failing tests.
 test --test_output=errors
 
 # Remove external content quickly when cleaning.
 clean --expunge_async
-
-# Build with kraken; test the same way we do in CI.
-build --config=kraken -X CppLink
-test --config=standalone
 
 # Omit unnecessary runfiles trees to speed up builds.
 build --config=norunfiles
