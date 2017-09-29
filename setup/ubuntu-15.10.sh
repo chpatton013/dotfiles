@@ -59,6 +59,7 @@ sudo apt-get install --assume-yes \
   g++ \
   gcc \
   git \
+  golang-go \
   google-chrome-stable \
   gnome-tweak-tool \
   htop \
@@ -91,15 +92,24 @@ sudo apt-get install --assume-yes etckeeper git-core
 # Vim linter.
 sudo pip2 install vim-vint
 
+# Code formatting.
+sudo pip2 install jsbeautifier yapf
+
 # Neovim python support
 sudo pip2 install --upgrade neovim
 sudo pip3 install --upgrade neovim
+
+# Bazel build formatting.
+go get github.com/bazelbuild/buildtools/buildifier
 
 # Rust install
 rust_install_file="$(mktemp)"
 wget --quiet --output-document="$rust_install_file" "$rust_install_url"
 sudo sh "$rust_install_file" --yes
 rm "$rust_install_file"
+
+# Extra dev tools.
+cargo install fd-find ripgrep
 
 # Docker service and user account
 sudo service docker restart

@@ -20,6 +20,7 @@ function main() {
   install_cpp
   install_java
   install_python
+  install_go
   install_js
   install_ruby
   install_rust
@@ -79,7 +80,7 @@ function install_core() {
 }
 
 function install_cpp() {
-  brew install bazel clang-format cmake gcc gcc5
+  brew install bazel buildifier clang-format cmake gcc gcc5
 }
 
 function install_java() {
@@ -92,6 +93,7 @@ function install_python() {
   local patch="import site; site.addsitedir(\"/usr/local/lib/python2.7/site-packages\")"
 
   brew install python python3 pyenv
+  sudo pip2 install yapf
 
   mkdir -p "$packages_dir"
   if [ ! -f "$brew_path_file" ] || ! grep -q "$patch" "$brew_path_file"; then
@@ -99,8 +101,13 @@ function install_python() {
   fi
 }
 
+function install_go() {
+  brew install golang
+}
+
 function install_js() {
   brew install node
+  sudo pip2 install jsbeautifier
 }
 
 function install_ruby() {
@@ -127,7 +134,21 @@ function install_vagrant() {
 
 function install_dev_tools() {
   brew install \
-    file-formula fswatch git gpatch gpg htop less neovim nmap stow tmux vim zsh
+    fd \
+    file-formula \
+    fswatch \
+    git \
+    gpatch \
+    gpg \
+    htop \
+    less \
+    neovim \
+    nmap \
+    ripgrep \
+    stow \
+    tmux \
+    vim \
+    zsh
 
   sudo pip2 install vim-vint
 
