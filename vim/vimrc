@@ -162,13 +162,29 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 "   SyntasticCheck       forces a syntax check in passive mode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:syntastic_check_on_open=1 " Check for syntax errors on file open.
-let g:syntastic_echo_current_error=1 " Echo errors to the command window.
-let g:syntastic_enable_signs=1 " Mark lines with errors and warnings.
-let g:syntastic_enable_balloons=0 " Do not open error balloons over erroneous lines.
-let g:syntastic_cpp_check_header=1 " YCM will provide context for C++ files.
-let g:syntastic_c_check_header=1 " Same for C files.
+" Check header files as well.
+let g:syntastic_c_check_header=1
+let g:syntastic_cpp_check_header=1
+
+" Check for errors on file open and close.
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=1
+
+" Print errors to the command window.
+let g:syntastic_echo_current_error=1
+let g:syntastic_cursor_column=1
+
+" Show errors in a non-obtrusive way.
+let g:syntastic_enable_balloons=0
+let g:syntastic_enable_highlighting=1
+let g:syntastic_enable_signs=1
+
+" Specify checkers for various filetypes.
+let g:syntastic_c_checkers=['clang_check', 'clang_tidy', 'cppcheck', 'gcc']
+let g:syntastic_cpp_checkers=['clang_check', 'clang_tidy', 'cppcheck', 'cpplint', 'gcc']
 let g:syntastic_python_checkers=['pep8']
+let g:syntastic_ruby_checkers=['rubylint']
+let g:syntastic_sh_checkers=['shellcheck']
 let g:syntastic_vim_checkers = ['vint']
 
 " TrollStopper
@@ -179,10 +195,45 @@ augroup AutoTrollStopper
   autocmd BufWritePre * silent! :TrollStop<CR>
 augroup END
 
+" UltiSnips
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Specify a single absolute path for snippet loading to prevent UltiSnips from
+" searching within the runtimepath.
+"let g:UltiSnipsSnippetDirectories=expand('~/.vim/UltiSnips')
+
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+" YCM doesn't have completers for some filetypes.
+if !exists('g:ycm_filetype_blacklist')
+  let g:ycm_filetype_blacklist={}
+endif
+let g:ycm_filetype_blacklist.help=1
+let g:ycm_filetype_blacklist.vim=1
+
+" Load extra conf without prompting.
+" The extra conf is only used for C and C++, so restrict it to those filetypes.
+augroup YcmExtraConf
+  autocmd!
+  autocmd BufNewFile,BufRead c,cpp let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+  autocmd BufNewFile,BufRead c,cpp let g:ycm_confirm_extra_conf=0
+augroup END
+
+" Automatically open and close the preview window during completion.
+let g:ycm_add_preview_to_completeopt=1
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
+
+" Perform completion while writing comments and strings.
+let g:ycm_complete_in_comments=1
+let g:ycm_complete_in_strings=1
+
+" Do not try to complete using text from comments or strings.
+let g:ycm_collect_identifiers_from_comments_and_strings=0
+
+" Get completion text from language-specific syntax files.
+let g:ycm_seed_identifiers_with_syntax=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
