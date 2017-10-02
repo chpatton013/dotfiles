@@ -21,6 +21,7 @@ call plug#begin()
 
 " Add your list of plugins here.
 Plug 'PeterRincker/vim-argumentative' " Rearrange function arguments
+Plug 'SirVer/ultisnips' " Code snippet completion
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYouCompleteMe') } " Autocompletion and code fixes
 Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plug 'airblade/vim-gitgutter' " Show git diff in the gutter
@@ -57,6 +58,7 @@ augroup FileTypeAssociation
   autocmd BufNewFile,BufRead *.impl,*.inl set filetype=cpp
   autocmd BufNewFile,BufRead *.launch set filetype=xml
   autocmd BufNewFile,BufRead *.make set filetype=make
+  autocmd BufNewFile,BufRead *.snippets set filetype=snippets
   autocmd BufNewFile,BufRead *.bzl set filetype=python
   autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.*,*.BUILD set filetype=bzl
   autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
@@ -198,9 +200,10 @@ augroup END
 " UltiSnips
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Specify a single absolute path for snippet loading to prevent UltiSnips from
-" searching within the runtimepath.
-"let g:UltiSnipsSnippetDirectories=expand('~/.vim/UltiSnips')
+let g:UltiSnipsExpandTrigger='<C-Space>'
+let g:UltiSnipsListSnippets='<C-Tab>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
