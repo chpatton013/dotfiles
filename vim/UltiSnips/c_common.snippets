@@ -1,0 +1,47 @@
+# These snippets are shared between C and C++.
+
+priority -50
+
+# Preprocessor ifndef-define guard.
+snippet ifndef "#ifndef <x> #define <x> <y> #endif" b
+#ifndef ${1/([A-Za-z0-9_]+).*/$1/}
+#define ${1:SYMBOL} ${2:value}
+#endif // ifndef $1
+endsnippet
+
+# Preprocessor if clause.
+snippet if "#if <x> #endif" b
+#if ${1:0}
+${VISUAL}$0
+#endif // #if $1
+endsnippet
+
+# Preprocessor ifdef-and-if clause.
+snippet ifdef "#ifdef <x> && #if <x> ... #endif" b
+#ifdef ${1:SYMBOL} && if ${2:$1}
+${VISUAL}$0
+#endif // ifdef $1 && if $2
+endsnippet
+
+# Basic main function.
+snippet main "main(argc, char**)" b
+int main(int argc, char** argv) {
+  ${VISUAL}$0
+  return 0;
+}
+endsnippet
+
+# Index-based for-loop.
+snippet for "for with index" b
+for (${4:int} ${2:index} = 0; $2 < ${1:count}; ${3:++$2}) {
+  ${VISUAL}$0
+}
+endsnippet
+
+# Function declaration and definition.
+snippet function "function declaration and definition" b
+${1:void} ${2:fn}($3);
+$1 $2($3) {
+  ${VISUAL}$0
+}
+endsnippet

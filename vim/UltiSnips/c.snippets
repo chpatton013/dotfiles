@@ -1,0 +1,35 @@
+priority -50
+
+extends c_common
+
+global !p
+
+from snippets import camel_to_snake, snake_to_camel, file_to_symbol
+
+
+def header_guard(snip):
+    filename = "{}.{}".format(snip.basename, snip.ft)
+    return camel_to_snake(file_to_symbol(filename)).upper()
+
+
+def struct_name(snip):
+    return camel_to_snake(file_to_symbol("{}_t".format(snip.basename)))
+
+endglobal
+
+# ifndef header guard.
+snippet once "header ifndef include guard"
+#ifndef ${1:`!p snip.rv = header_guard(snip)`}
+#define $1
+
+${VISUAL}$0
+
+#endif /* ifndef $1 */
+endsnippet
+
+# POD struct.
+snippet struct "plain-old-data struct" b
+struct ${1:`!p snip.rv = struct_name(snip)`} {
+  ${VISUAL}$0
+};
+endsnippet

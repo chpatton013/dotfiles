@@ -1,0 +1,263 @@
+priority -50
+
+extends c_common
+
+global !p
+
+def parse_arg_list(text):
+    """
+    TODO: proper recursive descent parsing.
+    Currently this does not handle multi-arg template lists or cv-qualifiers.
+    """
+    arg_list = []
+    arg_type = ""
+    arg_name = ""
+    name = False
+    for c in text:
+        if c == ",":
+            if arg_type and arg_name:
+                arg_list.append((arg_type, arg_name))
+            arg_type = ""
+            arg_name = ""
+            name = False
+
+        elif c == " " and len(arg_type):
+            name = True
+
+        elif c.isalnum() or c in "_&*<>:":
+            if name:
+                arg_name += c
+            else:
+                arg_type += c
+
+    if arg_type and arg_name:
+        arg_list.append((arg_type, arg_name))
+
+    return arg_list
+
+
+def _member_variable_list(arg_list,
+                          arg_list_to_member_list,
+                          snip,
+                          prefix=None,
+                          suffix=None):
+    output = ""
+
+    if prefix and len(arg_list):
+        output += prefix
+
+    for t, m in arg_list_to_member_list(arg_list):
+        output += "\n" + snip.mkline("{} {};".format(t, m))
+
+    if suffix and len(arg_list):
+        output += suffix
+
+    return output
+
+
+def _constructor_initializer_list(text,
+                                  arg_to_member,
+                                  snip,
+                                  prefix=None,
+                                  suffix=None):
+    """
+    TODO: use std::move for non-primitive values
+    """
+    arg_list = parse_arg_list(text)
+
+    output = ""
+
+    if prefix and len(arg_list):
+        output += prefix
+
+    if len(arg_list):
+        arg = arg_list[0]
+        member = arg_to_member(arg)
+        output += "{}({})".format(member[1], arg[1])
+
+    for arg in arg_list[1:]:
+        member = arg_to_member(arg)
+        output += ",\n" + snip.mkline("{}({})".format(member[1], arg[1]))
+
+    if suffix and len(arg_list):
+        output += suffix
+
+    return output
+
+
+def struct_arg_to_member(arg):
+    return (arg[0], arg[1].strip("_"))
+
+
+def struct_arg_list_to_member_list(arg_list):
+    return [struct_arg_to_member(arg) for arg in arg_list]
+
+
+def struct_member_variable_list(text, snip, prefix=None, suffix=None):
+    return _member_variable_list(
+        parse_arg_list(text),
+        struct_arg_list_to_member_list,
+        snip,
+        prefix="\n")
+
+
+def struct_constructor_initializer_list(text, snip):
+    return _constructor_initializer_list(text, struct_arg_to_member, snip)
+
+
+def class_arg_to_member(arg):
+    return (arg[0], "{}_".format(arg[1]))
+
+
+def class_arg_list_to_member_list(arg_list):
+    return [class_arg_to_member(arg) for arg in arg_list]
+
+
+def class_member_variable_list(text, snip):
+    return _member_variable_list(
+        parse_arg_list(text), class_arg_list_to_member_list, snip)
+
+
+def class_constructor_initializer_list(text, snip):
+    return _constructor_initializer_list(text, class_arg_to_member, snip)
+
+
+def derived_constructor_initializer_list(text, snip):
+    if len(text):
+        prefix = ",\n{}".format(snip.mkline(""))
+    else:
+        prefix = None
+    return _constructor_initializer_list(
+        text, class_arg_to_member, snip, prefix=prefix)
+
+endglobal
+
+snippet once "header pragma include guard" b
+#pragma once
+
+${VISUAL}$0
+endsnippet
+
+snippet namespace "opening and closing namespace" b
+namespace $1 {
+${VISUAL}$0
+} // namespace $1
+endsnippet
+
+snippet template "template typename" b
+template <typename $1>
+endsnippet
+
+snippet forward "variadic template forward" b
+template <typename... Args>
+${3:void} ${1:alias}(Args&&... args) {
+  return ${2:func}(std::forward<Args>(args)...);
+}
+endsnippet
+
+# begin() and end() iterators.
+snippet beginend "begin(), end()"
+${1:range}.begin(), $1.end()
+endsnippet
+
+# Iterator-based for-loop.
+snippet for "for with iterators" b
+for (auto ${2:itr} = ${1:range}.begin(); $2 != $1.end(); ++$2) {
+  ${VISUAL}$0
+}
+endsnippet
+
+# Range-based for-loop.
+snippet for "for with range" b
+for (const auto& ${2:item} : ${1:range}) {
+  ${VISUAL}$0
+}
+endsnippet
+
+snippet struct "plain-old-data struct" b
+/**
+ * $1
+ *
+ * ${0:TODO}
+ */
+struct ${1:StructName} final {
+  $1($2);`!p snip.shift()
+
+snip.rv = struct_member_variable_list(t[2], snip)`
+};
+
+$1::$1($2)
+  : `!p snip.shift(2)
+
+snip.rv = struct_constructor_initializer_list(t[2], snip)` {}
+endsnippet
+
+snippet class "class with private members" b
+/**
+ * $1
+ *
+ * ${0:TODO}
+ */
+class ${1:ClassName} final {
+  friend class $1Test;
+
+public:
+  $1($2);
+
+  ~$1() = default;
+  $1(const $1&) = default;
+  $1& operator=(const $1&) = default;
+  $1($1&&) = default;
+  $1& operator=($1&&) = default;
+
+private:`!p snip.shift()
+
+snip.rv = class_member_variable_list(t[2], snip)`
+};
+
+$1::$1($2)
+  : `!p snip.shift(2)
+
+snip.rv = class_constructor_initializer_list(t[2], snip)` {}
+endsnippet
+
+snippet interface "pure-virtual interface" b
+/**
+ * $1
+ *
+ * ${0:TODO}
+ */
+class ${1:ClassName} {
+public:
+  virtual ~$1() = default;
+};
+endsnippet
+
+snippet derived "derived class with private members" b
+/**
+ * $1 derives $2
+ *
+ * ${0:TODO}
+ */
+class ${1:DerivedName} final : public ${2:BaseName} {
+  friend class $1Test;
+
+public:
+  $1($3);
+
+  ~$1() = default;
+  $1(const $1&) = default;
+  $1& operator=(const $1&) = default;
+  $1($1&&) = default;
+  $1& operator=($1&&) = default;
+
+private:`!p snip.shift()
+
+snip.rv = class_member_variable_list(t[3], snip)`
+};
+
+$1::$1($3)
+  : $2()`!p snip.shift(2)
+
+snip.rv = derived_constructor_initializer_list(t[3], snip)` {}
+endsnippet
