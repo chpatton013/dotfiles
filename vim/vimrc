@@ -213,12 +213,8 @@ let g:ycm_filetype_blacklist.help=1
 let g:ycm_filetype_blacklist.vim=1
 
 " Load extra conf without prompting.
-" The extra conf is only used for C and C++, so restrict it to those filetypes.
-augroup YcmExtraConf
-  autocmd!
-  autocmd BufNewFile,BufRead c,cpp let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-  autocmd BufNewFile,BufRead c,cpp let g:ycm_confirm_extra_conf=0
-augroup END
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
 
 " Automatically open and close the preview window during completion.
 let g:ycm_add_preview_to_completeopt=1
