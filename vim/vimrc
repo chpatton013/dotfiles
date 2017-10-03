@@ -168,9 +168,9 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 let g:syntastic_c_check_header=1
 let g:syntastic_cpp_check_header=1
 
-" Check for errors on file open and close.
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=1
+" Only check syntax on save. Checking on open and close is too slow.
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
 
 " Print errors to the command window.
 let g:syntastic_echo_current_error=1
