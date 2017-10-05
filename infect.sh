@@ -4,14 +4,12 @@ set -xeuo pipefail
 script_dir="$( (builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) )"
 root_dir="$( (builtin cd "$script_dir" && git rev-parse --show-toplevel) )"
 
-source "$script_dir/utilities.sh"
-
 ################################################################################
 # Configure account
 ################################################################################
 
-change_shell "$(which zsh)" "$(user_name)"
-make_directory "$HOME/projects" "$HOME/.config" "$HOME/.tmux"
+sudo chsh --shell "$(which zsh)" "$(id --user --name)"
+mkdir --parents "$HOME/projects" "$HOME/.config" "$HOME/.tmux"
 
 ################################################################################
 # Update repository
@@ -42,7 +40,7 @@ wget --output-document="$HOME/.worktree" \
 )
 
 # VimPlug download
-make_directory ./vim/autoload
+mkdir --parents ./vim/autoload
 wget --output-document=./vim/autoload/plug.vim \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
