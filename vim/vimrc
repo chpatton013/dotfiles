@@ -9,6 +9,13 @@ function! BuildYouCompleteMe(info) abort
   end
 endfunction
 
+function! BuildPowerlineFonts(info) abort
+  if a:info.force || a:info.status !=? 'unchanged'
+    silent !./install.sh
+    redraw!
+  end
+endfunction
+
 function! BuildCommandT(info) abort
   if a:info.force || a:info.status !=? 'unchanged'
     silent !builtin cd ruby/command-t/ext/command-t && ruby extconf.rb && make
@@ -31,7 +38,7 @@ Plug 'google/vim-codefmt' " Syntax-aware code formatting
 Plug 'google/vim-glaive' " Configuration utility for maktaba
 Plug 'google/vim-maktaba' " Plugin framework
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
-Plug 'powerline/fonts' " Pre-patched and adjusted fonts for status line
+Plug 'powerline/fonts', { 'do': function('BuildPowerlineFonts') } " Pre-patched and adjusted fonts for status line
 Plug 'scrooloose/nerdtree' " File navigation
 Plug 'tpope/vim-abolish' " Assorted word-munging utilities
 Plug 'tpope/vim-commentary' " Easy (un)commenting of code blocks

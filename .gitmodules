@@ -22,6 +22,3 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = git@github.com:tmux-plugins/tpm.git
-[submodule "vim/fonts"]
-	path = vim/fonts
-	url = git@github.com:powerline/fonts.git
