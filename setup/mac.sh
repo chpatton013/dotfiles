@@ -19,6 +19,7 @@ function main() {
   install_core
   install_cpp
   install_java
+  install_bazel
   install_python
   install_go
   install_js
@@ -26,6 +27,7 @@ function main() {
   install_rust
   install_docker
   install_vagrant
+  install_web_tools
   install_dev_tools
   install_user_tools
 }
@@ -37,7 +39,7 @@ function _ruby_version() {
 function install_homebrew() {
   local install_url="https://raw.githubusercontent.com/Homebrew/install/master/install"
 
-  # Replace stdin with /dev/null so this install script does not wait for user.
+  # Replace stdin with /dev/null so this install script does not wait for input.
   /usr/bin/ruby -e "$(curl --fail --silent --show-error --location "$install_url")" </dev/null
 
   sudo mkdir -p /opt/homebrew-cask/Caskroom
@@ -80,11 +82,15 @@ function install_core() {
 }
 
 function install_cpp() {
-  brew install bazel buildifier clang-format cmake gcc gcc5
+  brew install clang-format cmake gcc gcc5
 }
 
 function install_java() {
   brew cask install java
+}
+
+function install_cpp() {
+  brew install bazel buildifier
 }
 
 function install_python() {
@@ -107,17 +113,19 @@ function install_go() {
 
 function install_js() {
   brew install node
-  sudo pip2 install jsbeautifier
+  sudo npm install --global js-beautify
 }
 
 function install_ruby() {
   brew install rbenv ruby ruby-build
   rbenv install "$(_ruby_version ruby)"
+  sudo gem install rubocop
 }
 
 function install_rust() {
   local install_url="https://static.rust-lang.org/rustup.sh"
   curl --fail --silent --show-error --location "$install_url" | sh
+  sudo cargo install rustfmt
 }
 
 function install_docker() {
@@ -130,6 +138,10 @@ function install_vagrant() {
 
   rbenv install "$(_ruby_version /opt/vagrant/embedded/bin/ruby)"
   vagrant plugin install vagrant-libvirt
+}
+
+function install_web_tools() {
+  sudo gem install sass
 }
 
 function install_dev_tools() {
@@ -154,6 +166,10 @@ function install_dev_tools() {
 
   sudo pip2 install --upgrade neovim
   sudo pip3 install --upgrade neovim
+
+  sudo npm install --global remark-cli
+
+  go get -u mvdan.cc/sh/cmd/shfmt
 }
 
 function install_user_tools() {

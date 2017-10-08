@@ -64,6 +64,7 @@ paths=( \
    /usr/kerberos
    / \
    "$HOME/dotfiles" \
+   "$HOME/go" \
 )
 for p in ${paths[@]}; do
    bin="${p%/}/bin"
