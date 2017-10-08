@@ -146,9 +146,6 @@ nnoremap <Leader>F :call AutoFormatToggle()<CR>
 " CommandT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" TODO: Use `fd` as file scanner.
-" Check up on [#258](https://github.com/wincent/command-t/pull/258) for progress
-" toward custom scanners.
 let g:CommandTFileScanner='git'
 
 " Add mappings to close quickfix window.
