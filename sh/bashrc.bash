@@ -3,28 +3,27 @@
 ###############################################################################
 
 if [ -f ~/.commonrc ]; then
-   fg_black=$'\[\e[0;30m\]'
-   fg_red=$'\[\e[0;31m\]'
-   fg_green=$'\[\e[0;32m\]'
-   fg_yellow=$'\[\e[0;33m\]'
-   fg_blue=$'\[\e[0;34m\]'
-   fg_magenta=$'\[\e[0;35m\]'
-   fg_cyan=$'\[\e[0;36m\]'
-   fg_white=$'\[\e[0;37m\]'
-   reset_color=$'\[\e[0m\]'
+  fg_black=$'\[\e[0;30m\]'
+  fg_red=$'\[\e[0;31m\]'
+  fg_green=$'\[\e[0;32m\]'
+  fg_yellow=$'\[\e[0;33m\]'
+  fg_blue=$'\[\e[0;34m\]'
+  fg_magenta=$'\[\e[0;35m\]'
+  fg_cyan=$'\[\e[0;36m\]'
+  fg_white=$'\[\e[0;37m\]'
+  reset_color=$'\[\e[0m\]'
 
-   SH_name=$'\u'
-   SH_host=$'\H'
-   SH_pwd=$'\w'
-   SH_date=$'`date +"%m-%y-%d"`'
-   SH_time=$'\D{}'
-   SH_priv=$'\$'
+  SH_name=$'\u'
+  SH_host=$'\H'
+  SH_pwd=$'\w'
+  SH_date=$'`date +"%m-%y-%d"`'
+  SH_time=$'\D{}'
+  SH_priv=$'\$'
 
-   source ~/.commonrc
+  source ~/.commonrc
 fi
 
 ###############################################################################
-
 
 ###############################################################################
 # Configuration Options.
@@ -43,7 +42,6 @@ shopt -s globstar
 complete -cf sudo
 
 ###############################################################################
-
 
 ###############################################################################
 # History Settings.

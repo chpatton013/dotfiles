@@ -2,42 +2,40 @@
 # ZSH Modules.
 ###############################################################################
 
-autoload -U compinit complete complist computil    # Enable completion support.
-autoload -U promptinit                             # Prompt customization support.
-autoload -U colors                                 # Enable color support.
-autoload -U regex                                  # Enable regex support.
+autoload -U compinit complete complist computil # Enable completion support.
+autoload -U promptinit                          # Prompt customization support.
+autoload -U colors                              # Enable color support.
+autoload -U regex                               # Enable regex support.
 colors && compinit -u && promptinit
 
 ###############################################################################
-
 
 ###############################################################################
 # External Files.
 ###############################################################################
 
 if [ -f ~/.commonrc ]; then
-   fg_black="%{$fg[black]%}"
-   fg_red="%{$fg[red]%}"
-   fg_green="%{$fg[green]%}"
-   fg_yellow="%{$fg[yellow]%}"
-   fg_blue="%{$fg[blue]%}"
-   fg_magenta="%{$fg[magenta]%}"
-   fg_cyan="%{$fg[cyan]%}"
-   fg_white="%{$fg[white]%}"
-   reset_color="%{$reset_color%}"
+  fg_black="%{$fg[black]%}"
+  fg_red="%{$fg[red]%}"
+  fg_green="%{$fg[green]%}"
+  fg_yellow="%{$fg[yellow]%}"
+  fg_blue="%{$fg[blue]%}"
+  fg_magenta="%{$fg[magenta]%}"
+  fg_cyan="%{$fg[cyan]%}"
+  fg_white="%{$fg[white]%}"
+  reset_color="%{$reset_color%}"
 
-   SH_name="%n"
-   SH_host="%M"
-   SH_pwd="%~"
-   SH_date="%D"
-   SH_time="%*"
-   SH_priv="%#"
+  SH_name="%n"
+  SH_host="%M"
+  SH_pwd="%~"
+  SH_date="%D"
+  SH_time="%*"
+  SH_priv="%#"
 
-   source ~/.commonrc
+  source ~/.commonrc
 fi
 
 ###############################################################################
-
 
 ###############################################################################
 # Key Bindings.
@@ -80,51 +78,48 @@ bindkey -M viins ' ' magic-space
 
 ###############################################################################
 
-
 ###############################################################################
 # Configuration Options.
 ###############################################################################
 
-setopt AUTO_CD          # Lone directory names become cd commands.
-setopt AUTO_PUSHD       # cd = pushd.
-setopt CORRECT          # This is why I use zsh.
-setopt MULTIOS          # Allow piping to multiple outputs.
-setopt NO_BEEP          # No audio bells.
-setopt NO_FLOW_CONTROL  # It's annoying when the terminal stops producing output for no good reason.
-setopt NO_HUP           # Do not hang up on me.
-setopt PUSHD_MINUS      # Reverses 'cd +1' and 'cd -1'.
-setopt PUSHD_SILENT     # So annoying.
-setopt PUSHD_TO_HOME    # Blank pushd goes to home.
-setopt RC_EXPAND_PARAM  # foo${a b c}bar = fooabar foobbar foocbar instead of fooa b cbar.
-setopt VI               # Vim commands on the command line (instead of emacs).
+setopt AUTO_CD           # Lone directory names become cd commands.
+setopt AUTO_PUSHD        # cd = pushd.
+setopt CORRECT           # This is why I use zsh.
+setopt MULTIOS           # Allow piping to multiple outputs.
+setopt NO_BEEP           # No audio bells.
+setopt NO_FLOW_CONTROL   # It's annoying when the terminal stops producing output for no good reason.
+setopt NO_HUP            # Do not hang up on me.
+setopt PUSHD_MINUS       # Reverses 'cd +1' and 'cd -1'.
+setopt PUSHD_SILENT      # So annoying.
+setopt PUSHD_TO_HOME     # Blank pushd goes to home.
+setopt RC_EXPAND_PARAM   # foo${a b c}bar = fooabar foobbar foocbar instead of fooa b cbar.
+setopt VI                # Vim commands on the command line (instead of emacs).
 
 ###############################################################################
-
 
 ###############################################################################
 # History Settings.
 ###############################################################################
 
-setopt APPEND_HISTORY         # Do not overwrite.
-setopt EXTENDED_HISTORY       # Save time and duration of execution.
-setopt HIST_IGNORE_DUPS       # Ignore immediate duplicates.
-setopt HIST_IGNORE_SPACE      # Do not save lines that start with a space.
-setopt HIST_NO_STORE          # Do not save commands with '!' (only the resulting auto-completed command).
-setopt HIST_VERIFY            # Auto-completion with '!' verifies on next line.
-setopt SHARE_HISTORY          # Share history between shells.
+setopt APPEND_HISTORY    # Do not overwrite.
+setopt EXTENDED_HISTORY  # Save time and duration of execution.
+setopt HIST_IGNORE_DUPS  # Ignore immediate duplicates.
+setopt HIST_IGNORE_SPACE # Do not save lines that start with a space.
+setopt HIST_NO_STORE     # Do not save commands with '!' (only the resulting auto-completed command).
+setopt HIST_VERIFY       # Auto-completion with '!' verifies on next line.
+setopt SHARE_HISTORY     # Share history between shells.
 
 ###############################################################################
-
 
 ###############################################################################
 # Completion Settings.
 ###############################################################################
 
-setopt COMPLETE_IN_WORD    # Try to complete from cursor.
-setopt GLOB_COMPLETE       # Expand globs.
-setopt EXTENDED_GLOB       # Moar globs!
-setopt NO_CASE_GLOB        # Case insensitive globbing.
-setopt NUMERIC_GLOB_SORT   # Glob sorting is primarily numeric.
+setopt COMPLETE_IN_WORD  # Try to complete from cursor.
+setopt GLOB_COMPLETE     # Expand globs.
+setopt EXTENDED_GLOB     # Moar globs!
+setopt NO_CASE_GLOB      # Case insensitive globbing.
+setopt NUMERIC_GLOB_SORT # Glob sorting is primarily numeric.
 
 # Formatting output.
 zstyle ':completion:*:descriptions' format '%B%d%b'

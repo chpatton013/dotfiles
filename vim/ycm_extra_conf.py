@@ -34,10 +34,12 @@ COMMON_FLAGS = [
     "-Weffc++",
     "--pipe",
     "-std=c++14",
-    "-x", "c++",
+    "-x",
+    "c++",
     # This flag is only needed for YCM.
     "-DUSE_CLANG_COMPLETER",
 ]
+
 
 def _interleave(prefix, elements):
     """
@@ -49,6 +51,7 @@ def _interleave(prefix, elements):
             result.append(prefix)
             result.append(el)
     return result
+
 
 def _find_parent_dir_with_file(directory, filename, root=None):
     """
@@ -66,6 +69,7 @@ def _find_parent_dir_with_file(directory, filename, root=None):
         directory = os.path.dirname(directory)
     return directory if file_exists_in_dir(directory, filename) else None
 
+
 def _find_uncle_dir(filename, uncle, root=None):
     """
     Recursively search in parent directory until a sibling directory with the
@@ -73,13 +77,12 @@ def _find_uncle_dir(filename, uncle, root=None):
     Returns the path to the parent's sibling directory, or None.
     """
     directory = _find_parent_dir_with_file(
-            os.path.dirname(filename),
-            uncle,
-            root=root)
+        os.path.dirname(filename), uncle, root=root)
     if directory:
         return os.path.join(directory, uncle)
     else:
         return None
+
 
 def default_flags(filename):
     """
@@ -104,18 +107,20 @@ def default_flags(filename):
 
     return COMMON_FLAGS + system_include_paths + local_include_paths
 
+
 def compilation_info(filename):
     """
     Lookup file-specific compilation information from a compile-commands
     database.
     """
-    database_dir = _find_parent_dir_with_file(os.path.dirname(filename),
-                                              DATABASE_FILE)
+    database_dir = _find_parent_dir_with_file(
+        os.path.dirname(filename), DATABASE_FILE)
     if not database_dir:
         return None
 
     database = ycm_core.CompilationDatabase(database_dir)
     return database.GetCompilationInfoForFile(filename)
+
 
 def flags_and_directory(filename):
     """
@@ -133,6 +138,7 @@ def flags_and_directory(filename):
         return flags, include_dir
     else:
         return flags, os.path.dirname(filename)
+
 
 def flags_relative_to_absolute(flags, directory):
     """
@@ -175,6 +181,7 @@ def flags_relative_to_absolute(flags, directory):
         else:
             absolute_flags.append(flag)
     return absolute_flags
+
 
 def FlagsForFile(filename, **kwargs):
     filename = os.path.expanduser(filename)

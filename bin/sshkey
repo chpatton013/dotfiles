@@ -30,22 +30,25 @@ function _get_agent_pids() {
 }
 
 function _get_non_canon_agent_pids() {
-  local canon_agent_pid; canon_agent_pid="$(_get_canon_agent_pid)"
+  local canon_agent_pid
+  canon_agent_pid="$(_get_canon_agent_pid)"
   readonly canon_agent_pid
 
-  local all_agent_pids; all_agent_pids="$(_get_agent_pids)"
+  local all_agent_pids
+  all_agent_pids="$(_get_agent_pids)"
   readonly all_agent_pids
   if [ -z "$canon_agent_pid" ]; then
     echo "$all_agent_pids"
   elif [ ! -z "$all_agent_pids" ] &&
-       [ "$all_agent_pids" != "$canon_agent_pid" ]; then
+    [ "$all_agent_pids" != "$canon_agent_pid" ]; then
     # -v == --invert-match on Linux
     echo "$all_agent_pids" | grep -v "$canon_agent_pid"
   fi
 }
 
 function _is_canon_agent_running() {
-  local canon_agent_pid; canon_agent_pid="$(_get_canon_agent_pid)"
+  local canon_agent_pid
+  canon_agent_pid="$(_get_canon_agent_pid)"
   readonly canon_agent_pid
 
   if [ -z "$canon_agent_pid" ]; then
@@ -84,7 +87,7 @@ function main() {
   kill_non_canon_agents
 
   if ! _is_canon_agent_running; then
-    ssh-agent > "$env_file"
+    ssh-agent >"$env_file"
   fi
 
   seed_agent

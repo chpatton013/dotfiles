@@ -96,14 +96,14 @@ function install_cpp() {
 function install_python() {
   local packages_dir="$HOME/Library/Python/2.7/lib/python/site-packages"
   local brew_path_file="$packages_dir/homebrew.pth"
-  local patch="import site; site.addsitedir(\"/usr/local/lib/python2.7/site-packages\")"
+  local patch='import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")'
 
   brew install python python3 pyenv
   sudo pip2 install yapf
 
   mkdir -p "$packages_dir"
   if [ ! -f "$brew_path_file" ] || ! grep -q "$patch" "$brew_path_file"; then
-    echo "$patch" >> "$brew_path_file"
+    echo "$patch" >>"$brew_path_file"
   fi
 }
 

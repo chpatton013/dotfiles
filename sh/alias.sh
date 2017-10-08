@@ -7,23 +7,23 @@ alias startx="startx &> ~/.xlog"
 
 # Add color to several commands.
 if [ "$(uname -s)" = "Darwin" ]; then
-   alias gdb="lldb"
+  alias gdb="lldb"
 else
-   alias ls="ls --color"
-   alias grep="grep --color"
-   alias fgrep="fgrep --color"
-   alias egrep="egrep --color"
+  alias ls="ls --color"
+  alias grep="grep --color"
+  alias fgrep="fgrep --color"
+  alias egrep="egrep --color"
 fi
 
 alias l="ls"
 if [ "$(uname -s)" = "Darwin" ]; then
-   alias ll="ls -hl"
-   alias la="ls -a"
-   alias lal="ll -a"
+  alias ll="ls -hl"
+  alias la="ls -a"
+  alias lal="ll -a"
 else
-   alias ll="ls --human-readable -l"
-   alias la="ls --all"
-   alias lal="ll --all"
+  alias ll="ls --human-readable -l"
+  alias la="ls --all"
+  alias lal="ll --all"
 fi
 alias lla="lal"
 

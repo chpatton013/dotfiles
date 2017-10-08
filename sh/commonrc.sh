@@ -4,12 +4,11 @@
 
 # If not running interactively, don't do anything.
 case $- in
-   *i*) ;;
-   *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 ###############################################################################
-
 
 ###############################################################################
 # External Files.
@@ -21,22 +20,21 @@ esac
 [ -f ~/.cargo/env ] && . ~/.cargo/env
 
 if [ -f ~/.git-completion.sh ]; then
-   . ~/.git-completion.sh
-   export GIT_PS1_SHOWDIRTYSTATE="true"
-   export GIT_PS1_SHOWSTASHSTATE=" true"
-   export GIT_PS1_SHOWUNTRACKEDFILES=" true"
-   export GIT_PS1_SHOWUPSTREAM="true"
+  . ~/.git-completion.sh
+  export GIT_PS1_SHOWDIRTYSTATE="true"
+  export GIT_PS1_SHOWSTASHSTATE=" true"
+  export GIT_PS1_SHOWUNTRACKEDFILES=" true"
+  export GIT_PS1_SHOWUPSTREAM="true"
 fi
 
 if [ -d ~/.dircolors ]; then
-   dircolors ~/.dircolors
+  dircolors ~/.dircolors
 fi
 
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export ANDROID_SDK_HOME=/usr/local/opt/android-sdk
 
 ###############################################################################
-
 
 ###############################################################################
 # History Settings.
@@ -49,56 +47,53 @@ export HISTFILESIZE=2000
 
 ###############################################################################
 
-
 ###############################################################################
 # Path Construction.
 ###############################################################################
 
-paths=( \
-   /usr/local \
-   /usr \
-   /usr/local/mysql \
-   /usr/X11 \
-   /usr/local/cuda \
-   /usr/local/cuda-5.0 \
-   /usr/kerberos
-   / \
-   "$HOME/dotfiles" \
-   "$HOME/go" \
+paths=(
+  /usr/local
+  /usr
+  /usr/local/mysql
+  /usr/X11
+  /usr/local/cuda
+  /usr/local/cuda-5.0
+  /usr/kerberos
+  /
+  "$HOME/dotfiles"
+  "$HOME/go"
 )
 for p in ${paths[@]}; do
-   bin="${p%/}/bin"
-   sbin="${p%/}/sbin"
-   [ -d "$bin" ] && PATH+=:"$bin"
-   [ -d "$sbin" ] && PATH+=:"$sbin"
+  bin="${p%/}/bin"
+  sbin="${p%/}/sbin"
+  [ -d "$bin" ] && PATH+=:"$bin"
+  [ -d "$sbin" ] && PATH+=:"$sbin"
 done
 PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$PATH"
 
 ###############################################################################
 
-
 ###############################################################################
 # LD Library Path Construction.
 ###############################################################################
 
-library_paths=( \
-   / \
-   /usr \
-   /usr/local \
-   /usr/local/cuda \
-   /usr/local/cuda-5.0 \
+library_paths=(
+  /
+  /usr
+  /usr/local
+  /usr/local/cuda
+  /usr/local/cuda-5.0
 )
 for l in ${library_paths[@]}; do
-   lib="$l/lib"
-   lib64="$l/lib64"
-   [ -d "$lib" ] && LD_LIBRARY_PATH+=:"$lib"
-   [ -d "$lib64" ] && LD_LIBRARY_PATH+=:"$lib64"
+  lib="$l/lib"
+  lib64="$l/lib64"
+  [ -d "$lib" ] && LD_LIBRARY_PATH+=:"$lib"
+  [ -d "$lib64" ] && LD_LIBRARY_PATH+=:"$lib64"
 done
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
 
 ###############################################################################
-
 
 ###############################################################################
 # Prompt Definition
@@ -126,7 +121,6 @@ $PS1_priv$PS1_rangle "
 
 ###############################################################################
 
-
 ###############################################################################
 # Language
 ###############################################################################
@@ -144,18 +138,18 @@ export LC_ADDRESS="en_US.UTF-8"
 export LC_TELEPHONE="en_US.UTF-8"
 export LC_MEASUREMENT="en_US.UTF-8"
 export LC_IDENTIFICATION="en_US.UTF-8"
-export LC_ALL=
+export LC_ALL
 export CHARSET=UTF-8
 
 ###############################################################################
 
 if [ -f ~/.bootstrap.sh ]; then
-   source ~/.bootstrap.sh
+  source ~/.bootstrap.sh
 fi
 if [ -d ~/.bootstrap ]; then
-   for b in ~/.bootstrap/*; do
-      source "$b"
-   done
+  for b in ~/.bootstrap/*; do
+    source "$b"
+  done
 fi
 
 # Setup ssh agent automatically. This will require a key decryption prompt in

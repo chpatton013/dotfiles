@@ -4,10 +4,10 @@ export WORKTREE_BRANCH_NAME_PREFIX=user/chris/
 #export WORKTREE_BRANCH_NAME_SUFFIX=
 #export WORKTREE_BASE_BRANCH=master
 #export WORKTREE_REMOTE=origin
-WORKTREE_ENVIRONMENT_ENTRYPOINT="builtin cd \"\$project_directory\""
-WORKTREE_ENVIRONMENT_ENTRYPOINT+=" && tmux has-session -t \"\$project_name\" 2>/dev/null"
-WORKTREE_ENVIRONMENT_ENTRYPOINT+=" && tmux attach -t \"\$project_name\""
-WORKTREE_ENVIRONMENT_ENTRYPOINT+=" || tmux new -s \"\$project_name\""
+WORKTREE_ENVIRONMENT_ENTRYPOINT='builtin cd "$project_directory"'
+WORKTREE_ENVIRONMENT_ENTRYPOINT+=' && tmux has-session -t "$project_name" 2>/dev/null'
+WORKTREE_ENVIRONMENT_ENTRYPOINT+=' && tmux attach -t "$project_name"'
+WORKTREE_ENVIRONMENT_ENTRYPOINT+=' || tmux new -s "$project_name"'
 export WORKTREE_ENVIRONMENT_ENTRYPOINT
 source ~/.worktree
 alias wt=worktree
