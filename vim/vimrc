@@ -151,7 +151,7 @@ let g:CommandTFileScanner='git'
 " Add mappings to close quickfix window.
 let g:CommandTCancelMap=['<Esc>', '<C-c>']
 
-nnoremap <C-p> :CommandT<CR>
+nnoremap <C-f> :CommandT<CR>
 
 " EditorConfig
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
