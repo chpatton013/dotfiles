@@ -1,1 +1,1 @@
-../vim/ycm_extra_conf.py
+../tools/ycm_extra_conf.py
