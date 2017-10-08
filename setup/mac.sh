@@ -152,6 +152,7 @@ function install_dev_tools() {
     git \
     gpatch \
     gpg \
+    grip \
     htop \
     less \
     neovim \

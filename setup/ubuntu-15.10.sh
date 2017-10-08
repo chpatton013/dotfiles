@@ -114,6 +114,7 @@ go get github.com/bazelbuild/buildtools/buildifier
 go get -u mvdan.cc/sh/cmd/shfmt
 
 # Extra dev tools.
+sudo pip2 install grip
 cargo install fd-find ripgrep
 
 # Docker service and user account
