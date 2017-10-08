@@ -129,7 +129,7 @@ let g:formatters_sh=['shfmt']
 let g:formatters_xhtml=['htmlbeautify']
 let g:formatters_xml=['htmlbeautify']
 
-let g:formatdef_shfmt_sh='shfmt -s -i '.&shiftwidth
+let g:formatdef_shfmt='"shfmt -s -i ".&shiftwidth'
 let g:formatter_yapf_style='pep8'
 
 " Automatic formatting.
