@@ -1,0 +1,50 @@
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/BlockLength:
+  Max: 30
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/ParameterLists:
+  Max: 4
+  CountKeywordArgs: false
+
+Naming/MethodName:
+  EnforcedStyle: camelCase
+
+# Local variables should be snake_case, but constants should be kConstantCase.
+# This isn't supported by rubocop, so we'll have to disable this cop.
+Naming/VariableName:
+  Enabled: false
+
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
+
+# We want to enforce the opposite (always use parens). This isn't supported by
+# rubocop, so we'll have to disable this cop.
+Style/DefWithParentheses:
+  Enabled: false
+
+# We want to enforce the opposite (always use parens). This isn't supported by
+# rubocop, so we'll have to disable this cop.
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: false
+
+Style/NumericLiterals:
+  MinDigits: 6
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# We want to enforce the opposite (always return from functions). This isn't
+# supported by rubocop, so we'll have to disable this cop.
+Style/RedundantReturn:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma

@@ -79,6 +79,7 @@ let g:mapleader=','
 
 " Airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
@@ -110,6 +111,26 @@ function! AutoFormatIfEnabled() abort
     :Autoformat
   endif
 endfunction
+
+" Filetype formatters.
+let g:formatters_c=['clangformat']
+let g:formatters_cpp=['clangformat']
+let g:formatters_css=['cssbeautify']
+let g:formatters_html=['htmlbeautify']
+let g:formatters_javascript=['jsbeautify_javascript']
+let g:formatters_json=['jsbeautify_json']
+let g:formatters_markdown=['remark']
+let g:formatters_protobuf=['clangformat']
+let g:formatters_python=['yapf']
+let g:formatters_ruby=['rubocop']
+let g:formatters_rust=['rustfmt']
+let g:formatters_scss=['cssbeautify']
+let g:formatters_sh=['shfmt']
+let g:formatters_xhtml=['htmlbeautify']
+let g:formatters_xml=['htmlbeautify']
+
+let g:formatdef_shfmt_sh='shfmt -s -i '.&shiftwidth
+let g:formatter_yapf_style='pep8'
 
 " Automatic formatting.
 augroup AutoFormatSettings
