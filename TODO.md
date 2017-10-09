@@ -45,6 +45,11 @@ catastrophic happens, and at that point it's too late to use.
 
 ## Vim
 
+### Look into ALE as a replacement for Syntastic
+
+I've heard good things about it. There's no pressing need right now, but it
+might play nicely with languages that it doesn't explicitly support.
+
 ### Find a formatter for VimL
 
 This is proving difficult to search for. All I find are formatters that work in
