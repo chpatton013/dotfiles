@@ -1,9 +1,5 @@
 # TODO
 
-## Bin
-
-`sshkey` should be in its own repository, just like `worktree`.
-
 ## Bootstrap
 
 A lot of that is outdated and should be cleaned up.

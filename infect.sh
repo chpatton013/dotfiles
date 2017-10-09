@@ -9,7 +9,7 @@ root_dir="$(builtin cd "$script_dir" && git rev-parse --show-toplevel)"
 ################################################################################
 
 sudo chsh --shell "$(which zsh)" "$(id --user --name)"
-mkdir --parents "$HOME/projects" "$HOME/.config" "$HOME/.tmux"
+mkdir --parents ~/bin ~/projects ~/.config ~/.tmux
 
 ################################################################################
 # Update repository
@@ -30,8 +30,13 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 # Build dependencies
 ################################################################################
 
+# ssh-agent-canonicalize download
+wget --output-document=~/bin/ssh-agent-canonicalize \
+  https://raw.githubusercontent.com/chpatton013/ssh-agent-canonicalize/master/ssh-agent-canonicalize
+chmod +x ~/bin/ssh-agent-canonicalize
+
 # Worktree download
-wget --output-document="$HOME/.worktree" \
+wget --output-document=~/.worktree \
   https://raw.githubusercontent.com/chpatton013/worktree/master/worktree.sh
 
 # VimPlug download

@@ -60,7 +60,7 @@ paths=(
   /usr/local/cuda-5.0
   /usr/kerberos
   /
-  "$HOME/dotfiles"
+  "$HOME"
   "$HOME/go"
 )
 for p in ${paths[@]}; do
@@ -154,4 +154,4 @@ fi
 
 # Setup ssh agent automatically. This will require a key decryption prompt in
 # the first shell opened each boot.
-sk
+eval $(ssh-agent-canonicalize)
