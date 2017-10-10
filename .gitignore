@@ -1,6 +1,2 @@
 *.sw?
 *.pyc
-/vim/.netrwhist
-/vim/autoload/plug.vim
-/vim/plugin/
-/vim/plugged/
