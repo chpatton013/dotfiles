@@ -3,28 +3,12 @@ alias less="less --RAW-CONTROL-CHARS"
 # Enable trusted and untrsuted X Forwarding and compression in X sessions.
 alias ssh="ssh -o ForwardX11=yes -o ForwardX11Trusted=yes -o ForwardAgent=true"
 # Log X sessions.
-alias startx="startx &> ~/.xlog"
-
-# Add color to several commands.
-if [ "$(uname -s)" = "Darwin" ]; then
-  alias gdb="lldb"
-else
-  alias ls="ls --color"
-  alias grep="grep --color"
-  alias fgrep="fgrep --color"
-  alias egrep="egrep --color"
-fi
+alias startx="startx &>~/.xlog"
 
 alias l="ls"
-if [ "$(uname -s)" = "Darwin" ]; then
-  alias ll="ls -hl"
-  alias la="ls -a"
-  alias lal="ll -a"
-else
-  alias ll="ls --human-readable -l"
-  alias la="ls --all"
-  alias lal="ll --all"
-fi
+alias ll="ls -hl"
+alias la="ls -a"
+alias lal="ll -a"
 alias lla="lal"
 
 # Command-line shortcuts.

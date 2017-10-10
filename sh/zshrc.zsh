@@ -12,7 +12,7 @@ colors && compinit -u && promptinit
 # External Files.
 ###############################################################################
 
-if [ -f ~/.commonrc ]; then
+if [ -f ~/.shellrc ]; then
   fg_black="%{$fg[black]%}"
   fg_red="%{$fg[red]%}"
   fg_green="%{$fg[green]%}"
@@ -30,7 +30,7 @@ if [ -f ~/.commonrc ]; then
   SH_time="%*"
   SH_priv="%#"
 
-  source ~/.commonrc
+  source ~/.shellrc
 fi
 
 ###############################################################################

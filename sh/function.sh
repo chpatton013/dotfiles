@@ -5,29 +5,20 @@ function random_string() {
   base64 /dev/urandom | tr -d '/+' | fold -w "$length" | head -n 1
 }
 
-# `ls` displays trailing identifiers ('/' or '*'), color, and non-printables.
-if [ "$(uname -s)" = "Darwin" ]; then
-  function ls() {
-    /bin/ls -Fb "$@"
-  }
-else
-  function ls() {
-    /bin/ls --classify --escape "$@"
-  }
-fi
+# `ls` displays trailing identifiers ('/' or '*') and non-printables.
+function ls() {
+  /bin/ls -Fb "$@"
+}
 
 function cd() {
   builtin cd "$@" && ls
-}
-
-function fuck() {
-  sudo $(fc -ln -1)
 }
 
 function tmux_start_session() {
   local name
   name="$1"
   readonly name
+
   if [ -z "$name" ]; then
     tmux
   elif tmux has-session -t "$name" 2>/dev/null; then
@@ -46,22 +37,13 @@ function vpn() {
 }
 
 function docker_push() {
-  local image_name
+  local image_name tag user_name user_email identifier
   image_name="$1"
-  readonly image_name
-  local tag
   tag="${2:-latest}"
-  readonly tag
-
-  local user_name
   user_name="chpatton013"
-  readonly user_name
-  local user_email
   user_email="chpatton013@gmail.com"
-  readonly user_email
-  local identifier
   identifier="$user_name/$image_name"
-  readonly identifier
+  readonly image_name tag user_name user_email identifier
 
   docker login --username="$user_name" --email="$user_email"
 

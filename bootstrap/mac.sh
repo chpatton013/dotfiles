@@ -23,3 +23,5 @@ if which brew &>/dev/null; then
   PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
   MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
 fi
+
+alias gdb="lldb"

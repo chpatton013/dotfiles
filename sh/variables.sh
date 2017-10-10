@@ -2,12 +2,9 @@ export tmux_dark_theme="$HOME/.themes/solarized/tmux-colors-solarized/tmuxcolors
 export tmux_light_theme="$HOME/.themes/solarized/tmux-colors-solarized/tmuxcolors-light.conf"
 export tmux_default_theme="$tmux_light_theme"
 
-export vim_background="light"
-export vim_tab_width=2
-
 export BROWSER='chromium-browser'
 export CLICOLOR=TRUE
 export EDITOR=vim
 export PAGER=less
 export TERM='xterm-256color'
-export TERINAL='xterm'
+export TERMINAL='xterm'

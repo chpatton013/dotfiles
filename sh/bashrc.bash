@@ -2,7 +2,7 @@
 # External Files.
 ###############################################################################
 
-if [ -f ~/.commonrc ]; then
+if [ -f ~/.shellrc ]; then
   fg_black=$'\[\e[0;30m\]'
   fg_red=$'\[\e[0;31m\]'
   fg_green=$'\[\e[0;32m\]'
@@ -20,7 +20,7 @@ if [ -f ~/.commonrc ]; then
   SH_time=$'\D{}'
   SH_priv=$'\$'
 
-  source ~/.commonrc
+  source ~/.shellrc
 fi
 
 ###############################################################################

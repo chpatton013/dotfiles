@@ -43,7 +43,7 @@ chmod +x ~/bin/ssh-agent-canonicalize
 # Libraries
 ################################################################################
 
-mkdir --parents ~/.config/{bashrc.d,zshrc.d,shellrc.d}
+mkdir --parents ~/.config/{bashrc.d,zshrc.d}
 
 # worktree
 wget --output-document=~/.config/shellrc.d/worktree.sh \
