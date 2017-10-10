@@ -9,8 +9,6 @@ case $- in
 esac
 
 ###############################################################################
-
-###############################################################################
 # External Files.
 ###############################################################################
 
@@ -19,13 +17,10 @@ esac
 [ -f ~/.variables ] && . ~/.variables
 [ -f ~/.cargo/env ] && . ~/.cargo/env
 
-if [ -f ~/.git-completion.sh ]; then
-  . ~/.git-completion.sh
-  export GIT_PS1_SHOWDIRTYSTATE="true"
-  export GIT_PS1_SHOWSTASHSTATE=" true"
-  export GIT_PS1_SHOWUNTRACKEDFILES=" true"
-  export GIT_PS1_SHOWUPSTREAM="true"
-fi
+export GIT_PS1_SHOWDIRTYSTATE="true"
+export GIT_PS1_SHOWSTASHSTATE=" true"
+export GIT_PS1_SHOWUNTRACKEDFILES=" true"
+export GIT_PS1_SHOWUPSTREAM="true"
 
 if [ -d ~/.dircolors ]; then
   dircolors ~/.dircolors
@@ -35,8 +30,6 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 export ANDROID_SDK_HOME=/usr/local/opt/android-sdk
 
 ###############################################################################
-
-###############################################################################
 # History Settings.
 ###############################################################################
 
@@ -44,8 +37,6 @@ export HISTFILE=~/.history
 export SAVEHIST=1000
 export HISTSIZE=1000
 export HISTFILESIZE=2000
-
-###############################################################################
 
 ###############################################################################
 # Path Construction.
@@ -73,8 +64,6 @@ PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$PATH"
 
 ###############################################################################
-
-###############################################################################
 # LD Library Path Construction.
 ###############################################################################
 
@@ -92,8 +81,6 @@ for l in ${library_paths[@]}; do
   [ -d "$lib64" ] && LD_LIBRARY_PATH+=:"$lib64"
 done
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
-
-###############################################################################
 
 ###############################################################################
 # Prompt Definition
@@ -120,8 +107,6 @@ export PS1="$PS1_name$PS1_at$PS1_host$PS1_vbar$PS1_date$PS1_at$PS1_time$PS1_vbar
 $PS1_priv$PS1_rangle "
 
 ###############################################################################
-
-###############################################################################
 # Language
 ###############################################################################
 
@@ -142,6 +127,14 @@ export LC_ALL
 export CHARSET=UTF-8
 
 ###############################################################################
+# Extra config files
+###############################################################################
+
+if [ -d ~/.config/shellrc.d ]; then
+  for f in "$(find ~/.config/shellrc.d -type f)"; do
+    [ -n "$f" ] && source "$f"
+  done
+fi
 
 if [ -f ~/.bootstrap.sh ]; then
   source ~/.bootstrap.sh

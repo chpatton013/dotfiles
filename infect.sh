@@ -9,7 +9,7 @@ root_dir="$(builtin cd "$script_dir" && git rev-parse --show-toplevel)"
 ################################################################################
 
 sudo chsh --shell "$(which zsh)" "$(id --user --name)"
-mkdir --parents ~/bin ~/projects ~/.config ~/.tmux
+mkdir --parents ~/bin ~/projects ~/.tmux
 
 ################################################################################
 # Update repository
@@ -27,20 +27,44 @@ git submodule update --init --recursive
 stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 
 ################################################################################
-# Build dependencies
+# Download dependencies
 ################################################################################
 
-# ssh-agent-canonicalize download
+# Executables
+################################################################################
+
+mkdir --parents ~/bin
+
+# ssh-agent-canonicalize
 wget --output-document=~/bin/ssh-agent-canonicalize \
   https://raw.githubusercontent.com/chpatton013/ssh-agent-canonicalize/master/ssh-agent-canonicalize
 chmod +x ~/bin/ssh-agent-canonicalize
 
-# Worktree download
-wget --output-document=~/.worktree \
+# Libraries
+################################################################################
+
+mkdir --parents ~/.config/{bashrc.d,zshrc.d,shellrc.d}
+
+# worktree
+wget --output-document=~/.config/shellrc.d/worktree.sh \
   https://raw.githubusercontent.com/chpatton013/worktree/master/worktree.sh
 
-# VimPlug download
+# Git PS1 prompt
+wget --output-document=~/.config/shellrc.d/git-prompt.sh \
+  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+
+# Git shell completion
+wget --output-document=~/.config/shellrc.d/git-completion.bash \
+  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+wget --output-document=~/.config/shellrc.d/git-completion.zsh \
+  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+
+# Vim plugins
+################################################################################
+
 mkdir --parents ./vim/autoload
+
+# VimPlug download
 wget --output-document=./vim/autoload/plug.vim \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 

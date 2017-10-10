@@ -7,7 +7,6 @@
 Dependencies should not be committed or submoduled. They should be fetched
 explicitly at infect time.
 
-* git/git-completion.sh
 * colors/dircolors/solarized
 * themes/solarized/iterm2-colors-solarized
 * themes/solarized/gnome-terminal-colors-solarized
