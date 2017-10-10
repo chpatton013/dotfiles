@@ -12,9 +12,6 @@ explicitly at infect time.
 * themes/solarized/gnome-terminal-colors-solarized
 * themes/solarized/konsole-colors-solarized
 * themes/solarized/tmux-colors-solarized
-* tmux/plugins/tmux-continuum
-* tmux/plugins/tmux-resurrect
-* tmux/plugins/tpm
 
 ### Switch to Ansible
 

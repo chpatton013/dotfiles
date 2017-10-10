@@ -59,6 +59,23 @@ wget --output-document=~/.config/shellrc.d/git-completion.bash \
 wget --output-document=~/.config/shellrc.d/git-completion.zsh \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 
+# Tmux plugins
+################################################################################
+
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+  git clone git@github.com:tmux-plugins/tpm.git ~/.tmux/plugins/tpm
+fi
+(
+  builtin cd ~/.tmux/plugins/tpm
+  git fetch
+  git clean --force -d
+  git reset --hard origin/master
+)
+
+~/.tmux/plugins/tpm/bin/clean_plugins
+~/.tmux/plugins/tpm/bin/install_plugins
+~/.tmux/plugins/tpm/bin/update_plugins all
+
 # Vim plugins
 ################################################################################
 
