@@ -148,8 +148,4 @@ zstyle ':completion::complete:*' use-cache 1
 # Extra config files
 ###############################################################################
 
-if [ -d ~/.config/zshrc.d ]; then
-  for f in ~/.config/zshrc.d/*; do
-    source "$f"
-  done
-fi
+source_files_in_directory ~/.config/zshrc.d

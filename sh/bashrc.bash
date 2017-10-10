@@ -50,8 +50,4 @@ HISTCONTROL=ignoreboth
 # Extra config files
 ###############################################################################
 
-if [ -d ~/.config/bashrc.d ]; then
-  for f in ~/.config/bashrc.d/*; do
-    source "$f"
-  done
-fi
+source_files_in_directory ~/.config/bashrc.d

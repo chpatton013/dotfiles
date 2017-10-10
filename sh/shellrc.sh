@@ -127,20 +127,23 @@ export CHARSET="UTF-8"
 # Extra config files
 ###############################################################################
 
-if [ -d ~/.config/shellrc.d ]; then
-  for f in ~/.config/shellrc.d/*; do
-    source "$f"
-  done
-fi
+function source_files_in_directory() {
+  local directory ifs_restore
+  directory="$1"
+  ifs_restore="$IFS"
+  readonly directory ifs_restore
 
-if [ -f ~/.bootstrap.sh ]; then
-  source ~/.bootstrap.sh
-fi
-if [ -d ~/.bootstrap ]; then
-  for b in ~/.bootstrap/*; do
-    source "$b"
-  done
-fi
+  if [ -d "$directory" ]; then
+    IFS=$'\n'
+    for f in $(find -L "$directory" -type f); do
+      source "$f"
+    done
+    IFS="$ifs_restore"
+  fi
+}
+
+source_files_in_directory ~/.config/shellrc.d
+source_files_in_directory ~/.bootstrap
 
 # Setup ssh agent automatically. This will require a key decryption prompt in
 # the first shell opened each boot.
