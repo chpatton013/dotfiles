@@ -1,9 +1,5 @@
 # TODO
 
-## Bootstrap
-
-A lot of that is outdated and should be cleaned up.
-
 ## Infect
 
 ### Pull dependencies on setup
