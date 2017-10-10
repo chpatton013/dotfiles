@@ -128,8 +128,8 @@ export CHARSET="UTF-8"
 ###############################################################################
 
 if [ -d ~/.config/shellrc.d ]; then
-  for f in "$(find ~/.config/shellrc.d -type f)"; do
-    [ -n "$f" ] && source "$f"
+  for f in ~/.config/shellrc.d/*; do
+    source "$f"
   done
 fi
 

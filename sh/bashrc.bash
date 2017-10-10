@@ -51,7 +51,7 @@ HISTCONTROL=ignoreboth
 ###############################################################################
 
 if [ -d ~/.config/bashrc.d ]; then
-  for f in "$(find ~/.config/bashrc.d -type f)"; do
-    [ -n "$f" ] && source "$f"
+  for f in ~/.config/bashrc.d/*; do
+    source "$f"
   done
 fi

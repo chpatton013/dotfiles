@@ -83,7 +83,7 @@ setopt AUTO_PUSHD        # cd = pushd.
 setopt CORRECT           # This is why I use zsh.
 setopt MULTIOS           # Allow piping to multiple outputs.
 setopt NO_BEEP           # No audio bells.
-setopt NO_FLOW_CONTROL   # It's annoying when the terminal stops producing output for no good reason.
+setopt NO_FLOW_CONTROL   # It is annoying when the terminal stops producing output for no good reason.
 setopt NO_HUP            # Do not hang up on me.
 setopt PUSHD_MINUS       # Reverses 'cd +1' and 'cd -1'.
 setopt PUSHD_SILENT      # So annoying.
@@ -149,7 +149,7 @@ zstyle ':completion::complete:*' use-cache 1
 ###############################################################################
 
 if [ -d ~/.config/zshrc.d ]; then
-  for f in "$(find ~/.config/zshrc.d -type f)"; do
-    [ -n "$f" ] && source "$f"
+  for f in ~/.config/zshrc.d/*; do
+    source "$f"
   done
 fi
