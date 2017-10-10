@@ -24,7 +24,7 @@ function! BuildCommandT(info) abort
 endfunction
 
 " Initialize Plug.
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 
 " Add your list of plugins here.
 Plug 'Chiel92/vim-autoformat' " Syntax-aware code formatting
