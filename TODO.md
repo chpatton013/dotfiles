@@ -30,10 +30,7 @@ Everyone keeps raving about it. It might be worth trying out.
 
 ## Tmux
 
-### Automate resurrect plugin
-
-Investigate to see if this can be automated. I only ever need it when something
-catastrophic happens, and at that point it's too late to use.
+### Use Powerline
 
 ## Vim
 

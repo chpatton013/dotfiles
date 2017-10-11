@@ -157,6 +157,7 @@ function install_dev_tools() {
     less \
     neovim \
     nmap \
+    reattach-to-user-namespace \
     ripgrep \
     stow \
     tmux \

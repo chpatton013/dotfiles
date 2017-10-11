@@ -38,6 +38,7 @@ Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
 Plug 'powerline/fonts', { 'do': function('BuildPowerlineFonts') } " Pre-patched and adjusted fonts for status line
 Plug 'scrooloose/nerdtree' " File navigation
+Plug 'tmux-plugins/vim-tmux' " Conveniences when editing Tmux configs
 Plug 'tpope/vim-abolish' " Assorted word-munging utilities
 Plug 'tpope/vim-commentary' " Easy (un)commenting of code blocks
 Plug 'tpope/vim-fugitive' " Integrated git commands
@@ -45,6 +46,7 @@ Plug 'tpope/vim-obsession' " Intelligent and automatic session management
 Plug 'tpope/vim-repeat' " Better command classification for `.`
 Plug 'tpope/vim-rhubarb' " GitHub integration for fugitive
 Plug 'tpope/vim-surround' " Easily manipulate surrounding symbols
+Plug 'roxma/vim-tmux-clipboard' " Sync Vim and Tmux copy buffers
 Plug 'vim-airline/vim-airline' " Better status line
 Plug 'vim-airline/vim-airline-themes' " Color theme support for airline
 Plug 'vim-syntastic/syntastic' " Syntax checking for several common languages
