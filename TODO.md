@@ -34,10 +34,7 @@ Everyone keeps raving about it. It might be worth trying out.
 
 ## Vim
 
-### Look into ALE as a replacement for Syntastic
-
-I've heard good things about it. There's no pressing need right now, but it
-might play nicely with languages that it doesn't explicitly support.
+### Replace Airline with Powerline
 
 ### Find a formatter for VimL
 

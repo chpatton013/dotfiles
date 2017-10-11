@@ -37,6 +37,7 @@ Plug 'altercation/vim-colors-solarized' " Solarized color theme for vim
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
 Plug 'powerline/fonts', { 'do': function('BuildPowerlineFonts') } " Pre-patched and adjusted fonts for status line
+Plug 'roxma/vim-tmux-clipboard' " Sync Vim and Tmux copy buffers
 Plug 'scrooloose/nerdtree' " File navigation
 Plug 'tmux-plugins/vim-tmux' " Conveniences when editing Tmux configs
 Plug 'tpope/vim-abolish' " Assorted word-munging utilities
@@ -46,12 +47,11 @@ Plug 'tpope/vim-obsession' " Intelligent and automatic session management
 Plug 'tpope/vim-repeat' " Better command classification for `.`
 Plug 'tpope/vim-rhubarb' " GitHub integration for fugitive
 Plug 'tpope/vim-surround' " Easily manipulate surrounding symbols
-Plug 'roxma/vim-tmux-clipboard' " Sync Vim and Tmux copy buffers
 Plug 'vim-airline/vim-airline' " Better status line
 Plug 'vim-airline/vim-airline-themes' " Color theme support for airline
-Plug 'vim-syntastic/syntastic' " Syntax checking for several common languages
 Plug 'vim-utils/vim-man' " Open man pages in vim
 Plug 'vim-utils/vim-troll-stopper' " Convert elusive unicode characters to ASCII
+Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " Fuzzy file finder
 
 " All of your Plugins must be added before the following line.
@@ -82,9 +82,18 @@ let g:mapleader=','
 " Airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:airline#extensions#ale#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
+
+" ALE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:ale_completion_enabled=1
+
+nmap <C-p> <Plug>(ale_previous_wrap)
+nmap <C-n> <Plug>(ale_next_wrap)
 
 " Autoformat
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -186,39 +195,6 @@ nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 
 " Toggle NERDTree buffer.
 nnoremap <Leader>t :NERDTreeToggle<CR>
-
-" Syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Commands:
-"   Errors               pop up location list and display errors
-"   SyntasticToggleMode  toggles between active and passive mode
-"   SyntasticCheck       forces a syntax check in passive mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Check header files as well.
-let g:syntastic_c_check_header=1
-let g:syntastic_cpp_check_header=1
-
-" Only check syntax on save. Checking on open and close is too slow.
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-
-" Print errors to the command window.
-let g:syntastic_echo_current_error=1
-let g:syntastic_cursor_column=1
-
-" Show errors in a non-obtrusive way.
-let g:syntastic_enable_balloons=0
-let g:syntastic_enable_highlighting=1
-let g:syntastic_enable_signs=1
-
-" Specify checkers for various filetypes.
-let g:syntastic_c_checkers=['clang_check', 'clang_tidy', 'cppcheck', 'gcc']
-let g:syntastic_cpp_checkers=['clang_check', 'clang_tidy', 'cppcheck', 'cpplint', 'gcc']
-let g:syntastic_python_checkers=['pep8']
-let g:syntastic_ruby_checkers=['rubylint']
-let g:syntastic_sh_checkers=['shellcheck']
-let g:syntastic_vim_checkers=['vint']
 
 " TrollStopper
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
