@@ -1,5 +1,5 @@
 ###############################################################################
-# ZSH Modules.
+# Modules
 ###############################################################################
 
 autoload -U compinit complete complist computil # Enable completion support.
@@ -9,32 +9,14 @@ autoload -U regex                               # Enable regex support.
 colors && compinit -u && promptinit
 
 ###############################################################################
-# External Files.
+# Extra config files
 ###############################################################################
 
-if [ -f ~/.shellrc ]; then
-  fg_black="%{$fg[black]%}"
-  fg_red="%{$fg[red]%}"
-  fg_green="%{$fg[green]%}"
-  fg_yellow="%{$fg[yellow]%}"
-  fg_blue="%{$fg[blue]%}"
-  fg_magenta="%{$fg[magenta]%}"
-  fg_cyan="%{$fg[cyan]%}"
-  fg_white="%{$fg[white]%}"
-  reset_color="%{$reset_color%}"
-
-  SH_name="%n"
-  SH_host="%M"
-  SH_pwd="%~"
-  SH_date="%D"
-  SH_time="%*"
-  SH_priv="%#"
-
-  source ~/.shellrc
-fi
+source ~/.shellrc
+source_files_in_directory ~/.config/zshrc.d
 
 ###############################################################################
-# Key Bindings.
+# Key Bindings
 ###############################################################################
 
 # Incremental search.
@@ -61,7 +43,6 @@ bindkey '\e[2~' overwrite-mode
 bindkey '\e[3~' delete-char
 
 # Vim smash escape.
-bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 # Vim undo and redo.
 bindkey -M vicmd 'u' undo
@@ -73,42 +54,37 @@ bindkey -M vicmd "q" push-line
 bindkey -M viins ' ' magic-space
 
 ###############################################################################
-
+# Options
 ###############################################################################
-# Configuration Options.
+
+# Behavior
 ###############################################################################
 
 setopt AUTO_CD           # Lone directory names become cd commands.
 setopt AUTO_PUSHD        # cd = pushd.
-setopt CORRECT           # This is why I use zsh.
+setopt CORRECT           # Enable auto-correction for unrecognized commands.
 setopt MULTIOS           # Allow piping to multiple outputs.
 setopt NO_BEEP           # No audio bells.
 setopt NO_FLOW_CONTROL   # It is annoying when the terminal stops producing output for no good reason.
 setopt NO_HUP            # Do not hang up on me.
 setopt PUSHD_MINUS       # Reverses 'cd +1' and 'cd -1'.
-setopt PUSHD_SILENT      # So annoying.
+setopt PUSHD_SILENT      # Do not print directory name when running pushd.
 setopt PUSHD_TO_HOME     # Blank pushd goes to home.
 setopt RC_EXPAND_PARAM   # foo${a b c}bar = fooabar foobbar foocbar instead of fooa b cbar.
 setopt VI                # Vim commands on the command line (instead of emacs).
 
+# History
 ###############################################################################
 
-###############################################################################
-# History Settings.
-###############################################################################
-
-setopt APPEND_HISTORY    # Do not overwrite.
+setopt APPEND_HISTORY    # Append to history file instead of overwriting.
 setopt EXTENDED_HISTORY  # Save time and duration of execution.
-setopt HIST_IGNORE_DUPS  # Ignore immediate duplicates.
+setopt HIST_IGNORE_DUPS  # Ignore immediate duplicate commands.
 setopt HIST_IGNORE_SPACE # Do not save lines that start with a space.
-setopt HIST_NO_STORE     # Do not save commands with '!' (only the resulting auto-completed command).
+setopt HIST_NO_STORE     # Resolve '!' to their effective commands.
 setopt HIST_VERIFY       # Auto-completion with '!' verifies on next line.
 setopt SHARE_HISTORY     # Share history between shells.
 
-###############################################################################
-
-###############################################################################
-# Completion Settings.
+# Completion
 ###############################################################################
 
 setopt COMPLETE_IN_WORD  # Try to complete from cursor.
@@ -145,7 +121,89 @@ zstyle ':completion:*' completer _expand _complete _approximate _ignored
 zstyle ':completion::complete:*' use-cache 1
 
 ###############################################################################
-# Extra config files
+# Prompt
 ###############################################################################
 
-source_files_in_directory ~/.config/zshrc.d
+CURRENT_BG='NONE'
+
+() {
+  local LC_ALL="" LC_CTYPE="en_US.UTF-8"
+  SEGMENT_SEPARATOR=$'\ue0b0'
+}
+
+# Begin a segment
+# Takes two arguments, background and foreground. Both can be omitted,
+# rendering default background/foreground.
+function prompt_segment() {
+  local bg fg
+  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
+  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
+    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+  else
+    echo -n "%{$bg%}%{$fg%} "
+  fi
+  CURRENT_BG=$1
+  [[ -n $3 ]] && echo -n $3
+}
+
+# End the prompt, closing any open segments.
+function prompt_end() {
+  if [[ -n $CURRENT_BG ]]; then
+    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+  else
+    echo -n "%{%k%}"
+  fi
+  echo -n "%{%f%}"
+  CURRENT_BG=''
+}
+
+function prompt_status() {
+  prompt_segment yellow white "%?"
+}
+
+function prompt_user() {
+  prompt_segment red white "%n"
+}
+
+function prompt_host() {
+  prompt_segment cyan white "%M"
+}
+
+function prompt_date() {
+  prompt_segment magenta white "$(date +"%Y/%m/%d")"
+}
+
+function prompt_time() {
+  prompt_segment green white "$(date +"%H:%M:%S")"
+}
+
+function prompt_directory() {
+  prompt_segment blue white '%~'
+}
+
+function prompt_privilege() {
+  prompt_segment black white '%#'
+}
+
+## Main prompt
+function build_prompt() {
+  prompt_status
+  prompt_user
+  prompt_host
+  prompt_date
+  prompt_time
+  prompt_end
+  echo
+
+  CURRENT_BG='NONE'
+  prompt_directory
+  prompt_end
+  echo
+
+  CURRENT_BG='NONE'
+  prompt_privilege
+  prompt_end
+}
+
+export PS1="%{%f%b%k%}$(build_prompt) "

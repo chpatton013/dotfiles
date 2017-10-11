@@ -24,10 +24,6 @@ Ansible is much better at this than my shell scripts will ever be.
 It's been way too long since I've actually looked at those. They need to have
 some life breathed back into them.
 
-### Oh-My-Zsh
-
-Everyone keeps raving about it. It might be worth trying out.
-
 ## Tmux
 
 ### Use Powerline

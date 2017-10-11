@@ -9,7 +9,7 @@ root_dir="$(builtin cd "$script_dir" && git rev-parse --show-toplevel)"
 ################################################################################
 
 sudo chsh --shell "$(which zsh)" "$(id --user --name)"
-mkdir --parents ~/bin ~/projects ~/.tmux
+mkdir --parents ~/bin ~/projects
 
 ################################################################################
 # Update repository
