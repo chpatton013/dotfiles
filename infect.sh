@@ -9,7 +9,7 @@ root_dir="$(builtin cd "$script_dir" && git rev-parse --show-toplevel)"
 ################################################################################
 
 sudo chsh --shell "$(which zsh)" "$(id --user --name)"
-mkdir --parents ~/bin ~/projects
+mkdir --parents ~/bin ~/projects ~/.bootstrap.d
 
 ################################################################################
 # Update repository

@@ -2,9 +2,6 @@
 # Extra config files
 ###############################################################################
 
-[ -f ~/.cargo/env ] && source ~/.cargo/env
-[ -d ~/.dircolors ] && dircolors ~/.config/solarized-dircolors
-
 function source_files_in_directory() {
   local directory ifs_restore
   directory="$1"
@@ -21,7 +18,11 @@ function source_files_in_directory() {
 }
 
 source_files_in_directory ~/.config/shellrc.d
-source_files_in_directory ~/.bootstrap
+source_files_in_directory ~/.bootstrap.d
+
+[ -f ~/.cargo/env ] && source ~/.cargo/env
+[ -d ~/.config/solarized-dircolors ] &&
+  eval $(dircolors ~/.config/solarized-dircolors/dircolors.ansi-universal)
 
 ###############################################################################
 # Miscellaneous

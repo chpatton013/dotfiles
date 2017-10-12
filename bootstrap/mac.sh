@@ -25,3 +25,4 @@ if which brew &>/dev/null; then
 fi
 
 alias gdb="lldb"
+alias dircolors="gdircolors"
