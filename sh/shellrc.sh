@@ -133,7 +133,7 @@ export HISTFILESIZE=2000
 ###############################################################################
 
 [ -f ~/.cargo/env ] && source ~/.cargo/env
-[ -d ~/.dircolors ] && dircolors ~/.dircolors
+[ -d ~/.dircolors ] && dircolors ~/.config/solarized-dircolors
 
 function source_files_in_directory() {
   local directory ifs_restore

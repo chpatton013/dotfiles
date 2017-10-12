@@ -70,6 +70,18 @@ fi
   git reset --hard origin/master
 )
 
+# Solarized dircolors
+if [ ! -d ~/.config/solarized-dircolors ]; then
+  git clone git@github.com:seebi/dircolors-solarized.git \
+    ~/.config/solarized-dircolors
+fi
+(
+  builtin cd ~/.config/solarized-dircolors
+  git fetch
+  git clean --force -d
+  git reset --hard origin/master
+)
+
 # Tmux plugins
 ################################################################################
 
