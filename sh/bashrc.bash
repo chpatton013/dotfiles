@@ -1,3 +1,9 @@
+# If not running interactively, don't do anything.
+case $- in
+*i*) ;;
+*) return ;;
+esac
+
 source ~/.shellrc
 source_files_in_directory ~/.config/bashrc.d
 

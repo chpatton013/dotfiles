@@ -17,13 +17,6 @@ explicitly at infect time.
 
 Ansible is much better at this than my shell scripts will ever be.
 
-## Sh
-
-### Audit shell RC's
-
-It's been way too long since I've actually looked at those. They need to have
-some life breathed back into them.
-
 ## Tmux
 
 ### Use Powerline

@@ -1,33 +1,126 @@
 ###############################################################################
-# Login Actions.
+# Pathlist construction
 ###############################################################################
 
-# If not running interactively, don't do anything.
-case $- in
-*i*) ;;
-*) return ;;
-esac
-
-###############################################################################
-# External Files.
+# Utility functions
 ###############################################################################
 
-[ -f ~/.cargo/env ] && . ~/.cargo/env
+function trim_pathlist() {
+  sed -e 's/^:*//;s/:*$//'
+}
 
-export GIT_PS1_SHOWDIRTYSTATE="true"
-export GIT_PS1_SHOWSTASHSTATE=" true"
-export GIT_PS1_SHOWUNTRACKEDFILES=" true"
-export GIT_PS1_SHOWUPSTREAM="true"
+function prepend_pathlist() {
+  local pathlist prepend delimiter
+  pathlist="$1"
+  prepend="$2"
+  delimiter=":"
+  readonly pathlist prepend delimiter
 
-if [ -d ~/.dircolors ]; then
-  dircolors ~/.dircolors
-fi
+  (
+    IFS=$'\n'
+    local pathlist_parts=($(echo "$pathlist" | tr "$delimiter" "\n"))
+    local canonical_pathlist="$prepend"
+    for part in ${pathlist_parts[@]}; do
+      if [ "$part" != "$prepend" ]; then
+        canonical_pathlist+="$delimiter$part"
+      fi
+    done
 
-export ANDROID_HOME=/usr/local/opt/android-sdk
-export ANDROID_SDK_HOME=/usr/local/opt/android-sdk
+    echo -n "$canonical_pathlist" | trim_pathlist
+  )
+}
+
+function append_pathlist() {
+  local pathlist append delimiter
+  pathlist="$1"
+  append="$2"
+  delimiter=":"
+  readonly pathlist append delimiter
+
+  (
+    IFS=$'\n'
+    local pathlist_parts=($(echo "$pathlist" | tr "$delimiter" "\n"))
+    local canonical_pathlist=""
+    local part_found=""
+    for part in ${pathlist_parts[@]}; do
+      canonical_pathlist+="$part$delimiter"
+      if [ "$part" = "$append" ]; then
+        part_found="true"
+      fi
+    done
+
+    if [ -z "$part_found" ]; then
+      canonical_pathlist+="$append"
+    fi
+
+    echo -n "$canonical_pathlist" | trim_pathlist
+  )
+}
+
+# PATH
+###############################################################################
+
+paths=(
+  /usr/local
+  /usr
+  /usr/X11
+  /usr/kerberos
+  /
+  ~
+  ~/go
+)
+for p in "${paths[@]}"; do
+  bin="${p%/}/bin"
+  sbin="${p%/}/sbin"
+  [ -d "$bin" ] && PATH="$(append_pathlist "$PATH" "$bin")"
+  [ -d "$sbin" ] && PATH="$(append_pathlist "$PATH" "$sbin")"
+done
+PATH="$(prepend_pathlist "$PATH" ~/.rbenv/shims)"
+export PATH="$PATH"
+
+# LD_LIBRARY_PATH
+###############################################################################
+
+library_paths=(
+  /usr/local
+  /usr
+  /
+  ~
+)
+for l in "${library_paths[@]}"; do
+  lib="${l%/}/lib"
+  lib64="${l%/}/lib64"
+  [ -d "$lib" ] &&
+    LD_LIBRARY_PATH="$(append_pathlist "$LD_LIBRARY_PATH" "$lib")"
+  [ -d "$lib64" ] &&
+    LD_LIBRARY_PATH="$(append_pathlist "$LD_LIBRARY_PATH" "$lib64")"
+done
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
 
 ###############################################################################
-# History Settings.
+# Variables
+###############################################################################
+
+# Language
+###############################################################################
+
+export CHARSET="UTF-8"
+export LANG="en_US.UTF-8"
+export LC_ADDRESS="en_US.UTF-8"
+export LC_ALL=""
+export LC_COLLATE="C" # Sort uppercase before lowercase
+export LC_CTYPE="en_US.UTF-8"
+export LC_IDENTIFICATION="en_US.UTF-8"
+export LC_MEASUREMENT="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NAME="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_PAPER="en_US.UTF-8"
+export LC_TELEPHONE="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+
+# History Settings
 ###############################################################################
 
 export HISTFILE=~/.history
@@ -36,72 +129,11 @@ export HISTSIZE=1000
 export HISTFILESIZE=2000
 
 ###############################################################################
-# Path Construction.
-###############################################################################
-
-paths=(
-  /usr/local
-  /usr
-  /usr/local/mysql
-  /usr/X11
-  /usr/local/cuda
-  /usr/local/cuda-5.0
-  /usr/kerberos
-  /
-  "$HOME"
-  "$HOME/go"
-)
-for p in ${paths[@]}; do
-  bin="${p%/}/bin"
-  sbin="${p%/}/sbin"
-  [ -d "$bin" ] && PATH+=:"$bin"
-  [ -d "$sbin" ] && PATH+=:"$sbin"
-done
-PATH="$HOME/.rbenv/shims:$PATH"
-export PATH="$PATH"
-
-###############################################################################
-# LD Library Path Construction.
-###############################################################################
-
-library_paths=(
-  /
-  /usr
-  /usr/local
-  /usr/local/cuda
-  /usr/local/cuda-5.0
-)
-for l in ${library_paths[@]}; do
-  lib="$l/lib"
-  lib64="$l/lib64"
-  [ -d "$lib" ] && LD_LIBRARY_PATH+=:"$lib"
-  [ -d "$lib64" ] && LD_LIBRARY_PATH+=:"$lib64"
-done
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
-
-###############################################################################
-# Language
-###############################################################################
-
-export LANG="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LC_NUMERIC="en_US.UTF-8"
-export LC_TIME="en_US.UTF-8"
-export LC_COLLATE="C"
-export LC_MONETARY="en_US.UTF-8"
-export LC_MESSAGES="en_US.UTF-8"
-export LC_PAPER="en_US.UTF-8"
-export LC_NAME="en_US.UTF-8"
-export LC_ADDRESS="en_US.UTF-8"
-export LC_TELEPHONE="en_US.UTF-8"
-export LC_MEASUREMENT="en_US.UTF-8"
-export LC_IDENTIFICATION="en_US.UTF-8"
-export LC_ALL=""
-export CHARSET="UTF-8"
-
-###############################################################################
 # Extra config files
 ###############################################################################
+
+[ -f ~/.cargo/env ] && source ~/.cargo/env
+[ -d ~/.dircolors ] && dircolors ~/.dircolors
 
 function source_files_in_directory() {
   local directory ifs_restore
@@ -109,7 +141,7 @@ function source_files_in_directory() {
   ifs_restore="$IFS"
   readonly directory ifs_restore
 
-  if [ -d "$directory" ]; then
+  if [ -n "$directory" ] && [ -d "$directory" ]; then
     IFS=$'\n'
     for f in $(find -L "$directory" -type f); do
       source "$f"
@@ -120,6 +152,10 @@ function source_files_in_directory() {
 
 source_files_in_directory ~/.config/shellrc.d
 source_files_in_directory ~/.bootstrap
+
+###############################################################################
+# Miscellaneous
+###############################################################################
 
 # Setup ssh agent automatically. This will require a key decryption prompt in
 # the first shell opened each boot.
