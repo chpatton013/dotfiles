@@ -2,13 +2,6 @@
 
 ## Infect
 
-### Pull dependencies on setup
-
-Dependencies should not be committed or submoduled. They should be fetched
-explicitly at infect time.
-
-* colors/dircolors/solarized
-
 ### Switch to Ansible
 
 Ansible is much better at this than my shell scripts will ever be.
