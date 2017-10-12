@@ -5,10 +5,12 @@
 # Utility functions
 ###############################################################################
 
+# Remove leading, trailing, and repeated `:`s.
 function trim_pathlist() {
-  sed -e 's/^:*//;s/:*$//'
+  sed -e 's/^:*//;s/:*$//;s/:+/:/'
 }
 
+# Prepent a path to a pathlist. Remove any later occurences of path in pathlist.
 function prepend_pathlist() {
   local pathlist prepend delimiter
   pathlist="$1"
@@ -21,7 +23,7 @@ function prepend_pathlist() {
     local pathlist_parts=($(echo "$pathlist" | tr "$delimiter" "\n"))
     local canonical_pathlist="$prepend"
     for part in ${pathlist_parts[@]}; do
-      if [ "$part" != "$prepend" ]; then
+      if [ -n "$part" ] && [ "$part" != "$prepend" ]; then
         canonical_pathlist+="$delimiter$part"
       fi
     done
@@ -30,6 +32,7 @@ function prepend_pathlist() {
   )
 }
 
+# Append a path to a pathlist, unless the path appears sooner in the pathlist.
 function append_pathlist() {
   local pathlist append delimiter
   pathlist="$1"
@@ -43,7 +46,9 @@ function append_pathlist() {
     local canonical_pathlist=""
     local part_found=""
     for part in ${pathlist_parts[@]}; do
-      canonical_pathlist+="$part$delimiter"
+      if [ -n "$part" ]; then
+        canonical_pathlist+="$part$delimiter"
+      fi
       if [ "$part" = "$append" ]; then
         part_found="true"
       fi
