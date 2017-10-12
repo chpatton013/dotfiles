@@ -24,7 +24,7 @@ complete -cf sudo
 shopt -s histappend
 
 # Ignore immedately repeated commands and ignore commands prefixed with spaces.
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
 function build_ps1() {
   local fg_black=$'\[\e[0;30m\]'
