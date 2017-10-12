@@ -8,10 +8,6 @@ Dependencies should not be committed or submoduled. They should be fetched
 explicitly at infect time.
 
 * colors/dircolors/solarized
-* themes/solarized/iterm2-colors-solarized
-* themes/solarized/gnome-terminal-colors-solarized
-* themes/solarized/konsole-colors-solarized
-* themes/solarized/tmux-colors-solarized
 
 ### Switch to Ansible
 

@@ -59,6 +59,17 @@ wget --output-document=~/.config/shellrc.d/git-completion.bash \
 wget --output-document=~/.config/shellrc.d/git-completion.zsh \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 
+# Solarized color themes
+if [ ! -d ~/.config/solarized ]; then
+  git clone git@github.com:altercation/solarized.git ~/.config/solarized
+fi
+(
+  builtin cd ~/.config/solarized
+  git fetch
+  git clean --force -d
+  git reset --hard origin/master
+)
+
 # Tmux plugins
 ################################################################################
 
