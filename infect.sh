@@ -82,6 +82,18 @@ fi
   git reset --hard origin/master
 )
 
+# Powerline for Tmux
+if [ ! -d ~/.config/tmux-powerline ]; then
+  git clone git@github.com:erikw/tmux-powerline.git ~/.config/tmux-powerline
+fi
+(
+  builtin cd ~/.config/tmux-powerline
+  git fetch
+  git clean --force -d
+  git reset --hard origin/master
+)
+ln -sf "$root_dir/tmux/theme.sh" ~/.config/tmux-powerline/themes/custom.sh
+
 # Tmux plugins
 ################################################################################
 
@@ -98,6 +110,8 @@ fi
 ~/.tmux/plugins/tpm/bin/clean_plugins
 ~/.tmux/plugins/tpm/bin/install_plugins
 ~/.tmux/plugins/tpm/bin/update_plugins all
+
+ln -s "$root_dir/tmux/plugins/tmux-mem-cpu-load/tmux-mem-cpu-load" ~/bin
 
 # Vim plugins
 ################################################################################

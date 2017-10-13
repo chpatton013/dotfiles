@@ -54,6 +54,7 @@ sudo apt-get install --assume-yes \
   google-chrome-stable \
   gnome-tweak-tool \
   htop \
+  ifstat \
   inotify-tools \
   "linux-image-extra-$kernel_version" \
   lm-sensors \

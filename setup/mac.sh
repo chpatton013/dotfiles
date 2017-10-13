@@ -154,6 +154,7 @@ function install_dev_tools() {
     gpg \
     grip \
     htop \
+    ifstat \
     less \
     neovim \
     nmap \

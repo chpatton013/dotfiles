@@ -39,6 +39,7 @@ sudo apt-get install --assume-yes \
   git \
   golang-go \
   htop \
+  ifstat \
   "linux-headers-$kernel_version" \
   "linux-image-$kernel_version" \
   lm-sensors \

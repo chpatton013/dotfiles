@@ -6,13 +6,7 @@
 
 Ansible is much better at this than my shell scripts will ever be.
 
-## Tmux
-
-### Use Powerline
-
 ## Vim
-
-### Replace Airline with Powerline
 
 ### Find a formatter for VimL
 

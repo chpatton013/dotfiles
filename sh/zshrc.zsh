@@ -165,23 +165,23 @@ function prompt_end() {
 }
 
 function prompt_status() {
-  prompt_segment yellow white "%?"
+  prompt_segment black white "%?"
 }
 
 function prompt_user() {
-  prompt_segment red white "%n"
+  prompt_segment white black "%n"
 }
 
 function prompt_host() {
-  prompt_segment cyan white "%M"
+  prompt_segment black white "%M"
 }
 
 function prompt_date() {
-  prompt_segment magenta white "$(date +"%Y/%m/%d")"
+  prompt_segment white black "$(date +"%Y/%m/%d")"
 }
 
 function prompt_time() {
-  prompt_segment green white "$(date +"%H:%M:%S")"
+  prompt_segment black white "$(date +"%H:%M:%S")"
 }
 
 function prompt_directory() {
