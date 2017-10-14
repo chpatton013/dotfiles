@@ -4,6 +4,8 @@ set -euo pipefail
 ubuntu_version="$(lsb_release --short --codename)"
 kernel_version="$(uname --kernel-release)"
 
+ruby_ppa="ppa:brightbox/ruby-ng"
+nodejs_ppa="ppa:chris-lea/node.js"
 git_ppa="ppa:git-core/ppa"
 tmux_ppa="ppa:pi-rho/dev"
 neovim_ppa="ppa:neovim-ppa/unstable"
@@ -19,6 +21,12 @@ rust_install_url="https://static.rust-lang.org/rustup.sh"
 
 sudo apt-get update
 sudo apt-get install --assume-yes software-properties-common
+
+# Ruby PPA
+sudo apt-add-repository --yes "$ruby_ppa"
+
+# NodeJS PPA
+sudo add-apt-repository --yes "$nodejs_ppa"
 
 # Git PPA
 sudo add-apt-repository --yes "$git_ppa"
@@ -46,6 +54,7 @@ sudo apt-get install --assume-yes \
   clang-3.6 \
   clang-format-3.6 \
   cmake \
+  cmake-data \
   docker-engine \
   g++ \
   gcc \
@@ -60,26 +69,27 @@ sudo apt-get install --assume-yes \
   lm-sensors \
   make \
   neovim \
-  nodejs \
-  nodejs-legacy \
-  npm \
   openssh-client \
   openssh-server \
   python-dev \
   python-pip \
   python3-dev \
   python3-pip \
-  ruby \
+  ruby2.4 \
+  ruby2.4-dev \
   stow \
   tmux=2.0-1~ppa1~t \
   tree \
   vagrant \
-  vagrant-libvirt \
   vim \
   zsh
 
 # Install etckeeper separately so we can specify "git mode".
 sudo apt-get install --assume-yes etckeeper git-core
+
+# Go setup
+export GOPATH=~/go
+mkdir --parents "$GOPATH"
 
 # Vim linter.
 sudo pip2 install vim-vint
@@ -87,6 +97,10 @@ sudo pip2 install vim-vint
 # Neovim python support
 sudo pip2 install --upgrade neovim
 sudo pip3 install --upgrade neovim
+
+# NodeJS install
+curl --silent --location https://deb.nodesource.com/setup_6.x | sudo --preserve-env bash -
+sudo apt-get install --assume-yes nodejs
 
 # Rust install
 rust_install_file="$(mktemp)"
@@ -104,7 +118,7 @@ go get -u mvdan.cc/sh/cmd/shfmt
 
 # Extra dev tools.
 sudo pip2 install grip
-cargo install fd-find ripgrep
+sudo cargo install fd-find ripgrep
 
 # Docker service and user account
 sudo service docker restart
