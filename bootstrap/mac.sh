@@ -19,6 +19,27 @@ function docker_setup() {
   eval "$(docker-machine env default)"
 }
 
+function inotifyrun() {
+  echo "Watching $(pwd): $@"
+
+  "$@"
+  echo
+
+  while fswatch --recursive \
+    --event Updated \
+    --event Created \
+    --event Removed \
+    --event MovedFrom \
+    --event MovedTo \
+    --timestamp \
+    --extended \
+    --exclude ".*/\.git/.*|(.*\.sw.?$)" \
+    .; do
+    "$@"
+    echo
+  done
+}
+
 if which brew &>/dev/null; then
   PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
   MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
