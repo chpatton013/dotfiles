@@ -5,7 +5,7 @@ function random_string() {
   base64 /dev/urandom | tr -d '/+' | fold -w "$length" | head -n 1
 }
 
-# `ls` displays trailing identifiers ('/' or '*') and non-printables.
+# Show trailing file type identifiers (*, /, etc) and non-printables.
 function ls() {
   /bin/ls -Fb "$@"
 }
@@ -29,7 +29,7 @@ function tmux_start_session() {
 }
 
 function ifind() {
-  find -iname "*$@*"
+  find "$(pwd)" -iname "*$@*"
 }
 
 function vpn() {
