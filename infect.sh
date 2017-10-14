@@ -29,7 +29,7 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 mkdir --parents ~/bin
 
 # ssh-agent-canonicalize
-wget --output-document=~/bin/ssh-agent-canonicalize \
+wget --output-document ~/bin/ssh-agent-canonicalize \
   https://raw.githubusercontent.com/chpatton013/ssh-agent-canonicalize/master/ssh-agent-canonicalize
 chmod +x ~/bin/ssh-agent-canonicalize
 
@@ -39,17 +39,17 @@ chmod +x ~/bin/ssh-agent-canonicalize
 mkdir --parents ~/.config/{bashrc.d,zshrc.d}
 
 # worktree
-wget --output-document=~/.config/shellrc.d/worktree.sh \
+wget --output-document ~/.config/shellrc.d/worktree.sh \
   https://raw.githubusercontent.com/chpatton013/worktree/master/worktree.sh
 
 # Git PS1 prompt
-wget --output-document=~/.config/shellrc.d/git-prompt.sh \
+wget --output-document ~/.config/shellrc.d/git-prompt.sh \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 
 # Git shell completion
-wget --output-document=~/.config/shellrc.d/git-completion.bash \
+wget --output-document ~/.config/shellrc.d/git-completion.bash \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-wget --output-document=~/.config/shellrc.d/git-completion.zsh \
+wget --output-document ~/.config/shellrc.d/git-completion.zsh \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 
 # Solarized color themes
@@ -112,7 +112,7 @@ ln -s "$root_dir/tmux/plugins/tmux-mem-cpu-load/tmux-mem-cpu-load" ~/bin
 mkdir --parents ./vim/autoload
 
 # VimPlug download
-wget --output-document=./vim/autoload/plug.vim \
+wget --output-document ./vim/autoload/plug.vim \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Vim plugins
