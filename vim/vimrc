@@ -38,6 +38,7 @@ Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
 Plug 'powerline/fonts', { 'do': function('BuildPowerlineFonts') } " Pre-patched and adjusted fonts for status line
 Plug 'roxma/vim-tmux-clipboard' " Sync Vim and Tmux copy buffers
+Plug 'rust-lang/rust.vim' " Rust syntax highlighting
 Plug 'scrooloose/nerdtree' " File navigation
 Plug 'tmux-plugins/vim-tmux' " Conveniences when editing Tmux configs
 Plug 'tpope/vim-abolish' " Assorted word-munging utilities
