@@ -1,6 +1,6 @@
 # TODO
 
-## Infect
+## Infect/Setup
 
 ### Switch to Ansible
 
