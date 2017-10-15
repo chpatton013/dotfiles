@@ -34,6 +34,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYouCompleteMe') } " Autoco
 Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plug 'airblade/vim-gitgutter' " Show git diff in the gutter
 Plug 'altercation/vim-colors-solarized' " Solarized color theme for vim
+Plug 'cespare/vim-toml' " Toml syntax highlighting
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
 Plug 'powerline/fonts', { 'do': function('BuildPowerlineFonts') } " Pre-patched and adjusted fonts for status line
