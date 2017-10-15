@@ -170,6 +170,8 @@ function install_dev_tools() {
   sudo pip2 install --upgrade neovim
   sudo pip3 install --upgrade neovim
 
+  sudo gem install neovim
+
   sudo npm install --global remark-cli
 
   go get -u mvdan.cc/sh/cmd/shfmt

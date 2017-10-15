@@ -98,6 +98,9 @@ sudo pip2 install vim-vint
 sudo pip2 install --upgrade neovim
 sudo pip3 install --upgrade neovim
 
+# Neovim ruby support
+sudo gem install neovim
+
 # NodeJS install
 curl --silent --location https://deb.nodesource.com/setup_6.x | sudo --preserve-env bash -
 sudo apt-get install --assume-yes nodejs
