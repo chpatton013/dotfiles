@@ -198,6 +198,11 @@ nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 " Toggle NERDTree buffer.
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
+" Rust.Vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:rust_recommended_style=0
+
 " TrollStopper
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
