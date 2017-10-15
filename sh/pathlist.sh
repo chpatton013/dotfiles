@@ -68,6 +68,7 @@ paths=(
   /usr/kerberos
   /
   ~
+  ~/.cargo
   ~/go
 )
 for p in "${paths[@]}"; do
