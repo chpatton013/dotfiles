@@ -47,10 +47,8 @@ wget --output-document ~/.config/shellrc.d/git-prompt.sh \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 
 # Git shell completion
-wget --output-document ~/.config/shellrc.d/git-completion.bash \
+wget --output-document ~/.config/bashrc.d/git-completion.bash \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-wget --output-document ~/.config/shellrc.d/git-completion.zsh \
-  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 
 # Solarized color themes
 if [ ! -d ~/.config/solarized ]; then
