@@ -85,7 +85,7 @@ rm "$rust_install_file"
 sudo pip2 install yapf
 sudo npm install --global js-beautify remark-cli
 sudo gem install rubocop sass
-sudo cargo install rustfmt
+cargo install rustfmt
 go get github.com/bazelbuild/buildtools/buildifier
 go get -u mvdan.cc/sh/cmd/shfmt
 
