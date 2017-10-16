@@ -1,11 +1,6 @@
 # Utility functions
 ###############################################################################
 
-# Remove leading, trailing, and repeated `:`s.
-function trim_pathlist() {
-  sed -e 's/^:*//;s/:*$//;s/:+/:/'
-}
-
 # Prepent a path to a pathlist. Remove any later occurences of path in pathlist.
 function prepend_pathlist() {
   local pathlist prepend delimiter
@@ -14,18 +9,22 @@ function prepend_pathlist() {
   delimiter=":"
   readonly pathlist prepend delimiter
 
-  (
-    IFS=$'\n'
-    local pathlist_parts=($(echo "$pathlist" | tr "$delimiter" "\n"))
-    local canonical_pathlist="$prepend"
-    for part in ${pathlist_parts[@]}; do
-      if [ -n "$part" ] && [ "$part" != "$prepend" ]; then
-        canonical_pathlist+="$delimiter$part"
-      fi
-    done
+  python -c "$(cat <<EOF
+import sys
 
-    echo -n "$canonical_pathlist" | trim_pathlist
-  )
+pathlist = sys.argv[1]
+delimiter = sys.argv[2]
+prepend = sys.argv[3:]
+
+unique = set()
+unique_pathlist = []
+for el in prepend + pathlist.split(delimiter):
+  if el and el not in unique:
+    unique.add(el)
+    unique_pathlist.append(el)
+sys.stdout.write(delimiter.join(unique_pathlist))
+EOF
+)" "$pathlist" "$delimiter" "$prepend"
 }
 
 # Append a path to a pathlist, unless the path appears sooner in the pathlist.
@@ -36,26 +35,22 @@ function append_pathlist() {
   delimiter=":"
   readonly pathlist append delimiter
 
-  (
-    IFS=$'\n'
-    local pathlist_parts=($(echo "$pathlist" | tr "$delimiter" "\n"))
-    local canonical_pathlist=""
-    local part_found=""
-    for part in ${pathlist_parts[@]}; do
-      if [ -n "$part" ]; then
-        canonical_pathlist+="$part$delimiter"
-      fi
-      if [ "$part" = "$append" ]; then
-        part_found="true"
-      fi
-    done
+  python -c "$(cat <<EOF
+import sys
 
-    if [ -z "$part_found" ]; then
-      canonical_pathlist+="$append"
-    fi
+pathlist = sys.argv[1]
+delimiter = sys.argv[2]
+append = sys.argv[3:]
 
-    echo -n "$canonical_pathlist" | trim_pathlist
-  )
+unique = set()
+unique_pathlist = []
+for el in pathlist.split(delimiter) + append:
+  if el and el not in unique:
+    unique.add(el)
+    unique_pathlist.append(el)
+sys.stdout.write(delimiter.join(unique_pathlist))
+EOF
+)" "$pathlist" "$delimiter" "$append"
 }
 
 # PATH
