@@ -1,12 +1,3 @@
-[user]
-  name = Christopher Patton
-  email = chpatton013@gmail.com
-[github]
-  user = chpatton013
-[core]
-  excludesfile = ~/.gitignore
-[color]
-  ui = true
 [alias]
   ap = add --patch
   cm = commit
@@ -28,17 +19,26 @@
   rs = reset
   sl = stash list
   st = status --short --branch --ignore-submodules=dirty
+[color]
+  ui = true
+[core]
+  excludesfile = ~/.gitignore
 [fetch]
   prune = true
-[push]
-  default = current
-[pull]
-  rebase = true
+[github]
+  user = chpatton013
 [merge]
   tool = vimdiff
   conflictstyle = diff3
 [mergetool]
   keepBackup = false
   prompt = false
+[push]
+  default = current
+[pull]
+  rebase = true
 [rerere]
   enabled = true
+[user]
+  name = Christopher Patton
+  email = chpatton013@gmail.com
