@@ -5,7 +5,6 @@ function main() {
   install_homebrew
   install_core
   install_cpp
-  install_java
   install_bazel
   install_python
   install_go
@@ -72,12 +71,8 @@ function install_cpp() {
   brew install clang-format cmake gcc gcc5
 }
 
-function install_java() {
-  brew cask install java
-}
-
-function install_cpp() {
-  brew install bazel buildifier
+function install_bazel() {
+  brew install bazel buildifier java
 }
 
 function install_python() {
