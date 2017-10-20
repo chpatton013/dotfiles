@@ -6,6 +6,8 @@
 !/shellrc.d/
 !/nvim/
 
+/shellrc.d/worktree.sh
+
 /nvim/*
 /nvim/*/
 

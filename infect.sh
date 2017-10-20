@@ -62,10 +62,6 @@ mkdir -p ~/.config/{bashrc.d,zshrc.d}
 wget --output-document ~/.config/shellrc.d/worktree.sh \
   https://raw.githubusercontent.com/chpatton013/worktree/master/worktree.sh
 
-# Git PS1 prompt
-wget --output-document ~/.config/shellrc.d/git-prompt.sh \
-  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
-
 # Git shell completion
 wget --output-document ~/.config/bashrc.d/git-completion.bash \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
