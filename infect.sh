@@ -8,15 +8,15 @@ root_dir="$(builtin cd "$script_dir" && git rev-parse --show-toplevel)"
 # Configure account
 ################################################################################
 
-sudo chsh --shell "$(which zsh)" "$(id --user --name)"
-mkdir --parents ~/bin ~/projects ~/.bootstrap.d
+sudo chsh -s "$(which zsh)" "$(id -un)"
+mkdir -p ~/bin ~/projects ~/.bootstrap.d
 
 ################################################################################
 # Link config files in home folder
 ################################################################################
 
 (builtin cd stow && find -mindepth 1 -maxdepth 1) |
-  xargs -I {} rm --recursive --force "$HOME/{}"
+  xargs -I {} rm -rf "$HOME/{}"
 stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 
 ################################################################################
@@ -26,7 +26,7 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 # Executables
 ################################################################################
 
-mkdir --parents ~/bin
+mkdir -p ~/bin
 
 # ssh-agent-canonicalize
 wget --output-document ~/bin/ssh-agent-canonicalize \
@@ -36,7 +36,7 @@ chmod +x ~/bin/ssh-agent-canonicalize
 # Libraries
 ################################################################################
 
-mkdir --parents ~/.config/{bashrc.d,zshrc.d}
+mkdir -p ~/.config/{bashrc.d,zshrc.d}
 
 # worktree
 wget --output-document ~/.config/shellrc.d/worktree.sh \
@@ -107,7 +107,7 @@ ln -s "$root_dir/tmux/plugins/tmux-mem-cpu-load/tmux-mem-cpu-load" ~/bin
 # Vim plugins
 ################################################################################
 
-mkdir --parents ./vim/autoload
+mkdir -p ./vim/autoload
 
 # VimPlug download
 wget --output-document ./vim/autoload/plug.vim \
