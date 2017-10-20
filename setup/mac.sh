@@ -38,8 +38,6 @@ function install_homebrew() {
   sudo chown -R "$(id -un):admin" /opt/homebrew-cask
 
   # Open all taps before updating.
-  brew tap homebrew/dupes
-  brew tap homebrew/versions
   brew tap neovim/neovim
   brew tap jeffreywildman/homebrew-virt-manager
 
