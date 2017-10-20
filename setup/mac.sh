@@ -130,8 +130,19 @@ function install_vagrant() {
   brew cask install vagrant vagrant-manager virtualbox
   brew install libiconv libvirt virt-manager virt-viewer
 
-  rbenv install --skip-existing "$(_ruby_version /opt/vagrant/embedded/bin/ruby)"
-  vagrant plugin install vagrant-libvirt
+  local vagrant_ruby_version
+  vagrant_ruby_version="$(_ruby_version /opt/vagrant/embedded/bin/ruby)"
+  readonly vagrant_ruby_version
+
+  rbenv install --skip-existing "$vagrant_ruby_version"
+
+  (
+    CONFIGURE_ARGS="with-ldflags=-L/opt/vagrant/embedded/lib with-libvirt-include=/usr/local/include/libvirt with-libvirt-lib=/usr/local/lib"
+    GEM_HOME="~/.vagrant.d/gems/$vagrant_ruby_version"
+    GEM_PATH="$GEM_HOME:/opt/vagrant/embedded/gems"
+    PATH="/opt/vagrant/embedded/bin:$PATH"
+    vagrant plugin install vagrant-libvirt
+  )
 }
 
 function install_web_tools() {
