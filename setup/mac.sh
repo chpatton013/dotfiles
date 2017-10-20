@@ -1,19 +1,6 @@
 #!/usr/bin/env bash
 set -xeuo pipefail
 
-# Installed via getmacapps.com:
-#   alfred
-#   caffeine
-#   chrome
-#   cyberduck
-#   flux
-#   iterm2
-#   skype
-#   spotify
-#   steam
-#   textwrangler
-#   vlc
-
 function main() {
   install_homebrew
   install_core
@@ -178,7 +165,19 @@ function install_dev_tools() {
 }
 
 function install_user_tools() {
-  brew cask install shiftit karabiner-elements
+  brew cask install \
+    alfred \
+    caffeine \
+    cyberduck \
+    firefox \
+    flux \
+    google-chrome \
+    iterm2 \
+    karabiner-elements \
+    shiftit \
+    spotify \
+    steam \
+    vlc
 }
 
 main
