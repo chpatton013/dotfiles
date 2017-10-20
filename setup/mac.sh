@@ -106,7 +106,7 @@ function install_js() {
 
 function install_ruby() {
   brew install rbenv ruby ruby-build
-  rbenv install "$(_ruby_version ruby)"
+  rbenv install --skip-existing "$(_ruby_version ruby)"
   gem install --user-install rubocop
 }
 
@@ -124,7 +124,7 @@ function install_vagrant() {
   brew cask install vagrant vagrant-manager virtualbox
   brew install libiconv libvirt virt-manager virt-viewer
 
-  rbenv install "$(_ruby_version /opt/vagrant/embedded/bin/ruby)"
+  rbenv install --skip-existing "$(_ruby_version /opt/vagrant/embedded/bin/ruby)"
   vagrant plugin install vagrant-libvirt
 }
 
