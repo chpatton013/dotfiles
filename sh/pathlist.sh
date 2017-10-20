@@ -74,9 +74,11 @@ for p in "${paths[@]}"; do
 done
 
 [ -d ~/.rbenv/shims ] && PATH="$(prepend_pathlist "$PATH" ~/.rbenv/shims)"
-for bin in $(find ~/.gem/ruby -maxdepth 2 -type d -name bin); do
-  [ -d "$bin" ] && PATH="$(append_pathlist "$PATH" "$bin")"
-done
+if [ -d ~/.gem/ruby ]; then
+  for bin in $(find ~/.gem/ruby -maxdepth 2 -type d -name bin); do
+    [ -d "$bin" ] && PATH="$(append_pathlist "$PATH" "$bin")"
+  done
+fi
 
 export PATH="$PATH"
 
