@@ -35,6 +35,24 @@ chmod +x ~/bin/ssh-agent-canonicalize
 
 eval $(~/bin/ssh-agent-canonicalize)
 
+# alacritty
+if [ ! -d ~/alacritty ]; then
+  git clone git@github.com:jwilm/alacritty.git ~/alacritty
+fi
+(
+  builtin cd ~/alacritty
+  git fetch
+  git clean --force -d
+  git reset --hard origin/master
+
+  rustup override set stable
+  rustup update stable
+
+  cargo build --release
+  cp ./target/release/alacritty ~/bin
+  cp Alacritty.desktop ~/.local/share/applications
+)
+
 # Libraries
 ################################################################################
 
