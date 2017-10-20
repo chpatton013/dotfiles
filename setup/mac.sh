@@ -121,6 +121,9 @@ function install_docker() {
 }
 
 function install_vagrant() {
+  curl --fail --silent --show-error --location \
+    https://raw.githubusercontent.com/doomedraven/homebrew-virt-manager/ef0515d1e54309a5627ecfc20b2ae5d5cde84494/virt-manager.rb > \
+    /usr/local/Homebrew/Library/Taps/jeffreywildman/homebrew-virt-manager/virt-manager.rb
   brew cask install vagrant vagrant-manager virtualbox
   brew install libiconv libvirt virt-manager virt-viewer
 
