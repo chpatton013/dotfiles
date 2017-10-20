@@ -81,7 +81,7 @@ function install_python() {
   local patch='import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")'
 
   brew install python python3 pyenv
-  sudo pip2 install yapf
+  pip2 --user install yapf
 
   mkdir -p "$packages_dir"
   if [ ! -f "$brew_path_file" ] || ! grep -q "$patch" "$brew_path_file"; then
@@ -101,7 +101,7 @@ function install_js() {
 function install_ruby() {
   brew install rbenv ruby ruby-build
   rbenv install "$(_ruby_version ruby)"
-  sudo gem install rubocop
+  gem install --user-install rubocop
 }
 
 function install_rust() {
@@ -123,7 +123,7 @@ function install_vagrant() {
 }
 
 function install_web_tools() {
-  sudo gem install sass
+  gem install --user-install sass
 }
 
 function install_dev_tools() {
@@ -147,12 +147,12 @@ function install_dev_tools() {
     vim \
     zsh
 
-  sudo pip2 install vim-vint
+  pip2 --user install vim-vint
 
-  sudo pip2 install --upgrade neovim
-  sudo pip3 install --upgrade neovim
+  pip2 --user install --upgrade neovim
+  pip3 --user install --upgrade neovim
 
-  sudo gem install neovim
+  gem install --user-install neovim
 
   sudo npm install --global remark-cli
 
