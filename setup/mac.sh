@@ -164,14 +164,18 @@ function install_user_tools() {
     alfred \
     caffeine \
     cyberduck \
+    discord \
     firefox \
     flux \
     google-chrome \
     iterm2 \
     karabiner-elements \
+    plex-media-server \
     shiftit \
+    slack \
     spotify \
     steam \
+    tunnelblick \
     vlc
 }
 
