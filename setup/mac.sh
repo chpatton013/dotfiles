@@ -87,7 +87,7 @@ function install_python() {
   local patch='import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")'
 
   brew install python python3 pyenv
-  pip2 --user install yapf
+  pip2 install --user yapf
 
   mkdir -p "$packages_dir"
   if [ ! -f "$brew_path_file" ] || ! grep -q "$patch" "$brew_path_file"; then
@@ -153,10 +153,10 @@ function install_dev_tools() {
     vim \
     zsh
 
-  pip2 --user install vim-vint
+  pip2 install --user vim-vint
 
-  pip2 --user install --upgrade neovim
-  pip3 --user install --upgrade neovim
+  pip2 install --user --upgrade neovim
+  pip3 install --user --upgrade neovim
 
   gem install --user-install neovim
 
