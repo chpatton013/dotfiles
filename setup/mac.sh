@@ -101,7 +101,7 @@ function install_go() {
 
 function install_js() {
   brew install node
-  npm install --global js-beautify
+  npm install --global --prefix=~/.npm js-beautify
 }
 
 function install_ruby() {
@@ -163,7 +163,7 @@ function install_dev_tools() {
 
   gem install --user-install neovim
 
-  npm install --global remark-cli
+  npm install --global --prefix=~/.npm remark-cli
 
   go get -u mvdan.cc/sh/cmd/shfmt
 }
