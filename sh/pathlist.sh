@@ -72,7 +72,12 @@ for p in "${paths[@]}"; do
   [ -d "$bin" ] && PATH="$(append_pathlist "$PATH" "$bin")"
   [ -d "$sbin" ] && PATH="$(append_pathlist "$PATH" "$sbin")"
 done
-PATH="$(prepend_pathlist "$PATH" ~/.rbenv/shims)"
+
+[ -d ~/.rbenv/shims ] && PATH="$(prepend_pathlist "$PATH" ~/.rbenv/shims)"
+for bin in $(find ~/.gem/ruby -maxdepth 2 -type d -name bin); do
+  [ -d "$bin" ] && PATH="$(append_pathlist "$PATH" "$bin")"
+done
+
 export PATH="$PATH"
 
 # LD_LIBRARY_PATH
