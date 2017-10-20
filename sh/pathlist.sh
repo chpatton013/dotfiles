@@ -64,6 +64,7 @@ paths=(
   /
   ~
   ~/.cargo
+  ~/.npm
   ~/go
 )
 for p in "${paths[@]}"; do
