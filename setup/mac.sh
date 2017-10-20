@@ -2,6 +2,11 @@
 set -xeuo pipefail
 
 function main() {
+  if [ "$(id -u)" -eq 0 ]; then
+    echo This script should not be run as root. Exiting. >&2
+    exit 1
+  fi
+
   install_homebrew
   install_core
   install_cpp
