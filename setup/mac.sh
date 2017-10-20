@@ -72,7 +72,8 @@ function install_cpp() {
 }
 
 function install_bazel() {
-  brew install bazel buildifier java
+  brew cask install java
+  brew install bazel buildifier
 }
 
 function install_python() {
