@@ -113,7 +113,7 @@ function install_ruby() {
 function install_rust() {
   local install_url="https://static.rust-lang.org/rustup.sh"
   curl --fail --silent --show-error --location "$install_url" | sh
-  which rustfmt >/dev/null || cargo install rustfmt
+  [ -f ~/.cargo/bin/rustfmt ] || cargo install rustfmt
 }
 
 function install_docker() {
