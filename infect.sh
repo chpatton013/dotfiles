@@ -33,6 +33,8 @@ wget --output-document ~/bin/ssh-agent-canonicalize \
   https://raw.githubusercontent.com/chpatton013/ssh-agent-canonicalize/master/ssh-agent-canonicalize
 chmod +x ~/bin/ssh-agent-canonicalize
 
+eval $(~/bin/ssh-agent-canonicalize)
+
 # Libraries
 ################################################################################
 
