@@ -7,6 +7,8 @@ function main() {
     exit 1
   fi
 
+  sudo --validate
+
   install_homebrew
   install_core
   install_cpp
