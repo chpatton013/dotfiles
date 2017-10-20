@@ -2,6 +2,7 @@
 /*/
 
 !/.gitignore
+!/karabiner
 !/shellrc.d/
 !/nvim/
 
