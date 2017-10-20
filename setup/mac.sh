@@ -194,7 +194,7 @@ function install_user_tools() {
     google-chrome \
     iterm2 \
     karabiner-elements \
-    plex-media-server \
+    plex-media-player \
     shiftit \
     slack \
     spotify \
