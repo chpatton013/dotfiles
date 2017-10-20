@@ -137,10 +137,11 @@ function install_vagrant() {
   rbenv install --skip-existing "$vagrant_ruby_version"
 
   (
-    CONFIGURE_ARGS="with-ldflags=-L/opt/vagrant/embedded/lib with-libvirt-include=/usr/local/include/libvirt with-libvirt-lib=/usr/local/lib"
-    GEM_HOME="~/.vagrant.d/gems/$vagrant_ruby_version"
-    GEM_PATH="$GEM_HOME:/opt/vagrant/embedded/gems"
-    PATH="/opt/vagrant/embedded/bin:$PATH"
+    export CONFIGURE_ARGS="with-ldflags=-L/opt/vagrant/embedded/lib with-libvirt-include=/usr/local/include/libvirt with-libvirt-lib=/usr/local/lib"
+    export GEM_HOME="~/.vagrant.d/gems/$vagrant_ruby_version"
+    export GEM_PATH="$GEM_HOME:/opt/vagrant/embedded/gems"
+    export PATH="/opt/vagrant/embedded/bin:$PATH"
+
     vagrant plugin install vagrant-libvirt
   )
 }
