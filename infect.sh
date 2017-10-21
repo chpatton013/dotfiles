@@ -26,7 +26,7 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 # Executables
 ################################################################################
 
-mkdir -p ~/bin
+mkdir -p ~/bin ~/.local/share/applications
 
 # ssh-agent-canonicalize
 wget --output-document ~/bin/ssh-agent-canonicalize \
@@ -51,6 +51,10 @@ fi
   cargo build --release
   cp ./target/release/alacritty ~/bin
   cp Alacritty.desktop ~/.local/share/applications
+)
+(
+  builtin cd "$root_dir/alacritty"
+  ./make_config.py --output_file=~/.config/alacritty.yml
 )
 
 # Libraries
