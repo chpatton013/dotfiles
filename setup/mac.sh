@@ -53,10 +53,10 @@ function install_core() {
   brew install file-formula fswatch nmap openssh rsync tree unzip wget
 
   # GNU utilities.
-  brew install binutils
-  brew install coreutils
-  brew install diffutils
-  brew install ed --default-names
+  brew install binutils --with-default-names
+  brew install coreutils --with-default-names
+  brew install diffutils --with-default-names
+  brew install ed --with-default-names
   brew install findutils --with-default-names
   brew install gawk
   brew install gnu-indent --with-default-names
