@@ -8,7 +8,7 @@ WORKTREE_ENVIRONMENT_ENTRYPOINT='builtin cd "$project_directory"'
 WORKTREE_ENVIRONMENT_ENTRYPOINT+=' && tmux has-session -t "$project_name" 2>/dev/null'
 WORKTREE_ENVIRONMENT_ENTRYPOINT+=' && tmux attach -t "$project_name"'
 WORKTREE_ENVIRONMENT_ENTRYPOINT+=' || tmux new -s "$project_name"'
-export WORKTREE_ENVIRONMENT_ENTRYPOINT=""
+export WORKTREE_ENVIRONMENT_ENTRYPOINT
 alias wt=worktree
 alias wt_create=worktree_create
 alias wt_resume=worktree_resume
