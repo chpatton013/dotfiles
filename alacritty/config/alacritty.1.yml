@@ -55,18 +55,18 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: DejaVu Sans Mono for Powerline
-    style: Book
+    family: Hack
+    style: Regular
 
   # The bold font face
   bold:
-    family: DejaVu Sans Mono for Powerline
+    family: Hack
     style: Bold
 
   # The italic font face
   italic:
-    family: DejaVu Sans Mono for Powerline
-    style: Oblique
+    family: Hack
+    style: Italic
 
   # Point size of the font
   size: 10.0
