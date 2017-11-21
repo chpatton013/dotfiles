@@ -180,6 +180,10 @@ let g:CommandTCancelMap=['<Esc>', '<C-c>']
 
 nnoremap <C-f> :CommandT<CR>
 
+" TODO: use `fd` as file scanner.
+" This [open pull request](https://github.com/wincent/command-t/pull/258) may
+" provide the needed configurability.
+
 " EditorConfig
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
