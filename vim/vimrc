@@ -4,6 +4,7 @@
 
 function! BuildYouCompleteMe(info) abort
   if a:info.force || a:info.status !=? 'unchanged'
+    echo 'Building YouCompleteMe'
     silent !./install.py --clang-completer --racer-completer --tern-completer
     redraw!
   end
@@ -11,6 +12,7 @@ endfunction
 
 function! BuildPowerlineFonts(info) abort
   if a:info.force || a:info.status !=? 'unchanged'
+    echo 'Building PowerlineFonts'
     silent !./install.sh
     redraw!
   end
@@ -18,6 +20,7 @@ endfunction
 
 function! BuildCommandT(info) abort
   if a:info.force || a:info.status !=? 'unchanged'
+    echo 'Building CommandT'
     silent !builtin cd ruby/command-t/ext/command-t && ruby extconf.rb && make
     redraw!
   end
