@@ -2,6 +2,14 @@
 " Initialization
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+function! InstallVimPlug() abort
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    echo 'Downloading VimPlug'
+    silent !wget --output-document ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    redraw!
+  endif
+endfunction
+
 function! BuildYouCompleteMe(info) abort
   if a:info.force || a:info.status !=? 'unchanged'
     echo 'Building YouCompleteMe'
@@ -27,6 +35,7 @@ function! BuildCommandT(info) abort
 endfunction
 
 " Initialize Plug.
+call InstallVimPlug()
 call plug#begin('~/.vim/plugged')
 
 " Add your list of plugins here.
