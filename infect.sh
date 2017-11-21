@@ -127,10 +127,10 @@ ln -s "$root_dir/tmux/plugins/tmux-mem-cpu-load/tmux-mem-cpu-load" ~/bin
 # Vim plugins
 ################################################################################
 
-mkdir -p ./vim/autoload
+mkdir -p ~/.vim/autoload
 
 # VimPlug download
-wget --output-document ./vim/autoload/plug.vim \
+wget --output-document ~/.vim/autoload/plug.vim \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Vim plugins
