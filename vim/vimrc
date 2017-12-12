@@ -182,6 +182,13 @@ nnoremap <Leader>f :Autoformat<CR>
 xnoremap <Leader>f :Autoformat<CR>
 nnoremap <Leader>F :call AutoFormatToggle()<CR>
 
+" Commentary
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup CommentStringSettings
+  autocmd!
+  autocmd FileType c,cpp,java setlocal commentstring=//\ %s
+augroup END
+
 " CommandT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
