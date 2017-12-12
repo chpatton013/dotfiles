@@ -5,7 +5,7 @@ alias fgrep="fgrep --color"
 alias egrep="egrep --color"
 
 function inotifyrun() {
-  echo "Watching $(pwd): $@"
+  echo Watching $(pwd): $@
 
   "$@"
   echo

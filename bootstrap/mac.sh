@@ -20,7 +20,7 @@ function docker_setup() {
 }
 
 function inotifyrun() {
-  echo "Watching $(pwd): $@"
+  echo Watching $(pwd): $@
 
   "$@"
   echo
