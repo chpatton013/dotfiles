@@ -23,6 +23,7 @@
   ui = true
 [core]
   excludesfile = ~/.gitignore
+  preloadIndex = true
 [fetch]
   prune = true
 [github]
