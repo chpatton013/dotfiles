@@ -124,3 +124,7 @@ cargo install fd-find ripgrep
 # Docker service and user account
 sudo service docker restart
 sudo usermod --append --groups docker "$(id --user --name)"
+
+# Increase inotify maximum watch count.
+echo 'fs.inotify.max_user_watches = 1048575' | sudo tee /etc/sysctl.d/99-max-user-watches.conf
+sudo sysctl --load --system
