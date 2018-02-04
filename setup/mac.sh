@@ -41,7 +41,9 @@ function install_homebrew() {
 
   # Open all taps before updating.
   brew tap neovim/neovim
-  brew tap jeffreywildman/homebrew-virt-manager
+  # TODO: Revert to jeffreywildman/homebrew-virt-manager when this PR has
+  # merged: https://github.com/jeffreywildman/homebrew-virt-manager/pull/83
+  brew tap lunixbochs/homebrew-virt-manager
 
   brew update
   brew upgrade
@@ -123,12 +125,6 @@ function install_docker() {
 }
 
 function install_vagrant() {
-  # TODO: remove this patch when the open PR merges:
-  #   https://github.com/jeffreywildman/homebrew-virt-manager/pull/85
-  curl --fail --silent --show-error --location \
-    https://raw.githubusercontent.com/doomedraven/homebrew-virt-manager/ef0515d1e54309a5627ecfc20b2ae5d5cde84494/virt-manager.rb > \
-    /usr/local/Homebrew/Library/Taps/jeffreywildman/homebrew-virt-manager/virt-manager.rb
-
   brew cask install vagrant vagrant-manager virtualbox
   brew install libiconv libvirt virt-manager virt-viewer
 
@@ -146,6 +142,7 @@ function install_vagrant() {
 
     vagrant plugin install vagrant-libvirt
   )
+  vagrant plugin install vagrant-vbguest
 }
 
 function install_web_tools() {
