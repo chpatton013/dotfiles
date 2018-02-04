@@ -47,6 +47,7 @@ function install_homebrew() {
 
   brew update
   brew upgrade
+  brew cask upgrade
 }
 
 function install_core() {

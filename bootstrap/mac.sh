@@ -40,6 +40,10 @@ function inotifyrun() {
   done
 }
 
+function upgrade_system() {
+  brew update && brew upgrade && brew cask upgrade
+}
+
 if which brew &>/dev/null; then
   PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
   MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
