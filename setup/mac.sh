@@ -147,7 +147,7 @@ function install_vagrant() {
 }
 
 function install_web_tools() {
-  gem install --user-install sass
+  gem install --user-install rails sass
 }
 
 function install_dev_tools() {
