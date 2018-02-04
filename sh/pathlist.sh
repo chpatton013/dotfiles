@@ -58,6 +58,7 @@ EOF
 
 paths=(
   /usr/local
+  /usr/local/opt/go
   /usr
   /usr/X11
   /usr/kerberos
@@ -74,12 +75,13 @@ for p in "${paths[@]}"; do
   [ -d "$sbin" ] && PATH="$(append_pathlist "$PATH" "$sbin")"
 done
 
-[ -d ~/.rbenv/shims ] && PATH="$(prepend_pathlist "$PATH" ~/.rbenv/shims)"
 if [ -d ~/.gem/ruby ]; then
   for bin in $(find ~/.gem/ruby -maxdepth 2 -type d -name bin); do
-    [ -d "$bin" ] && PATH="$(append_pathlist "$PATH" "$bin")"
+    [ -d "$bin" ] && PATH="$(prepend_pathlist "$PATH" "$bin")"
   done
 fi
+[ -d ~/.rbenv/bin ] && PATH="$(prepend_pathlist "$PATH" ~/.rbenv/bin)"
+[ -d ~/.rbenv/shims ] && PATH="$(prepend_pathlist "$PATH" ~/.rbenv/shims)"
 
 export PATH="$PATH"
 
