@@ -40,8 +40,8 @@ function build_ps1() {
   local ps1_user=$'\u'
   local ps1_host=$'\H'
   local ps1_pwd=$'\w'
-  local ps1_date=$'$(date +"%Y.%m.%d")'
-  local ps1_time=$'$(date +"%H.%M.%S")'
+  local ps1_date=$'\D{%Y/%m/%d}'
+  local ps1_time=$'\D{%H:%M:%S}'
   local ps1_priv=$'\$'
 
   echo -n "$fg_red$ps1_user"

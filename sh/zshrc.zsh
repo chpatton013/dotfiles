@@ -177,11 +177,11 @@ function prompt_host() {
 }
 
 function prompt_date() {
-  prompt_segment white black "$(date +"%Y/%m/%d")"
+  prompt_segment white black "%D{%Y/%m/%d}"
 }
 
 function prompt_time() {
-  prompt_segment black white "$(date +"%H:%M:%S")"
+  prompt_segment black white "%D{%H:%M:%S}"
 }
 
 function prompt_directory() {
