@@ -41,9 +41,7 @@ function install_homebrew() {
 
   # Open all taps before updating.
   brew tap neovim/neovim
-  # TODO: Revert to jeffreywildman/homebrew-virt-manager when this PR has
-  # merged: https://github.com/jeffreywildman/homebrew-virt-manager/pull/83
-  brew tap lunixbochs/homebrew-virt-manager
+  brew tap jeffreywildman/homebrew-virt-manager
 
   brew update
   brew upgrade
