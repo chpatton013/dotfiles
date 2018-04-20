@@ -152,7 +152,7 @@ function install_vagrant() {
 
     vagrant plugin install vagrant-libvirt vagrant-docker-compose
   )
-  vagrant plugin install vagrant-vbguest
+  vagrant plugin install vagrant-vbguest vagrant-docker-compose
 }
 
 function install_web_tools() {
