@@ -5,6 +5,7 @@ export BROWSER='chromium-browser'
 export CLICOLOR=TRUE
 export EDITOR=vim
 export PAGER=less
+export PYTHONDONTWRITEBYTECODE=1
 export TERM='xterm-256color'
 export TERMINAL='xterm'
 
