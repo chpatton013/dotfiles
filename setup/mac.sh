@@ -194,6 +194,7 @@ function install_user_tools() {
     karabiner-elements \
     plex-media-player \
     shiftit \
+    signal \
     slack \
     spotify \
     steam \
