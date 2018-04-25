@@ -139,7 +139,7 @@ function install_vagrant() {
     export GEM_PATH="$GEM_HOME:/opt/vagrant/embedded/gems"
     export PATH="/opt/vagrant/embedded/bin:$PATH"
 
-    vagrant plugin install vagrant-libvirt
+    vagrant plugin install vagrant-libvirt vagrant-docker-compose
   )
   vagrant plugin install vagrant-vbguest
 }
