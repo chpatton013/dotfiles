@@ -9,6 +9,7 @@ function main() {
 
   sudo --validate
 
+  make_destination_dirs
   install_homebrew
   install_core
   install_cpp
@@ -16,6 +17,7 @@ function main() {
   install_python
   install_go
   install_js
+  install_lua
   install_ruby
   install_rust
   install_docker
@@ -23,10 +25,15 @@ function main() {
   install_web_tools
   install_dev_tools
   install_user_tools
+  install_vim
 }
 
 function _ruby_version() {
   "$@" --version | sed 's/^ruby \([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/g'
+}
+
+function make_destination_dirs() {
+  mkdir -p ~/bin ~/dependencies ~/projects
 }
 
 function install_homebrew() {
@@ -103,6 +110,10 @@ function install_go() {
 function install_js() {
   brew install node
   npm install --global --prefix=~/.npm js-beautify
+}
+
+function install_lua() {
+  brew install lua
 }
 
 function install_ruby() {
@@ -200,6 +211,101 @@ function install_user_tools() {
     steam \
     tunnelblick \
     vlc
+}
+
+function _install_vim_lua_prefix() {
+  local cellar version
+  cellar="$(brew --cellar lua)"
+  version="$(
+    brew list --versions lua | \
+    awk '{print $2}' | \
+    sort --reverse | \
+    head -n 1
+  )"
+  readonly cellar version
+
+  echo "$cellar/$version"
+}
+
+function _install_vim_python2_config_dir() {
+  local cellar version identifier
+  cellar="$(brew --cellar python2)"
+  version="$(
+    brew list --versions python2 | \
+    tr "[[:space:]]" "\n" | \
+    grep -E "^2\." | \
+    sort --reverse | \
+    head -n 1
+  )"
+  identifier="$(echo "$version" | sed -E 's#(^[^\.]+\.[^\.]+)\..*#\1#')"
+  readonly cellar version identifier
+
+  echo "$cellar/$version/Frameworks/Python.framework/Versions/$identifier/lib/python$identifier/config"
+}
+
+function _install_vim_python3_config_dir() {
+  local cellar version identifier
+  cellar="$(brew --cellar python3)"
+  version="$(
+    brew list --versions python3 | \
+    tr "[[:space:]]" "\n" | \
+    grep -E "^3\." | \
+    sort --reverse | \
+    head -n 1
+  )"
+  identifier="$(echo "$version" | sed -E 's#(^[^\.]+\.[^\.]+)\..*#\1#')"
+  readonly cellar version identifier
+
+  find \
+    "$cellar/$version/Frameworks/Python.framework/Versions/$identifier/lib/python$identifier" \
+    -maxdepth 1 \
+    -type d \
+    -name "config-$identifier*"
+}
+
+function install_vim() {
+  if [ ! -d ~/dependencies/vim ]; then
+    git clone \
+      --branch=master \
+      --single-branch \
+      --depth=1 \
+      git@github.com:vim/vim.git \
+      ~/dependencies/vim
+  fi
+
+  mkdir -p ~/dependencies/vim_install
+
+  (
+    builtin cd ~/dependencies/vim
+    ./configure \
+      --disable-darwin \
+      --enable-autoservername \
+      --enable-cscope \
+      --enable-fail-if-missing \
+      --enable-luainterp=yes \
+      --enable-multibyte \
+      --enable-mzschemeinterp \
+      --enable-perlinterp=yes \
+      --enable-python3interp=yes \
+      --enable-pythoninterp=yes \
+      --enable-rubyinterp=yes \
+      --enable-tclinterp=yes \
+      --enable-terminal \
+      --exec-prefix="$HOME/dependencies/vim_install" \
+      --prefix="$HOME/dependencies/vim_install" \
+      --with-compiledby="$(id -un)" \
+      --with-features=huge \
+      --with-lua-prefix="$(_install_vim_lua_prefix)" \
+      --with-python-command=python \
+      --with-python-config-dir="$(_install_vim_python2_config_dir)" \
+      --with-python3-command=python3 \
+      --with-python3-config-dir="$(_install_vim_python3_config_dir)" \
+      --with-ruby-command=ruby \
+      --with-x
+    make
+    make test
+    make install
+  )
 }
 
 main
