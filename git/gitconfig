@@ -1,5 +1,6 @@
 [alias]
   ap = add --patch
+  clone = clone --recursive
   cm = commit
   co = checkout
   cp = cherry-pick
