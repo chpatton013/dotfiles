@@ -85,7 +85,7 @@ function install_cpp() {
 }
 
 function install_bazel() {
-  brew cask install java caskroom/versions/java8
+  brew cask install java homebrew/cask-versions/java8
   brew install bazel buildifier
 }
 
