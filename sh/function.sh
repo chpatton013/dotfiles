@@ -29,7 +29,7 @@ function tmux_start_session() {
 }
 
 function ifind() {
-  find "$(pwd)" -iname "*$@*"
+  find . -iname "*$@*"
 }
 
 function vpn() {
