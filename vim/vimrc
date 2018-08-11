@@ -49,6 +49,7 @@ Plug 'altercation/vim-colors-solarized' " Solarized color theme for vim
 Plug 'cespare/vim-toml' " Toml syntax highlighting
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
+Plug 'posva/vim-vue' " Syntax highlighting and linting for Vue components
 Plug 'powerline/fonts', { 'do': function('BuildPowerlineFonts') } " Pre-patched and adjusted fonts for status line
 Plug 'roxma/vim-tmux-clipboard' " Sync Vim and Tmux copy buffers
 Plug 'rust-lang/rust.vim' " Rust syntax highlighting
@@ -75,13 +76,14 @@ call plug#end()
 " helps get consistent behavior from them.
 augroup FileTypeAssociation
   autocmd!
-  autocmd BufNewFile,BufRead *.impl,*.inl set filetype=cpp
-  autocmd BufNewFile,BufRead *.launch set filetype=xml
-  autocmd BufNewFile,BufRead *.make set filetype=make
-  autocmd BufNewFile,BufRead *.snippets set filetype=snippets
-  autocmd BufNewFile,BufRead *.bzl set filetype=python
-  autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.*,*.BUILD set filetype=bzl
-  autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+  autocmd BufNewFile,BufRead *.impl,*.inl setlocal filetype=cpp
+  autocmd BufNewFile,BufRead *.launch setlocal filetype=xml
+  autocmd BufNewFile,BufRead *.make setlocal filetype=make
+  autocmd BufNewFile,BufRead *.snippets setlocal filetype=snippets
+  autocmd BufNewFile,BufRead *.bzl setlocal filetype=python
+  autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.*,*.BUILD,*.bazel setlocal filetype=bzl
+  autocmd BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
+  autocmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
 augroup END
 
 " Use , instead of \ for the map leader.
@@ -255,6 +257,14 @@ let g:UltiSnipsExpandTrigger='<C-Space>'
 let g:UltiSnipsListSnippets='<C-Tab>'
 let g:UltiSnipsJumpForwardTrigger='<C-j>'
 let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+
+" Vim-Vue
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+augroup VueComponentSyntax
+  autocmd!
+  autocmd FileType vue syntax sync fromstart
+augroup END
 
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
