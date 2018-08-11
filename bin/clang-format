@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+function locate_executables() {
+  local pattern
+  pattern="$1"
+  readonly pattern
+
+  for f in $(locate --basename --regex "$pattern"); do
+    if [ -f "$f" ] && [ -x "$f" ]; then
+      echo $f
+    fi
+  done
+}
+
+which_clang_format="$(
+locate_executables '^clang-format-[0-9]\.[0-9]$' |
+sort --reverse --version-sort --field-separator=- --key=3,3 |
+head --lines=1
+)"
+
+"$which_clang_format" "$@"

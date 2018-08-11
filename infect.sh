@@ -9,18 +9,36 @@ root_dir="$(builtin cd "$script_dir" && git rev-parse --show-toplevel)"
 ################################################################################
 
 sudo chsh -s "$(which zsh)" "$(id -un)"
-mkdir -p ~/bin ~/projects ~/.bootstrap.d
+mkdir -p \
+  ~/bin \
+  ~/dependencies \
+  ~/projects \
+  ~/.bootstrap.d \
+  ~/.config/{bashrc.d,zshrc.d} \
+  ~/.local/share/applications
 
 ################################################################################
 # Link config files in home folder
 ################################################################################
 
-(builtin cd stow && find -mindepth 1 -maxdepth 1) |
+function stow_directory() {
+  local target package
+  target="$1"
+  package="$2"
+  readonly target package
+
+  (builtin cd stow && find -mindepth 1 -maxdepth 1) |
   xargs -I {} rm -rf "$HOME/{}"
-stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
+  stow --verbose=1 --dir="$root_dir" --target="$target" --restow "$package"
+}
+stow_directory "$HOME" stow
+stow_directory "$HOME/bin" bin
 
 ################################################################################
 # Download dependencies
+################################################################################
+
+# Applications
 ################################################################################
 
 mkdir -p \
