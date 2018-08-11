@@ -58,3 +58,4 @@ function build_ps1() {
 }
 
 export PS1="$(build_ps1)"
+export HISTFILE=~/.history.bash

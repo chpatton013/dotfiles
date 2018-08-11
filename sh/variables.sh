@@ -30,7 +30,6 @@ export LC_TIME="en_US.UTF-8"
 # History Settings
 ###############################################################################
 
-export HISTFILE=~/.history
 export SAVEHIST=1000
 export HISTSIZE=1000
 export HISTFILESIZE=2000

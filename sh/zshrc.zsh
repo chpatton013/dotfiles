@@ -213,3 +213,4 @@ function build_prompt() {
 }
 
 export PS1="%{%f%b%k%}$(build_prompt) "
+export HISTFILE=~/.history.zsh
