@@ -321,6 +321,16 @@ augroup AutoResizeSplits
   autocmd VimResized * wincmd =
 augroup END
 
+" Reload open files that have changed outside of Vim.
+augroup AutoReloadFiles
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+        \ if mode() != 'c' | checktime | endif
+  autocmd FileChangedShellPost *
+        \ echohl WarningMsg |
+        \ echo "File changed on disk. Buffer reloaded." |
+        \ echohl None
+augroup END
+
 " Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
