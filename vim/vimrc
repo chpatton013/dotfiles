@@ -117,26 +117,36 @@ omap a; <Plug>Argumentative_OpPendingOuterTextObject
 " Autoformat
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! AutoFormatToggle() abort
-  if !exists('b:toggle_auto_format')
-    let b:toggle_auto_format=0
+function! AutoFormatInitialize() abort
+  if !exists('b:auto_format_enabled')
+    let b:auto_format_enabled=1
   endif
+endfunction
 
-  if b:toggle_auto_format
-    :echo 'Disabling auto-formatting'
-    let b:toggle_auto_format=0
+function! AutoFormatEnable() abort
+  :echo 'Enabling auto-formatting'
+  let b:auto_format_enabled=1
+endfunction
+
+function! AutoFormatDisable() abort
+  :echo 'Enabling auto-formatting'
+  let b:auto_format_enabled=0
+endfunction
+
+function! AutoFormatToggle() abort
+  :call AutoFormatInitialize()
+
+  if b:auto_format_enabled
+    :call AutoFormatEnable()
   else
-    :echo 'Enabling auto-formatting'
-    let b:toggle_auto_format=1
+    :call AutoFormatDisable()
   endif
 endfunction
 
 function! AutoFormatIfEnabled() abort
-  if !exists('b:toggle_auto_format')
-    let b:toggle_auto_format=0
-  endif
+  :call AutoFormatInitialize()
 
-  if b:toggle_auto_format
+  if b:auto_format_enabled
     :echo 'Auto-formatting buffer'
     :Autoformat
   endif
