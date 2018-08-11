@@ -12,7 +12,7 @@ indent_size = 2
 indent_size = 4
 
 # All Bazel files.
-[{WORKSPACE,*BUILD*,*.bzl}]
+[{WORKSPACE,*BUILD*,*.bzl,*.bazel}]
 indent_size = 4
 
 # Markdown
