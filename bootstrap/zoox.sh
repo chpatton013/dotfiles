@@ -19,3 +19,5 @@ source "$(worktree_active_project_worktree)/scripts/shell/zooxrc.sh"
 function bbt() {
   bb "$@" && btest "$@"
 }
+
+alias aws-mfa='oathtool --totp --base32 -w 1 "`cat ~/.aws/oathtool-mfa`"'
