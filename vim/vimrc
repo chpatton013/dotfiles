@@ -352,7 +352,7 @@ set cursorline                  " Highlight current line.
 set dictionary+=~/.vim/dictionary/english-freq
 set expandtab                   " Expand tabs into spaces.
 set foldcolumn=1                " Add N columns to show fold levels and boundaries.
-set foldmethod=indent           " Set fold method (manual,indent,expr,syntax,diff,marker).
+set foldmethod=syntax           " Set fold method (manual,indent,expr,syntax,diff,marker).
 set hidden                      " Use hidden buffers so unsaved buffers can go to the background.
 set history=500                 " Set number of lines for vim to remember.
 set hlsearch                    " Highlight all search matches.
@@ -379,7 +379,6 @@ set showmatch                   " Show matching () {} etc..
 set showmode                    " Show current editor mode (insert, visual, replace, etc).
 set sidescrolloff=10            " Keep min of N columns right/left cursor.
 set smartcase                   " Searches are case-sensitive only if caps used.
-set smartindent                 " Maintains most indentation and adds extra level when nesting.
 set smarttab                    " Tabs and backspaces at the start of a line indent the line one level.
 set splitright splitbelow       " Open splits below and to the right.
 set synmaxcol=2000              " Only matches syntax on first N columns of each line.
@@ -396,7 +395,8 @@ set wrapscan                    " Searching wraps to start of file when end is r
 
 augroup LanguageSpecificOverrides
   autocmd!
-  autocmd FileType python let b:indent_size=4
+  autocmd FileType python setlocal foldmethod=indent | let b:indent_size=4
+  autocmd FileType make setlocal noexpandtab
 augroup END
 
 function! IndentSizeInitialize() abort
