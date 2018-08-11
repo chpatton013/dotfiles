@@ -26,19 +26,9 @@ function! BuildPowerlineFonts(info) abort
   end
 endfunction
 
-function! BuildCommandT(info) abort
-  if a:info.force || a:info.status !=? 'unchanged'
-    echo 'Building CommandT'
-    silent !builtin cd ruby/command-t/ext/command-t && ruby extconf.rb && make
-    redraw!
-  end
-endfunction
-
-" Initialize Plug.
+" Initialize VimPlug and setup plugins.
 call InstallVimPlug()
 call plug#begin('~/.vim/plugged')
-
-" Add your list of plugins here.
 Plug 'Chiel92/vim-autoformat' " Syntax-aware code formatting
 Plug 'PeterRincker/vim-argumentative' " Rearrange function arguments
 Plug 'SirVer/ultisnips' " Code snippet completion
@@ -48,6 +38,8 @@ Plug 'airblade/vim-gitgutter' " Show git diff in the gutter
 Plug 'altercation/vim-colors-solarized' " Solarized color theme for vim
 Plug 'cespare/vim-toml' " Toml syntax highlighting
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
+Plug 'junegunn/fzf', { 'dir': '~/dependencies/fzf', 'do': './install --all' } " Fuzzy file finder
+Plug 'junegunn/fzf.vim' " Custom selector implementation for FZF
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<Plug>(GrepperOperator)'] } " Integrate grep into quick-fix
 Plug 'posva/vim-vue' " Syntax highlighting and linting for Vue components
 Plug 'powerline/fonts', { 'do': function('BuildPowerlineFonts') } " Pre-patched and adjusted fonts for status line
@@ -67,9 +59,6 @@ Plug 'vim-airline/vim-airline-themes' " Color theme support for airline
 Plug 'vim-utils/vim-man' " Open man pages in vim
 Plug 'vim-utils/vim-troll-stopper' " Convert elusive unicode characters to ASCII
 Plug 'w0rp/ale' " Asynchronous Lint Engine
-Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " Fuzzy file finder
-
-" All of your Plugins must be added before the following line.
 call plug#end()
 
 " Behavior of several plugins depends on filetype being set. Setting it early
@@ -186,29 +175,38 @@ nnoremap <Leader>F :call AutoFormatToggle()<CR>
 
 " Commentary
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 augroup CommentStringSettings
   autocmd!
   autocmd FileType c,cpp,java setlocal commentstring=//\ %s
 augroup END
 
-" CommandT
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:CommandTFileScanner='git'
-
-" Add mappings to close quickfix window.
-let g:CommandTCancelMap=['<Esc>', '<C-c>']
-
-nnoremap <C-f> :CommandT<CR>
-
-" TODO: use `fd` as file scanner.
-" This [open pull request](https://github.com/wincent/command-t/pull/258) may
-" provide the needed configurability.
-
 " EditorConfig
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:EditorConfig_exclude_patterns=['fugitive://.*']
+
+" FZF
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <C-f> :FZF<CR>
+
+let g:fzf_colors =
+      \{
+      \  'fg':      ['fg', 'Normal'],
+      \  'bg':      ['bg', 'Normal'],
+      \  'hl':      ['fg', 'Comment'],
+      \  'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \  'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \  'hl+':     ['fg', 'Statement'],
+      \  'info':    ['fg', 'PreProc'],
+      \  'border':  ['fg', 'Ignore'],
+      \  'prompt':  ['fg', 'Conditional'],
+      \  'pointer': ['fg', 'Exception'],
+      \  'marker':  ['fg', 'Keyword'],
+      \  'spinner': ['fg', 'Label'],
+      \  'header':  ['fg', 'Comment'],
+      \}
 
 " GitGutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

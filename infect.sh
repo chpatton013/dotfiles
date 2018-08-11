@@ -23,10 +23,11 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 # Download dependencies
 ################################################################################
 
-# Executables
-################################################################################
-
-mkdir -p ~/bin ~/dependencies ~/.local/share/applications
+mkdir -p \
+  ~/bin \
+  ~/dependencies \
+  ~/.local/share/applications \
+  ~/.config/{bashrc.d,zshrc.d}
 
 # ssh-agent-canonicalize
 wget --output-document ~/bin/ssh-agent-canonicalize \
@@ -74,10 +75,18 @@ fi
   make install
 )
 
-# Libraries
-################################################################################
+# fzf
+if [ ! -d ~/dependencies/fzf ]; then
+  git clone git@github.com:junegunn/fzf.git ~/dependencies/fzf
+fi
+(
+  builtin cd ~/dependencies/fzf
+  git fetch
+  git clean --force -d
+  git reset --hard origin/master
 
-mkdir -p ~/.config/{bashrc.d,zshrc.d}
+  ./install --all
+)
 
 # worktree
 wget --output-document ~/.config/shellrc.d/worktree.sh \

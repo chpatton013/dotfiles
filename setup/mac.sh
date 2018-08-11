@@ -164,6 +164,7 @@ function install_dev_tools() {
     fd \
     file-formula \
     fswatch \
+    fzf \
     git \
     gpatch \
     gpg \
