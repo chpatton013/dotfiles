@@ -374,7 +374,6 @@ set number                      " Display line numbers.
 set path=,,.,**,/usr/include,/usr/local/include
 set scrolloff=5                 " Keep min of N lines above/below cursor.
 set shellslash                  " Use forward slashes regardless of OS.
-set shiftwidth=2                " Auto-indent N spaces each indent level.
 set showcmd                     " Show partial commands in the status line.
 set showmatch                   " Show matching () {} etc..
 set showmode                    " Show current editor mode (insert, visual, replace, etc).
@@ -382,10 +381,8 @@ set sidescrolloff=10            " Keep min of N columns right/left cursor.
 set smartcase                   " Searches are case-sensitive only if caps used.
 set smartindent                 " Maintains most indentation and adds extra level when nesting.
 set smarttab                    " Tabs and backspaces at the start of a line indent the line one level.
-set softtabstop=2               " Using a TAB inserts N spaces.
 set splitright splitbelow       " Open splits below and to the right.
 set synmaxcol=2000              " Only matches syntax on first N columns of each line.
-set tabstop=2                   " TABs expand to N spaces.
 set textwidth=80                " Hard wrap at N characters.
 set ttyfast                     " Smoother redrawing.
 set viminfo='20,\"500,%         " Adjust viminfo contents.
@@ -396,6 +393,31 @@ set wildmenu                    " Tab completion navigable menu is enabled.
 set wildmode=list:longest,full  " Tab completion lists matches, then opens wildmenu on next <Tab>.
 set wrap                        " Soft wrap lines.
 set wrapscan                    " Searching wraps to start of file when end is reached.
+
+augroup LanguageSpecificOverrides
+  autocmd!
+  autocmd FileType python let b:indent_size=4
+augroup END
+
+function! IndentSizeInitialize() abort
+  if !exists('b:indent_size')
+    let b:indent_size=2
+  endif
+endfunction
+
+function! SetIndentSize() abort
+  :call IndentSizeInitialize()
+
+  let &shiftwidth=b:indent_size
+  let &tabstop=b:indent_size
+  let &softtabstop=b:indent_size
+endfunction
+
+:call SetIndentSize()
+augroup IndentSize
+  autocmd!
+  autocmd FileType * :call SetIndentSize()
+augroup END
 
 " Toggles for invertible settings.
 nnoremap <Leader>h :set invhlsearch<CR>
