@@ -109,7 +109,7 @@ function install_go() {
 
 function install_js() {
   brew install node
-  npm install --global --prefix=~/.npm js-beautify
+  npm install --global --prefix=~/.npm js-beautify eslint eslint-plugin-vue
 }
 
 function install_lua() {
