@@ -26,7 +26,7 @@ stow --verbose=1 --dir="$root_dir" --target="$HOME" --restow stow
 # Executables
 ################################################################################
 
-mkdir -p ~/bin ~/.local/share/applications
+mkdir -p ~/bin ~/dependencies ~/.local/share/applications
 
 # ssh-agent-canonicalize
 wget --output-document ~/bin/ssh-agent-canonicalize \
@@ -36,11 +36,11 @@ chmod +x ~/bin/ssh-agent-canonicalize
 eval $(~/bin/ssh-agent-canonicalize)
 
 # alacritty
-if [ ! -d ~/alacritty ]; then
-  git clone git@github.com:jwilm/alacritty.git ~/alacritty
+if [ ! -d ~/dependencies/alacritty ]; then
+  git clone git@github.com:jwilm/alacritty.git ~/dependencies/alacritty
 fi
 (
-  builtin cd ~/alacritty
+  builtin cd ~/dependencies/alacritty
   git fetch
   git clean --force -d
   git reset --hard origin/master
@@ -55,6 +55,23 @@ fi
 (
   builtin cd "$root_dir/alacritty"
   ./make_config.py --output_file=~/.config/alacritty.yml
+)
+
+# fswatch
+if [ ! -f ~/dependencies/fswatch-1.12.0.tar.gz ]; then
+  wget --output-document ~/dependencies/fswatch-1.12.0.tar.gz \
+      https://github.com/emcrisostomo/fswatch/releases/download/1.12.0/fswatch-1.12.0.tar.gz
+fi
+if [ ! -d ~/dependencies/fswatch-1.12.0 ]; then
+  tar xzf ~/dependencies/fswatch-1.12.0.tar.gz --directory ~/dependencies
+fi
+(
+  builtin cd ~/dependencies/fswatch-1.12.0
+
+  ./configure --prefix ~
+  make
+  make check
+  make install
 )
 
 # Libraries
