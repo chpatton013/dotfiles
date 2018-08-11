@@ -54,3 +54,28 @@ function docker_push() {
   docker tag "$image_id" "$identifier:$tag"
   docker push "$identifier"
 }
+
+function _inotifyrun_invoke() {
+  echo CWD: $(pwd)
+  echo CMD: $@
+  "$@"
+  echo
+}
+
+function inotifyrun() {
+  _inotifyrun_invoke "$@"
+
+  while fswatch \
+      --event Updated \
+      --event Created \
+      --event Removed \
+      --event MovedFrom \
+      --event MovedTo \
+      --recursive \
+      --timestamp \
+      --extended \
+      --exclude ".*/\.git/.*|.*/\.mypy_cache/.*|.*/bazel-.*/.*|(.*\.sw.?$)" \
+      .; do
+    _inotifyrun_invoke "$@"
+  done
+}
