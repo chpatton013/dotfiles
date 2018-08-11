@@ -13,6 +13,7 @@ alias lla="lal"
 
 # Command-line shortcuts.
 alias ...="builtin cd .."
+alias b="bazel"
 alias g="git"
 alias gg="g gr"
 alias m="make --jobs=8"
