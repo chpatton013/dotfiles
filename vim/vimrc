@@ -339,6 +339,7 @@ set modeline                    " Check files for a modeline to apply config set
 set nobomb                      " Remove Byte Order Mark from files.
 set noerrorbells                " No beeps on errors.
 set nofoldenable                " Do not open file folded.
+set nojoinspaces                " Do not use multiple spaces when joining after punctuation.
 set nopaste                     " Do not default to paste mode.
 set noswapfile                  " Don't use swap files.
 set number                      " Display line numbers.
