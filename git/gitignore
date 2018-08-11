@@ -1,32 +1,35 @@
-# Useless OS-specific files
+# OS directory attributes
 .DS_Store
+._*
 
-# Vim Swap Files
+# Editor swap files
 *.sw?
-
-# EMacs Swap Files
 *.*~
 
-# Compiled Object files
-*.slo
+# C/C++ build artifacts
+*.a
+*.class
+*.dylib
+*.la
+*.lai
 *.lo
 *.o
-*.class
-
-# Compiled Dynamic libraries
+*.slo
 *.so
-*.dylib
+*.so.?
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-
-# Compiled Python
+# Python cache files
 *.pyc
+__pycache__
+.eggs/
+*.egg/
+*.egg-info/
+.mypy_cache
+.tox/
 
-.remote
-
+# Profiling
 gmon.out
 
+# Static analysis
 tags
+compile_commands.json
