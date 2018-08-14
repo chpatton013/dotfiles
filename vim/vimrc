@@ -358,6 +358,7 @@ set history=500                 " Set number of lines for vim to remember.
 set hlsearch                    " Highlight all search matches.
 set ignorecase                  " Ignore case in regular expressions.
 set incsearch                   " Immediately highlight search matches.
+set indentkeys-=:,<:>           " Do not trigger indent when : is pressed.
 set laststatus=2                " Show status line even where there is only one window.
 set lazyredraw                  " Redraw faster.
 set linespace=0                 " Adjust relative line height.
