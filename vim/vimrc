@@ -129,7 +129,7 @@ function! AutoFormatEnable() abort
 endfunction
 
 function! AutoFormatDisable() abort
-  :echo 'Enabling auto-formatting'
+  :echo 'Disabling auto-formatting'
   let b:auto_format_enabled=0
 endfunction
 
@@ -137,9 +137,9 @@ function! AutoFormatToggle() abort
   :call AutoFormatInitialize()
 
   if b:auto_format_enabled
-    :call AutoFormatEnable()
-  else
     :call AutoFormatDisable()
+  else
+    :call AutoFormatEnable()
   endif
 endfunction
 
