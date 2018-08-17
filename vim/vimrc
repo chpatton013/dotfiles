@@ -151,6 +151,7 @@ function! AutoFormatIfEnabled() abort
 endfunction
 
 " Filetype formatters.
+let g:formatters_bzl=['buildifier']
 let g:formatters_c=['clangformat']
 let g:formatters_cpp=['clangformat']
 let g:formatters_css=['cssbeautify']
@@ -167,6 +168,7 @@ let g:formatters_sh=['shfmt']
 let g:formatters_xhtml=['htmlbeautify']
 let g:formatters_xml=['htmlbeautify']
 
+let g:formatdef_buildifier='"buildifier -mode=fix -path=".expand("%:p")'
 let g:formatdef_shfmt='"shfmt -s -i ".&shiftwidth'
 
 " Automatic formatting.
