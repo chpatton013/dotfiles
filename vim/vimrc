@@ -117,7 +117,7 @@ omap a; <Plug>Argumentative_OpPendingOuterTextObject
 
 function! AutoFormatInitialize() abort
   if !exists('b:auto_format_enabled')
-    let b:auto_format_enabled=1
+    let b:auto_format_enabled=0
   endif
 endfunction
 
@@ -168,12 +168,12 @@ let g:formatters_xhtml=['htmlbeautify']
 let g:formatters_xml=['htmlbeautify']
 
 let g:formatdef_shfmt='"shfmt -s -i ".&shiftwidth'
-let g:formatter_yapf_style='pep8'
 
 " Automatic formatting.
 augroup AutoFormatSettings
   autocmd!
   autocmd BufWritePre * call AutoFormatIfEnabled()
+  autocmd FileType bzl,c,cpp,css,html,javascript,json,markdown,protobuf,python,ruby,rust,scss,sh,xhtml,xml let b:auto_format_enabled=1
 augroup END
 
 " Manual formatting.
