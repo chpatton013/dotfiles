@@ -69,8 +69,6 @@ augroup FileTypeAssociation
   autocmd BufNewFile,BufRead *.launch setlocal filetype=xml
   autocmd BufNewFile,BufRead *.make setlocal filetype=make
   autocmd BufNewFile,BufRead *.snippets setlocal filetype=snippets
-  autocmd BufNewFile,BufRead *.bzl setlocal filetype=python
-  autocmd BufNewFile,BufRead WORKSPACE,BUILD,BUILD.*,*.BUILD,*.bazel setlocal filetype=bzl
   autocmd BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
   autocmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
 augroup END
