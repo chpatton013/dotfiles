@@ -82,6 +82,7 @@ if [ -d ~/.gem/ruby ]; then
 fi
 [ -d ~/.rbenv/bin ] && PATH="$(prepend_pathlist "$PATH" ~/.rbenv/bin)"
 [ -d ~/.rbenv/shims ] && PATH="$(prepend_pathlist "$PATH" ~/.rbenv/shims)"
+[ -d ~/.bootstrap.bin ] && PATH="$(prepend_pathlist "$PATH" ~/.bootstrap.bin)"
 
 export PATH="$PATH"
 

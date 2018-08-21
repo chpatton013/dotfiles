@@ -14,6 +14,7 @@ mkdir -p \
   ~/dependencies \
   ~/projects \
   ~/.bootstrap.d \
+  ~/.bootstrap.bin \
   ~/.config/{bashrc.d,zshrc.d} \
   ~/.local/share/applications
 
