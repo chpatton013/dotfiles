@@ -120,6 +120,7 @@ go get -u mvdan.cc/sh/cmd/shfmt
 # Extra dev tools.
 sudo pip2 install grip
 cargo install fd-find ripgrep
+sudo pip3 install --upgrade gdbgui
 
 # Docker service and user account
 sudo service docker restart

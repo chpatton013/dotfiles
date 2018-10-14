@@ -190,6 +190,8 @@ function install_dev_tools() {
 
   npm install --global --prefix=~/.npm remark-cli
 
+  pip3 install --user --upgrade gdbgui
+
   go get -u mvdan.cc/sh/cmd/shfmt
   go get -u github.com/bazelbuild/buildtools/buildozer
 }
