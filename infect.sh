@@ -106,6 +106,8 @@ fi
 
   ./install --all
 )
+ln -sf ~/.fzf.bash ~/.config/bashrc.d/fzf.bash
+ln -sf ~/.fzf.zsh ~/.config/zshrc.d/fzf.zsh
 
 # worktree
 wget --output-document ~/.config/shellrc.d/worktree.sh \

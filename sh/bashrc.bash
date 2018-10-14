@@ -1,9 +1,10 @@
 # If not running interactively, don't do anything.
 case $- in
-*i*) ;;
-*) return ;;
+  *i*) ;;
+  *) return ;;
 esac
 
+# Extra config files
 source ~/.shellrc
 source_files_in_directory ~/.config/bashrc.d
 
