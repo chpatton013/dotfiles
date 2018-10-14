@@ -113,6 +113,12 @@ ln -sf ~/.fzf.zsh ~/.config/zshrc.d/fzf.zsh
 wget --output-document ~/.config/shellrc.d/worktree.sh \
   https://raw.githubusercontent.com/chpatton013/worktree/master/worktree.sh
 
+# Configurations
+################################################################################
+
+# GDB Dashboard
+wget --output-document ~/.gdbinit git.io/.gdbinit
+
 # Git shell completion
 wget --output-document ~/.config/bashrc.d/git-completion.bash \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
