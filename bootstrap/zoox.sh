@@ -20,4 +20,8 @@ function bbt() {
   bb "$@" && btest "$@"
 }
 
+function skyquery() {
+  bazel query --universe_scope=//... --order_output=no "$@"
+}
+
 alias aws-mfa='oathtool --totp --base32 -w 1 "`cat ~/.aws/oathtool-mfa`"'
