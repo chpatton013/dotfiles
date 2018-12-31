@@ -1,37 +1,57 @@
 ################################################################################
 # Defaults
 
-# Group tasks into fewer processes so the OS scheduler can handle them better.
-startup --batch_cpu_scheduling
-
-# Always show output from failing tests.
-test --test_output=errors
-
-# Remove external content quickly when cleaning.
-clean --expunge_async
-
-# Omit unnecessary runfiles trees to speed up builds.
-build --config=norunfiles
-test --config=norunfiles
+clean --color=yes --expunge_async
+fetch --color=yes
+build --color=yes --config=local_sandboxed
+test --color=yes --test_output=errors --config=local_sandboxed
 
 ################################################################################
 # Configs
 
+# standalone
+# Run builds and tests without the burden of reproducible FS jails.
+build:standalone --spawn_strategy=standalone --genrule_strategy=standalone
+test:standalone --spawn_strategy=standalone --genrule_strategy=standalone
+
+# sandboxed
 # Ensure builds and tests happen in a reproducible environment.
 build:sandboxed --spawn_strategy=sandboxed --genrule_strategy=sandboxed
 test:sandboxed --spawn_strategy=sandboxed --genrule_strategy=sandboxed
 
-# Turn off slow build and test isolation.
-build:standalone --spawn_strategy=standalone --genrule_strategy=standalone
-test:standalone --spawn_strategy=standalone --genrule_strategy=standalone
-
+# runfiles
 # Build runfiles forests for all binary targets.
-build:runfiles --build_runfile_links
-test:runfiles --build_runfile_links
+build:runfiles --build_runfile_links --build_runfile_manifests
+test:runfiles --build_runfile_links --build_runfile_manifests
 
+# norunfiles
 # Only build runfiles forests for explicitly requested binary targets.
-build:norunfiles --nobuild_runfile_links
-test:norunfiles --nobuild_runfile_links
+build:norunfiles --nobuild_runfile_links --nobuild_runfile_manifests
+test:norunfiles --nobuild_runfile_links --nobuild_runfile_manifests
 
+# explain
 # Make it easy to request explanations.
 build:explain --explain /tmp/explain.txt --verbose_explanations
+
+# repository_cache, disk_cache
+# Cache external repositories and action outputs in a location that can be
+# shared by multiple workspaces.
+fetch:repository_cache --repository_cache=~/.cache/bazel/repository_cache
+build:disk_cache --disk_cache=~/.cache/bazel/disk_cache
+
+# norepository_cache, nodisk_cache
+# Do not cache external repositories and action outputs in a shared location.
+fetch:norepository_cache --repository_cache=
+build:nodisk_cache --disk_cache=
+
+# local_standalone
+# Run actions locally without FS jails, generate runfiles trees, and use a
+# shared disk cache.
+build:local_standalone --config=standalone --config=runfiles --config=disk_cache
+test:local_standalone --config=standalone --config=runfiles
+
+# local_sandboxed
+# Run actions locally within FS jails, generate runfiles trees, and use a
+# shared disk cache.
+build:local_sandboxed --config=sandboxed --config=runfiles --config=disk_cache
+test:local_sandboxed --config=sandboxed --config=runfiles
