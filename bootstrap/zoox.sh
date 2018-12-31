@@ -25,3 +25,4 @@ function skyquery() {
 }
 
 alias aws-mfa='oathtool --totp --base32 -w 1 "`cat ~/.aws/oathtool-mfa`"'
+alias vault-auth='VAULT_ADDR=https://vault.zooxlabs.com:8200 vault auth -method=ldap username=chris'
