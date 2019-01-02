@@ -16,10 +16,6 @@ alias wt_resume=worktree_resume
 export VLR_ROOT="$HOME"
 source "$(worktree_active_project_worktree)/scripts/shell/zooxrc.sh"
 
-function bbt() {
-  bb "$@" && btest "$@"
-}
-
 function skyquery() {
   bazel query --universe_scope=//... --order_output=no "$@"
 }
