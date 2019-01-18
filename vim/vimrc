@@ -348,7 +348,6 @@ set autowrite                   " Write before executing the 'make' command.
 set backspace=indent,eol,start  " Allow <BS> to go over indents, eol, and start of insert.
 set colorcolumn=80              " Highlight the 80th column.
 set cpoptions+=$                " Show dollar sign at end of text to be changed.
-set cursorline                  " Highlight current line.
 set dictionary+=~/.vim/dictionary/english-freq
 set expandtab                   " Expand tabs into spaces.
 set foldcolumn=1                " Add N columns to show fold levels and boundaries.
@@ -366,6 +365,7 @@ set list                        " Enable listchars for undesireable whitespace a
 set listchars=tab:➤-,trail:·,extends:»,precedes:«
 set modeline                    " Check files for a modeline to apply config settings.
 set nobomb                      " Remove Byte Order Mark from files.
+set nocursorline                " Do not highlight current line.
 set noerrorbells                " No beeps on errors.
 set nofoldenable                " Do not open file folded.
 set nojoinspaces                " Do not use multiple spaces when joining after punctuation.
@@ -421,6 +421,7 @@ augroup IndentSize
 augroup END
 
 " Toggles for invertible settings.
+nnoremap <Leader>c :set invcursorline<CR>
 nnoremap <Leader>h :set invhlsearch<CR>
 nnoremap <Leader>n :set invnumber<CR>
 nnoremap <Leader>p :set invpaste<CR>
