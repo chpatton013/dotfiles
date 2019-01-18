@@ -8,18 +8,18 @@ root_dir="$(builtin cd "$script_dir" && git rev-parse --show-toplevel)"
 # Configure account
 ################################################################################
 
-sudo chsh -s "$(which zsh)" "$(id -un)"
-mkdir -p \
-  ~/bin \
-  ~/dependencies \
-  ~/projects \
-  ~/.bootstrap.d \
-  ~/.bootstrap.bin \
-  ~/.config/{bashrc.d,zshrc.d} \
-  ~/.local/share/applications
-
+# Set shell
 ################################################################################
-# Link config files in home folder
+
+sudo chsh -s "$(which zsh)" "$(id -un)"
+
+# Clear paths that will be managed by stow
+################################################################################
+
+(builtin cd stow && find -mindepth 1 -maxdepth 1) |
+  xargs -I {} rm -rf "$HOME/{}"
+
+# Link config files using stow
 ################################################################################
 
 function stow_directory() {
@@ -28,12 +28,22 @@ function stow_directory() {
   package="$2"
   readonly target package
 
-  (builtin cd stow && find -mindepth 1 -maxdepth 1) |
-  xargs -I {} rm -rf "$HOME/{}"
   stow --verbose=1 --dir="$root_dir" --target="$target" --restow "$package"
 }
 stow_directory "$HOME" stow
 stow_directory "$HOME/bin" bin
+
+# Create directories expected by other applications
+################################################################################
+
+mkdir -p \
+  ~/bin \
+  ~/dependencies \
+  ~/projects \
+  ~/.bootstrap.d \
+  ~/.bootstrap.bin \
+  ~/.config/{bashrc.d,shellrc.d,zshrc.d} \
+  ~/.local/share/applications
 
 ################################################################################
 # Download dependencies
@@ -41,12 +51,6 @@ stow_directory "$HOME/bin" bin
 
 # Applications
 ################################################################################
-
-mkdir -p \
-  ~/bin \
-  ~/dependencies \
-  ~/.local/share/applications \
-  ~/.config/{bashrc.d,zshrc.d}
 
 # ssh-agent-canonicalize
 wget --output-document ~/bin/ssh-agent-canonicalize \
@@ -65,6 +69,7 @@ fi
   git clean --force -d
   git reset --hard origin/master
 
+  source ~/.cargo/env
   rustup override set stable
   rustup update stable
 
