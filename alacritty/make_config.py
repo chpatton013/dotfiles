@@ -38,7 +38,7 @@ def main(argv=None):
     if args.output_file == "-":
         output_file = sys.stdout
     else:
-        output_file = open(args.output_file, "w")
+        output_file = open(os.path.expanduser(args.output_file), "w")
 
     output_file.write("\n".join(files))
 
