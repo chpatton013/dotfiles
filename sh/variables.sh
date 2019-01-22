@@ -4,6 +4,10 @@
 export BROWSER='chromium-browser'
 export CLICOLOR=TRUE
 export EDITOR=vim
+export FZF_DEFAULT_COMMAND='(
+  git ls-tree -r --name-only HEAD ||
+  fd --type f --hidden --exclude .git
+)'
 export PAGER=less
 export PYTHONDONTWRITEBYTECODE=1
 export TERM='xterm-256color'
